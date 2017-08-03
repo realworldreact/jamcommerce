@@ -1,0 +1,27 @@
+{
+  "name": "jamcommerce",
+  "description": "",
+  "version": "0.0.1",
+  "author": "Berkeley Martinez <Berkeley@realworldreact.com>",
+  "dependencies": {
+    "gatsby": "^1.0.1",
+    "gatsby-link": "^1.0.1",
+    "gatsby-plugin-react-helmet": "^1.0.1"
+  },
+  "keywords": [
+    "gatsby",
+    "gocommerce",
+    "react"
+  ],
+  "license": "MIT",
+  "main": "n/a",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
+    "test": "echo 'yo'"
+  },
+  "devDependencies": {
+    "prettier": "^1.5.2"
+  }
+}
