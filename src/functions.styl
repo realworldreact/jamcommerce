@@ -1,0 +1,137 @@
+$directions = {
+  row: row,
+  row-reverse: row-reverse,
+  column: column,
+  column-reverse: column-reverse
+}
+
+$items = {
+  top: flex-start,
+  bottom: flex-end,
+  center: center,
+  stretch: stretch,
+  baseline: baseline
+}
+
+$contents = {
+  top: flex-start,
+  bottom: flex-end,
+  center: center,
+  around: space-around,
+  between: space-between
+}
+
+$justifies = {
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  around: space-around,
+  between: space-between
+}
+
+// greats a grid system
+$grid(direction='row', item='', content='', justify='')
+  unless $directions[direction]
+    error('expected a valid flexbox direction but got ' + direction)
+
+  unless !item || $items[item]
+    error('expected a valid align-items value but got '+ item)
+
+  unless !content || $contents[content]
+    error('expected a valid align-content value but got '+ content)
+
+  unless !justify || $justifies[justify]
+    error('expected a valid justify value but got ' + justify)
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: $directions[direction];
+
+  if $items[item]
+    align-items: $items[item];
+  if $contents[content]
+    align-content: $contents[content];
+  if $justifies[justify]
+    justify-content: $justifies[justify];
+
+
+$cell(i = 1, item = '', g = $gutter, cols = $columns)
+  unless !item || $items[item]
+    error('expected a valid value for item but got ' + item)
+  flex-basis: s('calc(100% * %s - %s)', i / cols, unit(ks-rem(g), 'rem'));
+  min-width: 0; // FF adjustment for responsive images
+  if $items[item]
+    align-self: $items[item];
+  if g is not 0
+    margin: ks-rem(g / 2)
+
+$cell-offset(i = 1, cols = $columns, g = $gutter)
+  margin-left: s('calc(100% * %s + (%s / 2))', i / cols, ks-rem(g)) !important
+
+$center(value, pad = null)
+  margin-left auto
+  margin-right auto
+  width 100%
+  u = unit(value)
+  if (u is 'rem' or u is '%')
+    max-width unit(value, u)
+  else
+    max-width ks-rem(value)
+  if (pad is null)
+    return
+  else
+    p = unit(pad)
+    if (p is 'rem' or p is '%')
+      padding-left  unit(pad, p)
+      padding-right  unit(pad, p)
+    else
+      padding-left ks-rem(pad)
+      padding-right ks-rem(pad)
+
+$stack()
+  cell(1, 1)
+
+-is-string(val)
+  if typeof(val) is not 'unit'
+    if val is a 'string' or val is a 'ident'
+      true
+    else
+      false
+  else
+    false
+
+-get-scale-number($name)
+  for scale-name, value in $scale
+    if scale-name is $name
+      return value
+  return false
+
+$between(min = 0, max = '')
+  selected = selector()
+
+  if -is-string(min)
+    min = -get-scale-number(min)
+  if -is-string(max)
+    max = -get-scale-number(max)
+
+  condition = 'only screen'
+  unless min is 0
+    min = ks-rem(min)
+    condition = condition + ' and (min-width: %s)' % (min)
+
+  unless !max
+    max = ks-rem(max)
+    condition = condition + ' and (max-width: %s)' % (max)
+
+  if condition == 'only screen'
+    {block}
+  else
+    @media condition
+      {block}
+
+$below(max)
+  +$between(0, max)
+    {block}
+$above(min)
+  +$between(min)
+    {block}

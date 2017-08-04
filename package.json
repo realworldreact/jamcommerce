@@ -6,7 +6,8 @@
   "dependencies": {
     "gatsby": "^1.0.1",
     "gatsby-link": "^1.0.1",
-    "gatsby-plugin-react-helmet": "^1.0.1"
+    "gatsby-plugin-react-helmet": "^1.0.1",
+    "kouto-swiss": "^1.1.0"
   },
   "keywords": [
     "gatsby",
@@ -17,7 +18,7 @@
   "main": "n/a",
   "scripts": {
     "build": "gatsby build",
-    "start": "gatsby develop",
+    "start": "gatsby develop --port 3000",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
     "test": "echo 'yo'"
   },
