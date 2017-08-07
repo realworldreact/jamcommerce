@@ -55,7 +55,7 @@ $grid(direction='row', item='', content='', justify='')
     justify-content: $justifies[justify];
 
 
-$cell(i = 1, item = '', g = $gutter, cols = $columns)
+$cell(i = 1, item = '', g = $grid-gutter-width, cols = $columns)
   unless !item || $items[item]
     error('expected a valid value for item but got ' + item)
   flex-basis: s('calc(100% * %s - %s)', i / cols, unit(ks-rem(g), 'rem'));
@@ -65,7 +65,7 @@ $cell(i = 1, item = '', g = $gutter, cols = $columns)
   if g is not 0
     margin: ks-rem(g / 2)
 
-$cell-offset(i = 1, cols = $columns, g = $gutter)
+$cell-offset(i = 1, cols = $columns, g = $grid-gutter-width)
   margin-left: s('calc(100% * %s + (%s / 2))', i / cols, ks-rem(g)) !important
 
 $center(value, pad = null)
@@ -89,7 +89,7 @@ $center(value, pad = null)
       padding-right ks-rem(pad)
 
 $stack()
-  cell(1, 1)
+  $cell(1, 1)
 
 -is-string(val)
   if typeof(val) is not 'unit'
