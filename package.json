@@ -7,7 +7,9 @@
     "gatsby": "^1.0.1",
     "gatsby-link": "^1.0.1",
     "gatsby-plugin-react-helmet": "^1.0.1",
-    "kouto-swiss": "^1.1.0"
+    "kouto-swiss": "^1.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1"
   },
   "keywords": [
     "gatsby",
