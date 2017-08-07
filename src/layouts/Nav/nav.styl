@@ -1,0 +1,43 @@
+// nav
+$navbar-height = 50px;
+$nav-link-padding = 10px 15px;
+$navbar-padding-horizontal = (($navbar-height - $line-height-computed) / 2);
+$navbar-padding-vertical = floor(($grid-gutter-width / 2));
+
+$nav-padding()
+  padding $navbar-padding-horizontal $navbar-padding-vertical
+
+.navbar
+  height $navbar-height
+  font-size 20px
+  width 100%
+  li
+    display inline-block
+    height: 100%
+    text-align center
+    > a
+      height: 100%
+      cursor pointer
+      display block
+      $nav-padding()
+
+.top
+  $grid()
+  padding-left $navbar-padding-vertical
+  padding-right $navbar-padding-vertical
+  border-bottom 1px solid $gray
+
+.title
+  $nav-padding()
+  flex 1
+  font-size 24px
+  font-weight bold
+  text-align center
+
+.cart
+  img
+    size($navbar-height - ($navbar-padding-horizontal *2))
+
+.bottom
+  $grid()
+

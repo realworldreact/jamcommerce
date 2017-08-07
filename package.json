@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "author": "Berkeley Martinez <Berkeley@realworldreact.com>",
   "dependencies": {
+    "classnames": "^2.2.5",
     "gatsby": "^1.0.1",
     "gatsby-link": "^1.0.1",
     "gatsby-plugin-react-helmet": "^1.0.1",
