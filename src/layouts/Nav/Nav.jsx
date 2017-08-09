@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames/bind';
 
-import styles from './nav.styl';
+import styles from './nav.module.styl';
 import cart from './cart.svg';
 
 const cx = classnames.bind(styles);
@@ -28,7 +28,23 @@ export default function Nav() {
         </ul>
       </nav>
       <nav className={ cx('navbar', 'bottom') }>
-        New Arrivals
+        <ul>
+          <li>
+            <a>New Arrivals</a>
+          </li>
+          <li>
+            <a>Womens</a>
+          </li>
+          <li>
+            <a>Mens</a>
+          </li>
+          <li>
+            <a>Collections</a>
+          </li>
+          <li>
+            <a>Sales</a>
+          </li>
+        </ul>
       </nav>
     </div>
   );
