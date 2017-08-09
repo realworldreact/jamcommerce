@@ -30,7 +30,7 @@ $justifies = {
 }
 
 // greats a grid system
-$grid(direction='row', item='', content='', justify='')
+$grid(direction='row', justify='', content='', item='')
   unless $directions[direction]
     error('expected a valid flexbox direction but got ' + direction)
 
@@ -54,6 +54,11 @@ $grid(direction='row', item='', content='', justify='')
   if $justifies[justify]
     justify-content: $justifies[justify];
 
+$row(justify='', content='', item='')
+  $grid('row', justify, content, item)
+
+$column(justify='', content='', item='')
+  $grid('column', justify, content, item)
 
 $cell(i = 1, item = '', g = $grid-gutter-width, cols = $columns)
   unless !item || $items[item]
