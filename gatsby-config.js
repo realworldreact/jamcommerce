@@ -3,7 +3,7 @@ const swiss = require('kouto-swiss');
 
 module.exports = {
   siteMetadata: {
-    title: 'JamCommerce'
+    title: 'JAMCommerce'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
