@@ -25,8 +25,8 @@ export default function Subheader() {
             src={ subheader1 }
           />
         </div>
-        <div><h3>Undeniably Hip</h3></div>
-        <div>
+        <div><h3 className={ cx('title') }>Undeniably Hip</h3></div>
+        <div className={ cx('copy') }>
 Static sites are en vogue not because they’re a fashion trend, but because the
 JAMstack represents the best parts of the full-stack architecture we’ve come to
 love — without the security risk, complexity, or maintenance costs.
@@ -35,10 +35,13 @@ love — without the security risk, complexity, or maintenance costs.
       </div>
       <div className={ cx('subheader-container') }>
         <div>
-          <img src={ subheader2 }/>
+          <img
+            className={ cx('img') }
+            src={ subheader2 }
+          />
         </div>
-        <div><h3>Accessories Galore</h3></div>
-        <p>
+        <div><h3 className={ cx('title') }>Accessories Galore</h3></div>
+        <p className={ cx('copy') }>
 With the JAMstack, you can add microservices as you require such as forms,
 databases as a service, blog CMS, comments, or this e-commerce solution — while
 maintaining the benefits of going static.
