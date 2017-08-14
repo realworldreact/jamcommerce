@@ -9,6 +9,7 @@
     "gatsby-link": "^1.0.1",
     "gatsby-plugin-react-helmet": "^1.0.1",
     "kouto-swiss": "^1.1.0",
+    "prop-types": "^15.5.10",
     "react-view-pager": "^0.5.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1"

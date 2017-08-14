@@ -1,15 +1,17 @@
 .carousel
   $center(1078px)
+  padding $padding-xl-horizontal 0
 
 .subheader
   $center(1078px)
   $row(between)
+  padding $padding-xl-horizontal 0
 
 .subheader-container
   width 450px
   .img
     size(450px, 400px)
-    padding-bottom $padding-large-horizontal
+    padding-bottom $padding-lg-horizontal
   .copy
     padding: $padding-base-horizontal 0
 
@@ -32,4 +34,24 @@
   width 15px
   & + &
     margin-left 10px
+
+
+.content-container
+  $row(between)
+  $center(1225px)
+  padding $padding-xl-horizontal 0
+
+.callout
+  $column(between)
+  size(556px, 655px)
+  border 20px solid $callout-gray-border
+  .img
+    width 100%
+
+.featured-container
+  $row(between)
+  max-width 540px
+
+.featured
+  size(230px)
 
