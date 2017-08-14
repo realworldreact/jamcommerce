@@ -44,8 +44,17 @@
 .callout
   $column(between)
   size(556px, 655px)
+  text-align left
   border 20px solid $callout-gray-border
+
+.copy
+  $column(between)
+  flex 1
+  padding $padding-xl-horizontal $padding-xl-vertical $padding-xl-horizontal ($padding-xl-vertical * 3)
+  .title
+    text-align center
   .img
+    display block
     width 100%
 
 .featured-container
