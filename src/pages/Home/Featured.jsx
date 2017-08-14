@@ -13,16 +13,21 @@ const propTypes = {
 };
 
 export default function Featured({ img, title, price, sale }) {
+  const isSale = !!sale;
+  const Price = isSale ? 'del' : 'span';
+  const _sale = isSale ? <span className={ cx('sale') }>${ sale }</span> : null;
   return (
     <div className={ cx('featured') }>
       <div className={ cx('img') }>
         <img src={ img }/>
       </div>
-      <div className={ cx('title') }>
-        { title }
-      </div>
+      <header className={ cx('title') }>
+        <h4>
+          { title }
+        </h4>
+      </header>
       <div className={ cx('price') }>
-        { price } { sale ? sale : null }
+        <Price>${ price }</Price> { _sale }
       </div>
     </div>
   );
