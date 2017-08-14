@@ -49,6 +49,13 @@ export default class Home extends Component {
             }
           </div>
         </div>
+        <div className={ cx('prefooter') }>
+          <h3>
+            Learn More about the JAMstack from the links in the footer,
+            or click around this example app to see how
+            an e-commerce solution works with static tech!
+          </h3>
+        </div>
       </div>
     );
   }
