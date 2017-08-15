@@ -30,12 +30,12 @@ $justifies = {
 }
 
 // greats a grid system
-$grid(direction='row', justify='', content='', item='')
+$grid(direction='row', justify='', items='', content='')
   unless $directions[direction]
     error('expected a valid flexbox direction but got ' + direction)
 
-  unless !item || $items[item]
-    error('expected a valid align-items value but got '+ item)
+  unless !items || $items[items]
+    error('expected a valid align-items value but got '+ items)
 
   unless !content || $contents[content]
     error('expected a valid align-content value but got '+ content)
@@ -47,18 +47,18 @@ $grid(direction='row', justify='', content='', item='')
   flex-wrap: wrap;
   flex-direction: $directions[direction];
 
-  if $items[item]
-    align-items: $items[item];
-  if $contents[content]
-    align-content: $contents[content];
   if $justifies[justify]
     justify-content: $justifies[justify];
+  if $items[items]
+    align-items: $items[items];
+  if $contents[content]
+    align-content: $contents[content];
 
-$row(justify='', content='', item='')
-  $grid('row', justify, content, item)
+$row(justify='', items='', content='')
+  $grid('row', justify, items, content)
 
-$column(justify='', content='', item='')
-  $grid('column', justify, content, item)
+$column(justify='', items='', content='',)
+  $grid('column', justify, items, content)
 
 $cell(i = 1, item = '', g = $grid-gutter-width, cols = $columns)
   unless !item || $items[item]
