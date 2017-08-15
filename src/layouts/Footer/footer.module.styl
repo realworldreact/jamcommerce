@@ -1,0 +1,119 @@
+.footer
+  $row(between)
+  background-color $ftr-background
+  color $ftr-primary
+  padding ($padding-xl-horizontal * 2) ($padding-xl-vertical * 2)
+
+.top-row
+  width 32%
+
+.first
+  padding-bottom $padding-xl-horizontal
+
+  .content
+    max-width 361px
+  h4
+    color $ftr-primary
+  p
+    color $ftr-secondary
+  a
+    color $ftr-secondary
+
+.solutions
+  max-width 209px
+  h5
+    color $ftr-primary
+
+.solutions-container
+  $row(around)
+  margin-left $padding-base-vertical
+  p
+    color $ftr-secondary
+    width 45%
+
+.about
+  padding-top 50px
+  .content
+    $row(between)
+    $center(419px)
+  a
+    display inline-block
+    color $ftr-primary
+    font-size 18px
+  p
+    width 45%
+
+$input-border-thickness = 4px
+.newsletter
+  .content
+    $column(between)
+    width 335px
+    text-align right
+    margin-left auto
+  h3
+    color $ftr-primary
+    margin-top 0
+  p
+    color $ftr-secondary
+  .input
+    size(100%, 39px)
+    $row()
+  input
+    flex 1
+    height 100%
+    border $input-border-thickness solid $ftr-secondary
+    &:focus
+      border-color $brand-info
+    &.error
+      border-color $brand-error
+    &.success
+      border-color $brand-success
+  .addon
+    font-size $font-size-base
+    font-weight normal
+    height 100%
+    line-height 1
+    padding $padding-base-vertical $padding-base-horizontal
+    text-align center
+    img
+      size($line-height-computed)
+    &.success
+      background-color $brand-success
+      border $input-border-thickness solid $brand-success
+    &.error
+      background-color $brand-error
+      border $input-border-thickness solid $brand-error
+  button
+    size(167px, 37px)
+    background-color $ftr-action-btn
+    border none
+    border-radius 6px
+    color $ftr-primary
+    margin $padding-base-horizontal $padding-base-vertical $padding-base-horizontal auto
+    &:disabled
+      background-color $ftr-secondary
+
+.bottom
+  $row(between, center)
+  width 100%
+
+$icons-width = 200px
+.icons
+  $row(around)
+  size($icons-width, 25px)
+  .icon
+    size(25px)
+    img
+      display block
+      margin-left auto
+      margin-right auto
+
+.created-by
+  flex 1
+  margin-right $icons-width
+  text-align center
+  width 220px
+  h4
+    color $ftr-primary
+  h5
+    color $ftr-secondary

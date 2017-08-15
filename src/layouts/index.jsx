@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 
 import './index.styl';
 import Nav from './Nav';
+import Footer from './Footer';
 
 export default function TemplateWrapper({ children }) {
   return (
@@ -19,6 +20,7 @@ export default function TemplateWrapper({ children }) {
       <div>
         { children() }
       </div>
+      <Footer />
     </div>
   );
 }
