@@ -5,8 +5,10 @@ import styles from './home.module.styl';
 import featuredimg from './featured.png';
 import Carousel from './Carousel.jsx';
 import Subheader from './Subheader.jsx';
-import Callout from './Callout.jsx';
+import Callout from '../Callout';
 import Featured from './Featured.jsx';
+import LearnMore from './Learn-More.jsx';
+import callout from './callout.png';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
@@ -37,7 +39,20 @@ export default class Home extends Component {
         <Carousel />
         <Subheader />
         <div className={ cx('content-container') }>
-          <Callout />
+          <Callout className={ cx('callout') }>
+            <header className={ cx('copy') }>
+              <h1 className={ cx('title') }>Nothing to Hack</h1>
+              <p>
+          Because your app is rendered in pure static HTML, there is virtually
+          no risk of SQL injection, malware attacks, or other nefarious hackery.
+              </p>
+              <LearnMore />
+            </header>
+            <img
+              className={ cx('img') }
+              src={ callout }
+            />
+          </Callout>
           <div className={ cx('featured-container') }>
             {
               featured.map(featured => (
