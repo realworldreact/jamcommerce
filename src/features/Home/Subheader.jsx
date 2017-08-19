@@ -20,7 +20,7 @@ export default function Subheader() {
           />
         </div>
         <div>
-          <h1 className={ cx('title') }>Undeniably Hip</h1>
+          <h2 className={ cx('title') }>Undeniably Hip</h2>
         </div>
         <div className={ cx('copy') }>
           Static sites are en vogue not because they’re a fashion trend, but
@@ -38,7 +38,7 @@ export default function Subheader() {
           />
         </div>
         <div>
-          <h1 className={ cx('title') }>Accessories Galore</h1>
+          <h2 className={ cx('title') }>Accessories Galore</h2>
         </div>
         <p className={ cx('copy') }>
           With the JAMstack, you can add microservices as you require such as

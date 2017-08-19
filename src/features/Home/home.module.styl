@@ -16,9 +16,12 @@
     padding: $padding-base-horizontal 0
 
 .learn-more
+  color $primary
+  font-weight 400
+  font-size 16px
   .triangle
     margin-left $padding-base-vertical
-    size(12px)
+    size(10px)
 
 .pager
   align-items center
@@ -51,6 +54,10 @@
   $column(between)
   flex 1
   padding $padding-xl-horizontal $padding-xl-vertical $padding-xl-horizontal ($padding-xl-vertical * 3)
+  line-height $line-height-copy
+  color $text-description
+  font-weight 300
+  font-size 18px
   .title
     text-align center
   .img
@@ -70,6 +77,7 @@
 
 .prefooter
   $center(650px)
-  line-height 44px
+  line-height 34px
   padding 150px 0
-
+  font-weight 300
+  color $text-description
