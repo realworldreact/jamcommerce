@@ -2,7 +2,7 @@
   $row(between)
   background-color $ftr-background
   color $ftr-primary
-  padding ($padding-xl-horizontal * 2) ($padding-xl-vertical * 2)
+  padding ($padding-xl-horizontal * 1.2) ($padding-xl-vertical * 2)
 
 .top-row
   width 32%
@@ -17,10 +17,15 @@
   p
     color $ftr-secondary
   a
-    color $ftr-secondary
+    color $ftr-primary
+    font-size 14px
+    font-weight 300
+    &:hover
+      color $ftr-hover
 
 .solutions
-  max-width 209px
+  max-width 260px
+  padding-top 22px
   h5
     color $ftr-primary
 
@@ -32,14 +37,17 @@
     width 45%
 
 .about
-  padding-top 50px
+  padding-top 60px
   .content
     $row(between)
     $center(419px)
   a
     display inline-block
     color $ftr-primary
-    font-size 18px
+    font-size 16px
+    line-height 22px
+    &:hover
+      color $ftr-hover
   p
     width 45%
 
@@ -62,6 +70,7 @@ $input-border-thickness = 4px
     flex 1
     height 100%
     border $input-border-thickness solid $ftr-secondary
+    padding-left 10px
     &:focus
       border-color $brand-info
     &.error

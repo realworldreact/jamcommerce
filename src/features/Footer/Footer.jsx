@@ -36,12 +36,12 @@ export default function Footer() {
     <footer className={ cx('footer') }>
       <div className={ cx('first', 'top-row') }>
         <div className={ cx('content') }>
-          <h4>JAMCommerce</h4>
+          <h4>JAM Commerce</h4>
           <p>A headless e-commerce solution for JAMstack sites</p>
-          <a src='https://github.com/'>view the code on GitHub</a>
+          <a src='https://github.com/'>View the code on GitHub</a>
         </div>
         <div className={ cx('solutions') }>
-          <h5>Other JAMStack solutions</h5>
+          <h4>Other JAMStack solutions</h4>
           <div className={ cx('solutions-container') }>
             { netlifySolutions.map(({ name, src }) =>
               (
@@ -91,7 +91,9 @@ export default function Footer() {
             (non-spammy) newsletter
           </p>
           <div className={ cx('input') }>
-            <input className={ cx('') } />
+            <input
+              placeholder='your@email.com'
+            />
           </div>
           <button
             disabled={ true }
