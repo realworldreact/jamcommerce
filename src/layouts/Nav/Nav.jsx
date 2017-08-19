@@ -3,14 +3,17 @@ import classnames from 'classnames/bind';
 
 import styles from './nav.module.styl';
 import cart from './cart.svg';
+import Menu from '../Menu';
+import { Split } from '../Menu';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
 
 export default function Nav() {
+  const MenuComp = Split;
   return (
-    <div>
-      <nav className={ cx('navbar', 'top') }>
+    <div className={ cx('navbar') }>
+      <nav className={ cx('top') }>
         <div className={ cx('title') }>
           JAM Commerce
         </div>
@@ -27,7 +30,7 @@ export default function Nav() {
           </li>
         </ul>
       </nav>
-      <nav className={ cx('navbar', 'bottom') }>
+      <nav className={ cx('bottom') }>
         <ul>
           <li>
             <a>New Arrivals</a>
@@ -46,6 +49,7 @@ export default function Nav() {
           </li>
         </ul>
       </nav>
+      <Menu><MenuComp /></Menu>
     </div>
   );
 }

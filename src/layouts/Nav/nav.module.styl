@@ -25,6 +25,11 @@ $navbar($height, $font-size = 20px)
       display block
       $nav-padding($height)
 
+// required to make dropdown menu work
+.navbar
+  position relative
+  z-index $z-navbar
+
 .top
   $grid()
   $navbar($navbar-top-height)
