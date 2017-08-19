@@ -60,11 +60,13 @@ $row(justify='', items='', content='')
 $column(justify='', items='', content='',)
   $grid('column', justify, items, content)
 
-$cell(i = 1, item = '', g = $grid-gutter-width, cols = $columns)
+$cell(i = 1, cols = $columns, item = '', g = $grid-gutter-width)
   unless !item || $items[item]
     error('expected a valid value for item but got ' + item)
+
   flex-basis: s('calc(100% * %s - %s)', i / cols, unit(ks-rem(g), 'rem'));
   min-width: 0; // FF adjustment for responsive images
+
   if $items[item]
     align-self: $items[item];
   if g is not 0
