@@ -3,14 +3,14 @@ import classnames from 'classnames/bind';
 
 import styles from './nav.module.styl';
 import cart from './cart.svg';
-import Menu from '../Menu';
-import { Split } from '../Menu';
+import Menu, { Split, Text } from '../Menu';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
+const isImg = false;
 
 export default function Nav() {
-  const MenuComp = Split;
+  const MenuComp = isImg ? Split : Text;
   return (
     <div className={ cx('navbar') }>
       <nav className={ cx('top') }>

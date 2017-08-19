@@ -14,3 +14,21 @@
   $padding-base()
   .item
     $column(between)
+
+$items-per-col = 6
+$item-height = 26px
+// item-height =~ font-size + (line-height / 2)
+.text
+  $row(around)
+  $center(50%)
+  $padding-base()
+  text-align left
+  .category
+    $padding-base()
+    width 45%
+  .content
+    $column(start)
+    height $item-height * $items-per-col
+    .item
+      height $item-height
+      text-decoration none
