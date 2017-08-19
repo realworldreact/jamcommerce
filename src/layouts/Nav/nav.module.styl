@@ -36,13 +36,27 @@ $navbar($height, $font-size = 20px)
   padding-left $navbar-padding-vertical
   padding-right $navbar-padding-vertical
   border-bottom 1px solid $gray
+  display flex
+  justify-content space-between
+
+
+.hamburger
+  flex 1
+  align-self center
+  @media (min-width: 760px)
+    visibility hidden
+    //todo: fix media query
 
 .title
   $nav-padding($navbar-top-height)
-  flex 1
+  flex 3
   font-size 24px
   font-weight bold
   text-align center
+
+.account
+  flex 1
+  text-align right
 
 .cart
   img
@@ -53,6 +67,5 @@ $navbar($height, $font-size = 20px)
   $row(center)
   border-bottom 1px solid $gray
   ul
-    display inline-block
     a
       $column(center, center)
