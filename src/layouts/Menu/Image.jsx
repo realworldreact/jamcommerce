@@ -20,10 +20,12 @@ export default function Image() {
   return (
     <div className={ cx('image') }>
       {
-        data.map(({ title, img }) => (
+        data.map(({ title, img, href = '#' }) => (
           <div className={ cx('item') }>
-            <header><h4>{ title }</h4></header>
-            <div><img src={ img }/></div>
+            <a src={ href }>
+              <header><h4>{ title }</h4></header>
+              <div><img src={ img }/></div>
+            </a>
           </div>
         ))
       }
