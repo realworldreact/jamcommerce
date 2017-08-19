@@ -16,13 +16,13 @@ const data = [
     img: imageMenu
   }
 ];
-export default function Split() {
+export default function Image() {
   return (
-    <div className={ cx('split') }>
+    <div className={ cx('image') }>
       {
         data.map(({ title, img }) => (
           <div className={ cx('item') }>
-            <header>{ title }</header>
+            <header><h4>{ title }</h4></header>
             <div><img src={ img }/></div>
           </div>
         ))
@@ -30,5 +30,5 @@ export default function Split() {
     </div>
   );
 }
-Split.displayName = 'Split';
-Split.propTypes = propTypes;
+Image.displayName = 'Image';
+Image.propTypes = propTypes;
