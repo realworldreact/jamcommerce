@@ -67,5 +67,20 @@ $navbar($height, $font-size = 20px)
   $row(center)
   border-bottom 1px solid $gray
   ul
+    display inline-block
     a
       $column(center, center)
+      text-transform uppercase
+      letter-spacing 2.75px
+      color $menu-unselected
+      font-weight 100
+      margin-left 17px
+      margin-right 17px
+      padding-left 0
+      padding-right 0
+      &:hover
+        color $menu-selected
+      &:active
+        color $menu-selected
+        padding-top 5px
+        border-bottom 5px solid black
