@@ -2,6 +2,14 @@
   "name": "jamcommerce",
   "description": "",
   "version": "0.0.1",
+  "scripts": {
+    "build": "gatsby build",
+    "start": "gatsby develop --port 3000",
+    "lint": "eslint --ext=js,jsx .",
+    "pretest": "npm run lint",
+    "test": "echo 'yo'",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'"
+  },
   "author": "Berkeley Martinez <Berkeley@realworldreact.com>",
   "dependencies": {
     "classnames": "^2.2.5",
@@ -27,12 +35,6 @@
   ],
   "license": "MIT",
   "main": "n/a",
-  "scripts": {
-    "build": "gatsby build",
-    "start": "gatsby develop --port 3000",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
-    "test": "echo 'yo'"
-  },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "eslint": "^4.5.0",
