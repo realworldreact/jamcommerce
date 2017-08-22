@@ -29,7 +29,8 @@
     "plugin:jsx-a11y/recommended"
   ],
   "rules": {
-    "comma-dangle": 2,
+    "arrow-body-style": [ "error", "as-needed" ],
+    "comma-dangle": [ "error", "always-multiline" ],
     "no-cond-assign": 2,
     "no-console": 0,
     "no-constant-condition": 2,
@@ -40,7 +41,7 @@
     "no-empty-character-class": 2,
     "no-ex-assign": 2,
     "no-extra-boolean-cast": 2,
-    "no-extra-parens": 0,
+    "no-extra-parens": [ "error", "all", { "ignoreJSX": "multi-line", "nestedBinaryExpressions": false } ],
     "no-extra-semi": 2,
     "no-func-assign": 2,
     "no-inner-declarations": 2,
@@ -200,7 +201,6 @@
       2,
       "always"
     ],
-    "space-in-brackets": 0,
     "space-in-parens": 0,
     "space-infix-ops": 2,
     "space-unary-ops": [
@@ -215,6 +215,8 @@
       "always",
       { "exceptions": ["-"] }
     ],
+    "object-curly-spacing": [ "error", "always" ],
+    "array-bracket-spacing": [ "error", "always" ],
     "wrap-regex": 2,
 
     "max-depth": 0,

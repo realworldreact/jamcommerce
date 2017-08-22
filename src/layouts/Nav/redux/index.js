@@ -3,9 +3,7 @@ import { createTypes } from 'redux-create-types';
 
 const ns = 'nav';
 
-const types = createTypes([
-  'clickOnSubNav'
-], ns);
+const types = createTypes([ 'clickOnSubNav' ], ns);
 
 const initialState = {};
 export const clickOnSubNav = createAction(types.clickOnSubNav);

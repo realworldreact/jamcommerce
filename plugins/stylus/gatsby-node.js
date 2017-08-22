@@ -12,7 +12,7 @@ exports.modifyWebpackConfig = ({ config, stage }, options = {}) => {
     config.merge(current => {
       current.stylus = {
         use: options.use,
-        import: options.import
+        import: options.import,
       };
       return current;
     });
@@ -26,11 +26,11 @@ exports.modifyWebpackConfig = ({ config, stage }, options = {}) => {
       config.loader('stylus', {
         test: stylusFiles,
         exclude: stylusModulesFiles,
-        loaders: ['style', 'css', 'postcss', 'stylus']
+        loaders: [ 'style', 'css', 'postcss', 'stylus' ],
       });
       config.loader('stylusModules', {
         test: stylusModulesFiles,
-        loaders: ['style', cssModulesConfDev, 'postcss', 'stylus']
+        loaders: [ 'style', cssModulesConfDev, 'postcss', 'stylus' ],
       });
       return config;
     }
@@ -42,16 +42,16 @@ exports.modifyWebpackConfig = ({ config, stage }, options = {}) => {
         loader: ExtractTextPlugin.extract('style', [
           'css?minimize',
           'postcss',
-          'stylus'
-        ])
+          'stylus',
+        ]),
       });
       config.loader('stylusModules', {
         test: stylusModulesFiles,
         loader: ExtractTextPlugin.extract('style', [
           cssModulesConfProd,
           'postcss',
-          'stylus'
-        ])
+          'stylus',
+        ]),
       });
       return config;
     }
@@ -61,17 +61,17 @@ exports.modifyWebpackConfig = ({ config, stage }, options = {}) => {
       const moduleLoader = ExtractTextPlugin.extract('style', [
         cssModulesConfProd,
         'postcss',
-        'stylus'
+        'stylus',
       ]);
 
       config.loader('stylus', {
         test: stylusFiles,
         exclude: stylusModulesFiles,
-        loader: 'null'
+        loader: 'null',
       });
       config.loader('stylusModules', {
         test: stylusModulesFiles,
-        loader: moduleLoader
+        loader: moduleLoader,
       });
       return config;
     }
@@ -79,16 +79,16 @@ exports.modifyWebpackConfig = ({ config, stage }, options = {}) => {
     case 'build-javascript': {
       const moduleLoader = ExtractTextPlugin.extract('style', [
         cssModulesConfProd,
-        'stylus'
+        'stylus',
       ]);
       config.loader('stylus', {
         test: stylusFiles,
         exclude: stylusModulesFiles,
-        loader: 'null'
+        loader: 'null',
       });
       config.loader('stylusModules', {
         test: stylusModulesFiles,
-        loader: moduleLoader
+        loader: moduleLoader,
       });
 
       return config;
