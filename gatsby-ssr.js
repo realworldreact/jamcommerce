@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 
-import storeFactory from './src/features/storeFactory.js';
+import storeFactory from './src/storeFactory.js';
 
 exports.replaceRenderer = ({ bodyComponent, replaceBodyHTMLString }) => {
 

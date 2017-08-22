@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import storeFactory from './src/features/storeFactory.js';
+import storeFactory from './src/storeFactory.js';
 
 exports.replaceRouterComponent = ({ history }) => {
   const win = typeof window !== 'undefined' ? window : {};

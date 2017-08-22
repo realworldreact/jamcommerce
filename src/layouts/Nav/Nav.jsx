@@ -1,15 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
 
 import styles from './nav.module.styl';
 import cart from './cart.svg';
+import { clickOnSubNav } from './redux';
 import Menu, { Image, Text } from '../Menu';
 
 const cx = classnames.bind(styles);
-const propTypes = {};
+const mapStateToProps = null;
+const mapDispatchToProps = {
+  clickOnSubNav: e => {
+    e.preventDefault();
+    return clickOnSubNav();
+  }
+};
+const propTypes = {
+  clickOnSubNav: PropTypes.func.isRequired
+};
 const isImg = true;
 
-export default function Nav() {
+export function Nav({
+  clickOnSubNav
+}) {
   const MenuComp = isImg ? Image : Text;
   return (
     <div className={ cx('navbar') }>
@@ -33,7 +47,7 @@ export default function Nav() {
       <nav className={ cx('bottom') }>
         <ul>
           <li>
-            <a>New Arrivals</a>
+            <a onClick={ clickOnSubNav }>New Arrivals</a>
           </li>
           <li>
             <a>Womens</a>
@@ -56,3 +70,8 @@ export default function Nav() {
 
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav);
