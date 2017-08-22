@@ -31,18 +31,29 @@ $navbar($height, $font-size = 20px)
   z-index $z-navbar
 
 .top
-  $grid()
+  $grid(, between)
   $navbar($navbar-top-height)
+  border-bottom 1px solid $gray
   padding-left $navbar-padding-vertical
   padding-right $navbar-padding-vertical
-  border-bottom 1px solid $gray
+
+
+.hamburger
+  flex 1
+  align-self center
+  +$above(sm)
+    visibility hidden
 
 .title
   $nav-padding($navbar-top-height)
-  flex 1
+  flex 3
   font-size 24px
   font-weight bold
   text-align center
+
+.account
+  flex 1
+  text-align right
 
 .cart
   img
@@ -56,3 +67,17 @@ $navbar($height, $font-size = 20px)
     display inline-block
     a
       $column(center, center)
+      color $menu-unselected
+      font-weight 100
+      letter-spacing 2.75px
+      margin-left 17px
+      margin-right 17px
+      padding-left 0
+      padding-right 0
+      text-transform uppercase
+      &:active
+        border-bottom 5px solid black
+        color $menu-selected
+        padding-top 5px
+      &:hover
+        color $menu-selected

@@ -6,6 +6,7 @@ import classnames from 'classnames/bind';
 import styles from './nav.module.styl';
 import cart from './cart.svg';
 import { clickOnSubNav } from './redux';
+import hamburger from './hamburger.svg';
 import Menu, { Image, Text } from '../Menu';
 
 const cx = classnames.bind(styles);
@@ -28,10 +29,13 @@ export function Nav({
   return (
     <div className={ cx('navbar') }>
       <nav className={ cx('top') }>
+        <div className={ cx('hamburger') }>
+          <img src={ hamburger } />
+        </div>
         <div className={ cx('title') }>
           JAM Commerce
         </div>
-        <ul>
+        <ul className={ cx('account') }>
           <li>
             <a>
               Sign In
