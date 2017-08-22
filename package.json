@@ -6,9 +6,11 @@
     "build": "gatsby build",
     "start": "gatsby develop --port 3000",
     "lint": "eslint --ext=js,jsx .",
+    "lint:fix": "eslint . --ext=js,jsx --fix",
     "pretest": "npm run lint",
     "test": "echo 'yo'",
-    "format": "prettier-eslint 'src/**/*.js' './gatsby*.js' './plugins/**/*.js' --eslint-config-path ./.eslintrc --trailing-comma all --single-quote --write '.'",
+    "format": "prettier 'src/**/*.js' 'src/**/*.jsx' './gatsby*.js' './plugins/**/*.js' --trailing-comma all --single-quote --write",
+    "postformat": "npm run lint:fix",
     "commit": "git-cz",
     "commitmsg": "validate-commit-msg"
   },
@@ -47,12 +49,12 @@
     "commitizen": "^2.9.6",
     "cz-freecodecamp": "^1.0.0",
     "eslint": "^4.5.0",
+    "eslint-plugin-class-property": "^1.0.6",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.3.0",
     "husky": "^0.14.3",
     "prettier": "^1.5.2",
-    "prettier-eslint-cli": "^4.2.1",
     "validate-commit-msg": "^2.14.0"
   }
 }
