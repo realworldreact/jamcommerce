@@ -35,20 +35,18 @@ export function Nav({
         <div className={ cx('title') }>
           JAM Commerce
         </div>
-        <div className={ cx('account') }>
-          <ul>
-            <li>
-              <a>
-                Sign In
-              </a>
-            </li>
-            <li>
-              <a className={ cx('cart') }>
-                <img src={ cart } />
-              </a>
-            </li>
-          </ul>
-        </div>
+        <ul className={ cx('account') }>
+          <li>
+            <a>
+              Sign In
+            </a>
+          </li>
+          <li>
+            <a className={ cx('cart') }>
+              <img src={ cart } />
+            </a>
+          </li>
+        </ul>
       </nav>
       <nav className={ cx('bottom') }>
         <ul>
