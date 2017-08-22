@@ -10,7 +10,13 @@
     "gatsby-plugin-react-helmet": "^1.0.1",
     "kouto-swiss": "^1.1.0",
     "prop-types": "^15.5.10",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.1.2",
     "react-view-pager": "^0.5.1",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-create-types": "0.0.1",
+    "reselect": "^3.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1"
   },
@@ -28,6 +34,11 @@
     "test": "echo 'yo'"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.5.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.3.0",
     "prettier": "^1.5.2"
   }
 }
