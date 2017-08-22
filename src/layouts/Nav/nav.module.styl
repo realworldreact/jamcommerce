@@ -41,9 +41,8 @@ $navbar($height, $font-size = 20px)
 .hamburger
   flex 1
   align-self center
-  @media (min-width: 760px)
+  +$above(sm)
     visibility hidden
-    //todo: fix media query
 
 .title
   $nav-padding($navbar-top-height)
