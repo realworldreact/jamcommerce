@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { default as navReducer } from './layouts/Nav/redux';
+import { default as navReducer } from './features/Nav/redux';
 
 export default function createReducer() {
   return combineReducers(

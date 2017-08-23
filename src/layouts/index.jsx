@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import './index.styl';
-import Nav from './Nav';
-import Footer from './Footer';
+import Nav from '../features/Nav';
+import Footer from '../features/Footer';
 
 export default function TemplateWrapper({ children }) {
   return (
