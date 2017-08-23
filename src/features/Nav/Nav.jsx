@@ -1,70 +1,67 @@
+import _ from 'lodash';
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
 import { createSelector } from 'reselect';
 
 import {
-  hoverOnSubNav,
   clickOnSubNav,
-  mouseLeaveMenu,
+  hoverOnSubNav,
   isMenuOpenSelector,
+  itemsSelector,
+  mouseLeaveMenu,
 } from './redux';
 import styles from './nav.module.styl';
 import cart from './cart.svg';
 import hamburger from './hamburger.svg';
 import Menu, { Image, Text } from '../Menu';
 
-const womansLink = '/wommans';
-const _items = [
-  {
-    name: 'New Arrivals',
-    href: womansLink,
-  },
-  {
-    name: 'Womans',
-    href: womansLink,
-  },
-  {
-    name: 'Mens',
-    href: womansLink,
-  },
-  {
-    name: 'Collections',
-    href: womansLink,
-  },
-  {
-    name: 'Sales',
-    href: womansLink,
-  },
-];
+const preventDefault = e => e && e.preventDefault();
+const createBoundFunc = _.memoize((name, e, ac, dispatch) => _.flow(e, ac, dispatch));
 
 const cx = classnames.bind(styles);
-const mapStateToProps = createSelector(isMenuOpenSelector, isMenuOpen => ({
-  items: _items,
-  isMenuOpen,
-}));
-function mapDispatchToProps(dispatch, { items = _items }) {
+const mapStateToProps = createSelector(
+  isMenuOpenSelector,
+  itemsSelector,
+  (isMenuOpen, items = []) => ({ items, isMenuOpen }),
+);
+
+function mapDispatchToProps(dispatch) {
+  const dispatchers = bindActionCreators({ mouseLeaveMenu }, dispatch);
+  dispatchers.dispatch = dispatch;
+  return () => dispatchers;
+}
+
+function mergeProps(stateProps, dispatchProps) {
+  const { items = [] } = stateProps;
+  const { dispatch } = dispatchProps;
   const clickOnSubNavActions = items.reduce((dispatchers, { name }) => {
-    dispatchers[name] = e => {
-      e.preventDefault();
-      return dispatch(clickOnSubNav(name));
-    };
+    dispatchers[name] = createBoundFunc(
+      name,
+      preventDefault,
+      clickOnSubNav.bind(name),
+      dispatch,
+    );
 
     return dispatchers;
   }, {});
   const hoverOnSubNavActions = items.reduce((dispatchers, { name }) => {
-    dispatchers[name] = e => {
-      e.preventDefault();
-      return dispatch(hoverOnSubNav(name));
-    };
-
+    dispatchers[name] = createBoundFunc(
+      name,
+      _.noop,
+      hoverOnSubNav.bind(name),
+      dispatch,
+    );
     return dispatchers;
   }, {});
+
   return {
-    mouseLeaveMenu: () => dispatch(mouseLeaveMenu()),
-    hoverOnSubNavActions,
+    ...stateProps,
+    ...dispatchProps,
     clickOnSubNavActions,
+    hoverOnSubNavActions,
   };
 }
 
@@ -145,4 +142,4 @@ export function Nav({
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Nav);

@@ -26,6 +26,7 @@
     "gatsby-link": "^1.0.1",
     "gatsby-plugin-react-helmet": "^1.0.1",
     "kouto-swiss": "^1.1.0",
+    "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
