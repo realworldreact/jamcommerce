@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
 import { createSelector } from 'reselect';
 
-import { clickOnSubNav, mouseLeaveMenu, isMenuOpenSelector } from './redux';
+import {
+  hoverOnSubNav,
+  clickOnSubNav,
+  mouseLeaveMenu,
+  isMenuOpenSelector,
+} from './redux';
 import styles from './nav.module.styl';
 import cart from './cart.svg';
 import hamburger from './hamburger.svg';
@@ -40,7 +45,7 @@ const mapStateToProps = createSelector(isMenuOpenSelector, isMenuOpen => ({
   isMenuOpen,
 }));
 function mapDispatchToProps(dispatch, { items = _items }) {
-  const subNavActions = items.reduce((dispatchers, { name }) => {
+  const clickOnSubNavActions = items.reduce((dispatchers, { name }) => {
     dispatchers[name] = e => {
       e.preventDefault();
       return dispatch(clickOnSubNav(name));
@@ -48,22 +53,38 @@ function mapDispatchToProps(dispatch, { items = _items }) {
 
     return dispatchers;
   }, {});
+  const hoverOnSubNavActions = items.reduce((dispatchers, { name }) => {
+    dispatchers[name] = e => {
+      e.preventDefault();
+      return dispatch(hoverOnSubNav(name));
+    };
+
+    return dispatchers;
+  }, {});
   return {
     mouseLeaveMenu: () => dispatch(mouseLeaveMenu()),
-    subNavActions,
+    hoverOnSubNavActions,
+    clickOnSubNavActions,
   };
 }
 
 const propTypes = {
+  clickOnSubNavActions: PropTypes.object,
+  hoverOnSubNavActions: PropTypes.object,
   isMenuOpen: PropTypes.bool,
   items: PropTypes.array,
   mouseLeaveMenu: PropTypes.func.isRequired,
-  subNavActions: PropTypes.object,
 };
 
 const isImg = true;
 
-export function Nav({ isMenuOpen, items, mouseLeaveMenu, subNavActions }) {
+export function Nav({
+  isMenuOpen,
+  items,
+  mouseLeaveMenu,
+  clickOnSubNavActions,
+  hoverOnSubNavActions,
+}) {
   const MenuComp = isImg ? Image : Text;
   return (
     <div className={ cx('navbar') }>
@@ -100,7 +121,8 @@ export function Nav({ isMenuOpen, items, mouseLeaveMenu, subNavActions }) {
                 className={ cx('item-link') }
                 href={ href }
                 key={ name }
-                onClick={ subNavActions[name] }
+                onClick={ clickOnSubNavActions[name] }
+                onMouseEnter={ hoverOnSubNavActions[name] }
                 >
                 <li className={ cx('item') }>
                   { name }
