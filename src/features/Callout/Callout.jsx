@@ -7,7 +7,7 @@ import styles from './callout.module.styl';
 const cx = classnames.bind(styles);
 const propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default function Callout({ className, children }) {

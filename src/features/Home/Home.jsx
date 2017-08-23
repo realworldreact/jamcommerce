@@ -12,25 +12,30 @@ import callout from './callout.png';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
-const featured = [{
-  img: featuredimg,
-  price: 199.00,
-  title: 'React'
-}, {
-  img: featuredimg,
-  title: 'Webpack',
-  price: 299.00,
-  sale: 199.00
-}, {
-  img: featuredimg,
-  title: 'Falcor',
-  price: 299.00,
-  sale: 199.00
-}, {
-  img: featuredimg,
-  title: 'Graphql',
-  price: 299.00
-}];
+const featured = [
+  {
+    img: featuredimg,
+    price: 199.0,
+    title: 'React',
+  },
+  {
+    img: featuredimg,
+    title: 'Webpack',
+    price: 299.0,
+    sale: 199.0,
+  },
+  {
+    img: featuredimg,
+    title: 'Falcor',
+    price: 299.0,
+    sale: 199.0,
+  },
+  {
+    img: featuredimg,
+    title: 'Graphql',
+    price: 299.0,
+  },
+];
 
 export default class Home extends Component {
   render() {
@@ -43,8 +48,9 @@ export default class Home extends Component {
             <header className={ cx('copy') }>
               <h1 className={ cx('title') }>Nothing to Hack</h1>
               <p>
-          Because your app is rendered in pure static HTML, there is virtually
-          no risk of SQL injection, malware attacks, or other nefarious hackery.
+                Because your app is rendered in pure static HTML, there is
+                virtually no risk of SQL injection, malware attacks, or other
+                nefarious hackery.
               </p>
               <LearnMore />
             </header>
@@ -54,21 +60,21 @@ export default class Home extends Component {
             />
           </Callout>
           <div className={ cx('featured-container') }>
-            {
-              featured.map(featured => (
+            { featured.map(featured =>
+              (
                 <Featured
                   key={ featured.title }
                   { ...featured }
                 />
-              ))
-            }
+              ),
+            ) }
           </div>
         </div>
         <div className={ cx('prefooter') }>
           <h3>
-            Learn More about the JAMstack from the links in the footer,
-            or click around this example app to see how
-            an e-commerce solution works with static tech!
+            Learn More about the JAMstack from the links in the footer, or click
+            around this example app to see how an e-commerce solution works with
+            static tech!
           </h3>
         </div>
       </div>

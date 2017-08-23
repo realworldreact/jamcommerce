@@ -6,7 +6,7 @@ import styles from './menu.module.styl';
 
 const cx = classnames.bind(styles);
 const propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
 };
 
 const exampleCopy = `
@@ -16,7 +16,9 @@ export default function Menu({ children }) {
   return (
     <div className={ cx('menu') }>
       { children }
-      <div>{ exampleCopy }</div>
+      <div>
+        { exampleCopy }
+      </div>
     </div>
   );
 }
