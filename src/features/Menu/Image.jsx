@@ -1,39 +1,39 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
 import styles from './menu.module.styl';
-import imageMenu from './image-menu.png';
 
 const cx = classnames.bind(styles);
-const propTypes = {};
+const propTypes = {
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      img: PropTypes.string,
+    }),
+  ).isRequired,
+};
 
-const data = [
-  {
-    title: 'Women',
-    img: imageMenu,
-  },
-  {
-    title: 'Men',
-    img: imageMenu,
-  },
-];
-export default function Image() {
+export default function Image({ categories }) {
   return (
     <div className={ cx('image') }>
-      { data.map(({ title, img, href = '#' }) =>
+      { categories.map(({ title, img, alt, href = '#' }) =>
         (
           <div
             className={ cx('item') }
             key={ title }
             >
-            <a src={ href }>
+            <a href={ href }>
               <header>
                 <h4>
                   { title }
                 </h4>
               </header>
               <div>
-                <img src={ img } />
+                <img
+                  alt={ alt }
+                  src={ img }
+                />
               </div>
             </a>
           </div>

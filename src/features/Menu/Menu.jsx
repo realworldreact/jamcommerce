@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
 import styles from './menu.module.styl';
+import Body from './Body.jsx';
 
 const cx = classnames.bind(styles);
 const propTypes = {
@@ -31,5 +32,8 @@ export default function Menu({ children, isOpen, onMouseLeave }) {
     </div>
   );
 }
+
+Menu.Body = Body;
+
 Menu.displayName = 'Menu';
 Menu.propTypes = propTypes;

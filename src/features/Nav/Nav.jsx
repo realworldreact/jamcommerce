@@ -7,25 +7,37 @@ import classnames from 'classnames/bind';
 import { createSelector } from 'reselect';
 
 import {
+  categoriesSelector,
   clickOnSubNav,
+  directoriesSelector,
+  directorySelector,
   hoverOnSubNav,
   isMenuOpenSelector,
-  itemsSelector,
   mouseLeaveMenu,
 } from './redux';
 import styles from './nav.module.styl';
 import cart from './cart.svg';
 import hamburger from './hamburger.svg';
-import Menu, { Image, Text } from '../Menu';
+import Menu from '../Menu';
 
 const preventDefault = e => e && e.preventDefault();
-const createBoundFunc = _.memoize((name, e, ac, dispatch) => _.flow(e, ac, dispatch));
+const createBoundFunc = _.memoize(
+  (name, e, ac, dispatch) => _.flow(e, () => ac(name), dispatch),
+  (name, e, ac) => name + ac,
+);
 
 const cx = classnames.bind(styles);
 const mapStateToProps = createSelector(
   isMenuOpenSelector,
-  itemsSelector,
-  (isMenuOpen, items = []) => ({ items, isMenuOpen }),
+  directoriesSelector,
+  directorySelector,
+  categoriesSelector,
+  (isMenuOpen, directories = [], currentDirectory, categories) => ({
+    categories,
+    currentDirectory,
+    directories,
+    isMenuOpen,
+  }),
 );
 
 function mapDispatchToProps(dispatch) {
@@ -35,23 +47,23 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mergeProps(stateProps, dispatchProps) {
-  const { items = [] } = stateProps;
+  const { directories = [] } = stateProps;
   const { dispatch } = dispatchProps;
-  const clickOnSubNavActions = items.reduce((dispatchers, { name }) => {
-    dispatchers[name] = createBoundFunc(
-      name,
+  const clickOnSubNavActions = directories.reduce((dispatchers, { title }) => {
+    dispatchers[title] = createBoundFunc(
+      title,
       preventDefault,
-      clickOnSubNav.bind(name),
+      clickOnSubNav,
       dispatch,
     );
 
     return dispatchers;
   }, {});
-  const hoverOnSubNavActions = items.reduce((dispatchers, { name }) => {
-    dispatchers[name] = createBoundFunc(
-      name,
+  const hoverOnSubNavActions = directories.reduce((dispatchers, { title }) => {
+    dispatchers[title] = createBoundFunc(
+      title,
       _.noop,
-      hoverOnSubNav.bind(name),
+      hoverOnSubNav,
       dispatch,
     );
     return dispatchers;
@@ -66,23 +78,24 @@ function mergeProps(stateProps, dispatchProps) {
 }
 
 const propTypes = {
+  categories: PropTypes.array,
   clickOnSubNavActions: PropTypes.object,
+  currentDirectory: PropTypes.object,
+  directories: PropTypes.array,
   hoverOnSubNavActions: PropTypes.object,
   isMenuOpen: PropTypes.bool,
-  items: PropTypes.array,
   mouseLeaveMenu: PropTypes.func.isRequired,
 };
 
-const isImg = true;
-
 export function Nav({
-  isMenuOpen,
-  items,
-  mouseLeaveMenu,
+  categories,
   clickOnSubNavActions,
+  currentDirectory,
+  directories,
   hoverOnSubNavActions,
+  isMenuOpen,
+  mouseLeaveMenu,
 }) {
-  const MenuComp = isImg ? Image : Text;
   return (
     <div className={ cx('navbar') }>
       <nav className={ cx('top') }>
@@ -112,28 +125,37 @@ export function Nav({
       </nav>
       <nav className={ cx('bottom') }>
         <ul>
-          { items.map(({ name, href }) =>
+          { directories.map(({ title, href }) =>
             (
               <a
                 className={ cx('item-link') }
                 href={ href }
-                key={ name }
-                onClick={ clickOnSubNavActions[name] }
-                onMouseEnter={ hoverOnSubNavActions[name] }
+                key={ title }
+                onClick={ clickOnSubNavActions[title] }
+                onMouseEnter={ hoverOnSubNavActions[title] }
                 >
                 <li className={ cx('item') }>
-                  { name }
+                  { title }
                 </li>
               </a>
             ),
           ) }
+          <a
+            className={ cx('item-link') }
+            href='/womens'
+            >
+            <li className={ cx('item') }>Sale</li>
+          </a>
         </ul>
       </nav>
       <Menu
         isOpen={ isMenuOpen }
         onMouseLeave={ mouseLeaveMenu }
         >
-        <MenuComp />
+        <Menu.Body
+          categories={ categories }
+          view={ currentDirectory.view }
+        />
       </Menu>
     </div>
   );
