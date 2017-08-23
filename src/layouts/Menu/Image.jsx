@@ -10,28 +10,35 @@ const propTypes = {};
 const data = [
   {
     title: 'Women',
-    img: imageMenu
-  }, {
+    img: imageMenu,
+  },
+  {
     title: 'Men',
-    img: imageMenu
-  }
+    img: imageMenu,
+  },
 ];
 export default function Image() {
   return (
     <div className={ cx('image') }>
-      {
-        data.map(({ title, img, href = '#' }) => (
+      { data.map(({ title, img, href = '#' }) =>
+        (
           <div
             className={ cx('item') }
             key={ title }
             >
             <a src={ href }>
-              <header><h4>{ title }</h4></header>
-              <div><img src={ img }/></div>
+              <header>
+                <h4>
+                  { title }
+                </h4>
+              </header>
+              <div>
+                <img src={ img } />
+              </div>
             </a>
           </div>
-        ))
-      }
+        ),
+      ) }
     </div>
   );
 }

@@ -9,17 +9,23 @@ const propTypes = {
   img: PropTypes.string,
   price: PropTypes.number,
   sale: PropTypes.number,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 export default function Featured({ img, title, price, sale }) {
   const isSale = !!sale;
   const Price = isSale ? 'del' : 'span';
-  const _sale = isSale ? <span className={ cx('sale') }>${ sale }</span> : null;
+  const _sale = isSale ?
+    (
+      <span className={ cx('sale') }>
+        ${ sale }
+      </span>
+    ) :
+    null;
   return (
     <div className={ cx('featured') }>
       <div className={ cx('img') }>
-        <img src={ img }/>
+        <img src={ img } />
       </div>
       <header className={ cx('title') }>
         <h4>

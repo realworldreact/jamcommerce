@@ -10,10 +10,10 @@ export default function TemplateWrapper({ children }) {
   return (
     <div>
       <Helmet
-        meta={[
+        meta={ [
           { name: 'description', content: 'Sample' },
-          { name: 'keywords', content: 'sample, something' }
-        ]}
+          { name: 'keywords', content: 'sample, something' },
+        ] }
         title='JamCommerce'
       />
       <Nav />
@@ -26,5 +26,5 @@ export default function TemplateWrapper({ children }) {
 }
 
 TemplateWrapper.propTypes = {
-  children: PropTypes.func
+  children: PropTypes.func,
 };

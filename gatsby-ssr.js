@@ -8,9 +8,11 @@ exports.replaceRenderer = ({ bodyComponent, replaceBodyHTMLString }) => {
   const store = storeFactory();
 
   const ConnectedBody = () =>
-    (<Provider store={store}>
-      {bodyComponent}
-    </Provider>);
+    (
+      <Provider store={ store }>
+        { bodyComponent }
+      </Provider>
+    );
 
   replaceBodyHTMLString(renderToString(<ConnectedBody />));
 };

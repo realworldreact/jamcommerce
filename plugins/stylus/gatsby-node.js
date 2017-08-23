@@ -26,11 +26,21 @@ exports.modifyWebpackConfig = ({ config, stage }, options = {}) => {
       config.loader('stylus', {
         test: stylusFiles,
         exclude: stylusModulesFiles,
-        loaders: [ 'style', 'css', 'postcss', 'stylus' ],
+        loaders: [
+          'style',
+          'css',
+          'postcss',
+          'stylus',
+        ],
       });
       config.loader('stylusModules', {
         test: stylusModulesFiles,
-        loaders: [ 'style', cssModulesConfDev, 'postcss', 'stylus' ],
+        loaders: [
+          'style',
+          cssModulesConfDev,
+          'postcss',
+          'stylus',
+        ],
       });
       return config;
     }

@@ -15,16 +15,14 @@ const mapDispatchToProps = {
   clickOnSubNav: e => {
     e.preventDefault();
     return clickOnSubNav();
-  }
+  },
 };
 const propTypes = {
-  clickOnSubNav: PropTypes.func.isRequired
+  clickOnSubNav: PropTypes.func.isRequired,
 };
 const isImg = true;
 
-export function Nav({
-  clickOnSubNav
-}) {
+export function Nav({ clickOnSubNav }) {
   const MenuComp = isImg ? Image : Text;
   return (
     <div className={ cx('navbar') }>
@@ -32,14 +30,10 @@ export function Nav({
         <div className={ cx('hamburger') }>
           <img src={ hamburger } />
         </div>
-        <div className={ cx('title') }>
-          JAM Commerce
-        </div>
+        <div className={ cx('title') }>JAM Commerce</div>
         <ul className={ cx('account') }>
           <li>
-            <a>
-              Sign In
-            </a>
+            <a>Sign In</a>
           </li>
           <li>
             <a className={ cx('cart') }>
@@ -67,7 +61,9 @@ export function Nav({
           </li>
         </ul>
       </nav>
-      <Menu><MenuComp /></Menu>
+      <Menu>
+        <MenuComp />
+      </Menu>
     </div>
   );
 }
@@ -75,7 +71,4 @@ export function Nav({
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Nav);
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

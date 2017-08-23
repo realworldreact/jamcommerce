@@ -17,13 +17,13 @@ const netlifySolutions = [
   { name: 'GoTell', src: '' },
   { name: 'Gotiator', src: '' },
   { name: 'AWS Lambda', src: '' },
-  { name: 'Serverless', src: '' }
+  { name: 'Serverless', src: '' },
 ];
 const icons = [
   iconFB,
   iconIG,
   iconYT,
-  iconTW
+  iconTW,
 ];
 
 // addon button
@@ -43,24 +43,44 @@ export default function Footer() {
         <div className={ cx('solutions') }>
           <h5>Other JAMStack solutions</h5>
           <div className={ cx('solutions-container') }>
-            {
-              netlifySolutions.map(({ name, src }) => ((
-                <p key={ name }><a src={ src }>{ name }</a></p>
-              )))
-            }
+            { netlifySolutions.map(({ name, src }) =>
+              (
+                <p key={ name }>
+                  <a src={ src }>
+                    { name }
+                  </a>
+                </p>
+              ),
+            ) }
           </div>
         </div>
       </div>
       <div className={ cx('about', 'top-row') }>
         <div className={ cx('content') }>
-          <p><a src=''>About JAMStack</a></p>
-          <p><a src=''>JAMstack Radio Podcast</a></p>
-          <p><a src=''>JAMStack Online Training</a></p>
-          <p><a src=''>JAMStack Meetup</a></p>
-          <p><a src=''>MIT License</a></p>
-          <p><a src=''>See the Code</a></p>
-          <p><a src=''>Jobs</a></p>
-          <p><a src=''>Contact Us</a></p>
+          <p>
+            <a src=''>About JAMStack</a>
+          </p>
+          <p>
+            <a src=''>JAMstack Radio Podcast</a>
+          </p>
+          <p>
+            <a src=''>JAMStack Online Training</a>
+          </p>
+          <p>
+            <a src=''>JAMStack Meetup</a>
+          </p>
+          <p>
+            <a src=''>MIT License</a>
+          </p>
+          <p>
+            <a src=''>See the Code</a>
+          </p>
+          <p>
+            <a src=''>Jobs</a>
+          </p>
+          <p>
+            <a src=''>Contact Us</a>
+          </p>
         </div>
       </div>
       <div className={ cx('newsletter', 'top-row') }>
@@ -71,7 +91,7 @@ export default function Footer() {
             (non-spammy) newsletter
           </p>
           <div className={ cx('input') }>
-            <input className={ cx('') }/>
+            <input className={ cx('') } />
           </div>
           <button
             disabled={ true }
@@ -83,16 +103,16 @@ export default function Footer() {
       </div>
       <div className={ cx('bottom') }>
         <div className={ cx('icons') }>
-          {
-            icons.map(icon => (
+          { icons.map(icon =>
+            (
               <div
                 className={ cx('icon') }
                 key={ icon }
                 >
                 <img src={ icon } />
               </div>
-            ))
-          }
+            ),
+          ) }
         </div>
         <div className={ cx('created-by') }>
           <h4 className={ cx('title') }>Created By Netlify</h4>
