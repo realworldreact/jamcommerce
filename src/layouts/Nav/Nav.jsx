@@ -2,66 +2,118 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
+import { createSelector } from 'reselect';
 
+import { clickOnSubNav, mouseLeaveMenu, isMenuOpenSelector } from './redux';
 import styles from './nav.module.styl';
 import cart from './cart.svg';
-import { clickOnSubNav } from './redux';
 import hamburger from './hamburger.svg';
 import Menu, { Image, Text } from '../Menu';
 
-const cx = classnames.bind(styles);
-const mapStateToProps = null;
-const mapDispatchToProps = {
-  clickOnSubNav: e => {
-    e.preventDefault();
-    return clickOnSubNav();
+const womansLink = '/wommans';
+const _items = [
+  {
+    name: 'New Arrivals',
+    href: womansLink,
   },
-};
+  {
+    name: 'Womans',
+    href: womansLink,
+  },
+  {
+    name: 'Mens',
+    href: womansLink,
+  },
+  {
+    name: 'Collections',
+    href: womansLink,
+  },
+  {
+    name: 'Sales',
+    href: womansLink,
+  },
+];
+
+const cx = classnames.bind(styles);
+const mapStateToProps = createSelector(isMenuOpenSelector, isMenuOpen => ({
+  items: _items,
+  isMenuOpen,
+}));
+function mapDispatchToProps(dispatch, { items = _items }) {
+  const subNavActions = items.reduce((dispatchers, { name }) => {
+    dispatchers[name] = e => {
+      e.preventDefault();
+      return dispatch(clickOnSubNav(name));
+    };
+
+    return dispatchers;
+  }, {});
+  return {
+    mouseLeaveMenu: () => dispatch(mouseLeaveMenu()),
+    subNavActions,
+  };
+}
+
 const propTypes = {
-  clickOnSubNav: PropTypes.func.isRequired,
+  isMenuOpen: PropTypes.bool,
+  items: PropTypes.array,
+  mouseLeaveMenu: PropTypes.func.isRequired,
+  subNavActions: PropTypes.object,
 };
+
 const isImg = true;
 
-export function Nav({ clickOnSubNav }) {
+export function Nav({ isMenuOpen, items, mouseLeaveMenu, subNavActions }) {
   const MenuComp = isImg ? Image : Text;
   return (
     <div className={ cx('navbar') }>
       <nav className={ cx('top') }>
         <div className={ cx('hamburger') }>
-          <img src={ hamburger } />
+          <img
+            alt='menu hamburger'
+            src={ hamburger }
+          />
         </div>
         <div className={ cx('title') }>JAM Commerce</div>
         <ul className={ cx('account') }>
           <li>
-            <a>Sign In</a>
+            <a href='/signin'>Sign In</a>
           </li>
           <li>
-            <a className={ cx('cart') }>
-              <img src={ cart } />
+            <a
+              className={ cx('cart') }
+              href='/cart'
+              >
+              <img
+                alt='a padlock'
+                src={ cart }
+              />
             </a>
           </li>
         </ul>
       </nav>
       <nav className={ cx('bottom') }>
         <ul>
-          <li>
-            <a onClick={ clickOnSubNav }>New Arrivals</a>
-          </li>
-          <li>
-            <a>Womens</a>
-          </li>
-          <li>
-            <a>Mens</a>
-          </li>
-          <li>
-            <a>Collections</a>
-          </li>
-          <li>
-            <a>Sales</a>
-          </li>
+          { items.map(({ name, href }) =>
+            (
+              <a
+                className={ cx('item-link') }
+                href={ href }
+                key={ name }
+                onClick={ subNavActions[name] }
+                >
+                <li className={ cx('item') }>
+                  { name }
+                </li>
+              </a>
+            ),
+          ) }
         </ul>
       </nav>
-      <Menu>
+      <Menu
+        isOpen={ isMenuOpen }
+        onMouseLeave={ mouseLeaveMenu }
+        >
         <MenuComp />
       </Menu>
     </div>

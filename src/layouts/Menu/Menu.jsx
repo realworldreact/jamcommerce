@@ -7,14 +7,23 @@ import styles from './menu.module.styl';
 const cx = classnames.bind(styles);
 const propTypes = {
   children: PropTypes.element,
+  isOpen: PropTypes.bool,
+  onMouseLeave: PropTypes.func,
 };
 
 const exampleCopy = `
   Note: This is an example site. All links point to the same route.
 `;
-export default function Menu({ children }) {
+export default function Menu({ children, isOpen, onMouseLeave }) {
+  const menuClasses = {
+    menu: true,
+    open: isOpen,
+  };
   return (
-    <div className={ cx('menu') }>
+    <div
+      className={ cx(menuClasses) }
+      onMouseLeave={ onMouseLeave }
+      >
       { children }
       <div>
         { exampleCopy }

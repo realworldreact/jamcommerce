@@ -1,12 +1,15 @@
 .menu
   $padding-base()
   background-color $bg-color
+  box-shadow 0 4px 4px $menu-shadow
   position absolute
   text-align center
   top 100%
+  visibility hidden
   width 100%
-  box-shadow 0 4px 4px $menu-shadow
   z-index $z-dropdown
+.open
+  visibility visible
 
 .image
   $row(around)
