@@ -20,13 +20,12 @@ export default function Subheader() {
           />
         </div>
         <div>
-          <h2 className={ cx('title') }>Undeniably Hip</h2>
+          <h2 className={ cx('title') }>Get up and running fast</h2>
         </div>
         <div className={ cx('copy') }>
-          Static sites are en vogue not because they’re a fashion trend, but
-          because the JAMstack represents the best parts of the full-stack
-          architecture we’ve come to love — without the security risk,
-          complexity, or maintenance costs.
+          JAM Commerce has a minimal learning curve. If you know how to
+          fetch an API and are familiar with Git, you can make your
+          front-end code a full-stack e-commerce solution in record time.
         </div>
         <LearnMore />
       </div>
@@ -38,12 +37,13 @@ export default function Subheader() {
           />
         </div>
         <div>
-          <h2 className={ cx('title') }>Accessories Galore</h2>
+          <h2 className={ cx('title') }>Use tech that you love</h2>
         </div>
         <p className={ cx('copy') }>
-          With the JAMstack, you can add microservices as you require such as
-          forms, databases as a service, blog CMS, comments, or this e-commerce
-          solution — while maintaining the benefits of going static.
+          JAM Commerce is headless, meaning you can use whatever front-end
+          you'd like. You can also update and modify your stack by simply
+          reconnecting the API endpoints. For this example app, we used the
+          Gatsby static-site generator and some cool other tools.
         </p>
         <LearnMore />
       </div>
