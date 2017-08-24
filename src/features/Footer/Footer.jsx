@@ -91,9 +91,7 @@ export default function Footer() {
             (non-spammy) newsletter
           </p>
           <div className={ cx('input') }>
-            <input
-              placeholder='your@email.com'
-            />
+            <input placeholder='your@email.com' />
           </div>
           <button
             disabled={ true }
