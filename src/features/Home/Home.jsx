@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import classnames from 'classnames/bind';
 
 import styles from './home.module.styl';
-import featuredimg from './featured.png';
+import FalcorImg from './falcor-front.png';
+import GraphqlImg from './graphql-front.png';
+import ReactImg from './react-front.png';
+import WebpackImg from './webpack-front.png';
 import Carousel from './Carousel.jsx';
 import Subheader from './Subheader.jsx';
 import Callout from '../Callout';
@@ -14,24 +17,24 @@ const cx = classnames.bind(styles);
 const propTypes = {};
 const featured = [
   {
-    img: featuredimg,
+    img: ReactImg,
     price: 199.0,
     title: 'React',
   },
   {
-    img: featuredimg,
+    img: WebpackImg,
     title: 'Webpack',
     price: 299.0,
     sale: 199.0,
   },
   {
-    img: featuredimg,
+    img: FalcorImg,
     title: 'Falcor',
     price: 299.0,
     sale: 199.0,
   },
   {
-    img: featuredimg,
+    img: GraphqlImg,
     title: 'Graphql',
     price: 299.0,
   },
