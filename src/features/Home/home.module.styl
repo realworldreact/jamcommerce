@@ -6,9 +6,16 @@
   $center(1078px)
   $row(between)
   padding $padding-xl-horizontal 0
+  +$below(md)
+    $row(around)
+    padding $padding-xl-horizontal $padding-xl-vertical
+
 
 .subheader-container
   width 450px
+  +$below(md)
+    &:first-child
+      padding-bottom 70px
   .img
     size(450px, 400px)
     padding-bottom $padding-lg-horizontal
@@ -40,15 +47,21 @@
 
 
 .content-container
-  $row(between)
   $center(1225px)
+  $row(between)
+  // max-width 98vw
   padding $padding-xl-horizontal 0
+  +$below(1119px)
+    $row(around)
+    padding $padding-xl-horizontal $padding-xl-vertical
 
 .callout
   $column(between)
   size(556px, 655px)
   text-align left
   border 20px solid $callout-gray-border
+  +$below(1119px)
+    max-width 96vw
 
 .copy
   $column(between)
@@ -58,6 +71,10 @@
   font-weight 300
   line-height $line-height-copy
   padding $padding-xl-horizontal $padding-xl-vertical $padding-xl-horizontal ($padding-xl-vertical * 3)
+  line-height $line-height-copy
+  color $text-description
+  font-weight 300
+  font-size 18px
   .title
     text-align center
   .img
@@ -68,9 +85,14 @@
   $row(between)
   max-width 540px
   margin-top 50px
+  padding 2px 2px
+  +$below(502px)
+    $row(around)
 
 .featured
-  size(230px)
+  padding 2px 2px 20px 2px
+  +$below(1119px)
+    padding-bottom 45px
   .title
     font-weight bold
   .sale
