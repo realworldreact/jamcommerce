@@ -49,11 +49,10 @@ export default class Home extends Component {
         <div className={ cx('content-container') }>
           <Callout className={ cx('callout') }>
             <header className={ cx('copy') }>
-              <h1 className={ cx('title') }>Nothing to Hack</h1>
+              <h1 className={ cx('title') }>Free & Open Source</h1>
               <p>
-                Because your app is rendered in pure static HTML, there is
-                virtually no risk of SQL injection, malware attacks, or other
-                nefarious hackery.
+                JAM Commerce is completely free to use and modify as you
+                like. Create your own version or fork it and contribute!
               </p>
               <LearnMore />
             </header>
@@ -76,8 +75,8 @@ export default class Home extends Component {
         <div className={ cx('prefooter') }>
           <h4>
             Learn More about the JAMstack from the links in the footer,
-            or click around this example app to see how
-            an e-commerce solution works with static tech!
+            or click around this example app to see how JAM Commerce
+            works!
           </h4>
         </div>
       </div>
