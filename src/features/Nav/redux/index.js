@@ -4,6 +4,10 @@ import { createTypes } from 'redux-create-types';
 import { createSelector } from 'reselect';
 
 import imageMenu from '../image-menu.png';
+import menuMen from '../menu-men.png';
+import menuWomen from '../menu-women.png';
+import menuEssentialShoes from '../essential-shoes.png';
+import menuSummerAccessories from '../summer-accessories.png';
 
 const ns = 'nav';
 
@@ -67,19 +71,19 @@ const initialState = {
   categoriesById: {
     Women: {
       title: 'Woman',
-      img: imageMenu,
+      img: menuWomen,
     },
     Men: {
       title: 'Men',
-      img: imageMenu,
+      img: menuMen,
     },
     'Summer Colors': {
       title: 'Summer Colors',
-      img: imageMenu,
+      img: menuSummerAccessories,
     },
     'Essential Handbags': {
       title: 'Essential Handbags',
-      img: imageMenu,
+      img: menuEssentialShoes,
     },
     Clothing: {
       title: 'Clothing',
