@@ -51,8 +51,8 @@ export default class Home extends Component {
             <header className={ cx('copy') }>
               <h1 className={ cx('title') }>Free & Open Source</h1>
               <p>
-                JAM Commerce is completely free to use and modify as you
-                like. Create your own version or fork it and contribute!
+                JAM Commerce is completely free to use and modify as you like.
+                Create your own version or fork it and contribute!
               </p>
               <LearnMore />
             </header>
@@ -74,9 +74,8 @@ export default class Home extends Component {
         </div>
         <div className={ cx('prefooter') }>
           <h4>
-            Learn More about the JAMstack from the links in the footer,
-            or click around this example app to see how JAM Commerce
-            works!
+            Learn More about the JAMstack from the links in the footer, or click
+            around this example app to see how JAM Commerce works!
           </h4>
         </div>
       </div>

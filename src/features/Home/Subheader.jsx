@@ -23,9 +23,9 @@ export default function Subheader() {
           <h2 className={ cx('title') }>Get up and running fast</h2>
         </div>
         <div className={ cx('copy') }>
-          JAM Commerce has a minimal learning curve. If you know how to
-          fetch an API and are familiar with Git, you can make your
-          front-end code a full-stack e-commerce solution in record time.
+          JAM Commerce has a minimal learning curve. If you know how to fetch an
+          API and are familiar with Git, you can make your front-end code a
+          full-stack e-commerce solution in record time.
         </div>
         <LearnMore />
       </div>
@@ -40,10 +40,10 @@ export default function Subheader() {
           <h2 className={ cx('title') }>Use tech that you love</h2>
         </div>
         <p className={ cx('copy') }>
-          JAM Commerce is headless, meaning you can use whatever front-end
-          you'd like. You can also update and modify your stack by simply
-          reconnecting the API endpoints. For this example app, we used the
-          Gatsby static-site generator and some cool other tools.
+          JAM Commerce is headless, meaning you can use whatever front-end you'd
+          like. You can also update and modify your stack by simply reconnecting
+          the API endpoints. For this example app, we used the Gatsby
+          static-site generator and some cool other tools.
         </p>
         <LearnMore />
       </div>
