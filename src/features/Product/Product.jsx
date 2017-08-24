@@ -18,6 +18,7 @@ const propTypes = {
 
 const mock = {
   name: 'React',
+  alt: 'The react Shoe',
   img: reactFront,
   price: 199,
   sale: 99,
@@ -50,7 +51,7 @@ export default function Product({ pathContext }) {
         </div>
       </div>
       <div className={ cx('content') }>
-        { products.map(({ name, sale, price, img }, i) => {
+        { products.map(({ name, sale, price, img, alt }, i) => {
           const isSale = !!sale;
           const Price = isSale ? 'del' : 'span';
           const _sale = isSale ?
@@ -61,22 +62,28 @@ export default function Product({ pathContext }) {
             ) :
             null;
           return (
-            <div
+            <a
               className={ cx('product-item') }
+              href={ `/womens/shoes/${name}` }
               key={ i }
               >
-              <div className={ cx('img') }>
-                <img src={ img } />
+              <div>
+                <div className={ cx('img') }>
+                  <img
+                    alt={ alt }
+                    src={ img }
+                  />
+                </div>
+                <header className={ cx('title') }>
+                  <h4>
+                    { name }
+                  </h4>
+                </header>
+                <div className={ cx('price') }>
+                  <Price>${ price }</Price> { _sale }
+                </div>
               </div>
-              <header className={ cx('title') }>
-                <h4>
-                  { name }
-                </h4>
-              </header>
-              <div className={ cx('price') }>
-                <Price>${ price }</Price> { _sale }
-              </div>
-            </div>
+            </a>
           );
         }) }
       </div>
