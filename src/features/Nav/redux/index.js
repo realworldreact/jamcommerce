@@ -3,7 +3,6 @@ import { createAction, combineActions, handleActions } from 'redux-actions';
 import { createTypes } from 'redux-create-types';
 import { createSelector } from 'reselect';
 
-import imageMenu from '../image-menu.png';
 import menuMen from '../menu-men.png';
 import menuWomen from '../menu-women.png';
 import menuEssentialShoes from '../essential-shoes.png';
@@ -26,7 +25,7 @@ const initialState = {
   currentDirectory: 'New Arrivals',
   directories: [
     'New Arrivals',
-    'Womans',
+    'Womens',
     'Mens',
     'Collections',
   ],
@@ -40,8 +39,8 @@ const initialState = {
         'Men',
       ],
     },
-    Womans: {
-      title: 'Womans',
+    Womens: {
+      title: 'Womens',
       href: womansLink,
       view: 'Text',
       categories: [
