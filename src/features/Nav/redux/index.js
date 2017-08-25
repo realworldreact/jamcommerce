@@ -19,38 +19,38 @@ const types = createTypes(
   ns,
 );
 
-const womansLink = '/womans';
+const womenLink = '/women';
 const initialState = {
   isMenuOpen: false,
   currentDirectory: 'New Arrivals',
   directories: [
     'New Arrivals',
-    'Womens',
-    'Mens',
+    'Women',
+    'Men',
     'Collections',
   ],
   directoriesById: {
     'New Arrivals': {
       title: 'New Arrivals',
-      href: womansLink,
+      href: womenLink,
       view: 'Image',
       categories: [
         'Women',
         'Men',
       ],
     },
-    Womens: {
-      title: 'Womens',
-      href: womansLink,
+    Women: {
+      title: 'Women',
+      href: womenLink,
       view: 'Text',
       categories: [
         'Clothing',
         'Accessories',
       ],
     },
-    Mens: {
-      title: 'Mens',
-      href: womansLink,
+    Men: {
+      title: 'Men',
+      href: womenLink,
       view: 'Text',
       categories: [
         'Clothing',
@@ -59,7 +59,7 @@ const initialState = {
     },
     Collections: {
       title: 'Collections',
-      href: womansLink,
+      href: womenLink,
       view: 'Image',
       categories: [
         'Summer Colors',
@@ -69,7 +69,7 @@ const initialState = {
   },
   categoriesById: {
     Women: {
-      title: 'Woman',
+      title: 'Women',
       img: menuWomen,
     },
     Men: {
@@ -118,31 +118,31 @@ const initialState = {
     },
   },
   subById: {
-    'Active Wear': { title: 'Active Wear', href: 'womensLink' },
-    Bags: { title: 'Bags', href: 'womensLink' },
-    'Beach & Sun': { title: 'Beach & Sun', href: 'womensLink' },
-    Belts: { title: 'Belts', href: 'womensLink' },
-    Blazers: { title: 'Blazers', href: 'womensLink' },
-    'Coats & Blazers': { title: 'Coats & Blazers', href: 'womensLink' },
-    Demin: { title: 'Demin', href: 'womensLink' },
-    Dresses: { title: 'Dresses', href: 'womensLink' },
-    'Handbags & Wallets': { title: 'Handbags & Wallets', href: 'womensLink' },
+    'Active Wear': { title: 'Active Wear', href: 'womenLink' },
+    Bags: { title: 'Bags', href: 'womenLink' },
+    'Beach & Sun': { title: 'Beach & Sun', href: 'womenLink' },
+    Belts: { title: 'Belts', href: 'womenLink' },
+    Blazers: { title: 'Blazers', href: 'womenLink' },
+    'Coats & Blazers': { title: 'Coats & Blazers', href: 'womenLink' },
+    Demin: { title: 'Demin', href: 'womenLink' },
+    Dresses: { title: 'Dresses', href: 'womenLink' },
+    'Handbags & Wallets': { title: 'Handbags & Wallets', href: 'womenLink' },
     'Hats & Hair Accessories': {
       title: 'Hats & Hair Accessories',
-      href: 'womensLink',
+      href: 'womenLink',
     },
-    Jewelry: { title: 'Jewelry', href: 'womensLink' },
-    'Luggage & Travel': { title: 'Luggage & Travel', href: 'womensLink' },
-    Pajamas: { title: 'Pajamas', href: 'womensLink' },
-    'Pants & Leggings': { title: 'Pants & Leggings', href: 'womensLink' },
-    'Scarves & Wraps': { title: 'Scarves & Wraps', href: 'womensLink' },
-    Shirts: { title: 'Shirts', href: 'womensLink' },
-    'Shoes & Sandels': { title: 'Shoes & Sandels', href: 'womensLink' },
-    Skirts: { title: 'Skirts', href: 'womensLink' },
-    'Sleep & Lounge': { title: 'Sleep & Lounge', href: 'womensLink' },
-    Sunglasses: { title: 'Sunglasses', href: 'womensLink' },
-    'Tees & Tops': { title: 'Tees & Tops', href: 'womensLink' },
-    Watches: { title: 'Watches', href: 'womensLink' },
+    Jewelry: { title: 'Jewelry', href: 'womenLink' },
+    'Luggage & Travel': { title: 'Luggage & Travel', href: 'womenLink' },
+    Pajamas: { title: 'Pajamas', href: 'womenLink' },
+    'Pants & Leggings': { title: 'Pants & Leggings', href: 'womenLink' },
+    'Scarves & Wraps': { title: 'Scarves & Wraps', href: 'womenLink' },
+    Shirts: { title: 'Shirts', href: 'womenLink' },
+    'Shoes & Sandels': { title: 'Shoes & Sandels', href: 'womenLink' },
+    Skirts: { title: 'Skirts', href: 'womenLink' },
+    'Sleep & Lounge': { title: 'Sleep & Lounge', href: 'womenLink' },
+    Sunglasses: { title: 'Sunglasses', href: 'womenLink' },
+    'Tees & Tops': { title: 'Tees & Tops', href: 'womenLink' },
+    Watches: { title: 'Watches', href: 'womenLink' },
   },
 };
 

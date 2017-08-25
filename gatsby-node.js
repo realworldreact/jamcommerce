@@ -26,7 +26,7 @@ const dedent = require('dedent');
 exports.createPages = ({ boundActionCreators: { createPage } }) => {
   const productTemplate = path.resolve('src/features/Product/index.js');
   createPage({
-    path: '/womans/shoes',
+    path: '/women/shoes',
     component: productTemplate,
     context: {
       callout: {

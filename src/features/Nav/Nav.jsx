@@ -142,7 +142,7 @@ export function Nav({
           ) }
           <a
             className={ cx('item-link') }
-            href='/womens'
+            href='/women'
             >
             <li className={ cx('item') }>Sale</li>
           </a>

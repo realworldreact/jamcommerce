@@ -64,7 +64,7 @@ export default function Product({ pathContext }) {
           return (
             <a
               className={ cx('product-item') }
-              href={ `/womens/shoes/${name}` }
+              href={ `/women/shoes/${name}` }
               key={ i }
               >
               <div>
