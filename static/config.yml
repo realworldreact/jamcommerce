@@ -1,0 +1,67 @@
+backend:
+  name: github
+  repo: "realworldreact/jamcommerce"
+  branch: master # Branch to update (master by default)
+
+media_folder: "static/images" # Folder where user uploaded files should go
+public_folder: "images" # src attribute for public images
+
+collections: # A list of collections the CMS should be able to edit
+  - name: product
+    label: Product
+    path: '/product'
+    slug: '{{name}}'
+    folder: "content/collections/product"
+    create: true
+    fields:
+      - name: name
+        label: Name
+        widget: string
+
+      - name: description
+        label: Description
+        widget: markdown
+
+      - name: details
+        label: Details
+        widget: list
+
+
+      - name: price
+        label: Price
+        widget: number
+
+      - name: sale
+        label: Sale
+        widget: number
+        required: false
+
+      - name: images
+        label: Images
+        widget: list
+        fields:
+          - name: name
+            label: Name
+            widget: string
+
+          - name: alt
+            label: Alt Text
+            widget: string
+
+          - name: image
+            label: Image
+            widget: image
+
+  - name: settings
+    label: Settings
+    editor:
+      preview: false
+    files:
+      - name: general
+        label: "Site Settings"
+        file: "content/data/settings.json"
+        description: "General Site Settings"
+        fields:
+          - name: site_title
+            label: "Global title"
+            widget: string

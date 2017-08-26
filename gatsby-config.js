@@ -7,6 +7,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'cms',
     {
       resolve: 'stylus',
       options: {
