@@ -37,20 +37,24 @@ collections: # A list of collections the CMS should be able to edit
         file: "content/copy/home.yml"
         description: "Copy for the home page"
         fields:
-          - name: homeCallout
+          - name: callout
             label: "Left Callout"
             widget: object
             fields:
 
                 - name: title
-                  label: Home Callout Title
+                  label: Title
                   widget: string
                   tagname: h1
 
-                - name: description
-                  label: Home Callout Text
-                  widget: string
+                - name: paragraph
+                  label: Paragraph
+                  widget: text
                   tagname: p
+
+                - name: image
+                  label: Image
+                  widget: image
 
           - name: prefooter
             label: "Text above the Footer"
