@@ -46,7 +46,7 @@ export default function Product({ pathContext }) {
             </h3>
           </header>
           <div className={ cx('copy') }>
-            { callout.copy }
+            { callout.description }
           </div>
         </div>
       </div>
