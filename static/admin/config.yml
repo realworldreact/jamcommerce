@@ -28,8 +28,8 @@ collections: # A list of collections the CMS should be able to edit
                 label: Title
                 widget: string
 
-              - name: body
-                label: Body
+              - name: description
+                label: Description
                 widget: text
 
       - name: home_copy
