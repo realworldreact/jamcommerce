@@ -14,7 +14,11 @@ images:
   - alt: 'front of the React heal '
     image: /images/react-back.png
     name: b-lg
+  - alt: Side Profile of React heal
+    image: /images/react-side.png
+    name: s-lg
 ---
+
 
 
 
