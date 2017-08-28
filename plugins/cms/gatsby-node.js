@@ -1,6 +1,5 @@
 const fs = require('fs-extra');
 const path = require('path');
-// const chokidar = require('chokidar');
 const debug = require('debug');
 
 const cwd = process.cwd();
@@ -37,6 +36,8 @@ function copyCmsFiles() {
     ),
   );
 }
+
+// add admin page to gatsby routes
 exports.createPages = ({ boundActionCreators: { createPage } }) => {
   const filePath = require.resolve('./Admin.jsx');
   log('creating admin pages: ', filePath);
@@ -47,6 +48,8 @@ exports.createPages = ({ boundActionCreators: { createPage } }) => {
   });
 };
 
+// add admin layout for admin page
+// this prevents use defined default layout from messing with admin page
 exports.createLayouts = ({ boundActionCreators: { createLayout } }) => {
   const filePath = require.resolve('./AdminLayout.jsx');
   log('creating admin layout: ', filePath);
@@ -55,5 +58,9 @@ exports.createLayouts = ({ boundActionCreators: { createLayout } }) => {
   });
 };
 
+// this is our entrypoint in development
+// gatsby currently does not have a way to run something at the end of
+// developemnt script (when the server is ready to accept req's)
 exports.sourceNodes = copyCmsFiles;
+// this copies our files over after everything else has built
 exports.onPostBuild = copyCmsFiles;
