@@ -11,9 +11,10 @@ images:
   - alt: front of the React heal
     image: /images/react-front.png
     name: f-lg
-  - alt: front of the React heal
-    image: /images/react-front.png
-    name: f-lg
+  - alt: 'front of the React heal '
+    image: /images/react-back.png
+    name: b-lg
 ---
+
 
 
