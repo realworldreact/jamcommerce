@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
+import Link from 'gatsby-link';
 
 import styles from './menu.module.styl';
 
@@ -35,15 +36,15 @@ export default function Text({ categories }) {
             <div className={ cx('content') }>
               { sub.map(({ title, href = '#' }) =>
                 (
-                  <a
+                  <Link
                     className={ cx('item') }
-                    href={ href }
                     key={ title }
+                    to={ href }
                     >
                     <p>
                       { title }
                     </p>
-                  </a>
+                  </Link>
                 ),
               ) }
             </div>

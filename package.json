@@ -25,7 +25,7 @@
     "debug": "^3.0.1",
     "dedent": "^0.7.0",
     "gatsby": "^1.9.8",
-    "gatsby-link": "^1.0.1",
+    "gatsby-link": "^1.6.13",
     "gatsby-plugin-react-helmet": "^1.0.1",
     "gatsby-source-filesystem": "^1.4.6",
     "gatsby-transformer-remark": "^1.7.3",

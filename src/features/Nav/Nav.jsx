@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
 import { createSelector } from 'reselect';
+import Link from 'gatsby-link';
 
 import {
   categoriesSelector,
@@ -105,7 +106,9 @@ export function Nav({
             src={ hamburger }
           />
         </div>
-        <div className={ cx('title') }>JAM Commerce</div>
+        <Link to='/'>
+          <div className={ cx('title') }>JAM Commerce</div>
+        </Link>
         <ul className={ cx('account') }>
           <li>
             <a href='/signin'>Sign In</a>

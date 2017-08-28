@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
+import Link from 'gatsby-link';
 
 import styles from './menu.module.styl';
 
@@ -23,7 +24,7 @@ export default function Image({ categories }) {
             className={ cx('item') }
             key={ title }
             >
-            <a href={ href }>
+            <Link to={ href }>
               <header>
                 <h4>
                   { title }
@@ -35,7 +36,7 @@ export default function Image({ categories }) {
                   src={ img }
                 />
               </div>
-            </a>
+            </Link>
           </div>
         ),
       ) }
