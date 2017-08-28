@@ -8,6 +8,39 @@ public_folder: "images" # src attribute for public images
 publish_mode: editorial_workflow # uses PR's instead of direct commit messages
 
 collections: # A list of collections the CMS should be able to edit
+  - name: copy
+    label: "Copy"
+    create: true
+    editor:
+      preview: false
+    files:
+      - name: product_copy
+        label: "Product Copy"
+        file: "content/copy/product.yml"
+        description: "Copy for the product page"
+        fields:
+          - name: callout
+            label: Callout
+            widget: object
+            fields:
+
+              - name: title
+                label: Title
+                widget: string
+
+              - name: description
+                label: Description
+                widget: text
+
+      - name: home_copy
+        label: "Home Copy"
+        file: "content/copy/home.yml"
+        description: "Copy for the home page"
+        fields:
+          - name: prefooter
+            label: "Above the Footer"
+            widget: text
+
   - name: product
     label: Product
     path: '/product'
@@ -52,17 +85,3 @@ collections: # A list of collections the CMS should be able to edit
           - name: image
             label: Image
             widget: image
-
-  - name: settings
-    label: Settings
-    editor:
-      preview: false
-    files:
-      - name: general
-        label: "Site Settings"
-        file: "content/data/settings.json"
-        description: "General Site Settings"
-        fields:
-          - name: site_title
-            label: "Global title"
-            widget: string
