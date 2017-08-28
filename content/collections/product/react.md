@@ -8,9 +8,12 @@ details:
 price: '199'
 sale: '99'
 images:
-  - name: b-lg
-  - alt: front or the React heal
-    image: /images/redux-back.png
+  - alt: front of the React heal
+    image: /images/react-front.png
+    name: f-lg
+  - alt: front of the React heal
+    image: /images/react-front.png
     name: f-lg
 ---
+
 
