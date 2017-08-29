@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { createAction, combineActions, handleActions } from 'redux-actions';
+import { createAction } from 'redux-actions';
 import { createTypes } from 'redux-create-types';
 import { createSelector } from 'reselect';
 
@@ -7,6 +7,7 @@ import menuMen from '../menu-men.png';
 import menuWomen from '../menu-women.png';
 import menuEssentialShoes from '../essential-shoes.png';
 import menuSummerAccessories from '../summer-accessories.png';
+import { combineActions, handleActions } from '../../../utils/redux.js';
 
 const ns = 'nav';
 
@@ -20,7 +21,7 @@ const types = createTypes(
 );
 
 const womensLink = '/women/shoes';
-const initialState = {
+const defaultState = {
   isMenuOpen: false,
   currentDirectory: 'New Arrivals',
   directories: [
@@ -190,24 +191,22 @@ export const categoriesSelector = createSelector(
     }),
 );
 
-export default function createReducer() {
-  const reducer = handleActions(
-    {
-      [combineActions(types.clickOnSubNav, types.hoverOnSubNav)]: (
-        state,
-        { payload: item },
-      ) => ({
-        ...state,
-        isMenuOpen: true,
-        currentDirectory: item,
-      }),
-      [types.mouseLeaveMenu]: state => ({
-        ...state,
-        isMenuOpen: false,
-      }),
-    },
-    initialState,
-  );
-  reducer.toString = () => ns;
-  return reducer;
-}
+export default handleActions(
+  types,
+  types => ({
+    [combineActions(types.clickOnSubNav, types.hoverOnSubNav)]: (
+      state,
+      { payload: item },
+    ) => ({
+      ...state,
+      isMenuOpen: true,
+      currentDirectory: item,
+    }),
+    [types.mouseLeaveMenu]: state => ({
+      ...state,
+      isMenuOpen: false,
+    }),
+  }),
+  defaultState,
+  ns,
+);

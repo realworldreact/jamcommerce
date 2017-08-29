@@ -1,11 +1,5 @@
-import { combineReducers } from 'redux';
-import { default as navReducer } from './features/Nav/redux';
+import createReducerHash from './features/redux';
 
 export default function createReducer() {
-  return combineReducers(
-    [ navReducer ].map(f => f()).reduce((reducers, reducer) => {
-      reducers[reducer] = reducer;
-      return reducers;
-    }, {}),
-  );
+  return createReducerHash().getFinalReducer();
 }
