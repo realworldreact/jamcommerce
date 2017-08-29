@@ -29,6 +29,7 @@
     "gatsby-plugin-react-helmet": "^1.0.1",
     "gatsby-source-filesystem": "^1.4.6",
     "gatsby-transformer-remark": "^1.7.3",
+    "invariant": "^2.2.2",
     "js-yaml": "^3.9.1",
     "kouto-swiss": "^1.1.0",
     "lodash": "^4.17.4",
