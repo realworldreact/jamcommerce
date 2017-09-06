@@ -9,14 +9,30 @@ import Callout from '../Callout';
 
 const cx = classnames.bind(styles);
 const propTypes = {
-  pathContext: PropTypes.shape({
-    callout: PropTypes.object,
-    products: PropTypes.array,
+  data: PropTypes.shape({
+    productYaml: PropTypes.shape({
+      callout: PropTypes.object,
+    }),
+    allMarkdownRemark: PropTypes.shape({
+      edges: PropTypes.array,
+    }),
   }),
 };
 
-export default function Products({ pathContext }) {
-  const { callout = {}, products = [] } = pathContext;
+export default function Products({
+  data: {
+    productYaml: {
+      callout: {
+        description,
+        title,
+      },
+    },
+    allMarkdownRemark: {
+      edges,
+    },
+  },
+}) {
+  const products = edges.map(({ node: { frontmatter } }) => frontmatter);
   return (
     <div className={ cx('product') }>
       <div className={ cx('header') }>
@@ -32,11 +48,11 @@ export default function Products({ pathContext }) {
         <div className={ cx('header-right') }>
           <header className={ cx('title') }>
             <h3>
-              { callout.title }
+              { title }
             </h3>
           </header>
           <div className={ cx('copy') }>
-            { callout.description }
+            { description }
           </div>
         </div>
       </div>
@@ -83,3 +99,20 @@ export default function Products({ pathContext }) {
 
 Products.displayName = 'Products';
 Products.propTypes = propTypes;
+
+export const pageQuery = graphql`
+  fragment Products_copy on ProductYaml {
+    callout {
+      title
+      description
+    }
+  }
+
+  fragment Products_products on MarkdownRemark {
+    frontmatter {
+      name
+      price
+      sale
+    }
+  }
+`;

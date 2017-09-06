@@ -25,7 +25,8 @@
   "globals": {
     "Promise": true,
     "window": true,
-    "ga": true
+    "ga": true,
+    "graphql": true
   },
   "extends": [
     "plugin:jsx-a11y/recommended"

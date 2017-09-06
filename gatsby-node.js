@@ -3,46 +3,15 @@ const crypto = require('crypto');
 const _ = require('lodash');
 const yaml = require('js-yaml');
 
-exports.createPages = ({ graphql, boundActionCreators: { createPage } }) => {
-  const productTemplate = path.resolve('src/features/Product/index.js');
-  return graphql(`
-    {
-      allMarkdownRemark {
-        edges {
-          node {
-            frontmatter {
-              name
-              description
-              price
-              sale
-            }
-          }
-        }
-      }
-      productYaml {
-        callout {
-          description
-          title
-        }
-      }
-    }
-  `).then(res => {
-    if (res.errors) {
-      console.log('res.errors: ', res.errors);
-      throw res.errors;
-    }
-    const copy = res.data.productYaml;
-    const products = res.data.allMarkdownRemark.edges.map(
-      ({ node }) => node.frontmatter,
-    );
-    createPage({
-      path: '/women/shoes',
-      component: productTemplate,
-      context: {
-        ...copy,
-        products,
-      },
-    });
+exports.createPages = ({ boundActionCreators: { createPage } }) => {
+  const productTemplate = path.resolve('src/templates/products.js');
+  createPage({
+    path: '/women/shoes',
+    component: productTemplate,
+    context: {
+      category: 'shoes',
+      directory: 'women',
+    },
   });
 };
 
