@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
-import styles from './product.module.styl';
+import styles from './products.module.styl';
 
 import calloutImg from './callout-img.png';
 import Callout from '../Callout';
@@ -15,7 +15,7 @@ const propTypes = {
   }),
 };
 
-export default function Product({ pathContext }) {
+export default function Products({ pathContext }) {
   const { callout = {}, products = [] } = pathContext;
   return (
     <div className={ cx('product') }>
@@ -80,5 +80,6 @@ export default function Product({ pathContext }) {
     </div>
   );
 }
-Product.displayName = 'Product';
-Product.propTypes = propTypes;
+
+Products.displayName = 'Products';
+Products.propTypes = propTypes;
