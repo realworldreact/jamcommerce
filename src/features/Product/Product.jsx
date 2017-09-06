@@ -4,7 +4,6 @@ import classnames from 'classnames/bind';
 
 import styles from './product.module.styl';
 
-import reactFront from './react-front.png';
 import calloutImg from './callout-img.png';
 import Callout from '../Callout';
 
@@ -16,17 +15,8 @@ const propTypes = {
   }),
 };
 
-const mock = {
-  name: 'React',
-  alt: 'The react Shoe',
-  img: reactFront,
-  price: 199,
-  sale: 99,
-};
-const mocks = Array.from({ length: 12 }, () => ({ ...mock }));
-
 export default function Product({ pathContext }) {
-  const { callout = {}, products = mocks } = pathContext;
+  const { callout = {}, products = [] } = pathContext;
   return (
     <div className={ cx('product') }>
       <div className={ cx('header') }>
