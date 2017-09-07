@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import classnames from 'classnames/bind';
+import Link from 'gatsby-link';
+import leftArrow from './left-arrow.svg';
 
 import styles from './product.module.styl';
 
@@ -56,28 +59,21 @@ export default function Product({
           <div>
             <img
               alt='alt is set by content'
+              className={ cx('main') }
               { ...images.front }
             />
           </div>
-          <div>
-            <div>
-              <img
-                alt='alt is set by content'
-                { ...thumbnails.front }
-              />
-            </div>
-            <div>
-              <img
-                alt='alt is set by content'
-                { ...thumbnails.side }
-              />
-            </div>
-            <div>
-              <img
-                alt='alt is set by content'
-                { ...thumbnails.back }
-              />
-            </div>
+          <div className={ cx('thumbnails') }>
+            {
+              _.map(thumbnails, ({ alt, ...rest }, side) => (
+                <div key={ side }>
+                  <img
+                    alt={ alt }
+                    { ...rest }
+                  />
+                </div>
+              ))
+            }
           </div>
         </div>
         <div className={ cx('details') }>
@@ -98,6 +94,16 @@ export default function Product({
           </div>
         </div>
       </div>
+      <Link>
+          <div className={ cx('back') }>
+            <img
+              alt='A smal left pointing arrow'
+              className={ cx('left-arrow') }
+              src={ leftArrow }
+            />
+            Back to Shoes
+          </div>
+        </Link>
     </div>
   );
 }
@@ -118,6 +124,16 @@ export const productFragments = graphql`
         src
         srcSet
       }
+      back {
+        alt
+        src
+        srcSet
+      }
+      side {
+        alt
+        src
+        srcSet
+      }
     }
     images {
       front {
@@ -125,13 +141,11 @@ export const productFragments = graphql`
         src
         srcSet
       }
-
       back {
         alt
         src
         srcSet
       }
-
       side {
         alt
         src

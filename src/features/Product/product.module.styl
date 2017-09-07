@@ -1,13 +1,25 @@
-.content
-  $row(between)
+.product
   $center($scale.md)
   $padding-lg()
 
+.content
+  $row(between)
+
 .images
-  img
+  .main
     size(486px, 312px)
+
+  .thumbnails
+    $row(between)
+    img
+      size(139px, 117px)
 
 .details
   $padding-lg()
   $column(between)
   width 48%
+
+.back
+  .left-arrow
+    size(12px)
+    margin-right 3px
