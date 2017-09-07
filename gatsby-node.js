@@ -16,14 +16,26 @@ exports.createPages = ({ boundActionCreators: { createPage } }) => {
 };
 
 function transformYaml(actions, loadNodeContent, node) {
-  const { createNode, createParentChildLink } = actions;
+  const { createNode } = actions;
   function objToNode(obj, i) {
+    const isCopy = (/copy$/).test(node.dir);
     const objStr = JSON.stringify(obj);
     const contentDigest = crypto.createHash('md5').update(objStr).digest('hex');
+    const type = isCopy ?
+      'JAMCopy' :
+      _.upperFirst(_.camelCase(`${node.name}Yaml`));
+    let id = obj.id;
+    if (!id && isCopy) {
+      if (isCopy) {
+        id = `Copy-${node.name}`;
+      } else {
+        id = `${node.id} [${i}] >>> Yaml`;
+      }
+    }
 
-    return {
+    const newNode = {
       ...obj,
-      id: obj.id ? obj.id : `${node.id} [${i}] >>> YAML`,
+      id,
       children: [],
       parent: node.id,
       internal: {
@@ -31,9 +43,13 @@ function transformYaml(actions, loadNodeContent, node) {
         // TODO make choosing the "type" a lot smarter. This assumes
         // the parent node is a file.
         // PascalCase
-        type: _.upperFirst(_.camelCase(`${node.name} Yaml`)),
+        type,
       },
     };
+    if (isCopy) {
+      newNode.name = node.name;
+    }
+    return newNode;
   }
 
   return loadNodeContent(node)
@@ -42,18 +58,9 @@ function transformYaml(actions, loadNodeContent, node) {
       if (!_.isArray(contents)) {
         contents = [ contents ];
       }
-      return {
-        parent: node,
-        nodes: contents.map(objToNode),
-      };
+      return contents.map(objToNode);
     })
-    .then(({ parent, nodes }) =>
-      nodes.map(child => {
-        createNode(child);
-        createParentChildLink({ parent, child });
-        return null;
-      }),
-    );
+    .then((nodes) => nodes.map(child => createNode(child)));
 }
 
 const isProduct = node => node && node.frontmatter && node.frontmatter.images;
