@@ -9,7 +9,7 @@ export const productsQuery = graphql`
         }
       }
     }
-    jamCopy(name: { eq: "products" }){
+    jamCopy(name: { eq: "products" }) {
       ...Products_copy
     }
   }

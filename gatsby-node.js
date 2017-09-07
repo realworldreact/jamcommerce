@@ -60,7 +60,7 @@ function transformYaml(actions, loadNodeContent, node) {
       }
       return contents.map(objToNode);
     })
-    .then((nodes) => nodes.map(child => createNode(child)));
+    .then(nodes => nodes.map(child => createNode(child)));
 }
 
 const isProduct = node => node && node.frontmatter && node.frontmatter.images;
@@ -82,21 +82,14 @@ function createProductNodes(createNode, oldNode) {
     children: [],
     id: frontmatter.name,
     parent: oldNode.id,
-    thumbnails: _.reduce(
-      frontmatter.thumbnails,
-      createSrcset,
-      {}
-    ),
-    images: _.reduce(
-      frontmatter.images,
-      createSrcset,
-      {}
-    ),
+    thumbnails: _.reduce(frontmatter.thumbnails, createSrcset, {}),
+    images: _.reduce(frontmatter.images, createSrcset, {}),
     internal: {
       type: 'JAMProduct',
     },
   };
-  node.internal.contentDigest = crypto.createHash('md5')
+  node.internal.contentDigest = crypto
+    .createHash('md5')
     .update(JSON.stringify(node))
     .digest('hex');
 

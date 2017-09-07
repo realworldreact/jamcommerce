@@ -21,15 +21,8 @@ const propTypes = {
 
 export default function Products({
   data: {
-    jamCopy: {
-      callout: {
-        description,
-        title,
-      } = {},
-    } = {},
-    allJamProduct: {
-      edges = [],
-    } = {},
+    jamCopy: { callout: { description, title } = {} } = {},
+    allJamProduct: { edges = [] } = {},
   } = {},
 }) {
   const products = edges.map(({ node }) => node);
@@ -57,7 +50,7 @@ export default function Products({
         </div>
       </div>
       <div className={ cx('content') }>
-        { products.map(({ name, sale, price, thumbnails: { front }, alt }, i) => {
+        { products.map(({ name, sale, price, thumbnails: { front } }, i) => {
           const isSale = !!sale;
           const Price = isSale ? 'del' : 'span';
           const _sale = isSale ?
