@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
+import Link from 'gatsby-link';
 
 import styles from './products.module.styl';
 
@@ -61,10 +62,10 @@ export default function Products({
             ) :
             null;
           return (
-            <a
+            <Link
               className={ cx('product-item') }
-              href={ `/women/shoes/${name}` }
               key={ i }
+              to={ `/women/shoes/${name}` }
               >
               <div>
                 <div className={ cx('img') }>
@@ -82,7 +83,7 @@ export default function Products({
                   <Price>${ price }</Price> { _sale }
                 </div>
               </div>
-            </a>
+            </Link>
           );
         }) }
       </div>

@@ -3,15 +3,44 @@ const crypto = require('crypto');
 const path = require('path');
 const yaml = require('js-yaml');
 
-exports.createPages = ({ boundActionCreators: { createPage } }) => {
-  const productTemplate = path.resolve('src/templates/products.js');
+exports.createPages = ({ graphql, boundActionCreators: { createPage } }) => {
+  const productsTemplate = path.resolve('src/templates/products.js');
+  const productTemplate = path.resolve('src/templates/product.js');
   createPage({
     path: '/women/shoes',
-    component: productTemplate,
+    component: productsTemplate,
     context: {
       category: 'shoes',
       directory: 'women',
     },
+  });
+  return graphql(`
+    {
+      allJamProduct {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    }
+  `).then(({ errors, data: { allJamProduct: { edges } } } = null) => {
+    if (errors) {
+      throw errors;
+    }
+    edges.map(({ node }) => node)
+      .forEach(({ id, name }) => {
+        createPage({
+          path: `/women/shoes/${name}`,
+          component: productTemplate,
+          context: {
+            id,
+            name,
+          },
+        });
+      });
+    return undefined;
   });
 };
 
