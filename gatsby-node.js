@@ -70,7 +70,7 @@ const createSrcset = (imgs, { alt, sources }, side) => {
     alt,
     sources,
     src: sources[0] && sources[0].src,
-    srcset: sources.map(({ width, src }) => `${src} ${width}`).join(', '),
+    srcSet: sources.map(({ width, src }) => `${src} ${width}`).join(', '),
   };
   return imgs;
 };

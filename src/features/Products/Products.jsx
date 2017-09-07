@@ -21,18 +21,18 @@ const propTypes = {
 
 export default function Products({
   data: {
-    productYaml: {
+    jamCopy: {
       callout: {
         description,
         title,
-      },
-    },
-    allMarkdownRemark: {
-      edges,
-    },
-  },
+      } = {},
+    } = {},
+    allJamProduct: {
+      edges = [],
+    } = {},
+  } = {},
 }) {
-  const products = edges.map(({ node: { frontmatter } }) => frontmatter);
+  const products = edges.map(({ node }) => node);
   return (
     <div className={ cx('product') }>
       <div className={ cx('header') }>
@@ -57,7 +57,7 @@ export default function Products({
         </div>
       </div>
       <div className={ cx('content') }>
-        { products.map(({ name, sale, price, img, alt }, i) => {
+        { products.map(({ name, sale, price, thumbnails: { front }, alt }, i) => {
           const isSale = !!sale;
           const Price = isSale ? 'del' : 'span';
           const _sale = isSale ?
@@ -76,8 +76,8 @@ export default function Products({
               <div>
                 <div className={ cx('img') }>
                   <img
-                    alt={ alt }
-                    src={ img }
+                    alt='alt provided by content below'
+                    { ...front }
                   />
                 </div>
                 <header className={ cx('title') }>
@@ -101,18 +101,23 @@ Products.displayName = 'Products';
 Products.propTypes = propTypes;
 
 export const pageQuery = graphql`
-  fragment Products_copy on ProductYaml {
+  fragment Products_copy on JAMCopy {
     callout {
       title
       description
     }
   }
 
-  fragment Products_products on MarkdownRemark {
-    frontmatter {
-      name
-      price
-      sale
+  fragment Products_products on JAMProduct {
+    name
+    price
+    sale
+    thumbnails {
+      front {
+        alt
+        src
+        srcSet
+      }
     }
   }
 `;

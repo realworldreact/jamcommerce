@@ -2,14 +2,14 @@ export { default } from '../features/Products';
 
 export const productsQuery = graphql`
   query ProductsPage {
-    allMarkdownRemark {
+    allJamProduct {
       edges {
         node {
           ...Products_products
         }
       }
     }
-    productYaml {
+    jamCopy(name: { eq: "products" }){
       ...Products_copy
     }
   }
