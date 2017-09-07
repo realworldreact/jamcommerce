@@ -76,7 +76,3 @@ thumbnails:
       - width: 118w
         src: '/images/react-thumb-side-lg.png'
 ---
-
-
-
-
