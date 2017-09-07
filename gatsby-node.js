@@ -1,6 +1,6 @@
-const path = require('path');
-const crypto = require('crypto');
 const _ = require('lodash');
+const crypto = require('crypto');
+const path = require('path');
 const yaml = require('js-yaml');
 
 exports.createPages = ({ boundActionCreators: { createPage } }) => {
@@ -15,15 +15,8 @@ exports.createPages = ({ boundActionCreators: { createPage } }) => {
   });
 };
 
-exports.onCreateNode = ({
-  node,
-  loadNodeContent,
-  boundActionCreators: { createNode, createParentChildLink },
-}) => {
-  if (node.internal.mediaType !== 'text/yaml') {
-    return null;
-  }
-
+function transformYaml(actions, loadNodeContent, node) {
+  const { createNode, createParentChildLink } = actions;
   function objToNode(obj, i) {
     const objStr = JSON.stringify(obj);
     const contentDigest = crypto.createHash('md5').update(objStr).digest('hex');
@@ -61,4 +54,58 @@ exports.onCreateNode = ({
         return null;
       }),
     );
+}
+
+const isProduct = node => node && node.frontmatter && node.frontmatter.images;
+
+const createSrcset = (imgs, { alt, sources }, side) => {
+  imgs[side] = {
+    alt,
+    sources,
+    src: sources[0] && sources[0].src,
+    srcset: sources.map(({ width, src }) => `${src} ${width}`).join(', '),
+  };
+  return imgs;
+};
+
+function createProductNodes(createNode, oldNode) {
+  const { frontmatter } = oldNode;
+  const node = {
+    ...frontmatter,
+    children: [],
+    id: frontmatter.name,
+    parent: oldNode.id,
+    thumbnails: _.reduce(
+      frontmatter.thumbnails,
+      createSrcset,
+      {}
+    ),
+    images: _.reduce(
+      frontmatter.images,
+      createSrcset,
+      {}
+    ),
+    internal: {
+      type: 'JAMProduct',
+    },
+  };
+  node.internal.contentDigest = crypto.createHash('md5')
+    .update(JSON.stringify(node))
+    .digest('hex');
+
+  createNode(node);
+}
+
+exports.onCreateNode = ({
+  node,
+  loadNodeContent,
+  boundActionCreators: actions,
+}) => {
+  if (node.internal.mediaType === 'text/yaml') {
+    return transformYaml(actions, loadNodeContent, node);
+  }
+  if (isProduct(node)) {
+    return createProductNodes(actions.createNode, node);
+  }
+  return undefined;
 };
