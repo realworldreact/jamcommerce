@@ -151,7 +151,9 @@ export function Product({
         </div>
         <div className={ cx('details') }>
           <header>
-            <h1>{ name }</h1>
+            <h1>
+              { name }
+            </h1>
           </header>
           <div>
             <Price>${ price }</Price> { _sale }
@@ -160,14 +162,18 @@ export function Product({
             { description }
           </div>
           <ul className={ cx('list') }>
-            { details.map(detail => (
-              <li key={ detail }><small>{ detail }</small></li>
-            ))}
+            { details.map(detail =>
+              (
+                <li key={ detail }>
+                  <small>
+                    { detail }
+                  </small>
+                </li>
+              ),
+            ) }
           </ul>
           <div className={ cx('quantity') }>
-            <div className={ cx('copy') }>
-              Quantity{ ' ' }
-            </div>
+            <div className={ cx('copy') }>Quantity </div>
             <Selector
               className={ cx('quantity-selector', 'selector') }
               onChange={ quantityChanged }
