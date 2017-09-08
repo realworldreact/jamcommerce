@@ -1,14 +1,6 @@
 .Select
   position relative
 
-.Select,
-.Select div,
-.Select input,
-.Select span
-  -webkit-box-sizing border-box
-  -moz-box-sizing border-box
-  box-sizing border-box
-
 .Select.is-disabled > .Select-control
   background-color #f9f9f9
 
@@ -130,7 +122,6 @@
   animation Select-animation-spin 400ms infinite linear
   width 16px
   height 16px
-  box-sizing border-box
   border-radius 50%
   border 2px solid #ccc
   border-right-color #333
@@ -212,10 +203,7 @@
 
 
 .Select-menu-outer
-  border 1px solid #ccc
-  border-top-color #e6e6e6
   box-shadow 0 1px 0 rgba(0, 0, 0, 0.06)
-  box-sizing border-box
   margin-top -1px
   max-height 200px
   position absolute
@@ -229,7 +217,6 @@
   overflow-y auto
 
 .Select-option
-  box-sizing border-box
   background-color #fff
   color #666666
   cursor pointer
@@ -248,16 +235,12 @@
 
 .Select-option.is-focused
   background-color #ebf5ff
-  /* Fallback color for IE 8 */
-  background-color rgba(0, 126, 255, 0.08)
-  color #333
 
 .Select-option.is-disabled
   color #cccccc
   cursor default
 
 .Select-noresults
-  box-sizing border-box
   color #999999
   cursor default
   display block

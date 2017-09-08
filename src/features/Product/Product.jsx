@@ -162,14 +162,19 @@ export function Product({
           <div>
             { details }
           </div>
-          <div>
-            Quantity{ ' ' }
+          <div className={ cx('quantity') }>
+            <div className={ cx('copy') }>
+              Quantity{ ' ' }
+            </div>
             <Selector
-              className={ 'quantity-selector' }
+              className={ cx('quantity-selector', 'selector') }
               onChange={ quantityChanged }
               options={ quantities }
               value={ currentQuantity }
             />
+            <div>
+              <button className={ cx('button') }>Add To Cart</button>
+            </div>
           </div>
         </div>
       </div>
