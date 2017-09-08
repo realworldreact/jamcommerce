@@ -21,7 +21,7 @@
   },
   "author": "Berkeley Martinez <Berkeley@realworldreact.com>",
   "dependencies": {
-    "berkeleys-redux-utils": "^3.0.0",
+    "berkeleys-redux-utils": "^3.0.1",
     "classnames": "^2.2.5",
     "debug": "^3.0.1",
     "dedent": "^0.7.0",
