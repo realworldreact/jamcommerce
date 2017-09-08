@@ -21,6 +21,7 @@
   },
   "author": "Berkeley Martinez <Berkeley@realworldreact.com>",
   "dependencies": {
+    "berkeleys-redux-utils": "^3.0.0",
     "classnames": "^2.2.5",
     "debug": "^3.0.1",
     "dedent": "^0.7.0",
@@ -39,10 +40,10 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
     "react-router-scroll": "github:ytase/react-router-scroll#build",
+    "react-select": "^1.0.0-rc.5",
     "react-view-pager": "^0.5.1",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
-    "redux-create-types": "0.0.1",
     "reselect": "^3.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1"

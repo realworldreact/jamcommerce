@@ -29,17 +29,16 @@ exports.createPages = ({ graphql, boundActionCreators: { createPage } }) => {
     if (errors) {
       throw errors;
     }
-    edges.map(({ node }) => node)
-      .forEach(({ id, name }) => {
-        createPage({
-          path: `/women/shoes/${name}`,
-          component: productTemplate,
-          context: {
-            id,
-            name,
-          },
-        });
+    edges.map(({ node }) => node).forEach(({ id, name }) => {
+      createPage({
+        path: `/women/shoes/${name}`,
+        component: productTemplate,
+        context: {
+          id,
+          name,
+        },
       });
+    });
     return undefined;
   });
 };

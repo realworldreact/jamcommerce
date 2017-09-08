@@ -1,5 +1,5 @@
-import createReducerHash from './features/redux';
+import reducer from './features/redux';
 
 export default function createReducer() {
-  return createReducerHash().getFinalReducer();
+  return reducer;
 }

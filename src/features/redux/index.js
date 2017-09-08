@@ -1,8 +1,12 @@
-import { createTypes } from 'redux-create-types';
+import {
+  createTypes,
+  handleActions,
+  combineReducers,
+} from 'berkeleys-redux-utils';
 import { createAction } from 'redux-actions';
 
-import { createReducerHash, handleActions } from '../../utils/redux.js';
 import navReducer from '../Nav/redux';
+import productReducer from '../Product/redux';
 
 const ns = 'app';
 
@@ -11,18 +15,16 @@ export const types = createTypes([ 'routeUpdated' ], ns);
 
 export const routeUpdated = createAction(types.routeUpdated);
 
-export default function createReducer() {
-  return createReducerHash(
-    handleActions(
-      types,
-      types => ({
-        [types.routeUpdated]: (state, { payload: location }) => ({
-          location,
-        }),
+export default combineReducers(
+  handleActions(
+    () => ({
+      [types.routeUpdated]: (state, { payload: location }) => ({
+        location,
       }),
-      defaultState,
-      ns,
-    ),
-    navReducer,
-  );
-}
+    }),
+    defaultState,
+    ns,
+  ),
+  navReducer,
+  productReducer,
+);

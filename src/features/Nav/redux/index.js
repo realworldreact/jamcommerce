@@ -1,13 +1,16 @@
 import _ from 'lodash';
+import {
+  createTypes,
+  combineActions,
+  handleActions,
+} from 'berkeleys-redux-utils';
 import { createAction } from 'redux-actions';
-import { createTypes } from 'redux-create-types';
 import { createSelector } from 'reselect';
 
 import menuMen from '../menu-men.png';
 import menuWomen from '../menu-women.png';
 import menuEssentialShoes from '../essential-shoes.png';
 import menuSummerAccessories from '../summer-accessories.png';
-import { combineActions, handleActions } from '../../../utils/redux.js';
 
 const ns = 'nav';
 
@@ -192,8 +195,7 @@ export const categoriesSelector = createSelector(
 );
 
 export default handleActions(
-  types,
-  types => ({
+  () => ({
     [combineActions(types.clickOnSubNav, types.hoverOnSubNav)]: (
       state,
       { payload: item },
