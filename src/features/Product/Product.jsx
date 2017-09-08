@@ -9,6 +9,7 @@ import Selector from 'react-select';
 
 import leftArrow from './left-arrow.svg';
 import styles from './product.module.styl';
+import './react-select.styl';
 import './product.styl';
 import {
   quantityChanged,
