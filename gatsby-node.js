@@ -3,6 +3,13 @@ const crypto = require('crypto');
 const path = require('path');
 const yaml = require('js-yaml');
 
+const createSlug = _.flow([
+  s => s.toLowerCase(),
+  _.partialRight(_.replace, ' ', '-'),
+  _.partialRight(_.replace, '.', ''),
+  _.escape,
+]);
+
 exports.createPages = ({ graphql, boundActionCreators: { createPage } }) => {
   const productsTemplate = path.resolve('src/templates/products.js');
   const productTemplate = path.resolve('src/templates/product.js');
@@ -20,7 +27,8 @@ exports.createPages = ({ graphql, boundActionCreators: { createPage } }) => {
         edges {
           node {
             id
-            name
+            name,
+            slug
           }
         }
       }
@@ -29,9 +37,9 @@ exports.createPages = ({ graphql, boundActionCreators: { createPage } }) => {
     if (errors) {
       throw errors;
     }
-    edges.map(({ node }) => node).forEach(({ id, name }) => {
+    edges.map(({ node }) => node).forEach(({ id, name, slug }) => {
       createPage({
-        path: `/women/shoes/${name}`,
+        path: `/women/shoes/${slug}`,
         component: productTemplate,
         context: {
           id,
@@ -105,10 +113,12 @@ const createSrcset = (imgs, { alt, sources }, side) => {
 
 function createProductNodes(createNode, oldNode) {
   const { frontmatter } = oldNode;
+  const slug = createSlug(frontmatter.name);
   const node = {
     ...frontmatter,
     children: [],
     id: frontmatter.name,
+    slug,
     parent: oldNode.id,
     thumbnails: _.reduce(frontmatter.thumbnails, createSrcset, {}),
     images: _.reduce(frontmatter.images, createSrcset, {}),

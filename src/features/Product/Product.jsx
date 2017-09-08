@@ -46,10 +46,14 @@ const mapDispatchToProps = (dispatch, props) => {
   );
 
   const thumbnailHandlers = bindActionCreators(
-    _.reduce(thumbnails, (s, _, side) => {
-      s[side] = createHandlerMemo(side, thumbnailClicked);
-      return s;
-    }, {}),
+    _.reduce(
+      thumbnails,
+      (s, _, side) => {
+        s[side] = createHandlerMemo(side, thumbnailClicked);
+        return s;
+      },
+      {},
+    ),
     dispatch,
   );
 

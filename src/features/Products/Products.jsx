@@ -51,41 +51,43 @@ export default function Products({
         </div>
       </div>
       <div className={ cx('content') }>
-        { products.map(({ name, sale, price, thumbnails: { front } }, i) => {
-          const isSale = !!sale;
-          const Price = isSale ? 'del' : 'span';
-          const _sale = isSale ?
-            (
-              <span className={ cx('sale') }>
-                ${ sale }
-              </span>
-            ) :
-            null;
-          return (
-            <Link
-              className={ cx('product-item') }
-              key={ i }
-              to={ `/women/shoes/${name}` }
-              >
-              <div>
-                <div className={ cx('img') }>
-                  <img
-                    alt='alt provided by content below'
-                    { ...front }
-                  />
+        { products.map(
+          ({ name, sale, price, slug, thumbnails: { front } }, i) => {
+            const isSale = !!sale;
+            const Price = isSale ? 'del' : 'span';
+            const _sale = isSale ?
+              (
+                <span className={ cx('sale') }>
+                  ${ sale }
+                </span>
+              ) :
+              null;
+            return (
+              <Link
+                className={ cx('product-item') }
+                key={ i }
+                to={ `/women/shoes/${slug}` }
+                >
+                <div>
+                  <div className={ cx('img') }>
+                    <img
+                      alt='alt provided by content below'
+                      { ...front }
+                    />
+                  </div>
+                  <header className={ cx('title') }>
+                    <h4>
+                      { name }
+                    </h4>
+                  </header>
+                  <div className={ cx('price') }>
+                    <Price>${ price }</Price> { _sale }
+                  </div>
                 </div>
-                <header className={ cx('title') }>
-                  <h4>
-                    { name }
-                  </h4>
-                </header>
-                <div className={ cx('price') }>
-                  <Price>${ price }</Price> { _sale }
-                </div>
-              </div>
-            </Link>
-          );
-        }) }
+              </Link>
+            );
+          },
+        ) }
       </div>
     </div>
   );
@@ -106,6 +108,7 @@ export const pageQuery = graphql`
     name
     price
     sale
+    slug
     thumbnails {
       front {
         alt
