@@ -159,9 +159,11 @@ export function Product({
           <div>
             { description }
           </div>
-          <div>
-            { details }
-          </div>
+          <ul className={ cx('list') }>
+            { details.map(detail => (
+              <li key={ detail }><small>{ detail }</small></li>
+            ))}
+          </ul>
           <div className={ cx('quantity') }>
             <div className={ cx('copy') }>
               Quantity{ ' ' }
