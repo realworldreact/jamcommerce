@@ -150,9 +150,9 @@ export function Product({
           </div>
         </div>
         <div className={ cx('details') }>
-          <div>
-            { name }
-          </div>
+          <header>
+            <h1>{ name }</h1>
+          </header>
           <div>
             <Price>${ price }</Price> { _sale }
           </div>
