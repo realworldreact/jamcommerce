@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import classnames from 'classnames/bind';
@@ -15,9 +16,11 @@ import {
   quantityChanged,
   quantitiesSelector,
   currentQuantitySelector,
+  currentSizeChanged,
 } from './redux';
 
 const cx = classnames.bind(styles);
+const createSizeHandler = _.memoize((size, handler) => () => handler(size));
 const mapStateToProps = createSelector(
   quantitiesSelector,
   currentQuantitySelector,
@@ -27,8 +30,22 @@ const mapStateToProps = createSelector(
   }),
 );
 
-const mapDispatchToProps = {
-  quantityChanged: x => quantityChanged((x && x.value) || undefined),
+const mapDispatchToProps = (dispatch, props) => {
+  const { data: { jamProduct: { sizes } } } = props;
+
+  const sizeHandlers = bindActionCreators(
+    sizes.reduce((s, size) => {
+      s[size] = createSizeHandler(size, currentSizeChanged);
+      return s;
+    }, {}),
+    dispatch,
+  );
+
+  return {
+    sizeHandlers,
+    quantityChanged: x =>
+      dispatch(quantityChanged((x && x.value) || undefined)),
+  };
 };
 
 export const productFragments = graphql`
@@ -38,6 +55,7 @@ export const productFragments = graphql`
     sale
     description
     details
+    sizes
     thumbnails {
       front {
         alt
@@ -89,6 +107,7 @@ const propTypes = {
       name: PropTypes.string,
       price: PropTypes.string,
       sale: PropTypes.string,
+      sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
       thumbnails: PropTypes.shape({
         back: PropTypes.object,
         front: PropTypes.object,
@@ -96,14 +115,13 @@ const propTypes = {
       }),
     }).isRequired,
   }).isRequired,
+  sizeHandlers: PropTypes.object,
   quantities: PropTypes.array,
   quantityChanged: PropTypes.func.isRequired,
 };
 
 export function Product({
   currentQuantity,
-  quantities,
-  quantityChanged,
   data: {
     jamProduct: {
       description,
@@ -112,9 +130,13 @@ export function Product({
       name,
       price,
       sale,
+      sizes,
       thumbnails = {},
     },
   },
+  sizeHandlers,
+  quantities,
+  quantityChanged,
 }) {
   const isSale = !!sale;
   const Price = isSale ? 'del' : 'span';
@@ -172,6 +194,19 @@ export function Product({
               ),
             ) }
           </ul>
+          <div className='sizes'>
+            Sizes:{ ' ' }
+            { sizes.map(value =>
+              (
+                <button
+                  key={ value }
+                  onClick={ sizeHandlers[value] }
+                  >
+                  { value }
+                </button>
+              ),
+            ) }
+          </div>
           <div className={ cx('quantity') }>
             <div className={ cx('copy') }>Quantity </div>
             <Selector

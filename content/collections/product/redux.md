@@ -7,6 +7,10 @@ details:
   - Track Inventory with a git-centric static database (under development)
 price: '199'
 sale: '99'
+sizes:
+  - 5
+  - 6
+  - 8
 images:
   front:
     alt: 'Front of the Redux heal'

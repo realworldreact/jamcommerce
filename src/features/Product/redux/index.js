@@ -3,11 +3,21 @@ import { createTypes, handleActions } from 'berkeleys-redux-utils';
 
 export const ns = 'product';
 
-export const types = createTypes([ 'quantityChanged' ], ns);
+export const types = createTypes(
+  [
+    'currentSizeChanged',
+    'quantityChanged',
+    'sizeChanged',
+  ],
+  ns,
+);
 
 export const quantityChanged = createAction(types.quantityChanged);
+export const currentSizeChanged = createAction(types.currentSizeChanged);
+
 export const defaultState = {
   currentQuantity: null,
+  currentSize: null,
   quantities: [
     {
       value: 0,
@@ -32,12 +42,17 @@ const getNS = state => state[ns];
 
 export const currentQuantitySelector = state => getNS(state).currentQuantity;
 export const quantitiesSelector = state => getNS(state).quantities;
+export const currentSizeSelector = state => getNS(state).currentSize;
 
 export default handleActions(
   () => ({
     [types.quantityChanged]: (state, { payload }) => ({
       ...state,
       currentQuantity: payload,
+    }),
+    [types.currentSizeChanged]: (state, { payload }) => ({
+      ...state,
+      currentSize: payload,
     }),
   }),
   defaultState,
