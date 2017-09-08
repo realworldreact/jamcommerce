@@ -13,29 +13,41 @@ import styles from './product.module.styl';
 import './react-select.styl';
 import './product.styl';
 import {
-  quantityChanged,
-  quantitiesSelector,
+  currentImageSelector,
   currentQuantitySelector,
   currentSizeChanged,
+  quantitiesSelector,
+  quantityChanged,
+  thumbnailClicked,
 } from './redux';
 
 const cx = classnames.bind(styles);
-const createSizeHandler = _.memoize((size, handler) => () => handler(size));
+const createHandlerMemo = _.memoize((size, handler) => () => handler(size));
 const mapStateToProps = createSelector(
   quantitiesSelector,
   currentQuantitySelector,
-  (quantities, currentQuantity) => ({
+  currentImageSelector,
+  (quantities, currentQuantity, currentImage) => ({
     quantities,
     currentQuantity,
+    currentImage,
   }),
 );
 
 const mapDispatchToProps = (dispatch, props) => {
-  const { data: { jamProduct: { sizes } } } = props;
+  const { data: { jamProduct: { thumbnails, sizes } } } = props;
 
   const sizeHandlers = bindActionCreators(
     sizes.reduce((s, size) => {
-      s[size] = createSizeHandler(size, currentSizeChanged);
+      s[size] = createHandlerMemo(size, currentSizeChanged);
+      return s;
+    }, {}),
+    dispatch,
+  );
+
+  const thumbnailHandlers = bindActionCreators(
+    _.reduce(thumbnails, (s, _, side) => {
+      s[side] = createHandlerMemo(side, thumbnailClicked);
       return s;
     }, {}),
     dispatch,
@@ -43,6 +55,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
   return {
     sizeHandlers,
+    thumbnailHandlers,
     quantityChanged: x =>
       dispatch(quantityChanged((x && x.value) || undefined)),
   };
@@ -95,6 +108,7 @@ export const productFragments = graphql`
 
 const propTypes = {
   currentQuantity: PropTypes.number,
+  currentImage: PropTypes.string,
   data: PropTypes.shape({
     jamProduct: PropTypes.shape({
       description: PropTypes.string,
@@ -116,12 +130,14 @@ const propTypes = {
     }).isRequired,
   }).isRequired,
   sizeHandlers: PropTypes.object,
+  thumbnailHandlers: PropTypes.object,
   quantities: PropTypes.array,
   quantityChanged: PropTypes.func.isRequired,
 };
 
 export function Product({
   currentQuantity,
+  currentImage,
   data: {
     jamProduct: {
       description,
@@ -135,6 +151,7 @@ export function Product({
     },
   },
   sizeHandlers,
+  thumbnailHandlers,
   quantities,
   quantityChanged,
 }) {
@@ -155,13 +172,19 @@ export function Product({
             <img
               alt='alt is set by content'
               className={ cx('main') }
-              { ...images.front }
+              { ...images[currentImage] }
             />
           </div>
           <div className={ cx('thumbnails') }>
             { _.map(thumbnails, ({ alt, ...rest }, side) =>
               (
-                <div key={ side }>
+                <div
+                  key={ side }
+                  onClick={ thumbnailHandlers[side] }
+                  onKeyDown={ thumbnailHandlers[side] }
+                  role='button'
+                  tabIndex='0'
+                  >
                   <img
                     alt={ alt }
                     { ...rest }

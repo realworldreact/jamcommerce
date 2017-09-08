@@ -8,14 +8,17 @@ export const types = createTypes(
     'currentSizeChanged',
     'quantityChanged',
     'sizeChanged',
+    'thumbnailClicked',
   ],
   ns,
 );
 
 export const quantityChanged = createAction(types.quantityChanged);
 export const currentSizeChanged = createAction(types.currentSizeChanged);
+export const thumbnailClicked = createAction(types.thumbnailClicked);
 
 export const defaultState = {
+  currentImage: 'front',
   currentQuantity: null,
   currentSize: null,
   quantities: [
@@ -43,6 +46,7 @@ const getNS = state => state[ns];
 export const currentQuantitySelector = state => getNS(state).currentQuantity;
 export const quantitiesSelector = state => getNS(state).quantities;
 export const currentSizeSelector = state => getNS(state).currentSize;
+export const currentImageSelector = state => getNS(state).currentImage;
 
 export default handleActions(
   () => ({
@@ -53,6 +57,10 @@ export default handleActions(
     [types.currentSizeChanged]: (state, { payload }) => ({
       ...state,
       currentSize: payload,
+    }),
+    [types.thumbnailClicked]: (state, { payload }) => ({
+      ...state,
+      currentImage: payload || 'front',
     }),
   }),
   defaultState,
