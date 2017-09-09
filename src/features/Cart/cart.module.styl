@@ -1,0 +1,51 @@
+.cart
+  $center(682px)
+
+.header
+  text-align center
+
+.table
+  $padding-xl()
+  display flex
+  flex-wrap wrap
+
+
+$cell-size-first = 50%
+$cell-size = (100 - $cell-size-first) * .33
+
+.table-cell-first,
+.table-cell
+  border-bottom 1px black solid
+  flex-grow 1
+  overflow hidden
+  padding-top $padding-xl-vertical
+  padding-bottom $padding-xl-vertical
+  width $cell-size
+
+.details
+  $row(between)
+
+.details-img
+  size(111px, 94px)
+
+.details-info
+  $padding-sm()
+  $column(between)
+  flex 1
+  .remove
+    $button-to-link()
+    flex 1
+
+.table-cell-first
+  width $cell-size-first
+
+.table-total
+  $padding-sm()
+  border-bottom none
+  flex-basis 75%
+  padding-left 50%
+
+.table-sum
+  $padding-sm(,,,0)
+  border-bottom none
+  max-width $cell-size
