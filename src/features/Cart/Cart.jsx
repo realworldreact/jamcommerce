@@ -3,6 +3,7 @@ import React from 'react';
 import classnames from 'classnames/bind';
 
 import styles from './cart.module.styl';
+import Selector from '../Selector';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
@@ -66,9 +67,15 @@ export default function Cart() {
                   />
                 </div>
                 <div className={ cx('details-info') }>
-                  <div>{ name }</div>
-                  <div>size: { size }</div>
-                  <div><button className={ cx('remove') }>remove</button></div>
+                  <div>
+                    { name }
+                  </div>
+                  <div>
+                    size: { size }
+                  </div>
+                  <div>
+                    <button className={ cx('remove') }>remove</button>
+                  </div>
                 </div>
               </div>,
             );
@@ -85,7 +92,11 @@ export default function Cart() {
                 className={ cx('table-cell', 'quantity') }
                 key={ name + 'quantity' }
                 >
-                { price }
+                <Selector
+                  className={ cx('quantity-selector', 'selector') }
+                  options={ [ { value: '1', label: '1' } ] }
+                  value={ '1' }
+                />
               </div>,
             );
             a.push(

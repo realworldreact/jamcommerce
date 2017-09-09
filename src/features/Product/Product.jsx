@@ -6,11 +6,9 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import classnames from 'classnames/bind';
 import Link from 'gatsby-link';
-import Selector from 'react-select';
 
 import leftArrow from './left-arrow.svg';
 import styles from './product.module.styl';
-import './react-select.styl';
 import './product.styl';
 import {
   currentImageSelector,
@@ -20,6 +18,7 @@ import {
   quantityChanged,
   thumbnailClicked,
 } from './redux';
+import Selector from '../Selector';
 
 const cx = classnames.bind(styles);
 const createHandlerMemo = _.memoize((size, handler) => () => handler(size));
