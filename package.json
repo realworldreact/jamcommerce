@@ -31,6 +31,7 @@
     "gatsby-plugin-react-helmet": "^1.0.1",
     "gatsby-source-filesystem": "^1.4.6",
     "gatsby-transformer-remark": "^1.7.3",
+    "gocommerce-js": "^4.0.1",
     "invariant": "^2.2.2",
     "js-yaml": "^3.9.1",
     "kouto-swiss": "^1.1.0",
@@ -44,7 +45,9 @@
     "react-view-pager": "^0.5.1",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
+    "redux-observable": "^0.16.0",
     "reselect": "^3.0.1",
+    "rxjs": "^5.4.3",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1"
   },
