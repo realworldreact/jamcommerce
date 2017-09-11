@@ -1,3 +1,9 @@
+.price
+  margin-bottom 30px
+
+.description
+  margin-bottom 20px
+
 .product
   $center($scale.md)
   $padding-lg()
@@ -10,34 +16,80 @@
     size(486px, 312px)
 
   .thumbnails
-    $row(between)
+    $row(around)
+    padding-right 5px
     img
-      size(139px, 117px)
+      padding-left 5px
+      size(165px, 109px)
+      &:hover
+        cursor pointer
+
 
 .details
   $padding-lg()
   $column(between)
+  color $text-description
+  font-size 18px
+  font-weight 300
+  line-height $line-height-copy
   width 48%
 
   .sale
     color $color-sale
   .list
     list-style-type disc
+    // margin 20px 0 20px 20px
+
+  .sizes
+    color red
+
+  hr
+    margin-bottom 20px
+    margin-top 30px
+    width 100%
+
 
 .quantity
   $padding-md()
   $row(between)
   > div
-    margin-left $padding-sm-horizontal
     margin-right $padding-sm-horizontal
+    margin-top 15px
   .copy
     line-height 2
   .selector
     flex 1
   .button
+    background-color $primary
+    border none
+    color white
+    font-family lato
+    font-size 14px
+    font-weight 300
     height 100%
+    width 140px
+
 
 .back
+  margin-top 70px
+  margin-bottom 50px
   .left-arrow
-    size(12px)
-    margin-right 3px
+    margin-right 6px
+    size(10px)
+
+
+.button-size
+  background-color white
+  border none
+  color #a2a2a2
+  font-family lato
+  margin-right 15px
+  padding-left 0
+  padding-right 0
+  text-align center
+  &:hover
+    cursor pointer
+  &:active
+    border-bottom 2px solid black
+    color black
+    margin-bottom -2px
