@@ -203,10 +203,10 @@ export function Product({
               { name }
             </h1>
           </header>
-          <div>
+          <div className={ cx('price') }>
             <Price>${ price }</Price> { _sale }
           </div>
-          <div>
+          <div className={ cx('description') }>
             { description }
           </div>
           <ul className={ cx('list') }>
@@ -220,11 +220,13 @@ export function Product({
               ),
             ) }
           </ul>
+          <hr />
           <div className='sizes'>
-            Sizes:{ ' ' }
+            <p>Size:</p>{ ' ' }
             { sizes.map(value =>
               (
                 <button
+                  className={ cx('button-size') }
                   key={ value }
                   onClick={ sizeHandlers[value] }
                   >
