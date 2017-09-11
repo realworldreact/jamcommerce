@@ -39,6 +39,9 @@
   margin 20px 10px
   padding 2px 2px 20px 2px
   position relative
+  &:hover
+    img
+      transform scale(1.15)
   +$below(1119px)
     padding-bottom 45px
 
@@ -48,3 +51,4 @@
     color $color-sale
   img
     max-width 250px
+    transition all .2s ease-in-out
