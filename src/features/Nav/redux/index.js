@@ -66,8 +66,8 @@ const defaultState = {
       href: womensLink,
       view: 'Image',
       categories: [
-        'Summer Colors',
-        'Essential Handbags',
+        'Summer Accessories',
+        'Essential Heels',
       ],
     },
   },
@@ -82,13 +82,13 @@ const defaultState = {
       img: menuMen,
       href: womensLink,
     },
-    'Summer Colors': {
-      title: 'Summer Colors',
+    'Summer Accessories': {
+      title: 'Summer Accessories',
       img: menuSummerAccessories,
       href: womensLink,
     },
-    'Essential Handbags': {
-      title: 'Essential Handbags',
+    'Essential Heels': {
+      title: 'Essential Heels',
       img: menuEssentialShoes,
       href: womensLink,
     },
