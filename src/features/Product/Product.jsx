@@ -11,6 +11,7 @@ import leftArrow from './left-arrow.svg';
 import styles from './product.module.styl';
 import './product.styl';
 import {
+  clickOnAddToCart,
   currentImageSelector,
   currentQuantitySelector,
   currentSizeChanged,
@@ -22,19 +23,31 @@ import Selector from '../Selector';
 
 const cx = classnames.bind(styles);
 const createHandlerMemo = _.memoize((size, handler) => () => handler(size));
+const getGoCommerceData = (
+  _,
+  { data: { jamProduct: { sku, name, prices } } },
+) => ({
+  prices,
+  sku,
+  title: name,
+  type: 'shoe',
+});
 const mapStateToProps = createSelector(
+  getGoCommerceData,
   quantitiesSelector,
   currentQuantitySelector,
   currentImageSelector,
-  (quantities, currentQuantity, currentImage) => ({
-    quantities,
-    currentQuantity,
+  (gocommerceData, quantities, currentQuantity, currentImage) => ({
     currentImage,
+    currentQuantity,
+    gocommerceData,
+    quantities,
   }),
 );
 
 const mapDispatchToProps = (dispatch, props) => {
   const { data: { jamProduct: { thumbnails, sizes } } } = props;
+  const gocommerceData = getGoCommerceData(null, props);
 
   const sizeHandlers = bindActionCreators(
     sizes.reduce((s, size) => {
@@ -57,6 +70,7 @@ const mapDispatchToProps = (dispatch, props) => {
   );
 
   return {
+    clickOnAddToCart: () => dispatch(clickOnAddToCart(gocommerceData)),
     sizeHandlers,
     thumbnailHandlers,
     quantityChanged: x =>
@@ -67,6 +81,7 @@ const mapDispatchToProps = (dispatch, props) => {
 export const productFragments = graphql`
   fragment Product_page on JAMProduct {
     name
+    sku
     prices {
       amount
       currency
@@ -113,6 +128,7 @@ export const productFragments = graphql`
 `;
 
 const propTypes = {
+  clickOnAddToCart: PropTypes.func.isRequired,
   currentQuantity: PropTypes.number,
   currentImage: PropTypes.string,
   data: PropTypes.shape({
@@ -135,6 +151,7 @@ const propTypes = {
       }),
     }).isRequired,
   }).isRequired,
+  gocommerceData: PropTypes.object,
   sizeHandlers: PropTypes.object,
   thumbnailHandlers: PropTypes.object,
   quantities: PropTypes.array,
@@ -142,6 +159,7 @@ const propTypes = {
 };
 
 export function Product({
+  clickOnAddToCart,
   currentQuantity,
   currentImage,
   data: {
@@ -156,17 +174,12 @@ export function Product({
       thumbnails = {},
     },
   },
+  gocommerceData,
   sizeHandlers,
   thumbnailHandlers,
   quantities,
   quantityChanged,
 }) {
-  const gocommerceData = {
-    prices,
-    sku: name,
-    title: name,
-    type: 'shoe',
-  };
   const isSale = !!sale;
   const Price = isSale ? 'del' : 'span';
   const _sale = isSale ?
@@ -258,7 +271,12 @@ export function Product({
               value={ currentQuantity }
             />
             <div>
-              <button className={ cx('button') }>Add To Cart</button>
+              <button
+                className={ cx('button') }
+                onClick={ clickOnAddToCart }
+                >
+                Add To Cart
+              </button>
             </div>
           </div>
         </div>

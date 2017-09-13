@@ -5,6 +5,7 @@ export const ns = 'product';
 
 export const types = createTypes(
   [
+    'clickOnAddToCart',
     'currentSizeChanged',
     'quantityChanged',
     'sizeChanged',
@@ -13,6 +14,7 @@ export const types = createTypes(
   ns,
 );
 
+export const clickOnAddToCart = createAction(types.clickOnAddToCart);
 export const quantityChanged = createAction(types.quantityChanged);
 export const currentSizeChanged = createAction(types.currentSizeChanged);
 export const thumbnailClicked = createAction(types.thumbnailClicked);
