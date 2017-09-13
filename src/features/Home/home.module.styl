@@ -91,6 +91,11 @@
 
 .featured
   padding 2px 2px 20px 2px
+  transition all .2s ease-in-out
+  &:hover
+    cursor pointer
+    img
+      transform scale(1.15)
   +$below(1119px)
     padding-bottom 45px
   .title
@@ -99,6 +104,8 @@
     color $color-sale
   img
     max-width 250px
+    transition all .2s ease-in-out
+
 
 .prefooter
   $center(650px)
