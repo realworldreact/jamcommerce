@@ -161,6 +161,12 @@ export function Product({
   quantities,
   quantityChanged,
 }) {
+  const gocommerceData = {
+    prices,
+    sku: name,
+    title: name,
+    type: 'shoe',
+  };
   const isSale = !!sale;
   const Price = isSale ? 'del' : 'span';
   const _sale = isSale ?
@@ -172,6 +178,11 @@ export function Product({
     null;
   return (
     <div className={ cx('product') }>
+      <script
+        className='gocommerce-product'
+        dangerouslySetInnerHTML={ { __html: JSON.stringify(gocommerceData) } }
+        type='application/json'
+      />
       <div className={ cx('content') }>
         <div className={ cx('images') }>
           <div>
