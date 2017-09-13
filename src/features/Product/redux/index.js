@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import { createAction } from 'redux-actions';
 import { createTypes, handleActions } from 'berkeleys-redux-utils';
 
-export const ns = 'product';
+import { createCartMeta } from '../../../utils/redux';
 
+export const ns = 'product';
 export const types = createTypes(
   [
     'clickOnAddToCart',
@@ -14,7 +16,11 @@ export const types = createTypes(
   ns,
 );
 
-export const clickOnAddToCart = createAction(types.clickOnAddToCart);
+export const clickOnAddToCart = createAction(
+  types.clickOnAddToCart,
+  _.noop,
+  createCartMeta(),
+);
 export const quantityChanged = createAction(types.quantityChanged);
 export const currentSizeChanged = createAction(types.currentSizeChanged);
 export const thumbnailClicked = createAction(types.thumbnailClicked);

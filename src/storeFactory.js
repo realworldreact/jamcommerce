@@ -1,13 +1,14 @@
 import { compose, createStore, applyMiddleware } from 'redux';
-import { createEpicMiddleware } from 'redux-observable';
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
 
 import createReducer from './createReducer.js';
-import { epics } from './features/redux';
+import { epics as appEpics } from './features/redux';
 
 export default function storeFactory(
   { epicDependencies = {}, enhancer = f => f } = {},
 ) {
-  const epicMiddleware = createEpicMiddleware(...epics, {
+  const rootEpic = combineEpics(...appEpics);
+  const epicMiddleware = createEpicMiddleware(rootEpic, {
     dependencies: epicDependencies,
   });
   return createStore(
