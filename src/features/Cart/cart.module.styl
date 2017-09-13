@@ -1,8 +1,19 @@
 .cart
   $center(682px)
+  margin-bottom 200px
+  +$below(sm)
+    min-width 100%
 
 .header
+  margin-top 50px
   text-align center
+  h2
+    font-size 24px
+
+  .header-underline
+    border-top 1px solid $primary
+    margin -5px auto 0 auto
+    width 70px
 
 .table
   $padding-xl()
@@ -15,35 +26,68 @@ $cell-size = (100 - $cell-size-first) * .33
 
 .table-cell-first,
 .table-cell
-  border-bottom 1px black solid
+  border-bottom 1px solid $gray
   flex-grow 1
   overflow hidden
   padding-top $padding-xl-vertical
   padding-bottom $padding-xl-vertical
   width $cell-size
+  &:nth-child(4n+4)
+    text-align right
+  &:nth-child(-n+4)
+    color $gray-dark
+    font-size 13px
+    padding-bottom 8px
+  &:last-child
+    text-align right
 
 .details
   $row(between)
 
 .details-img
-  size(111px, 94px)
+  size(115px, 76px)
 
 .details-info
   $padding-sm()
   $column(between)
   flex 1
+  .product-name
+    color black
+    +$below(xs)
+      margin-bottom 5px
   .remove
     $button-to-link()
     flex 1
+    color $gray-dark
+    font-size 12px
+  .size-info
+    color $gray-dark
+    font-size 12px
+  .size-selected
+    color black
 
 .table-cell-first
   width $cell-size-first
+
+.price
+  color $gray-dark
+  font-size 14px
+  padding-top 24px
+
+.total
+  color $gray-dark
+  font-size 14px
+  padding-top 24px
 
 .table-total
   $padding-sm()
   border-bottom none
   flex-basis 75%
   padding-left 50%
+  text-align left
+
+.quantity
+  font-size 14px
 
 .table-sum
   $padding-sm(,,,0)

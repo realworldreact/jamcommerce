@@ -45,6 +45,7 @@ export default function Cart() {
     <div className={ cx('cart') }>
       <header className={ cx('header') }>
         <h2>Your Cart</h2>
+        <div className={ cx('header-underline') } />
       </header>
       <div className={ cx('table') }>
         <div className={ cx('table-cell-first', 'table-first') }>Item</div>
@@ -67,14 +68,14 @@ export default function Cart() {
                   />
                 </div>
                 <div className={ cx('details-info') }>
-                  <div>
+                  <div className={ cx('product-name') }>
                     { name }
                   </div>
-                  <div>
-                    size: { size }
+                  <div className={ cx('size-info') }>
+                    Size: <span className={ cx('size-selected') }>{ size }</span>
                   </div>
                   <div>
-                    <button className={ cx('remove') }>remove</button>
+                    <button className={ cx('remove') }>Remove</button>
                   </div>
                 </div>
               </div>,
@@ -84,7 +85,7 @@ export default function Cart() {
                 className={ cx('table-cell', 'price') }
                 key={ name + 'price' }
                 >
-                { price }
+                ${ price }
               </div>,
             );
             a.push(
@@ -104,14 +105,14 @@ export default function Cart() {
                 className={ cx('table-cell', 'total') }
                 key={ name + 'total' }
                 >
-                { _.round(price * quantity, 2) }
+                ${ _.round(price * quantity, 2) }
               </div>,
             );
             return a;
           },
           [],
         ) }
-        <div className={ cx('table-cell', 'table-total') }>Total</div>
+        <div className={ cx('table-cell', 'table-total') }>GRAND TOTAL</div>
         <div className={ cx('table-cell', 'table-sum') }>
           ${ '199' }
         </div>
