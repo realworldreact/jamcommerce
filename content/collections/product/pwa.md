@@ -5,7 +5,9 @@ details:
   - 100% Static
   - Easily integrate a static content-management system such as Netlify-CMS
   - Track Inventory with a git-centric static database (under development)
-price: '199'
+prices:
+  - amount: "199"
+    currency: "USD"
 sale: '99'
 sizes:
   - 5

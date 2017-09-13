@@ -119,6 +119,8 @@ function createProductNodes(createNode, oldNode) {
     children: [],
     id: frontmatter.name,
     slug,
+    sku: slug,
+    title: frontmatter.name,
     parent: oldNode.id,
     thumbnails: _.reduce(frontmatter.thumbnails, createSrcset, {}),
     images: _.reduce(frontmatter.images, createSrcset, {}),

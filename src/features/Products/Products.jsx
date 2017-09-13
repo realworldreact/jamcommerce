@@ -52,7 +52,7 @@ export default function Products({
       </div>
       <div className={ cx('content') }>
         { products.map(
-          ({ name, sale, price, slug, thumbnails: { front } }, i) => {
+          ({ name, sale, prices, slug, thumbnails: { front } }, i) => {
             const isSale = !!sale;
             const Price = isSale ? 'del' : 'span';
             const _sale = isSale ?
@@ -81,7 +81,7 @@ export default function Products({
                     </h4>
                   </header>
                   <div className={ cx('price') }>
-                    <Price>${ price }</Price> { _sale }
+                    <Price>${ prices[0].amount }</Price> { _sale }
                   </div>
                 </div>
               </Link>
@@ -106,7 +106,9 @@ export const pageQuery = graphql`
 
   fragment Products_products on JAMProduct {
     name
-    price
+    prices {
+      amount
+    }
     sale
     slug
     thumbnails {

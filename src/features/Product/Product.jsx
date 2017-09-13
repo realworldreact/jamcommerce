@@ -67,7 +67,10 @@ const mapDispatchToProps = (dispatch, props) => {
 export const productFragments = graphql`
   fragment Product_page on JAMProduct {
     name
-    price
+    prices {
+      amount
+      currency
+    }
     sale
     description
     details
@@ -122,7 +125,7 @@ const propTypes = {
         side: PropTypes.object,
       }),
       name: PropTypes.string,
-      price: PropTypes.string,
+      prices: PropTypes.array,
       sale: PropTypes.string,
       sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
       thumbnails: PropTypes.shape({
@@ -147,7 +150,7 @@ export function Product({
       details,
       images,
       name,
-      price,
+      prices,
       sale,
       sizes,
       thumbnails = {},
@@ -204,7 +207,7 @@ export function Product({
             </h1>
           </header>
           <div className={ cx('price') }>
-            <Price>${ price }</Price> { _sale }
+            <Price>${ prices[0].amount }</Price> { _sale }
           </div>
           <div className={ cx('description') }>
             { description }
