@@ -27,8 +27,8 @@ exports.createPages = ({ graphql, boundActionCreators: { createPage } }) => {
         edges {
           node {
             id
-            name,
-            slug
+            name
+            path
           }
         }
       }
@@ -37,9 +37,9 @@ exports.createPages = ({ graphql, boundActionCreators: { createPage } }) => {
     if (errors) {
       throw errors;
     }
-    edges.map(({ node }) => node).forEach(({ id, name, slug }) => {
+    edges.map(({ node }) => node).forEach(({ id, name, path }) => {
       createPage({
-        path: `/women/shoes/${slug}`,
+        path,
         component: productTemplate,
         context: {
           id,
@@ -120,6 +120,7 @@ function createProductNodes(createNode, oldNode) {
     id: frontmatter.name,
     slug,
     sku: slug,
+    path: `/women/shoes/${slug}`,
     title: frontmatter.name,
     parent: oldNode.id,
     thumbnails: _.reduce(frontmatter.thumbnails, createSrcset, {}),

@@ -15,7 +15,7 @@ export function addToCart(action, store, { commerce }) {
   }
   return action::filter(isCartAction)::map(getCartMeta)::filter(
     Boolean,
-  )::switchMap(product =>
+  )::switchMap(({ product }) =>
     fromPromise(commerce.addToCart(product))::map(
       cartUpdateCompleted,
     )::_catch(err =>

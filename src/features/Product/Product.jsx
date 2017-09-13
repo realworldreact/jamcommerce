@@ -22,11 +22,12 @@ import {
 import Selector from '../Selector';
 
 const cx = classnames.bind(styles);
-const createHandlerMemo = _.memoize((size, handler) => () => handler(size));
+const createHandlerMemo = _.memoize((value, handler) => () => handler(value));
 const getGoCommerceData = (
   _,
-  { data: { jamProduct: { sku, name, prices } } },
+  { data: { jamProduct: { sku, name, prices, path } } },
 ) => ({
+  path,
   prices,
   sku,
   title: name,
@@ -47,7 +48,6 @@ const mapStateToProps = createSelector(
 
 const mapDispatchToProps = (dispatch, props) => {
   const { data: { jamProduct: { thumbnails, sizes } } } = props;
-  const gocommerceData = getGoCommerceData(null, props);
 
   const sizeHandlers = bindActionCreators(
     sizes.reduce((s, size) => {
@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch, props) => {
   );
 
   return {
-    clickOnAddToCart: () => dispatch(clickOnAddToCart(gocommerceData)),
+    dispatch,
     sizeHandlers,
     thumbnailHandlers,
     quantityChanged: x =>
@@ -78,10 +78,23 @@ const mapDispatchToProps = (dispatch, props) => {
   };
 };
 
+const mergeProps = (stateProps, { dispatch, ...dispatchProps }, ownProps) => {
+  const { gocommerceData } = stateProps;
+  return {
+    ...ownProps,
+    ...stateProps,
+    ...dispatchProps,
+    clickOnAddToCart: createHandlerMemo(stateProps.currentQuantity, quantity =>
+      dispatch(clickOnAddToCart({ ...gocommerceData, quantity })),
+    ),
+  };
+};
+
 export const productFragments = graphql`
   fragment Product_page on JAMProduct {
     name
     sku
+    path
     prices {
       amount
       currency
@@ -298,4 +311,6 @@ export function Product({
 Product.displayName = 'Product';
 Product.propTypes = propTypes;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+  Product,
+);
