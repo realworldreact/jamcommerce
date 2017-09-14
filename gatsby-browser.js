@@ -15,7 +15,7 @@ exports.replaceRouterComponent = ({ history }) => {
     f => f;
 
   const commerce = new GoCommerce({
-    APIUrl: 'http://localhost:3010',
+    APIUrl: 'http://jamcommerce.netlify.com/api',
   });
   const store = storeFactory({
     epicDependencies: { commerce },
