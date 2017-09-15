@@ -14,6 +14,7 @@ import {
   clickOnAddToCart,
   currentImageSelector,
   currentQuantitySelector,
+  currentSizeSelector,
   currentSizeChanged,
   quantitiesSelector,
   quantityChanged,
@@ -38,11 +39,14 @@ const mapStateToProps = createSelector(
   quantitiesSelector,
   currentQuantitySelector,
   currentImageSelector,
-  (gocommerceData, quantities, currentQuantity, currentImage) => ({
+  currentSizeSelector,
+  (gocommerceData, quantities, currentQuantity, currentImage, currentSize) => ({
     currentImage,
     currentQuantity,
     gocommerceData,
     quantities,
+    currentSize,
+    isSubmitDisabled: !currentSize,
   }),
 );
 
@@ -144,6 +148,7 @@ const propTypes = {
   clickOnAddToCart: PropTypes.func.isRequired,
   currentQuantity: PropTypes.number,
   currentImage: PropTypes.string,
+  currentSize: PropTypes.number,
   data: PropTypes.shape({
     jamProduct: PropTypes.shape({
       description: PropTypes.string,
@@ -165,6 +170,7 @@ const propTypes = {
     }).isRequired,
   }).isRequired,
   gocommerceData: PropTypes.object,
+  isSubmitDisabled: PropTypes.bool,
   sizeHandlers: PropTypes.object,
   thumbnailHandlers: PropTypes.object,
   quantities: PropTypes.array,
@@ -173,8 +179,9 @@ const propTypes = {
 
 export function Product({
   clickOnAddToCart,
-  currentQuantity,
   currentImage,
+  currentQuantity,
+  currentSize,
   data: {
     jamProduct: {
       description,
@@ -188,6 +195,7 @@ export function Product({
     },
   },
   gocommerceData,
+  isSubmitDisabled,
   sizeHandlers,
   thumbnailHandlers,
   quantities,
@@ -261,12 +269,15 @@ export function Product({
             ) }
           </ul>
           <hr />
-          <div className='sizes'>
+          <div className={ cx('sizes') }>
             <p>Size:</p>{ ' ' }
             { sizes.map(value =>
               (
                 <button
-                  className={ cx('button-size') }
+                  className={ cx(
+                    'button-size',
+                    currentSize === value ? 'selected' : '',
+                  ) }
                   key={ value }
                   onClick={ sizeHandlers[value] }
                   >
@@ -283,10 +294,17 @@ export function Product({
               options={ quantities }
               value={ currentQuantity }
             />
-            <div>
+            <div className={ cx('submit-content') }>
+              { isSubmitDisabled ?
+                <small className={ cx('submit-warning') }>
+                    Please select a size
+                </small> :
+                null }
               <button
-                className={ cx('button') }
+                className={ cx('button', isSubmitDisabled ? 'disabled' : '') }
+                disabled={ isSubmitDisabled }
                 onClick={ clickOnAddToCart }
+                type='submit'
                 >
                 Add To Cart
               </button>
