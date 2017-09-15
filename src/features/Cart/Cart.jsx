@@ -1,46 +1,42 @@
 import _ from 'lodash';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
+import { createSelector } from 'reselect';
 
 import styles from './cart.module.styl';
+
+import { totalSelector, itemsSelector } from './redux';
 import Selector from '../Selector';
 
 const cx = classnames.bind(styles);
-const propTypes = {};
 
-const items = [
-  {
-    name: 'React',
-    alt: 'foo',
-    src: '/images/angular-front-xs',
-    srcSet:
-      '/images/angular-front-xs.png 147w, /images/angular-front-xl.png 1669w, /images/angular-front-lg.png 982w, /images/angular-front-md.png 442w, /images/angular-front-sm.png 295w',
-    price: 199,
-    size: 7,
-    quantity: 3,
-  },
-  {
-    name: 'Webpack',
-    alt: 'foo',
-    src: '/images/angular-front-xs',
-    srcSet:
-      '/images/angular-front-xs.png 147w, /images/angular-front-xl.png 1669w, /images/angular-front-lg.png 982w, /images/angular-front-md.png 442w, /images/angular-front-sm.png 295w',
-    price: 99,
-    size: 7,
-    quantity: 4,
-  },
-  {
-    name: 'Angular',
-    alt: 'foo',
-    src: '/images/react-front-xs',
-    srcSet:
-      '/images/angular-front-xs.png 147w, /images/angular-front-xl.png 1669w, /images/angular-front-lg.png 982w, /images/angular-front-md.png 442w, /images/angular-front-sm.png 295w',
-    price: 250,
-    size: 7,
-    quantity: 2,
-  },
-];
-export default function Cart() {
+const mapStateToProps = createSelector(
+  itemsSelector,
+  totalSelector,
+  (items, total) => ({ total, items }),
+);
+const mapDispatchToProps = null;
+
+const propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      alt: PropTypes.string,
+      quantity: PropTypes.number,
+      size: PropTypes.number,
+      sku: PropTypes.string,
+      src: PropTypes.string,
+      srcSet: PropTypes.string,
+      title: PropTypes.string,
+    }),
+  ),
+  total: PropTypes.shape({
+    amount: PropTypes.string,
+  }),
+};
+
+export function Cart({ items = [], total = {} }) {
   return (
     <div className={ cx('cart') }>
       <header className={ cx('header') }>
@@ -53,11 +49,11 @@ export default function Cart() {
         <div className={ cx('table-cell') }>Quantity</div>
         <div className={ cx('table-cell') }>Total</div>
         { items.reduce(
-          (a, { name, src, srcSet, alt, price, size, quantity }) => {
+          (a, { title, sku, src, srcSet, alt, price, size, quantity }) => {
             a.push(
               <div
                 className={ cx('table-cell-first', 'details') }
-                key={ name + name }
+                key={ sku + sku }
                 >
                 <div>
                   <img
@@ -69,7 +65,7 @@ export default function Cart() {
                 </div>
                 <div className={ cx('details-info') }>
                   <div className={ cx('product-name') }>
-                    { name }
+                    { title }
                   </div>
                   <div className={ cx('size-info') }>
                     Size: <span className={ cx('size-selected') }>{ size }</span>
@@ -83,29 +79,28 @@ export default function Cart() {
             a.push(
               <div
                 className={ cx('table-cell', 'price') }
-                key={ name + 'price' }
+                key={ sku + 'price' }
                 >
-                ${ price }
+                ${ price.amount }
               </div>,
             );
             a.push(
               <div
                 className={ cx('table-cell', 'quantity') }
-                key={ name + 'quantity' }
+                key={ sku + 'quantity' }
                 >
                 <Selector
                   className={ cx('quantity-selector', 'selector') }
-                  options={ [ { value: '1', label: '1' } ] }
-                  value={ '1' }
+                  value={ quantity }
                 />
               </div>,
             );
             a.push(
               <div
                 className={ cx('table-cell', 'total') }
-                key={ name + 'total' }
+                key={ sku + 'total' }
                 >
-                ${ _.round(price * quantity, 2) }
+                ${ _.round(price.amount * quantity, 2) }
               </div>,
             );
             return a;
@@ -114,7 +109,7 @@ export default function Cart() {
         ) }
         <div className={ cx('table-cell', 'table-total') }>GRAND TOTAL</div>
         <div className={ cx('table-cell', 'table-sum') }>
-          ${ '199' }
+          ${ total.amount }
         </div>
       </div>
     </div>
@@ -122,3 +117,5 @@ export default function Cart() {
 }
 Cart.displayName = 'Cart';
 Cart.propTypes = propTypes;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
