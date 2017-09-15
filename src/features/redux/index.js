@@ -9,6 +9,7 @@ import cartEpic from './cart-epic.js';
 import errorEpic from './error-epic.js';
 import navReducer from '../Nav/redux';
 import productReducer from '../Product/redux';
+import cartReducer from '../Cart/redux';
 
 const ns = 'app';
 
@@ -42,4 +43,5 @@ export default combineReducers(
   ),
   navReducer,
   productReducer,
+  cartReducer,
 );
