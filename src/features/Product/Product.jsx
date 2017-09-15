@@ -24,6 +24,11 @@ import Selector from '../Selector';
 
 const cx = classnames.bind(styles);
 const createHandlerMemo = _.memoize((value, handler) => () => handler(value));
+const getCommerceMeta = ({ data: { jamProduct: { images } } }) => ({
+  meta: {
+    image: images.front,
+  },
+});
 const getGoCommerceData = (
   _,
   { data: { jamProduct: { sku, name, prices, path } } },
@@ -84,6 +89,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
 const mergeProps = (stateProps, { dispatch, ...dispatchProps }, ownProps) => {
   const { gocommerceData } = stateProps;
+  const commerceMeta = getCommerceMeta(ownProps);
   return {
     ...ownProps,
     ...stateProps,
@@ -92,6 +98,8 @@ const mergeProps = (stateProps, { dispatch, ...dispatchProps }, ownProps) => {
       dispatch(
         clickOnAddToCart({
           ...gocommerceData,
+          ...commerceMeta,
+          size: stateProps.currentSize,
           quantity: stateProps.currentQuantity,
         }),
       ),

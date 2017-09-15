@@ -15,7 +15,10 @@ const cx = classnames.bind(styles);
 const mapStateToProps = createSelector(
   itemsSelector,
   totalSelector,
-  (items, total) => ({ total, items }),
+  (items, total) => ({
+    total,
+    items: items.map(({ meta = {}, ...item }) => Object.assign(item, meta)),
+  }),
 );
 const mapDispatchToProps = null;
 
@@ -49,7 +52,7 @@ export function Cart({ items = [], total = {} }) {
         <div className={ cx('table-cell') }>Quantity</div>
         <div className={ cx('table-cell') }>Total</div>
         { items.reduce(
-          (a, { title, sku, src, srcSet, alt, price, size, quantity }) => {
+          (a, { title, sku, image = {}, price, size, quantity }) => {
             a.push(
               <div
                 className={ cx('table-cell-first', 'details') }
@@ -57,10 +60,10 @@ export function Cart({ items = [], total = {} }) {
                 >
                 <div>
                   <img
-                    alt={ alt }
+                    alt={ image.alt }
                     className={ cx('details-img') }
-                    src={ src }
-                    srcSet={ srcSet }
+                    src={ image.src }
+                    srcSet={ image.srcSet }
                   />
                 </div>
                 <div className={ cx('details-info') }>
