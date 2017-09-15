@@ -52,7 +52,7 @@ export default function Products({
       </div>
       <div className={ cx('content') }>
         { products.map(
-          ({ name, sale, prices, slug, thumbnails: { front } }, i) => {
+          ({ name, sale, prices, slug, images: { front } }, i) => {
             const isSale = !!sale;
             const Price = isSale ? 'del' : 'span';
             const _sale = isSale ?
@@ -111,7 +111,7 @@ export const pageQuery = graphql`
     }
     sale
     slug
-    thumbnails {
+    images {
       front {
         alt
         src
