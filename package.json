@@ -31,7 +31,7 @@
     "gatsby-plugin-react-helmet": "^1.0.1",
     "gatsby-source-filesystem": "^1.4.6",
     "gatsby-transformer-remark": "^1.7.3",
-    "gocommerce-js": "^4.0.1",
+    "gocommerce-js": "git+https://github.com/BerkeleyTrue/gocommerce-js.git#fix/jamcommerce",
     "invariant": "^2.2.2",
     "js-yaml": "^3.9.1",
     "kouto-swiss": "^1.1.0",
