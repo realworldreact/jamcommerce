@@ -88,9 +88,13 @@ const mergeProps = (stateProps, { dispatch, ...dispatchProps }, ownProps) => {
     ...ownProps,
     ...stateProps,
     ...dispatchProps,
-    clickOnAddToCart: createHandlerMemo(stateProps.currentQuantity, quantity =>
-      dispatch(clickOnAddToCart({ ...gocommerceData, quantity })),
-    ),
+    clickOnAddToCart: () =>
+      dispatch(
+        clickOnAddToCart({
+          ...gocommerceData,
+          quantity: stateProps.currentQuantity,
+        }),
+      ),
   };
 };
 
