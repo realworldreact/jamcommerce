@@ -27,8 +27,7 @@ export default handleActions(
       state,
       { payload: cart },
     ) => ({
-      ...state,
-      cart,
+      ...cart,
     }),
   }),
   {},
