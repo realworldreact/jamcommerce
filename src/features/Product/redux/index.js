@@ -27,13 +27,9 @@ export const thumbnailClicked = createAction(types.thumbnailClicked);
 
 export const defaultState = {
   currentImage: 'front',
-  currentQuantity: null,
+  currentQuantity: 1,
   currentSize: null,
   quantities: [
-    {
-      value: 0,
-      label: '0',
-    },
     {
       value: 1,
       label: '1',
@@ -45,6 +41,14 @@ export const defaultState = {
     {
       value: 3,
       label: '3',
+    },
+    {
+      value: 4,
+      label: '4',
+    },
+    {
+      value: 5,
+      label: '5',
     },
   ],
 };
