@@ -25,7 +25,7 @@
     "classnames": "^2.2.5",
     "debug": "^3.0.1",
     "dedent": "^0.7.0",
-    "gatsby": "^1.9.24",
+    "gatsby": "^1.9.32",
     "gatsby-cli": "^1.1.6",
     "gatsby-link": "^1.6.13",
     "gatsby-plugin-react-helmet": "^1.0.1",
