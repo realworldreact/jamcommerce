@@ -1,3 +1,4 @@
+import { combineEpics } from 'redux-observable';
 import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { map } from 'rxjs/operator/map';
@@ -6,8 +7,22 @@ import { _catch } from 'rxjs/operator/catch';
 import { filter } from 'rxjs/operator/filter';
 import { _throw } from 'rxjs/observable/throw';
 
-import { cartUpdateFailed, cartUpdateCompleted } from '../Cart/redux';
+import { types } from './';
+import {
+  cartUpdateFailed,
+  cartUpdateCompleted,
+  commerceInitiated,
+} from '../Cart/redux';
 import { isCartAction, getCartMeta } from '../../utils/redux.js';
+
+export function cartInit(actions, store, { commerce }) {
+  if (!commerce) {
+    return EmptyObservable.create();
+  }
+  return actions.ofType(types.appMounted)::map(() =>
+    commerceInitiated(commerce.getCart()),
+  );
+}
 
 export function addToCart(action, store, { commerce }) {
   if (!commerce) {
@@ -23,4 +38,4 @@ export function addToCart(action, store, { commerce }) {
     )::_catch(err => [ cartUpdateFailed(err) ]),
   );
 }
-export default addToCart;
+export default combineEpics(cartInit, addToCart);
