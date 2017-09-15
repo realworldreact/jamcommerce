@@ -116,7 +116,7 @@ export function Nav({
         </Link>
         <ul className={ cx('account') }>
           <li>
-            <a href='/signin'>Sign In</a>
+            <Link to='/signin'>Sign In</Link>
           </li>
           <li>
             <Link
