@@ -7,9 +7,9 @@ import { createAction } from 'redux-actions';
 
 import cartEpic from './cart-epic.js';
 import errorEpic from './error-epic.js';
-import navReducer from '../Nav/redux';
-import productReducer from '../Product/redux';
 import cartReducer from '../Cart/redux';
+import productReducer, { epics as productEpics } from '../Product/redux';
+import navReducer from '../Nav/redux';
 
 const ns = 'app';
 
@@ -17,6 +17,7 @@ const defaultState = { location: {} };
 export const epics = [
   cartEpic,
   errorEpic,
+  ...productEpics,
 ];
 export const types = createTypes(
   [
