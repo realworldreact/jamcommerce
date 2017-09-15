@@ -119,9 +119,9 @@ export function Nav({
             <a href='/signin'>Sign In</a>
           </li>
           <li>
-            <a
+            <Link
               className={ cx('cart') }
-              href='/cart'
+              to='/cart'
               >
               <img
                 alt='a padlock'
@@ -130,7 +130,7 @@ export function Nav({
               <span className={ cx('num-in-cart') }>
                 { typeof numInCart === 'number' ? numInCart : 0 }
               </span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
