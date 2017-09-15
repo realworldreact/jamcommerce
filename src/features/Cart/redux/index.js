@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   combineActions,
   createTypes,
@@ -16,10 +17,23 @@ export const types = createTypes(
   ns,
 );
 
+const defaultState = {
+  items: {},
+  subtotal: {},
+  discount: {},
+  couponDiscount: {},
+  memberDiscount: {},
+  taxes: {},
+  total: {},
+};
+
+const getNS = state => state[ns];
 export const cartUpdateStarted = createAction(types.cartUpdate.start);
 export const cartUpdateCompleted = createAction(types.cartUpdate.complete);
 export const cartUpdateFailed = createAction(types.cartUpdate.error);
 export const commerceInitiated = createAction(types.commerceInitiated);
+export const numInCartSelector = state =>
+  _.reduce(getNS(state).items, (numOf, item) => numOf + item.quantity, null);
 
 export default handleActions(
   () => ({
@@ -30,6 +44,6 @@ export default handleActions(
       ...cart,
     }),
   }),
-  {},
+  defaultState,
   ns,
 );

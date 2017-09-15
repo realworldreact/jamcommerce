@@ -16,6 +16,7 @@ import {
   isMenuOpenSelector,
   mouseLeaveMenu,
 } from './redux';
+import { numInCartSelector } from '../Cart/redux';
 import styles from './nav.module.styl';
 import cart from './cart.svg';
 import hamburger from './hamburger.svg';
@@ -33,11 +34,13 @@ const mapStateToProps = createSelector(
   directoriesSelector,
   directorySelector,
   categoriesSelector,
-  (isMenuOpen, directories = [], currentDirectory, categories) => ({
+  numInCartSelector,
+  (isMenuOpen, directories = [], currentDirectory, categories, numInCart) => ({
     categories,
     currentDirectory,
     directories,
     isMenuOpen,
+    numInCart,
   }),
 );
 
@@ -86,6 +89,7 @@ const propTypes = {
   hoverOnSubNavActions: PropTypes.object,
   isMenuOpen: PropTypes.bool,
   mouseLeaveMenu: PropTypes.func.isRequired,
+  numInCart: PropTypes.number,
 };
 
 export function Nav({
@@ -96,6 +100,7 @@ export function Nav({
   hoverOnSubNavActions,
   isMenuOpen,
   mouseLeaveMenu,
+  numInCart,
 }) {
   return (
     <div className={ cx('navbar') }>
@@ -122,6 +127,9 @@ export function Nav({
                 alt='a padlock'
                 src={ cart }
               />
+              <span className={ cx('num-in-cart') }>
+                { typeof numInCart === 'number' ? numInCart : 0 }
+              </span>
             </a>
           </li>
         </ul>

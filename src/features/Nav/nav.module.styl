@@ -58,8 +58,15 @@ $navbar($height, $font-size = 20px)
     font-size 16px
 
 .cart
+  position relative
   img
     size($navbar-top-height - ($navbar-pad-horiz($navbar-top-height) *2))
+  .num-in-cart
+    color white
+    font-size small
+    left 18px
+    position absolute
+    top 22px
 
 .bottom
   $navbar($navbar-bottom-height, 14px)
