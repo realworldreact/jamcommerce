@@ -11,8 +11,18 @@ export default function Auth() {
   return (
     <div className={ cx('auth') }>
       <div className='container'>
-        <div />
-        <Form model='user'>
+        <header className={ cx('header') }>
+          <div>
+            <h4>Sign In</h4>
+          </div>
+          <div>
+            <h4>Sign Up</h4>
+          </div>
+        </header>
+        <Form
+          className={ cx('form') }
+          model='user'
+          >
           <div className={ cx('input-control') }>
             <label htmlFor='user.firstname'>
               First Name
@@ -47,6 +57,12 @@ export default function Auth() {
             </label>
             <div className={ cx('error') } />
           </div>
+          <button
+            className={ cx('submit') }
+            type='submit'
+            >
+            Submit
+          </button>
         </Form>
         <div />
       </div>
