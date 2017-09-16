@@ -51,43 +51,41 @@ export default function Products({
         </div>
       </div>
       <div className={ cx('content') }>
-        { products.map(
-          ({ name, sale, prices, slug, images: { front } }, i) => {
-            const isSale = !!sale;
-            const Price = isSale ? 'del' : 'span';
-            const _sale = isSale ?
-              (
-                <span className={ cx('sale') }>
-                  ${ sale }
-                </span>
-              ) :
-              null;
-            return (
-              <Link
-                className={ cx('product-item') }
-                key={ i }
-                to={ `/women/shoes/${slug}` }
-                >
-                <div>
-                  <div className={ cx('img') }>
-                    <img
-                      alt='alt provided by content below'
-                      { ...front }
-                    />
-                  </div>
-                  <header className={ cx('title') }>
-                    <h4>
-                      { name }
-                    </h4>
-                  </header>
-                  <div className={ cx('price') }>
-                    <Price>${ prices[0].amount }</Price> { _sale }
-                  </div>
+        { products.map(({ name, sale, prices, slug, images: { front } }, i) => {
+          const isSale = !!sale;
+          const Price = isSale ? 'del' : 'span';
+          const _sale = isSale ?
+            (
+              <span className={ cx('sale') }>
+                ${ sale }
+              </span>
+            ) :
+            null;
+          return (
+            <Link
+              className={ cx('product-item') }
+              key={ i }
+              to={ `/women/shoes/${slug}` }
+              >
+              <div>
+                <div className={ cx('img') }>
+                  <img
+                    alt='alt provided by content below'
+                    { ...front }
+                  />
                 </div>
-              </Link>
-            );
-          },
-        ) }
+                <header className={ cx('title') }>
+                  <h4>
+                    { name }
+                  </h4>
+                </header>
+                <div className={ cx('price') }>
+                  <Price>${ prices[0].amount }</Price> { _sale }
+                </div>
+              </div>
+            </Link>
+          );
+        }) }
       </div>
     </div>
   );
