@@ -1,0 +1,76 @@
+.group
+  margin-bottom 45px
+  position relative
+.input
+  border none
+  border-bottom 1px solid #757575
+  display block
+  font-size 18px
+  padding 10px 10px 10px 5px
+  width 300px
+
+  &:focus
+    outline none
+
+.label
+  color #999
+  font-size 18px
+  font-weight normal
+  left 5px
+  pointer-events none
+  position absolute
+  top 10px
+  transition 0.2s ease all
+
+.input:focus ~ .label,
+.input:valid ~ .label
+  top -20px
+  font-size 14px
+  color #5264AE
+
+.bar
+  display block
+  position relative
+  width 300px
+
+.bar:before,
+.bar:after
+  background #5264AE
+  bottom 1px
+  content ''
+  height 2px
+  position absolute
+  transition 0.2s ease all
+  width 0
+
+.bar:before
+  left 50%
+
+.bar:after
+  right 50%
+
+.input:focus ~ .bar:before,
+.input:focus ~ .bar:after
+  width 50%
+
+.highlight
+  height 60%
+  left 0
+  opacity 0.5
+  pointer-events none
+  position absolute
+  top 25%
+  width 100px
+
+
+.input:focus ~ .highlight
+  animation heighlighter 0.3s ease
+
+
+@keyframes heighlighter
+  from
+    background #5264AE
+  to
+    width 0
+    background transparent
+
