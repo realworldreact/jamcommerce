@@ -24,7 +24,18 @@ export default function Input({ messages, model, label, type, ...rest }) {
     <div className={ cx('group') }>
       <label htmlFor={ model }>
         <Comp
-          className={ cx('input') }
+          mapProps={ {
+            className: ({
+              fieldValue: { initialValue, value, touched, pristine, valid },
+            }) =>
+              cx({
+                'has-value': initialValue !== value,
+                input: true,
+                pristine,
+                touched,
+                valid,
+              }),
+          } }
           { ...controlProps }
         />
         <span className={ cx('label') }>
