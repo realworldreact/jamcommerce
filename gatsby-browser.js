@@ -18,7 +18,10 @@ exports.replaceRouterComponent = ({ history }) => {
     APIUrl: 'http://jamcommerce.netlify.com/api',
   });
   const store = storeFactory({
-    epicDependencies: { commerce },
+    epicDependencies: {
+      commerce,
+      localStorage: win.localStorage,
+    },
     enhancer: devTools,
   });
 

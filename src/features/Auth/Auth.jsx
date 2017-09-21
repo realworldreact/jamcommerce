@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
 import { Form } from 'react-redux-form';
 import Link from 'gatsby-link';
@@ -7,14 +8,24 @@ import isEmail from 'validator/lib/isEmail';
 
 import styles from './auth.module.styl';
 import Input from '../Input';
+import { onSigninSubmit, onSignupSubmit } from './redux';
 
 const cx = classnames.bind(styles);
 const propTypes = {
   location: PropTypes.object,
+  onSigninSubmit: PropTypes.func.isRequired,
+  onSignupSubmit: PropTypes.func.isRequired,
 };
 
-export default function Auth({ location }) {
+const mapStateToProps = null;
+const mapDispatchToProps = {
+  onSigninSubmit,
+  onSignupSubmit,
+};
+
+export function Auth({ location, onSigninSubmit, onSignupSubmit }) {
   const isSignin = location.pathname === '/signin';
+  const handleSubmit = isSignin ? onSigninSubmit : onSignupSubmit;
   return (
     <div className={ cx('auth') }>
       <div className={ cx('container') }>
@@ -33,6 +44,7 @@ export default function Auth({ location }) {
         <Form
           className={ cx('form') }
           model='forms.user'
+          onSubmit={ handleSubmit }
           >
           { !isSignin &&
             <div>
@@ -99,3 +111,5 @@ export default function Auth({ location }) {
 }
 Auth.displayName = 'Auth';
 Auth.propTypes = propTypes;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
