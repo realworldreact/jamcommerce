@@ -41,9 +41,9 @@ export default function Input({ messages, model, label, type, ...rest }) {
         <span className={ cx('label') }>
           { label }
         </span>
+        <span className={ cx('bar') } />
+        <span className={ cx('highlight') } />
       </label>
-      <span className={ cx('bar') } />
-      <span className={ cx('highlight') } />
       { messages &&
         <Errors
           messages={ messages }
