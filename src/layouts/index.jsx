@@ -2,12 +2,15 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import classnames from 'classnames/bind';
 
 import './index.styl';
+import styles from './main.module.styl';
 import { appMounted } from '../features/redux';
 import Nav from '../features/Nav';
 import Footer from '../features/Footer';
 
+const cx = classnames.bind(styles);
 const mapStateToProps = null;
 const mapDispatchToProps = {
   appMounted,
@@ -26,7 +29,7 @@ export class TemplateWrapper extends PureComponent {
   render() {
     const { children } = this.props;
     return (
-      <div>
+      <div className={ cx('main') }>
         <Helmet
           meta={ [
             { name: 'description', content: 'Sample' },
@@ -35,7 +38,7 @@ export class TemplateWrapper extends PureComponent {
           title='JamCommerce'
         />
         <Nav />
-        <div>
+        <div className={ cx('content') }>
           { children() }
         </div>
         <Footer />
