@@ -50,7 +50,8 @@
     "reselect": "^3.0.1",
     "rxjs": "^5.4.3",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1"
+    "stylus-loader": "^3.0.1",
+    "validator": "^8.2.0"
   },
   "keywords": [
     "gatsby",
