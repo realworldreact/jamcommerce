@@ -34,32 +34,35 @@ export default function Auth({ location }) {
           className={ cx('form') }
           model='user'
           >
-          <Input
-            label='First Name'
-            messages={ {
-              length: 'Firstname must be at least 2 characters',
-              required: 'Firstname is required',
-            } }
-            model='user.firstname'
-            type='text'
-            validators={ {
-              length: (val = '') => val.length > 2,
-              required: (val = '') => val.length,
-            } }
-          />
-          <Input
-            label='Last Name'
-            messages={ {
-              length: 'Lastname must be at least 2 characters',
-              required: 'Lastname is required',
-            } }
-            model='user.lastname'
-            type='text'
-            validators={ {
-              length: (val = '') => val.length > 2,
-              required: (val = '') => val.length,
-            } }
-          />
+          { isSignin &&
+            <div>
+              <Input
+                label='First Name'
+                messages={ {
+                  length: 'Firstname must be at least 2 characters',
+                  required: 'Firstname is required',
+                } }
+                model='user.firstname'
+                type='text'
+                validators={ {
+                  length: (val = '') => val.length > 2,
+                  required: (val = '') => val.length,
+                } }
+              />
+              <Input
+                label='Last Name'
+                messages={ {
+                  length: 'Lastname must be at least 2 characters',
+                  required: 'Lastname is required',
+                } }
+                model='user.lastname'
+                type='text'
+                validators={ {
+                  length: (val = '') => val.length > 2,
+                  required: (val = '') => val.length,
+                } }
+              />
+            </div> }
           <Input
             label='Email Address'
             messages={ {
