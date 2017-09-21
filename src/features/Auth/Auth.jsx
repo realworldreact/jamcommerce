@@ -32,7 +32,7 @@ export default function Auth({ location }) {
         </header>
         <Form
           className={ cx('form') }
-          model='user'
+          model='forms.user'
           >
           { isSignin &&
             <div>
