@@ -11,7 +11,7 @@ const propTypes = {};
 export default function Auth() {
   return (
     <div className={ cx('auth') }>
-      <div className='container'>
+      <div className={ cx('container') }>
         <header className={ cx('header') }>
           <div>
             <h4>Sign In</h4>
