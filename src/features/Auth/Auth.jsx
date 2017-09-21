@@ -19,14 +19,14 @@ export default function Auth({ location }) {
     <div className={ cx('auth') }>
       <div className={ cx('container') }>
         <header className={ cx('header') }>
-          <Link to='/signin'>
-            <div className={ cx({ underline: isSignin }) }>
-              <h4>Sign In</h4>
-            </div>
-          </Link>
           <Link to='/signup'>
             <div className={ cx({ underline: !isSignin }) }>
               <h4>Sign Up</h4>
+            </div>
+          </Link>
+          <Link to='/signin'>
+            <div className={ cx({ underline: isSignin }) }>
+              <h4>Sign In</h4>
             </div>
           </Link>
         </header>
@@ -34,7 +34,7 @@ export default function Auth({ location }) {
           className={ cx('form') }
           model='forms.user'
           >
-          { isSignin &&
+          { !isSignin &&
             <div>
               <Input
                 label='First Name'
