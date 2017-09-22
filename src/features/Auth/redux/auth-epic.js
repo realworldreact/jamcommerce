@@ -47,12 +47,13 @@ export function signinEpic(actions, store, { localStorage }) {
         return userParseError(error);
       }
       if (user.password === _user.password && user.email === _user.email) {
+        navigateTo('/account');
         return userLoginSuccess(user);
       }
       return userLoginFailed('User email or password is incorrect');
     }
     return userLoginFailed('No user found');
-  })::ignoreElements();
+  });
 }
 
 export default combineEpics(signinEpic, signupEpic);
