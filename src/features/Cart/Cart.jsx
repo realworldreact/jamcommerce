@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
 import { createSelector } from 'reselect';
+import Link from 'gatsby-link';
 
 import styles from './cart.module.styl';
 
@@ -114,6 +115,11 @@ export function Cart({ items = [], total = {} }) {
         <div className={ cx('table-cell', 'table-sum') }>
           ${ total.amount }
         </div>
+      </div>
+      <div className={ cx('checkout') }>
+        <Link to='/checkout'>
+          <button className={ cx('button') }>Check Out</button>
+        </Link>
       </div>
     </div>
   );
