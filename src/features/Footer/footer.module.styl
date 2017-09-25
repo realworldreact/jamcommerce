@@ -6,12 +6,17 @@
 
 .top-row
   width 32%
+  +$below('md')
+    width 100%
 
 .first
   padding-bottom $padding-xl-horizontal
 
   .content
     max-width 361px
+    +$below('md')
+      $center(361px)
+      text-align center
   h4
     color $ftr-primary
   p
@@ -26,6 +31,9 @@
 .solutions
   max-width 260px
   padding-top 22px
+  +$below('md')
+    $center(260px)
+    text-align center
 
 .solutions-container
   $row(around)
@@ -39,6 +47,8 @@
   .content
     $row(between)
     $center(419px)
+    +$below('md')
+      text-align center
   a
     display inline-block
     color $ftr-primary
@@ -56,6 +66,9 @@ $input-border-thickness = 4px
     width 335px
     text-align right
     margin-left auto
+    +$below('md')
+      $center(355px)
+      text-align center
   h3
     color $ftr-primary
     margin-top 0
@@ -103,6 +116,8 @@ $input-border-thickness = 4px
 .bottom
   $row(between, center)
   width 100%
+  +$below('md')
+    $grid('column-reverse', between)
 
 $icons-width = 200px
 .icons
@@ -124,3 +139,6 @@ $icons-width = 200px
     color $ftr-primary
   h5
     color $ftr-secondary
+
+  +$below('md')
+    margin-right 0
