@@ -22,6 +22,7 @@ exports.modifyWebpackConfig = ({ config, stage }, options = {}) => {
   const stylusModulesFiles = /\.module\.styl$/;
 
   switch (stage) {
+    case 'develop-html':
     case 'develop': {
       config.loader('stylus', {
         test: stylusFiles,
@@ -37,6 +38,27 @@ exports.modifyWebpackConfig = ({ config, stage }, options = {}) => {
         test: stylusModulesFiles,
         loaders: [
           'style',
+          cssModulesConfDev,
+          'postcss',
+          'stylus',
+        ],
+      });
+      return config;
+    }
+
+    case 'develop-ssr-html': {
+      config.loader('stylus', {
+        test: stylusFiles,
+        exclude: stylusModulesFiles,
+        loaders: [
+          'css',
+          'postcss',
+          'stylus',
+        ],
+      });
+      config.loader('stylusModules', {
+        test: stylusModulesFiles,
+        loaders: [
           cssModulesConfDev,
           'postcss',
           'stylus',
@@ -66,7 +88,6 @@ exports.modifyWebpackConfig = ({ config, stage }, options = {}) => {
       return config;
     }
 
-    case 'develop-html':
     case 'build-html': {
       const moduleLoader = ExtractTextPlugin.extract('style', [
         cssModulesConfProd,
