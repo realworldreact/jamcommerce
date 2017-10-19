@@ -61,17 +61,21 @@ export function Cart({ clickOnRemove, items = [], total = {} }) {
                 key={ sku + sku }
                 >
                 <div>
-                  <img
-                    alt={ image.alt }
-                    className={ cx('details-img') }
-                    src={ image.src }
-                    srcSet={ image.srcSet }
-                  />
+                  <Link to={ `/women/shoes/${sku}` }>
+                    <img
+                      alt={ image.alt }
+                      className={ cx('details-img') }
+                      src={ image.src }
+                      srcSet={ image.srcSet }
+                    />
+                  </Link>
                 </div>
                 <div className={ cx('details-info') }>
-                  <div className={ cx('product-name') }>
-                    { title }
-                  </div>
+                  <Link to={ `/women/shoes/${sku}` }>
+                    <div className={ cx('product-name') }>
+                      { title }
+                    </div>
+                  </Link>
                   <div className={ cx('size-info') }>
                     Size: <span className={ cx('size-selected') }>{ size }</span>
                   </div>
