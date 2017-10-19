@@ -8,7 +8,7 @@ import Link from 'gatsby-link';
 
 import styles from './cart.module.styl';
 
-import { totalSelector, itemsSelector } from './redux';
+import { totalSelector, itemsSelector, clickOnRemove } from './redux';
 import Selector from '../Selector';
 
 const cx = classnames.bind(styles);
@@ -21,9 +21,10 @@ const mapStateToProps = createSelector(
     items: items.map(({ meta = {}, ...item }) => Object.assign(item, meta)),
   }),
 );
-const mapDispatchToProps = null;
+const mapDispatchToProps = { clickOnRemove };
 
 const propTypes = {
+  clickOnRemove: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       alt: PropTypes.string,
@@ -40,7 +41,7 @@ const propTypes = {
   }),
 };
 
-export function Cart({ items = [], total = {} }) {
+export function Cart({ clickOnRemove, items = [], total = {} }) {
   return (
     <div className={ cx('cart') }>
       <header className={ cx('header') }>
@@ -75,7 +76,12 @@ export function Cart({ items = [], total = {} }) {
                     Size: <span className={ cx('size-selected') }>{ size }</span>
                   </div>
                   <div>
-                    <button className={ cx('remove') }>Remove</button>
+                    <button
+                      className={ cx('remove') }
+                      onClick={ () => clickOnRemove(sku) }
+                      >
+                      Remove
+                    </button>
                   </div>
                 </div>
               </div>,

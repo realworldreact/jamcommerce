@@ -1,14 +1,19 @@
 export const isCartAction = ({ meta: { cart: { isCart } = {} } = {} }) =>
   !!isCart;
 
-export const createCartMeta = (type = 'addToCart') => product => ({
+export const cartTypes = {
+  addToCart: 'addToCart',
+  removeFromCart: 'removeFromCart',
+};
+
+export const createCartMeta = (type = cartTypes.addToCart) => payload => ({
   cart: {
     type,
     isCart: true,
-    product,
+    payload,
   },
 });
 
 export const getCartMeta = ({
-  meta: { cart: { type, isCart, product } = {} } = {},
-}) => isCart ? { type, product } : null;
+  meta: { cart: { type, isCart, payload } = {} } = {},
+}) => isCart ? { type, payload } : null;

@@ -6,6 +6,7 @@ import {
   handleActions,
 } from 'berkeleys-redux-utils';
 import { createAction } from 'redux-actions';
+import { cartTypes, createCartMeta } from '../../../utils/redux.js';
 
 const ns = 'cart';
 
@@ -13,6 +14,7 @@ export const types = createTypes(
   [
     createAsyncTypes('cartUpdate'),
     'commerceInitiated',
+    'clickOnRemove',
   ],
   ns,
 );
@@ -21,6 +23,9 @@ export const cartUpdateStarted = createAction(types.cartUpdate.start);
 export const cartUpdateCompleted = createAction(types.cartUpdate.complete);
 export const cartUpdateFailed = createAction(types.cartUpdate.error);
 export const commerceInitiated = createAction(types.commerceInitiated);
+export const clickOnRemove = createAction(types.clickOnRemove, null,
+  createCartMeta(cartTypes.removeFromCart)
+);
 
 const defaultState = {
   items: {},
