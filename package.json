@@ -10,7 +10,6 @@
     "pretest": "npm run lint",
     "test": "echo 'yo'",
     "format": "prettier 'src/**/*.js' 'src/**/*.jsx' './gatsby*.js' './plugins/**/*.js' --trailing-comma all --single-quote --write",
-    "postinstall": "rm -rf gatsby; mkdir gatsby; cd gatsby; git init; git remote add -f origin https://github.com/BerkeleyTrue/gatsby.git; git config core.sparseCheckout true; echo \"packages/gatsby\" >> .git/info/sparse-checkout; git pull --depth=1 origin feat/dev-ssr; cd ..; npm i -s ./gatsby/packages/gatsby/",
     "postformat": "npm run lint:fix",
     "commit": "git-cz",
     "commitmsg": "validate-commit-msg"
@@ -26,7 +25,7 @@
     "classnames": "^2.2.5",
     "debug": "^3.0.1",
     "dedent": "^0.7.0",
-    "gatsby": "file:gatsby/packages/gatsby",
+    "gatsby": "git+https://github.com/realworldreact/gatsby-ssr.git",
     "gatsby-cli": "^1.1.6",
     "gatsby-link": "^1.6.13",
     "gatsby-plugin-react-helmet": "^1.0.1",
