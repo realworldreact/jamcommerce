@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { createAction } from 'redux-actions';
 import { createTypes, handleActions } from 'berkeleys-redux-utils';
+import { createSelector } from 'reselect';
 
 import { createCartMeta } from '../../../utils/redux';
 import navigationEpic from './navigation-epic.js';
@@ -31,34 +32,12 @@ export const defaultState = {
   currentImage: 'front',
   currentQuantity: 1,
   currentSize: null,
-  quantities: [
-    {
-      value: 1,
-      label: '1',
-    },
-    {
-      value: 2,
-      label: '2',
-    },
-    {
-      value: 3,
-      label: '3',
-    },
-    {
-      value: 4,
-      label: '4',
-    },
-    {
-      value: 5,
-      label: '5',
-    },
-  ],
 };
 
 const getNS = state => state[ns];
 
 export const currentQuantitySelector = state => getNS(state).currentQuantity;
-export const quantitiesSelector = state => getNS(state).quantities;
+export const maxQuantitySelector = state => getNS(state).maxQuantity;
 export const currentSizeSelector = state => getNS(state).currentSize;
 export const currentImageSelector = state => getNS(state).currentImage;
 

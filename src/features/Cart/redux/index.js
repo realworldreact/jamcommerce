@@ -38,7 +38,8 @@ const defaultState = {
 };
 
 const getNS = state => state[ns];
-export const itemsSelector = state => _.map(getNS(state).items, item => item);
+export const itemsMapSelector = state => getNS(state).items || {};
+export const itemsSelector = state => _.map(itemsMapSelector(state), item => item);
 export const totalSelector = state => getNS(state).total;
 export const numInCartSelector = state =>
   _.reduce(getNS(state).items, (numOf, item) => numOf + item.quantity, null);

@@ -16,11 +16,11 @@ import {
   currentQuantitySelector,
   currentSizeSelector,
   currentSizeChanged,
-  quantitiesSelector,
   quantityChanged,
   thumbnailClicked,
 } from './redux';
 import Selector from '../Selector';
+import { itemsMapSelector } from '../Cart/redux';
 
 const cx = classnames.bind(styles);
 const createHandlerMemo = _.memoize((value, handler) => () => handler(value));
@@ -41,15 +41,15 @@ const getGoCommerceData = (
 });
 const mapStateToProps = createSelector(
   getGoCommerceData,
-  quantitiesSelector,
   currentQuantitySelector,
   currentImageSelector,
   currentSizeSelector,
-  (gocommerceData, quantities, currentQuantity, currentImage, currentSize) => ({
+  itemsMapSelector,
+  (gocommerceData, currentQuantity, currentImage, currentSize, itemsMap) => ({
     currentImage,
-    currentQuantity,
+    currentQuantity: (itemsMap[gocommerceData.sku] || {}).quantity ||
+      currentQuantity,
     gocommerceData,
-    quantities,
     currentSize,
     isSubmitDisabled: !currentSize,
   }),
@@ -115,6 +115,7 @@ export const productFragments = graphql`
       amount
       currency
     }
+    maxQuantity,
     sale
     description
     details
@@ -185,7 +186,6 @@ const propTypes = {
   isSubmitDisabled: PropTypes.bool,
   sizeHandlers: PropTypes.object,
   thumbnailHandlers: PropTypes.object,
-  quantities: PropTypes.array,
   quantityChanged: PropTypes.func.isRequired,
 };
 
@@ -200,6 +200,7 @@ export function Product({
       details,
       images,
       name,
+      maxQuantity = 1,
       prices,
       sale,
       sizes,
@@ -210,7 +211,6 @@ export function Product({
   isSubmitDisabled,
   sizeHandlers,
   thumbnailHandlers,
-  quantities,
   quantityChanged,
 }) {
   const isSale = !!sale;
@@ -302,8 +302,8 @@ export function Product({
             <div className={ cx('copy') }>Quantity </div>
             <Selector
               className={ cx('quantity-selector', 'selector') }
+              maxQuantity={ maxQuantity }
               onChange={ quantityChanged }
-              options={ quantities }
               value={ currentQuantity }
             />
             <div className={ cx('submit-content') }>

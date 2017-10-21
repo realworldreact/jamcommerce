@@ -1,37 +1,20 @@
+import _ from 'lodash';
+import PropTypes from 'prop-types';
 import React from 'react';
 import Select from 'react-select';
 
 import './selector.styl';
 
-const propTypes = {};
+const propTypes = {
+  maxQuantity: PropTypes.number,
+};
 
-const options = [
-  {
-    value: 1,
-    label: '1',
-  },
-  {
-    value: 2,
-    label: '2',
-  },
-  {
-    value: 3,
-    label: '3',
-  },
-  {
-    value: 4,
-    label: '4',
-  },
-  {
-    value: 5,
-    label: '5',
-  },
-];
+const createOptions = _.memoize(n => _.range(n + 1).map(n => ({ value: n, label: String(n) })));
 
-export default function Selector(props) {
+export default function Selector({ maxQuantity, ...props }) {
   return (
     <Select
-      options={ options }
+      options={ createOptions(maxQuantity || 4) }
       { ...props }
     />
   );
