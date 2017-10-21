@@ -27,9 +27,7 @@ import { itemsMapSelector } from '../Cart/redux';
 const cx = classnames.bind(styles);
 const createHandlerMemo = _.memoize((value, handler) => () => handler(value));
 const getCommerceMeta = ({ data: { jamProduct: { images } } }) => ({
-  meta: {
-    image: images.front,
-  },
+  image: images.front,
 });
 const getGoCommerceData = (
   _,
@@ -102,8 +100,10 @@ const mergeProps = (stateProps, { dispatch, ...dispatchProps }, ownProps) => {
       dispatch(
         clickOnAddToCart({
           ...gocommerceData,
-          ...commerceMeta,
-          size: stateProps.currentSize,
+          meta: {
+            ...commerceMeta,
+            size: stateProps.currentSize,
+          },
           quantity: stateProps.currentQuantity,
         }),
       ),
