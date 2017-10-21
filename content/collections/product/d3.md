@@ -9,6 +9,7 @@ prices:
   - amount: "199"
     currency: "USD"
 sale: '99'
+maxQuantity: 4
 sizes:
   - 5
   - 6
