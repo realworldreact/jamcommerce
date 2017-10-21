@@ -9,7 +9,9 @@ const propTypes = {
   maxQuantity: PropTypes.number,
 };
 
-const createOptions = _.memoize(n => _.range(n + 1).map(n => ({ value: n, label: String(n) })));
+const createOptions = _.memoize(n =>
+  _.range(n + 1).map(n => ({ value: n, label: String(n) })),
+);
 
 export default function Selector({ maxQuantity, ...props }) {
   return (

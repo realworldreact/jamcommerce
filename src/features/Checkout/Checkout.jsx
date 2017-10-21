@@ -10,9 +10,7 @@ export default function Checkout() {
   return (
     <div className={ cx('checkout') }>
       <header className={ cx('header') }>
-        <h4>
-           Check Out
-        </h4>
+        <h4>Check Out</h4>
       </header>
       <div className={ cx('container') }>
         <nav className={ cx('nav') }>
@@ -22,9 +20,7 @@ export default function Checkout() {
             <li>Confirm</li>
           </ul>
         </nav>
-        <div className={ cx('content') }>
-          Hello
-        </div>
+        <div className={ cx('content') }>Hello</div>
       </div>
     </div>
   );

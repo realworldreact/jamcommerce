@@ -23,8 +23,10 @@ export const cartUpdateStarted = createAction(types.cartUpdate.start);
 export const cartUpdateCompleted = createAction(types.cartUpdate.complete);
 export const cartUpdateFailed = createAction(types.cartUpdate.error);
 export const commerceInitiated = createAction(types.commerceInitiated);
-export const clickOnRemove = createAction(types.clickOnRemove, null,
-  createCartMeta(cartTypes.removeFromCart)
+export const clickOnRemove = createAction(
+  types.clickOnRemove,
+  null,
+  createCartMeta(cartTypes.removeFromCart),
 );
 
 const defaultState = {
@@ -39,7 +41,8 @@ const defaultState = {
 
 const getNS = state => state[ns];
 export const itemsMapSelector = state => getNS(state).items || {};
-export const itemsSelector = state => _.map(itemsMapSelector(state), item => item);
+export const itemsSelector = state =>
+  _.map(itemsMapSelector(state), item => item);
 export const totalSelector = state => getNS(state).total;
 export const numInCartSelector = state =>
   _.reduce(getNS(state).items, (numOf, item) => numOf + item.quantity, null);

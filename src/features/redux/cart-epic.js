@@ -28,10 +28,9 @@ export function cartInit(actions, store, { commerce }) {
   );
 }
 function filterCommerceActions(_type) {
-  return this::filter(isCartAction)
-  ::map(getCartMeta)
-  ::filter(Boolean)
-  ::filter(({ type }) => type === _type);
+  return this::filter(isCartAction)::map(getCartMeta)::filter(Boolean)::filter(
+    ({ type }) => type === _type,
+  );
 }
 
 function catchCommercerError() {
@@ -44,12 +43,13 @@ export function addToCart(actions, store, { commerce }) {
   return _if(
     () => !commerce,
     EmptyObservable.create(),
-    actions::filterCommerceActions(cartTypes.addToCart)
-      ::mergeMap(({ type, payload: product }) =>
-        fromPromise(commerce.addToCart(product))::map(
-          cartUpdateCompleted,
-        )::catchCommercerError(type)
-      )
+    actions::filterCommerceActions(
+      cartTypes.addToCart,
+    )::mergeMap(({ type, payload: product }) =>
+      fromPromise(commerce.addToCart(product))::map(
+        cartUpdateCompleted,
+      )::catchCommercerError(type),
+    ),
   );
 }
 
@@ -57,13 +57,13 @@ export function removeFromCart(actions, store, { commerce }) {
   return _if(
     () => !commerce,
     EmptyObservable.create(),
-    actions::filterCommerceActions(cartTypes.removeFromCart)
-      ::mergeMap(({ type, payload: sku }) =>
-        defer(() => of(commerce.updateCart(sku, 0)))
-          ::map(() => commerce.getCart())
-          ::map(cartUpdateCompleted)
-          ::catchCommercerError(type)
-      )
+    actions::filterCommerceActions(
+      cartTypes.removeFromCart,
+    )::mergeMap(({ type, payload: sku }) =>
+      defer(() => of(commerce.updateCart(sku, 0)))::map(() =>
+        commerce.getCart(),
+      )::map(cartUpdateCompleted)::catchCommercerError(type),
+    ),
   );
 }
 export default combineEpics(cartInit, addToCart, removeFromCart);
