@@ -16,6 +16,7 @@ import {
   cartUpdateFailed,
   cartUpdateCompleted,
   commerceInitiated,
+  itemsMapSelector,
 } from '../Cart/redux';
 import { cartTypes, isCartAction, getCartMeta } from '../../utils/redux.js';
 
@@ -46,9 +47,14 @@ export function addToCart(actions, store, { commerce }) {
     actions::filterCommerceActions(
       cartTypes.addToCart,
     )::mergeMap(({ type, payload: product }) =>
-      fromPromise(commerce.addToCart(product))::map(
-        cartUpdateCompleted,
-      )::catchCommercerError(type),
+      _if(
+        () => !itemsMapSelector(store.getState())[product.sku],
+        defer(() => fromPromise(commerce.addToCart(product))),
+        defer(() => {
+          commerce.updateCart(product.sku, product.quantity);
+          return of(commerce.getCart());
+        }),
+      )::map(cartUpdateCompleted)::catchCommercerError(type),
     ),
   );
 }
