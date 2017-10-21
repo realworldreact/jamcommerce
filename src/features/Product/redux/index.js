@@ -1,7 +1,10 @@
 import _ from 'lodash';
 import { createAction } from 'redux-actions';
-import { createTypes, handleActions } from 'berkeleys-redux-utils';
-import { createSelector } from 'reselect';
+import {
+  combineActions,
+  createTypes,
+  handleActions,
+} from 'berkeleys-redux-utils';
 
 import { createCartMeta } from '../../../utils/redux';
 import navigationEpic from './navigation-epic.js';
@@ -15,6 +18,8 @@ export const types = createTypes(
     'quantityChanged',
     'sizeChanged',
     'thumbnailClicked',
+    'productMounted',
+    'productChanged',
   ],
   ns,
 );
@@ -27,6 +32,8 @@ export const clickOnAddToCart = createAction(
 export const quantityChanged = createAction(types.quantityChanged);
 export const currentSizeChanged = createAction(types.currentSizeChanged);
 export const thumbnailClicked = createAction(types.thumbnailClicked);
+export const productMounted = createAction(types.productMounted);
+export const productChanged = createAction(types.productChanged);
 
 export const defaultState = {
   currentImage: 'front',
@@ -43,9 +50,13 @@ export const currentImageSelector = state => getNS(state).currentImage;
 
 export default handleActions(
   () => ({
-    [types.quantityChanged]: (state, { payload }) => ({
+    [combineActions(
+      types.quantityChanged,
+      types.productChanged,
+      types.productMounted,
+    )]: (state, { payload }) => ({
       ...state,
-      currentQuantity: payload,
+      currentQuantity: payload || 1,
     }),
     [types.currentSizeChanged]: (state, { payload }) => ({
       ...state,
