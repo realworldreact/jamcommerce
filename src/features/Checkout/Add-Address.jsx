@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 import { Form } from 'react-redux-form';
 
-import styles from './add-address.module.styl';
+import styles from './checkout.module.styl';
 import { AddressForm } from '../Address';
 
 const cx = classnames.bind(styles);
