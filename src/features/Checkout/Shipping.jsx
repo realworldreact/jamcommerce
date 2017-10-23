@@ -9,6 +9,7 @@ import styles from './checkout.module.styl';
 import AddressList from './Address-List.jsx';
 import AddAddress from './Add-Address.jsx';
 import {
+  clickOnAddress,
   clickOnAddAddress,
   clickOnCancelAddAddress,
   submitNewAddress,
@@ -19,6 +20,7 @@ import { addressSelector } from '../Address/redux';
 const cx = classnames.bind(styles);
 const propTypes = {
   addresses: PropTypes.array,
+  clickOnAddress: PropTypes.func.isRequired,
   clickOnAddAddress: PropTypes.func.isRequired,
   clickOnCancelAddAddress: PropTypes.func.isRequired,
   isAddressListEmpty: PropTypes.bool,
@@ -36,6 +38,7 @@ const mapStateToProps = createSelector(
 );
 
 const mapDispatchToProps = {
+  clickOnAddress,
   clickOnAddAddress,
   clickOnCancelAddAddress,
   submitNewAddress,
@@ -43,6 +46,7 @@ const mapDispatchToProps = {
 
 export function Shipping({
   addresses,
+  clickOnAddress,
   clickOnAddAddress,
   clickOnCancelAddAddress,
   isAddressListEmpty,
@@ -51,14 +55,17 @@ export function Shipping({
 }) {
   return (
     <div className={ cx('shipping') }>
-      <AddressList addresses={ addresses } />
+      <AddressList
+        addresses={ addresses }
+        clickOnAddress={ clickOnAddress }
+      />
       <div className={ cx('shipping-content') }>
         { !showAddAddress &&
-        <button onClick={ clickOnAddAddress }>Add Address</button> }
+          <button onClick={ clickOnAddAddress }>Add Address</button> }
         { showAddAddress && <AddAddress handleSubmit={ submitNewAddress } /> }
         { showAddAddress &&
-            !isAddressListEmpty &&
-            <button onClick={ clickOnCancelAddAddress }>Cancel</button> }
+          !isAddressListEmpty &&
+          <button onClick={ clickOnCancelAddAddress }>Cancel</button> }
       </div>
     </div>
   );

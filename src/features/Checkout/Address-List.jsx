@@ -8,9 +8,15 @@ import { AddressDisplay } from '../Address';
 const cx = classnames.bind(styles);
 const propTypes = {
   addresses: PropTypes.array,
+  clickOnAddress: PropTypes.func,
+  selectedAddress: PropTypes.string,
 };
 
-export default function AddressList({ addresses = [] }) {
+export default function AddressList({
+  addresses = [],
+  clickOnAddress,
+  selectedAddress,
+}) {
   if (addresses.length === 0) {
     return null;
   }
@@ -23,10 +29,14 @@ export default function AddressList({ addresses = [] }) {
       <div className={ cx('address-container') }>
         { addresses.map(address =>
           (
-            <AddressDisplay
+            <button
+              className={ cx('address-box') }
               key={ address.id }
-              { ...address }
-            />
+              onClick={ () => clickOnAddress(address.id) }
+              >
+              { address.id === selectedAddress && 'x' }
+              <AddressDisplay { ...address } />
+            </button>
           ),
         ) }
       </div>

@@ -25,22 +25,40 @@
   .underline
     border-bottom 1px solid black
 
+.footer
+  $center(271px)
+  $padding-lg(,0,,0)
+
+.next-button
+  background-color black
+  border none
+  color white
+  line-height 2.5
+  width 100%
+  &[disabled]
+    background-color gray
+    cursor not-allowed
+
 .shipping
   header
     text-align center
+
+.shipping-content
+  $center(271px)
   button
     background-color white
     border 1px solid black
     line-height 3
     width 100%
 
-.shipping-content
-  $center(271px)
-
 .address-list
   $padding-lg()
   header
     border-bottom 1px solid black
+  button
+    background-color white
+    border none
+    text-align left
 
 .add-address
   padding-bottom $padding-lg-horizontal
