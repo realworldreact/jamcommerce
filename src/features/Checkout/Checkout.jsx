@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames/bind';
 
 import styles from './checkout.module.styl';
+import Shipping from './Shipping.jsx';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
@@ -20,7 +21,9 @@ export default function Checkout() {
             <li>Confirm</li>
           </ul>
         </nav>
-        <div className={ cx('content') }>Hello</div>
+        <div className={ cx('content') }>
+          <Shipping />
+        </div>
       </div>
     </div>
   );
