@@ -27,7 +27,7 @@ export function addressReducer(state = {}, action) {
     const address = { ...action.payload };
     const n = Object.keys(state).length + 1;
     if (!address.id) {
-      address.id = n;
+      address.id = String(n);
     }
     return {
       [address.id]: {
