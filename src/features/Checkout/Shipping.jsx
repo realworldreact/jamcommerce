@@ -52,12 +52,14 @@ export function Shipping({
   return (
     <div className={ cx('shipping') }>
       <AddressList addresses={ addresses } />
-      { !showAddAddress &&
+      <div className={ cx('shipping-content') }>
+        { !showAddAddress &&
         <button onClick={ clickOnAddAddress }>Add Address</button> }
-      { showAddAddress && <AddAddress handleSubmit={ submitNewAddress } /> }
-      { showAddAddress &&
-        !isAddressListEmpty &&
-        <button onClick={ clickOnCancelAddAddress }>Cancel</button> }
+        { showAddAddress && <AddAddress handleSubmit={ submitNewAddress } /> }
+        { showAddAddress &&
+            !isAddressListEmpty &&
+            <button onClick={ clickOnCancelAddAddress }>Cancel</button> }
+      </div>
     </div>
   );
 }
