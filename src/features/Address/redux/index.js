@@ -1,4 +1,19 @@
+import {
+  composeReducers,
+  createAction,
+  createTypes,
+  handleActions,
+} from 'berkeleys-redux-utils';
+import persistAddressEpic from './persist-address-epic.js';
+
+export const epics = [ persistAddressEpic ];
+
 export const ns = 'Address';
+export const types = createTypes([ 'persistedAddressParsed' ], ns);
+
+export const persistedAddressParsed = createAction(
+  types.persistedAddressParsed,
+);
 
 export const makeAddressAction = () => ({ address: { isAddress: true } });
 export const isAddressAction = ({
@@ -7,7 +22,7 @@ export const isAddressAction = ({
 
 export const addressSelector = state => state[ns];
 
-export default function addressReducer(state = {}, action) {
+export function addressReducer(state = {}, action) {
   if (isAddressAction(action)) {
     const address = { ...action.payload };
     const n = Object.keys(state).length + 1;
@@ -24,4 +39,16 @@ export default function addressReducer(state = {}, action) {
   return state;
 }
 
-addressReducer.toString = () => ns;
+export default composeReducers(
+  ns,
+  addressReducer,
+  handleActions(
+    () => ({
+      [types.persistedAddressParsed]: (state, { payload }) => ({
+        ...state,
+        ...payload,
+      }),
+    }),
+    {},
+  ),
+);
