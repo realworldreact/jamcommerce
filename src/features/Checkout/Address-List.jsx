@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
 import styles from './checkout.module.styl';
+import ViewHeader from './Header.jsx';
 import { AddressDisplay } from '../Address';
 
 const cx = classnames.bind(styles);
@@ -23,9 +24,7 @@ export default function AddressList({
 
   return (
     <div className={ cx('address-list') }>
-      <header>
-        <h4>Your Addresses</h4>
-      </header>
+      <ViewHeader>Your Address</ViewHeader>
       <div className={ cx('address-container') }>
         { addresses.map(address =>
           (
