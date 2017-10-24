@@ -10,12 +10,14 @@ import storeFactory from './src/storeFactory.js';
 exports.replaceRouterComponent = ({ history }) => {
   const win = typeof window !== 'undefined' ? window : {};
   // const doc = win.document ? win.document : {};
-  const devTools = win.__REDUX_DEVTOOLS_EXTENSION__ ?
+  const devTools = process.env.NODE_ENV === 'development' &&
+    win.__ENABLE_DEVTOOLS &&
+    win.__REDUX_DEVTOOLS_EXTENSION__ ?
     win.__REDUX_DEVTOOLS_EXTENSION__() :
     f => f;
 
   const commerce = new GoCommerce({
-    APIUrl: 'http://jamcommerce.netlify.com/api',
+    APIUrl: process.env.GOCOMMERCE_URI,
   });
   const store = storeFactory({
     epicDependencies: {
