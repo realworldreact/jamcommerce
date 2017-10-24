@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import GoCommerce from 'gocommerce-js';
+import devTools from 'remote-redux-devtools';
 
 import { routeUpdated } from './src/features/redux';
 import storeFactory from './src/storeFactory.js';
@@ -10,11 +11,6 @@ import storeFactory from './src/storeFactory.js';
 exports.replaceRouterComponent = ({ history }) => {
   const win = typeof window !== 'undefined' ? window : {};
   // const doc = win.document ? win.document : {};
-  const devTools = process.env.NODE_ENV === 'development' &&
-    win.__ENABLE_DEVTOOLS &&
-    win.__REDUX_DEVTOOLS_EXTENSION__ ?
-    win.__REDUX_DEVTOOLS_EXTENSION__() :
-    f => f;
 
   const commerce = new GoCommerce({
     APIUrl: process.env.GOCOMMERCE_URI,
@@ -24,7 +20,7 @@ exports.replaceRouterComponent = ({ history }) => {
       commerce,
       localStorage: win.localStorage,
     },
-    enhancer: devTools,
+    enhancer: devTools({ realtime: !!localStorage.__ENABLE_DEVTOOLS }),
   });
 
   store.dispatch(routeUpdated(history.location));
