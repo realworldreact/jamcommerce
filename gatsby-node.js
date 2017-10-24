@@ -1,5 +1,4 @@
 const _ = require('lodash');
-const wepback = require('webpack');
 const crypto = require('crypto');
 const path = require('path');
 const yaml = require('js-yaml');
@@ -151,17 +150,3 @@ exports.onCreateNode = ({
   }
   return undefined;
 };
-
-// exports.modifyWebpackConfig = ({ config, stage }) => {
-//   if (stage === 'develop') {
-//     config.plugin(
-//       'webpack-normalmodulereplacement',
-//       wepback.NormalModuleReplacementPlugin,
-//       [
-//         /gocommerce-js\/lib\/index.js/,
-//         './dev.js',
-//       ],
-//     );
-//   }
-//   return config;
-// };
