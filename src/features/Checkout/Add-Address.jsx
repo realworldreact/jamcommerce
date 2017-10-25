@@ -21,7 +21,7 @@ export default function AddAddress({ handleSubmit }) {
         model='forms.newAddress'
         onSubmit={ handleSubmit }
         >
-        <AddressForm model='newAddress' />
+        <AddressForm />
         <button
           className={ cx('submit') }
           type='submit'
