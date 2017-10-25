@@ -1,16 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
 import styles from './address-display.module.styl';
 import Input from '../Input';
 
 const cx = classnames.bind(styles);
-const propTypes = {
-  model: PropTypes.string.isRequired,
-};
+const propTypes = {};
 
-export default function AddressForm({ model }) {
+export default function AddressForm() {
   return (
     <div className={ cx('address-form') }>
       <Input
@@ -19,7 +17,7 @@ export default function AddressForm({ model }) {
           length: 'Name should be at least 6 characters',
           required: 'Name is required',
         } }
-        model={ `${model}.name` }
+        model='.name'
         type='text'
         validators={ {
           length: (val = '') => val.length > 6,
@@ -31,7 +29,7 @@ export default function AddressForm({ model }) {
         messages={ {
           required: 'Address is required',
         } }
-        model={ `${model}.address` }
+        model='.address'
         type='text'
         validators={ {
           required: (val = '') => val.length,
@@ -39,22 +37,22 @@ export default function AddressForm({ model }) {
       />
       <Input
         label='Apt'
-        model={ `${model}.address2` }
+        model='.address2'
         type='text'
       />
       <Input
         label='City'
-        model={ `${model}.city` }
+        model='.city'
         type='text'
       />
       <Input
         label='State'
-        model={ `${model}.state` }
+        model='.state'
         type='text'
       />
       <Input
         label='Zip Code'
-        model={ `${model}.zip` }
+        model='.zip'
         type='text'
       />
     </div>
