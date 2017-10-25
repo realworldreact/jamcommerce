@@ -11,7 +11,13 @@ import navReducer from './features/Nav/redux';
 import productReducer from './features/Product/redux';
 import { formModels as authFormModels } from './features/Auth/redux';
 
-const formsReducer = combineForms({ ...authFormModels, ...checkoutModels });
+const formsReducer = combineForms(
+  {
+    ...authFormModels,
+    ...checkoutModels,
+  },
+  'forms'
+);
 formsReducer.toString = () => 'forms';
 
 export default function createReducer() {
