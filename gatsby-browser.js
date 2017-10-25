@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { StripeProvider } from 'react-stripe-elements';
 import GoCommerce from 'gocommerce-js';
 import devTools from 'remote-redux-devtools';
 
@@ -29,9 +30,11 @@ exports.replaceRouterComponent = ({ history }) => {
   const ConnectedRouterWrapper = ({ children }) =>
     (
       <Provider store={ store }>
-        <Router history={ history }>
-          { children }
-        </Router>
+        <StripeProvider apiKey={ process.env.STRIPE_API_KEY }>
+          <Router history={ history }>
+            { children }
+          </Router>
+        </StripeProvider>
       </Provider>
     );
 

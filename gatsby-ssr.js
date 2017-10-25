@@ -1,10 +1,18 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
 
 import storeFactory from './src/storeFactory.js';
 
-exports.replaceRenderer = ({ bodyComponent, replaceBodyHTMLString }) => {
+exports.replaceRenderer = ({
+  setHeadComponents,
+  bodyComponent,
+  replaceBodyHTMLString,
+}) => {
+  setHeadComponents([ <script
+    key={ 'stripe-elements' }
+    src='https://js.stripe.com/v3/'
+  /> ]);
   const store = storeFactory();
 
   const ConnectedBody = () =>

@@ -3,6 +3,7 @@ import { combineForms } from 'react-redux-form';
 
 import addressReducer from './features/Address/redux';
 import appReducer from './features/redux';
+import cardReducer from './features/Card/redux';
 import cartReducer from './features/Cart/redux';
 import checkoutReducer, {
   formModels as checkoutModels,
@@ -16,7 +17,7 @@ const formsReducer = combineForms(
     ...authFormModels,
     ...checkoutModels,
   },
-  'forms'
+  'forms',
 );
 formsReducer.toString = () => 'forms';
 
@@ -24,6 +25,7 @@ export default function createReducer() {
   return combineReducers(
     addressReducer,
     appReducer,
+    cardReducer,
     cartReducer,
     checkoutReducer,
     formsReducer,

@@ -12,7 +12,9 @@ const propTypes = {
 export default function ViewHeader({ children }) {
   return (
     <header className={ cx('view-header') }>
-      <h4>{ children }</h4>
+      <h4>
+        { children }
+      </h4>
     </header>
   );
 }
