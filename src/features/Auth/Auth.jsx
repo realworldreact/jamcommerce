@@ -54,7 +54,7 @@ export function Auth({ location, onSigninSubmit, onSignupSubmit }) {
                   length: 'Firstname must be at least 2 characters',
                   required: 'Firstname is required',
                 } }
-                model='user.firstname'
+                model='.firstname'
                 type='text'
                 validators={ {
                   length: (val = '') => val.length > 2,
@@ -67,7 +67,7 @@ export function Auth({ location, onSigninSubmit, onSignupSubmit }) {
                   length: 'Lastname must be at least 2 characters',
                   required: 'Lastname is required',
                 } }
-                model='user.lastname'
+                model='.lastname'
                 type='text'
                 validators={ {
                   length: (val = '') => val.length > 2,
@@ -80,7 +80,7 @@ export function Auth({ location, onSigninSubmit, onSignupSubmit }) {
             messages={ {
               isEmail: 'Email is not currectly formatted',
             } }
-            model='user.email'
+            model='.email'
             type='email'
             validators={ {
               isEmail: (val = '') => isEmail(val),
@@ -91,7 +91,7 @@ export function Auth({ location, onSigninSubmit, onSignupSubmit }) {
             messages={ {
               length: 'Password must be at least 6 characters',
             } }
-            model='user.password'
+            model='.password'
             type='password'
             validators={ {
               length: (val = '') => val.length > 6,
