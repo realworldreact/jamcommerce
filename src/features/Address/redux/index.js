@@ -8,7 +8,7 @@ import persistAddressEpic from './persist-address-epic.js';
 
 export const epics = [ persistAddressEpic ];
 
-export const ns = 'Address';
+export const ns = 'address';
 export const types = createTypes([ 'persistedAddressParsed' ], ns);
 
 export const persistedAddressParsed = createAction(
