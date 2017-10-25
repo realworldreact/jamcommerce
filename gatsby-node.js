@@ -1,7 +1,9 @@
+require('dotenv').config();
 const _ = require('lodash');
 const crypto = require('crypto');
 const path = require('path');
 const yaml = require('js-yaml');
+const webpack = require('webpack');
 
 const createSlug = _.flow([
   s => s.toLowerCase(),
@@ -149,4 +151,17 @@ exports.onCreateNode = ({
     return createProductNodes(actions.createNode, node);
   }
   return undefined;
+};
+
+exports.modifyWebpackConfig = ({ config }) => {
+  // add env vars here
+  config.merge({
+    plugins: [ new webpack.DefinePlugin({
+      'process.env': {
+        GOCOMMERCE_URI: JSON.stringify(process.env.GOCOMMERCE_URI),
+        STRIPE_API_KEY: JSON.stringify(process.env.STRIPE_API_KEY),
+      },
+    }) ],
+  });
+  return config;
 };
