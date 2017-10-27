@@ -16,21 +16,24 @@ import Input from '../Input';
 
 const cx = classnames.bind(styles);
 const propTypes = {
+  createTokenComplete: PropTypes.func.isRequired,
+  createTokenError: PropTypes.func.isRequired,
+  createTokenStart: PropTypes.func.isRequired,
   stripe: PropTypes.object.isRequired,
 };
 const mapStateToProps = null;
 const mapDispatchToProps = {
-  createTokenStart,
   createTokenComplete,
   createTokenError,
+  createTokenStart,
 };
 
 export class BillingForm extends PureComponent {
   handleSubmit = ({ name }) => {
     const {
-      createTokenStart,
       createTokenComplete,
       createTokenError,
+      createTokenStart,
       stripe,
     } = this.props;
     createTokenStart();
@@ -55,7 +58,7 @@ export class BillingForm extends PureComponent {
         onSubmit={ this.handleSubmit }
         >
         <Input
-          label='Name'
+          label='Name on Card'
           messages={ {
             length: 'Name should be at least 6 characters',
             required: 'Name is required',
