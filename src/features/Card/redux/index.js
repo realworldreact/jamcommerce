@@ -1,16 +1,28 @@
 import {
   createTypes,
+  createAction,
   composeReducers,
   handleActions,
 } from 'berkeleys-redux-utils';
 
-const ns = 'card';
-export const types = createTypes([], ns);
+import persistCartEpic from './pesist-card-epic.js';
 
+export const epics = [ persistCartEpic ];
+
+const ns = 'card';
 export const isCardAction = ({ meta: { card } = {} }) => !!card;
 export const makeCardMeta = () => ({
   card: {},
 });
+
+export const types = createTypes([ 'persistedCardParsed' ], ns);
+
+export const persistedCardParsed = createAction(types.persistedCardParsed);
+
+const defaultState = {};
+
+const getNS = state => state[ns];
+export const cardMapSelector = getNS;
 
 function cardReducer(state = {}, action) {
   if (isCardAction(action)) {
@@ -29,8 +41,13 @@ function cardReducer(state = {}, action) {
 export default composeReducers(
   ns,
   cardReducer,
-  // handleActions(
-  //   () => ({
-  //   })
-  // )
+  handleActions(
+    () => ({
+      [types.persistedCardParsed]: (state, { payload }) => ({
+        ...state,
+        ...payload,
+      }),
+    }),
+    defaultState,
+  )
 );

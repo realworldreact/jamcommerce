@@ -5,16 +5,18 @@ import createReducer from './createReducer.js';
 import { epics as addressEpics } from './features/Address/redux';
 import { epics as appEpics } from './features/redux';
 import { epics as authEpics } from './features/Auth/redux';
+import { epics as cardEpics } from './features/Card/redux';
 import { epics as productEpics } from './features/Product/redux';
 
 export default function storeFactory(
   { epicDependencies = {}, enhancer = f => f } = {},
 ) {
   const rootEpic = combineEpics(
-    ...appEpics,
-    ...productEpics,
-    ...authEpics,
     ...addressEpics,
+    ...appEpics,
+    ...authEpics,
+    ...cardEpics,
+    ...productEpics,
   );
   const epicMiddleware = createEpicMiddleware(rootEpic, {
     dependencies: epicDependencies,
