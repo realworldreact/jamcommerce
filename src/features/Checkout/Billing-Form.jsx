@@ -70,7 +70,10 @@ export class BillingForm extends PureComponent {
             required: (val = '') => val.length,
           } }
         />
-        <label htmlFor='card'>
+        <label
+          className={ cx('card-label') }
+          htmlFor='card'
+          >
           Card Details
           <CardElement id='card' />
         </label>

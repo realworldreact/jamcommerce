@@ -63,16 +63,25 @@ header.view-header
   $padding-lg()
 
 .add-address
+  $center(271px)
   padding-bottom $padding-lg-horizontal
   padding-top $padding-lg-horizontal
-  $center(271px)
 
 .billing-content
-  $padding-lg()
   $center(271px)
+  padding-bottom $padding-lg-horizontal
+  padding-top $padding-lg-horizontal
   text-align center
   button
     background-color white
     border 1px solid black
     line-height 3
     width 100%
+
+.billing-form
+  padding-bottom $padding-lg-horizontal
+  padding-top $padding-lg-horizontal
+  .card-label > div
+    padding-top $padding-lg-horizontal
+  .submit
+    margin-top $padding-lg-horizontal
