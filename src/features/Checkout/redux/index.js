@@ -58,6 +58,7 @@ export const formModels = {
 
 const defaultState = {
   selectedAddress: null,
+  selectedCard: null,
   showAddAddress: false,
   showBilling: false,
   showConfirm: false,
@@ -68,6 +69,7 @@ export const selectedAddressSelector = state => getNS(state).selectedAddress;
 export const showAddAddressSelector = state => getNS(state).showAddAddress;
 export const showBillingSelector = state => getNS(state).showBilling;
 export const showConfirmSelector = state => getNS(state).showConfirm;
+export const selectedCardSelector = state => getNS(state).selectedCard;
 
 export default handleActions(
   () => ({
@@ -91,8 +93,9 @@ export default handleActions(
       showBilling: true,
       showConfirm: false,
     }),
-    [types.createToken.complete]: state => ({
+    [types.createToken.complete]: (state, { payload: { id } }) => ({
       ...state,
+      selectedCard: id,
       showBilling: false,
       showConfirm: true,
     }),

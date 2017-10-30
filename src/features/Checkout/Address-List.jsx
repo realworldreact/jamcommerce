@@ -23,13 +23,13 @@ export default function AddressList({
   }
 
   return (
-    <div className={ cx('address-list') }>
+    <div className={ cx('list') }>
       <ViewHeader>Your Address</ViewHeader>
       <div className={ cx('address-container') }>
         { addresses.map(address =>
           (
             <button
-              className={ cx('address-box') }
+              className={ cx('list-button') }
               key={ address.id }
               onClick={ () => clickOnAddress(address.id) }
               >
