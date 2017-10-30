@@ -15,8 +15,9 @@ export const types = createTypes(
     'clickOnAddAddress',
     'clickOnAddress',
     'clickOnBilling',
-    'clickOnNextConfirm',
     'clickOnCancelAddAddress',
+    'clickOnCard',
+    'clickOnNextConfirm',
     createAsyncTypes('createToken'),
     'submitNewAddress',
   ],
@@ -29,6 +30,7 @@ export const clickOnBilling = createAction(types.clickOnBilling);
 export const clickOnCancelAddAddress = createAction(
   types.clickOnCancelAddAddress,
 );
+export const clickOnCard = createAction(types.clickOnCard);
 export const clickOnNextConfirm = createAction(types.clickOnNextConfirm);
 export const createTokenStart = createAction(types.createToken.start);
 export const createTokenComplete = createAction(
@@ -66,10 +68,10 @@ const defaultState = {
 
 const getNS = state => state[ns];
 export const selectedAddressSelector = state => getNS(state).selectedAddress;
+export const selectedCardSelector = state => getNS(state).selectedCard;
 export const showAddAddressSelector = state => getNS(state).showAddAddress;
 export const showBillingSelector = state => getNS(state).showBilling;
 export const showConfirmSelector = state => getNS(state).showConfirm;
-export const selectedCardSelector = state => getNS(state).selectedCard;
 
 export default handleActions(
   () => ({
@@ -92,6 +94,15 @@ export default handleActions(
       ...state,
       showBilling: true,
       showConfirm: false,
+    }),
+    [types.clickOnCard]: (state, { payload: selectedCard }) => ({
+      ...state,
+      selectedCard,
+    }),
+    [types.clickOnNextConfirm]: state => ({
+      ...state,
+      showBilling: false,
+      showConfirm: true,
     }),
     [types.createToken.complete]: (state, { payload: { id } }) => ({
       ...state,

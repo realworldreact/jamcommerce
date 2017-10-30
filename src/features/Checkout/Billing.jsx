@@ -7,6 +7,7 @@ import { Elements } from 'react-stripe-elements';
 import { createSelector } from 'reselect';
 
 import styles from './checkout.module.styl';
+import { clickOnCard } from './redux';
 import ViewHeader from './Header.jsx';
 import BillingForm from './Billing-Form.jsx';
 import { cardMapSelector } from '../Card/redux';
@@ -14,14 +15,17 @@ import { cardMapSelector } from '../Card/redux';
 const cx = classnames.bind(styles);
 const propTypes = {
   cards: PropTypes.array,
+  clickOnCard: PropTypes.func.isRequired,
 };
+
 const mapStateToProps = createSelector(
   cardMapSelector,
   cardMap => ({ cards: _.map(cardMap, card => card) }),
 );
-const mapDispatchToProps = null;
 
-export function Billing({ cards }) {
+const mapDispatchToProps = { clickOnCard };
+
+export function Billing({ clickOnCard, cards }) {
   return (
     <div className={ cx('billing') }>
       <ViewHeader>Your Credit Card</ViewHeader>
@@ -32,7 +36,7 @@ export function Billing({ cards }) {
               <button
                 className={ cx('list-button') }
                 key={ card.id }
-                onClick={ () => console.log('click on card') }
+                onClick={ () => clickOnCard(card.id) }
                 >
                 <p><bold>{ card.name }</bold></p>
                 <p>Card ending in: { card.last4 }</p>

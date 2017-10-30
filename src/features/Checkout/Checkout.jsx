@@ -15,23 +15,28 @@ import {
   showBillingSelector,
   showConfirmSelector,
   selectedAddressSelector,
+  selectedCardSelector,
 } from './redux';
 
 const cx = classnames.bind(styles);
 const propTypes = {
   clickOnBilling: PropTypes.func.isRequired,
+  clickOnNextConfirm: PropTypes.func.isRequired,
   selectedAddress: PropTypes.string,
+  selectedCard: PropTypes.string,
   showBilling: PropTypes.bool,
   showConfirm: PropTypes.bool,
 };
 const mapStateToProps = createSelector(
   selectedAddressSelector,
+  selectedCardSelector,
   showBillingSelector,
   showConfirmSelector,
-  (selectedAddress, showBilling, showConfirm) => ({
+  (selectedAddress, selectedCard, showBilling, showConfirm) => ({
+    selectedAddress,
+    selectedCard,
     showBilling,
     showConfirm,
-    selectedAddress,
   }),
 );
 
@@ -44,6 +49,7 @@ export function Checkout({
   clickOnBilling,
   clickOnNextConfirm,
   selectedAddress,
+  selectedCard,
   showBilling,
   showConfirm,
 }) {
@@ -54,6 +60,7 @@ export function Checkout({
     btn = (
       <button
         className={ cx('next-button') }
+        disabled={ !selectedCard }
         onClick={ clickOnNextConfirm }
         >
         Next: Confirm
