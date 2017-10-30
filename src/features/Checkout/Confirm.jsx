@@ -15,9 +15,7 @@ export default function Confirm() {
       </header>
       <Table />
       <footer className={ cx('footer') }>
-        <button className={ cx('next-button') }>
-          Confirm Purchase
-        </button>
+        <button className={ cx('next-button') }>Confirm Purchase</button>
       </footer>
     </div>
   );

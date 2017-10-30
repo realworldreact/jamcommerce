@@ -47,74 +47,71 @@ export function Table({ clickOnRemove, items = [], total = {} }) {
       <div className={ cx('table-cell') }>Price</div>
       <div className={ cx('table-cell') }>Quantity</div>
       <div className={ cx('table-cell') }>Total</div>
-      { items.reduce(
-        (a, { title, sku, image = {}, price, size, quantity }) => {
-          a.push(
-            <div
-              className={ cx('table-cell-first', 'details') }
-              key={ sku + sku }
-              >
+      { items.reduce((a, { title, sku, image = {}, price, size, quantity }) => {
+        a.push(
+          <div
+            className={ cx('table-cell-first', 'details') }
+            key={ sku + sku }
+            >
+            <div>
+              <Link to={ `/women/shoes/${sku}` }>
+                <img
+                  alt={ image.alt }
+                  className={ cx('details-img') }
+                  src={ image.src }
+                  srcSet={ image.srcSet }
+                />
+              </Link>
+            </div>
+            <div className={ cx('details-info') }>
+              <Link to={ `/women/shoes/${sku}` }>
+                <div className={ cx('product-name') }>
+                  { title }
+                </div>
+              </Link>
+              <div className={ cx('size-info') }>
+                Size: <span className={ cx('size-selected') }>{ size }</span>
+              </div>
               <div>
-                <Link to={ `/women/shoes/${sku}` }>
-                  <img
-                    alt={ image.alt }
-                    className={ cx('details-img') }
-                    src={ image.src }
-                    srcSet={ image.srcSet }
-                  />
-                </Link>
+                <button
+                  className={ cx('remove') }
+                  onClick={ () => clickOnRemove(sku) }
+                  >
+                  Remove
+                </button>
               </div>
-              <div className={ cx('details-info') }>
-                <Link to={ `/women/shoes/${sku}` }>
-                  <div className={ cx('product-name') }>
-                    { title }
-                  </div>
-                </Link>
-                <div className={ cx('size-info') }>
-                  Size: <span className={ cx('size-selected') }>{ size }</span>
-                </div>
-                <div>
-                  <button
-                    className={ cx('remove') }
-                    onClick={ () => clickOnRemove(sku) }
-                    >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>,
-          );
-          a.push(
-            <div
-              className={ cx('table-cell', 'price') }
-              key={ sku + 'price' }
-              >
-              ${ price.amount }
-            </div>,
-          );
-          a.push(
-            <div
-              className={ cx('table-cell', 'quantity') }
-              key={ sku + 'quantity' }
-              >
-              <Selector
-                className={ cx('quantity-selector', 'selector') }
-                value={ quantity }
-              />
-            </div>,
-          );
-          a.push(
-            <div
-              className={ cx('table-cell', 'total') }
-              key={ sku + 'total' }
-              >
-              ${ _.round(price.amount * quantity, 2) }
-            </div>,
-          );
-          return a;
-        },
-        [],
-      ) }
+            </div>
+          </div>,
+        );
+        a.push(
+          <div
+            className={ cx('table-cell', 'price') }
+            key={ sku + 'price' }
+            >
+            ${ price.amount }
+          </div>,
+        );
+        a.push(
+          <div
+            className={ cx('table-cell', 'quantity') }
+            key={ sku + 'quantity' }
+            >
+            <Selector
+              className={ cx('quantity-selector', 'selector') }
+              value={ quantity }
+            />
+          </div>,
+        );
+        a.push(
+          <div
+            className={ cx('table-cell', 'total') }
+            key={ sku + 'total' }
+            >
+            ${ _.round(price.amount * quantity, 2) }
+          </div>,
+        );
+        return a;
+      }, []) }
       <div className={ cx('table-cell', 'table-total') }>GRAND TOTAL</div>
       <div className={ cx('table-cell', 'table-sum') }>
         ${ total.amount }

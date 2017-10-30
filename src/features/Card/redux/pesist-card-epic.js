@@ -19,9 +19,11 @@ export function persistCartEpic(actions, { getState }, { localStorage }) {
     actions.pipe(
       filter(isCardAction),
       map(() => cardMapSelector(getState())),
-      tap(cards => { localStorage.setItem(key, JSON.stringify(cards)); }),
+      tap(cards => {
+        localStorage.setItem(key, JSON.stringify(cards));
+      }),
       ignoreElements(),
-    )
+    ),
   );
 }
 
