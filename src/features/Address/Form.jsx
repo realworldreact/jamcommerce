@@ -29,7 +29,7 @@ export default function AddressForm() {
         messages={ {
           required: 'Address is required',
         } }
-        model='.address'
+        model='.address1'
         type='text'
         validators={ {
           required: (val = '') => val.length,

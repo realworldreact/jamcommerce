@@ -7,7 +7,7 @@ import styles from './address-display.module.styl';
 const cx = classnames.bind(styles);
 const propTypes = {
   name: PropTypes.string,
-  address: PropTypes.string,
+  address1: PropTypes.string,
   address2: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
@@ -16,7 +16,7 @@ const propTypes = {
 
 export default function AddressDisplay({
   name,
-  address,
+  address1,
   address2,
   city,
   state,
@@ -31,7 +31,7 @@ export default function AddressDisplay({
       </p>
       <p>
         <bold>
-          { address }
+          { address1 }
         </bold>
       </p>
       { address2 &&

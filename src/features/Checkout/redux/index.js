@@ -50,14 +50,14 @@ export const createTokenError = createAction(types.createToken.error);
 
 export const submitNewAddress = createAction(
   types.submitNewAddress,
-  undefined,
+  address => ({ ...address, country: 'USA' }),
   makeAddressAction,
 );
 
 export const formModels = {
   newAddress: {
     name: '',
-    address: '',
+    address1: '',
     address2: '',
     city: '',
     state: '',
