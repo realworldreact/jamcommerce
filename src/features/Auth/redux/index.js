@@ -1,5 +1,8 @@
-import { createTypes } from 'berkeleys-redux-utils';
-import { createAction } from 'redux-actions';
+import {
+  createTypes,
+  createAction,
+  handleActions,
+} from 'berkeleys-redux-utils';
 
 import authEpic from './auth-epic.js';
 
@@ -33,3 +36,24 @@ export const userParseError = createAction(types.userParseError);
 export const userParseSuccess = createAction(types.userParseSuccess);
 export const userLoginFailed = createAction(types.userLoginFailed);
 export const userLoginSuccess = createAction(types.userLoginSuccess);
+
+const defaultState = {
+  user: null,
+};
+
+const getNS = state => state[ns];
+export const userSelector = state => getNS(state).user || {};
+export const isSignedInSelector = state => !!userSelector(state).firstname;
+export const nameSelector = state =>
+  isSignedInSelector(state) ? userSelector(state).firstname : '';
+
+export default handleActions(
+  () => ({
+    [types.userLoginSuccess]: (state, { payload: user }) => ({
+      ...state,
+      user,
+    }),
+  }),
+  defaultState,
+  ns,
+);

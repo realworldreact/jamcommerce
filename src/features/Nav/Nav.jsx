@@ -17,11 +17,12 @@ import {
   isMenuOpenSelector,
   mouseLeaveMenu,
 } from './redux';
-import { numInCartSelector } from '../Cart/redux';
 import styles from './nav.module.styl';
 import cart from './cart.svg';
 import hamburger from './hamburger.svg';
 import Menu from '../Menu';
+import { isSignedInSelector, nameSelector } from '../Auth/redux';
+import { numInCartSelector } from '../Cart/redux';
 
 const preventDefault = e => e && e.preventDefault();
 const createBoundFunc = _.memoize(
@@ -36,11 +37,23 @@ const mapStateToProps = createSelector(
   directorySelector,
   categoriesSelector,
   numInCartSelector,
-  (isMenuOpen, directories = [], currentDirectory, categories, numInCart) => ({
+  isSignedInSelector,
+  nameSelector,
+  (
+    isMenuOpen,
+    directories = [],
+    currentDirectory,
+    categories,
+    numInCart,
+    isSignedIn,
+    name,
+  ) => ({
     categories,
     currentDirectory,
     directories,
     isMenuOpen,
+    isSignedIn,
+    name,
     numInCart,
   }),
 );
@@ -93,7 +106,9 @@ const propTypes = {
   directories: PropTypes.array,
   hoverOnSubNavActions: PropTypes.object,
   isMenuOpen: PropTypes.bool,
+  isSignedIn: PropTypes.bool,
   mouseLeaveMenu: PropTypes.func.isRequired,
+  name: PropTypes.string,
   numInCart: PropTypes.number,
 };
 
@@ -105,9 +120,28 @@ export function Nav({
   directories,
   hoverOnSubNavActions,
   isMenuOpen,
+  isSignedIn,
   mouseLeaveMenu,
+  name,
   numInCart,
 }) {
+  let signBtn;
+  if (isSignedIn) {
+    signBtn = (
+      <Link to='/account'>
+        { name }
+      </Link>
+    );
+  } else {
+    signBtn = (
+      <Link
+        onClick={ clickOnSignIn }
+        to='/signin'
+        >
+        Sign In
+      </Link>
+    );
+  }
   return (
     <div className={ cx('navbar') }>
       <nav className={ cx('top') }>
@@ -122,12 +156,7 @@ export function Nav({
         </Link>
         <ul className={ cx('account') }>
           <li>
-            <Link
-              onClick={ clickOnSignIn }
-              to='/signin'
-              >
-              Sign In
-            </Link>
+            { signBtn }
           </li>
           <li>
             <Link
