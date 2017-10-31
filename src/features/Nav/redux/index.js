@@ -11,12 +11,14 @@ import menuMen from '../menu-men.png';
 import menuWomen from '../menu-women.png';
 import menuEssentialShoes from '../essential-shoes.png';
 import menuSummerAccessories from '../summer-accessories.png';
+import { addRedirectTo } from '../../redux';
 
 const ns = 'nav';
 
 const types = createTypes(
   [
     'clickOnSubNav',
+    'clickOnSignIn',
     'hoverOnSubNav',
     'mouseLeaveMenu',
   ],
@@ -155,6 +157,11 @@ const defaultState = {
 };
 
 export const clickOnSubNav = createAction(types.clickOnSubNav);
+export const clickOnSignIn = createAction(
+  types.clickOnSignIn,
+  _.noop,
+  addRedirectTo,
+);
 export const hoverOnSubNav = createAction(types.hoverOnSubNav);
 export const mouseLeaveMenu = createAction(types.mouseLeaveMenu, _.noop);
 

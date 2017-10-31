@@ -10,6 +10,7 @@ import Link from 'gatsby-link';
 import {
   categoriesSelector,
   clickOnSubNav,
+  clickOnSignIn,
   directoriesSelector,
   directorySelector,
   hoverOnSubNav,
@@ -45,7 +46,10 @@ const mapStateToProps = createSelector(
 );
 
 function mapDispatchToProps(dispatch) {
-  const dispatchers = bindActionCreators({ mouseLeaveMenu }, dispatch);
+  const dispatchers = bindActionCreators(
+    { clickOnSignIn, mouseLeaveMenu },
+    dispatch,
+  );
   dispatchers.dispatch = dispatch;
   return () => dispatchers;
 }
@@ -83,6 +87,7 @@ function mergeProps(stateProps, dispatchProps) {
 
 const propTypes = {
   categories: PropTypes.array,
+  clickOnSignIn: PropTypes.func.isRequired,
   clickOnSubNavActions: PropTypes.object,
   currentDirectory: PropTypes.object,
   directories: PropTypes.array,
@@ -94,6 +99,7 @@ const propTypes = {
 
 export function Nav({
   categories,
+  clickOnSignIn,
   clickOnSubNavActions,
   currentDirectory,
   directories,
@@ -116,7 +122,12 @@ export function Nav({
         </Link>
         <ul className={ cx('account') }>
           <li>
-            <Link to='/signin'>Sign In</Link>
+            <Link
+              onClick={ clickOnSignIn }
+              to='/signin'
+              >
+              Sign In
+            </Link>
           </li>
           <li>
             <Link

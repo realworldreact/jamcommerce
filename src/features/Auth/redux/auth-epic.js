@@ -11,10 +11,11 @@ import {
   userLoginSuccess,
   userLoginFailed,
 } from './';
+import { redirectToSelector } from '../../redux';
 
 // poor mans auth
 // replace with auth service in production
-export function signupEpic(actions, store, { localStorage }) {
+export function signupEpic(actions, { getState }, { localStorage }) {
   if (!localStorage) {
     return EmptyObservable.create();
   }
@@ -23,11 +24,12 @@ export function signupEpic(actions, store, { localStorage }) {
     ({ payload }) => payload,
   )::map(user => {
     localStorage.setItem(userNS, JSON.stringify(user));
-    navigateTo('/account');
+    const redirectTo = redirectToSelector(getState());
+    navigateTo(redirectTo || '/account');
   })::ignoreElements();
 }
 
-export function signinEpic(actions, store, { localStorage }) {
+export function signinEpic(actions, { getState }, { localStorage }) {
   if (!localStorage) {
     return EmptyObservable.create();
   }
@@ -36,7 +38,7 @@ export function signinEpic(actions, store, { localStorage }) {
     ({ payload }) => payload,
   )::map(_user => {
     console.log(`
-      This exmple app uses local Storage for auth. In production an
+      This example app uses local Storage for auth. In production an
       authentication service should be used.
     `);
     let user = localStorage.getItem(userNS);
@@ -47,7 +49,8 @@ export function signinEpic(actions, store, { localStorage }) {
         return userParseError(error);
       }
       if (user.password === _user.password && user.email === _user.email) {
-        navigateTo('/account');
+        const redirectTo = redirectToSelector(getState());
+        navigateTo(redirectTo || '/account');
         return userLoginSuccess(user);
       }
       return userLoginFailed('User email or password is incorrect');
