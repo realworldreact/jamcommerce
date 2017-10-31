@@ -44,8 +44,11 @@ const defaultState = {
 const getNS = state => state[ns];
 export const userSelector = state => getNS(state).user || {};
 export const isSignedInSelector = state => !!userSelector(state).firstname;
+
 export const nameSelector = state =>
   isSignedInSelector(state) ? userSelector(state).firstname : '';
+export const emailSelector = state =>
+  isSignedInSelector(state) ? userSelector(state).email : '';
 
 export default handleActions(
   () => ({

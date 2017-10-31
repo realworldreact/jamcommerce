@@ -6,9 +6,12 @@ import {
   createTypes,
   handleActions,
 } from 'berkeleys-redux-utils';
+
+import checkoutEpic from './checkout-epic.js';
 import { makeAddressAction } from '../../Address/redux';
 import { makeCardMeta } from '../../Card/redux';
 
+export const epics = [ checkoutEpic ];
 export const ns = 'checkout';
 
 export const types = createTypes(
@@ -20,8 +23,12 @@ export const types = createTypes(
     'clickOnCancelAddAddress',
     'clickOnCancelCard',
     'clickOnCard',
+    'clickOnConfirm',
     'clickOnNextConfirm',
+    'checkoutError',
     createAsyncTypes('createToken'),
+    createAsyncTypes('postOrder'),
+    createAsyncTypes('postPayment'),
     'submitNewAddress',
   ],
   ns,
@@ -36,10 +43,12 @@ export const clickOnCancelAddAddress = createAction(
 );
 export const clickOnCancelCard = createAction(types.clickOnCancelCard);
 export const clickOnCard = createAction(types.clickOnCard);
+export const clickOnConfirm = createAction(types.clickOnConfirm, _.noop);
 export const clickOnNextConfirm = createAction(
   types.clickOnNextConfirm,
   _.noop,
 );
+export const checkoutError = createAction(types.checkoutError);
 export const createTokenStart = createAction(types.createToken.start);
 export const createTokenComplete = createAction(
   types.createToken.complete,
@@ -47,6 +56,9 @@ export const createTokenComplete = createAction(
   makeCardMeta,
 );
 export const createTokenError = createAction(types.createToken.error);
+
+export const postOrderComplete = createAction(types.postOrder.complete);
+export const postPaymentComplete = createAction(types.postPayment.complete);
 
 export const submitNewAddress = createAction(
   types.submitNewAddress,
@@ -73,6 +85,7 @@ const defaultState = {
   showAddCard: false,
   showBilling: false,
   showConfirm: false,
+  showSuccess: false,
 };
 
 const getNS = state => state[ns];
@@ -82,6 +95,7 @@ export const showAddAddressSelector = state => getNS(state).showAddAddress;
 export const showAddCardSelector = state => getNS(state).showAddCard;
 export const showBillingSelector = state => getNS(state).showBilling;
 export const showConfirmSelector = state => getNS(state).showConfirm;
+export const showSuccessSelector = state => getNS(state).showSuccess;
 
 export default handleActions(
   () => ({
@@ -126,6 +140,10 @@ export default handleActions(
       ...state,
       selectedCard: id,
       showAddCard: false,
+    }),
+    [types.postPayment.complete]: (state, { payload: transaction }) => ({
+      ...state,
+      transaction,
     }),
   }),
   defaultState,
