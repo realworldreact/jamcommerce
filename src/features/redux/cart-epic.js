@@ -45,7 +45,6 @@ export function cartInit(actions, store, { commerce }) {
     actions.pipe(
       ofType(types.appMounted),
       map(() => commerceInitiated(commerce.getCart())),
-      navigateToCart(),
     ),
   );
 }
