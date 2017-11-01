@@ -141,9 +141,15 @@ export default handleActions(
       selectedCard: id,
       showAddCard: false,
     }),
+    [types.postOrder.complete]: (state, { payload: order }) => ({
+      ...state,
+      order,
+    }),
     [types.postPayment.complete]: (state, { payload: transaction }) => ({
       ...state,
       transaction,
+      showConfirm: false,
+      showSuccess: true,
     }),
   }),
   defaultState,

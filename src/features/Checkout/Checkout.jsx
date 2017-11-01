@@ -8,12 +8,14 @@ import styles from './checkout.module.styl';
 import Shipping from './Shipping.jsx';
 import Billing from './Billing.jsx';
 import Confirm from './Confirm.jsx';
+import Success from './Success.jsx';
 
 import {
   clickOnBilling,
   clickOnNextConfirm,
   showBillingSelector,
   showConfirmSelector,
+  showSuccessSelector,
   selectedAddressSelector,
   selectedCardSelector,
 } from './redux';
@@ -26,17 +28,20 @@ const propTypes = {
   selectedCard: PropTypes.string,
   showBilling: PropTypes.bool,
   showConfirm: PropTypes.bool,
+  showSuccess: PropTypes.bool,
 };
 const mapStateToProps = createSelector(
   selectedAddressSelector,
   selectedCardSelector,
   showBillingSelector,
   showConfirmSelector,
-  (selectedAddress, selectedCard, showBilling, showConfirm) => ({
+  showSuccessSelector,
+  (selectedAddress, selectedCard, showBilling, showConfirm, showSuccess) => ({
     selectedAddress,
     selectedCard,
     showBilling,
     showConfirm,
+    showSuccess,
   }),
 );
 
@@ -52,7 +57,11 @@ export function Checkout({
   selectedCard,
   showBilling,
   showConfirm,
+  showSuccess,
 }) {
+  if (showSuccess) {
+    return <Success />;
+  }
   let View = Shipping;
   let btn = null;
   if (showBilling) {
