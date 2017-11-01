@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import classnames from 'classnames/bind';
 import { Frame, Track, View, ViewPager } from 'react-view-pager';
@@ -10,6 +11,7 @@ import banner3 from './banner-3.png';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
+const bannerTimeout = 3000;
 const banners = [
   banner1,
   banner2,
@@ -22,9 +24,25 @@ export default class Carousel extends PureComponent {
     this.state = {
       currentView: banners[0],
     };
-    banners.forEach(src => {
-      this['@@' + src] = () => this.setState({ currentView: src });
+    banners.forEach((src, index) => {
+      this['@@' + src] = () => this.setState({ currentView: index });
     });
+  }
+  componentDidMount() {
+    this._key = setInterval(() => {
+      let { currentView } = this.state;
+      if (typeof currentView === 'string') {
+        currentView = _.findIndex(banners, src => src === currentView);
+      }
+      this.setState({
+        currentView: (currentView + 1) % banners.length,
+      });
+    }, bannerTimeout);
+  }
+  componentWillUnmount() {
+    if (this._key) {
+      clearInterval(this._key);
+    }
   }
 
   handleViewChange = indicies => this.setState({ currentView: indicies[0] })
