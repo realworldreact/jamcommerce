@@ -20,6 +20,7 @@ import {
   showBillingSelector,
   showConfirmSelector,
   showSuccessSelector,
+  willUnmount,
 } from './redux';
 import { isSignedInSelector } from '../Auth/redux';
 
@@ -34,6 +35,7 @@ const propTypes = {
   showBilling: PropTypes.bool,
   showConfirm: PropTypes.bool,
   showSuccess: PropTypes.bool,
+  willUnmount: PropTypes.func.isRequired,
 };
 const mapStateToProps = createSelector(
   cardSelector,
@@ -63,6 +65,7 @@ const mapDispatchToProps = {
   clickOnBilling,
   clickOnNextConfirm,
   didMountWithoutAuth,
+  willUnmount,
 };
 
 export class Checkout extends Component {
@@ -72,6 +75,9 @@ export class Checkout extends Component {
       didMountWithoutAuth();
       navigateTo('/signin');
     }
+  }
+  componentWillUnmount() {
+    this.props.willUnmount();
   }
 
   render() {

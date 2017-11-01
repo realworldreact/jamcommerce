@@ -29,6 +29,7 @@ export const types = createTypes(
     createAsyncTypes('postPayment'),
     'didMountWithoutAuth',
     'submitNewAddress',
+    'willUnmount',
   ],
   ns,
 );
@@ -66,6 +67,7 @@ export const submitNewAddress = createAction(
   address => ({ ...address, country: 'USA' }),
   makeAddressAction,
 );
+export const willUnmount = createAction(types.willUnmount);
 
 export const formModels = {
   newAddress: {
@@ -87,7 +89,7 @@ const defaultState = {
   showSuccess: false,
   card: {},
   order: {},
-  transation: {},
+  transaction: {},
 };
 
 const getNS = state => state[ns];
@@ -142,6 +144,12 @@ export default handleActions(
       transaction,
       showConfirm: false,
       showSuccess: true,
+    }),
+    [types.willUnmount]: state => ({
+      ...state,
+      showBilling: false,
+      showConfirm: false,
+      showSuccess: false,
     }),
   }),
   defaultState,
