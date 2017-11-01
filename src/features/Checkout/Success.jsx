@@ -38,13 +38,13 @@ export function Success({ address1, address2, brand, city, last4 }) {
         <h4>Success</h4>
       </header>
       <div className={ cx('container') }>
-        <header>
+        <header className={ cx('success-header') }>
           <h4>Your order of React and 1 other item has been placed.</h4>
         </header>
         <hr />
       </div>
       <div>
-        <div className={ cx('content') }>
+        <div className={ cx('success-content') }>
           <p>
             We’ll be shipping your goods to { address1 }, { address2 } in { city }.
             You paid with your { brand } ending in { last4 }.
