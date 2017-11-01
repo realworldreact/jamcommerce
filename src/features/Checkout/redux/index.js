@@ -9,6 +9,7 @@ import {
 
 import checkoutEpic from './checkout-epic.js';
 import { makeAddressAction } from '../../Address/redux';
+import { addRedirectTo } from '../../redux';
 
 export const epics = [ checkoutEpic ];
 export const ns = 'checkout';
@@ -25,6 +26,7 @@ export const types = createTypes(
     createAsyncTypes('createToken'),
     createAsyncTypes('postOrder'),
     createAsyncTypes('postPayment'),
+    'didMountWithoutAuth',
     'submitNewAddress',
   ],
   ns,
@@ -49,6 +51,11 @@ export const createTokenError = createAction(types.createToken.error);
 export const postOrderComplete = createAction(types.postOrder.complete);
 export const postPaymentComplete = createAction(types.postPayment.complete);
 
+export const didMountWithoutAuth = createAction(
+  types.didMountWithoutAuth,
+  undefined,
+  addRedirectTo,
+);
 export const submitNewAddress = createAction(
   types.submitNewAddress,
   address => ({ ...address, country: 'USA' }),
