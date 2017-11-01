@@ -4,6 +4,7 @@ export const isCartAction = ({ meta: { cart: { isCart } = {} } = {} }) =>
 export const cartTypes = {
   addToCart: 'addToCart',
   removeFromCart: 'removeFromCart',
+  clearCart: 'clearCart',
 };
 
 export const createCartMeta = (type = cartTypes.addToCart) => payload => ({

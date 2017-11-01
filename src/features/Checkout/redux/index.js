@@ -10,6 +10,7 @@ import {
 import checkoutEpic from './checkout-epic.js';
 import { makeAddressAction } from '../../Address/redux';
 import { addRedirectTo } from '../../redux';
+import { createCartMeta, cartTypes } from '../../../utils/redux.js';
 
 export const epics = [ checkoutEpic ];
 export const ns = 'checkout';
@@ -49,7 +50,11 @@ export const createTokenComplete = createAction(types.createToken.complete);
 export const createTokenError = createAction(types.createToken.error);
 
 export const postOrderComplete = createAction(types.postOrder.complete);
-export const postPaymentComplete = createAction(types.postPayment.complete);
+export const postPaymentComplete = createAction(
+  types.postPayment.complete,
+  undefined,
+  createCartMeta(cartTypes.clearCart),
+);
 
 export const didMountWithoutAuth = createAction(
   types.didMountWithoutAuth,
