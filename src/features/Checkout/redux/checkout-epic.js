@@ -4,16 +4,15 @@ import { empty } from 'rxjs/observable/empty';
 import { switchMap, map, catchError, startWith } from 'rxjs/operators';
 
 import {
+  cardSelector,
   checkoutError,
   postOrderComplete,
   postPaymentComplete,
   selectedAddressSelector,
-  selectedCardSelector,
   types,
 } from './';
 import { emailSelector } from '../../Auth/redux';
 import { addressSelector } from '../../Address/redux';
-import { cardMapSelector } from '../../Card/redux';
 
 export default function checkoutEpic(actions, { getState }, { commerce }) {
   return _if(
@@ -24,8 +23,7 @@ export default function checkoutEpic(actions, { getState }, { commerce }) {
       switchMap(state => {
         const email = emailSelector(state);
         const address = addressSelector(state)[selectedAddressSelector(state)];
-        const { token } =
-          cardMapSelector(state)[selectedCardSelector(state)] || {};
+        const { token } = cardSelector(state);
         return defer(() =>
           commerce.order({
             email,

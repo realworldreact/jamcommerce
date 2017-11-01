@@ -5,9 +5,8 @@ import classnames from 'classnames/bind';
 import { createSelector } from 'reselect';
 
 import styles from './checkout.module.styl';
-import { selectedCardSelector, selectedAddressSelector } from './redux';
+import { cardSelector, selectedAddressSelector } from './redux';
 import { addressSelector } from '../Address/redux';
-import { cardMapSelector } from '../Card/redux';
 
 const cx = classnames.bind(styles);
 const propTypes = {
@@ -21,11 +20,9 @@ const propTypes = {
 const mapStateToProps = createSelector(
   addressSelector,
   selectedAddressSelector,
-  cardMapSelector,
-  selectedCardSelector,
-  (addressMap, addressId, cardMap, cardId) => {
+  cardSelector,
+  (addressMap, addressId, card) => {
     const address = addressMap[addressId] || {};
-    const card = cardMap[cardId] || {};
     return {
       ...address,
       ...card,

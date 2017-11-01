@@ -6,7 +6,6 @@ import appReducer from './features/redux';
 import authReducer, {
   formModels as authFormModels,
 } from './features/Auth/redux';
-import cardReducer from './features/Card/redux';
 import cartReducer from './features/Cart/redux';
 import checkoutReducer, {
   formModels as checkoutModels,
@@ -28,7 +27,6 @@ export default function createReducer() {
     addressReducer,
     appReducer,
     authReducer,
-    cardReducer,
     cartReducer,
     checkoutReducer,
     formsReducer,
