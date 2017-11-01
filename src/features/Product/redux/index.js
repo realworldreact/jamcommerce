@@ -7,9 +7,7 @@ import {
 } from 'berkeleys-redux-utils';
 
 import { createCartMeta } from '../../../utils/redux';
-import navigationEpic from './navigation-epic.js';
 
-export const epics = [ navigationEpic ];
 export const ns = 'product';
 export const types = createTypes(
   [

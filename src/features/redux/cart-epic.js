@@ -1,3 +1,4 @@
+import { navigateTo } from 'gatsby-link';
 import { ofType, combineEpics } from 'redux-observable';
 import { empty } from 'rxjs/observable/empty';
 import { _if } from 'rxjs/observable/if';
@@ -33,6 +34,10 @@ function catchCommercerError() {
     );
 }
 
+function navigateToCart() {
+  return source => source.pipe(tap(() => navigateTo('/cart')));
+}
+
 export function cartInit(actions, store, { commerce }) {
   return _if(
     () => !commerce,
@@ -40,6 +45,7 @@ export function cartInit(actions, store, { commerce }) {
     actions.pipe(
       ofType(types.appMounted),
       map(() => commerceInitiated(commerce.getCart())),
+      navigateToCart(),
     ),
   );
 }
@@ -58,7 +64,11 @@ export function addToCart(actions, { getState }, { commerce }) {
             commerce.updateCart(product.sku, product.quantity);
             return of(commerce.getCart());
           }),
-        ).pipe(map(cartUpdateCompleted), catchCommercerError(type)),
+        ).pipe(
+          map(cartUpdateCompleted),
+          navigateToCart(),
+          catchCommercerError(type),
+        ),
       ),
     ),
   );
@@ -74,6 +84,7 @@ export function removeFromCart(actions, store, { commerce }) {
         of(commerce.updateCart(sku, 0)).pipe(
           map(() => commerce.getCart()),
           map(cartUpdateCompleted),
+          navigateToCart(),
           catchCommercerError(type),
         ),
       ),
