@@ -36,6 +36,7 @@
   $padding-lg(,0,,0)
 
 .next-button
+.back-button
   background-color black
   border none
   color white
@@ -44,6 +45,11 @@
   &[disabled]
     background-color gray
     cursor not-allowed
+
+.back-button
+  background-color white
+  border 1px solid black
+  color black
 
 .shipping
   header
@@ -92,3 +98,10 @@ header.view-header
   text-align center
 .success-content
   $center(727px)
+  $padding-lg()
+
+.button-group
+  $row(between)
+  $padding-lg()
+  button
+    width 264px

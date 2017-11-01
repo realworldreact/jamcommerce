@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
 import { createSelector } from 'reselect';
+import Link from 'gatsby-link';
 
 import styles from './checkout.module.styl';
 import { cardSelector, selectedAddressSelector, orderSelector } from './redux';
@@ -72,6 +73,14 @@ export function Success({
             Please check your email account on file for your receipt and order
             confirmation.
           </p>
+          <div className={ cx('button-group') }>
+            <Link to='/'>
+              <button className={ cx('next-button') }>Continue Shopping</button>
+            </Link>
+            <Link to='/account/orders'>
+              <button className={ cx('back-button') }>View Order History</button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
