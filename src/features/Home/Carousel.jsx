@@ -72,13 +72,15 @@ export default class Carousel extends PureComponent {
             >
             { banners.map(src => (
               <View
+                className={ cx('pager-container') }
                 key={ src }
-                src={ src }
-                tag='img'
-              />
+                >
+                <img className={ cx('pager-img') } alt='foo' src={ src } />
+                <h2 className={ cx('pager-copy') }><span>Text</span></h2>
+              </View>
             )) }
           </Track>
-          <nav className={ cx('pager') }>
+          <nav className={ cx('pager-nav') }>
             { banners.map((src, index) =>
               (
                 <ProgressPage
