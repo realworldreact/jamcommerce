@@ -30,6 +30,15 @@
     margin-left $padding-base-vertical
     size(10px)
 
+$pager-copy-abs()
+  left 0
+  position absolute
+  width 100%
+$pager-copy-text()
+  background rgb(0, 0, 0) // fallback color
+  background transparent
+  $padding-sm()
+
 .pager-nav
   align-items center
   display flex
@@ -40,14 +49,40 @@
   width 100%
   .pager-img
     width 100%
-  .pager-copy
-    position absolute
-    top 200px
-    left 0
-    width 100%
+  .pager-copy-top
+    $pager-copy-abs()
+    color #FE5068
+    font-size 60px
+    font-weight bold
+    left 2%
+    top 3%
     span
-      background rgb(0, 0, 0) // fallback color
-      background rgba(0, 0, 0, 0.7)
+      $pager-copy-text()
+  .pager-copy-bottom
+    $pager-copy-abs()
+    color white
+    font-size 90px
+    left 3%
+    top 12%
+    span
+      $pager-copy-text()
+  .pager-hr
+    $pager-copy-abs()
+    $pager-copy-text()
+    background-color white
+    border 1px solid white
+    color white
+    margin-left 80px
+    padding 0
+    top 27%
+    width 19%
+  .pager-footer
+    $pager-copy-abs()
+    $pager-copy-text()
+    color white
+    font-size 19px
+    padding-left 43px
+    top 30%
 
 .page
   background #ccc

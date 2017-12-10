@@ -70,15 +70,30 @@ export default class Carousel extends PureComponent {
             onScroll={ this.handleScroll }
             onViewChange={ this.handleViewChange }
             >
-            { banners.map(src => (
-              <View
-                className={ cx('pager-container') }
-                key={ src }
-                >
-                <img className={ cx('pager-img') } alt='foo' src={ src } />
-                <h2 className={ cx('pager-copy') }><span>Text</span></h2>
-              </View>
-            )) }
+            { banners.map(src =>
+              (
+                <View
+                  className={ cx('pager-container') }
+                  key={ src }
+                  >
+                  <img
+                    alt='foo'
+                    className={ cx('pager-img') }
+                    src={ src }
+                  />
+                  <h2 className={ cx('pager-copy-top') }>
+                    <span>Dynamically</span>
+                  </h2>
+                  <h1 className={ cx('pager-copy-bottom') }>
+                    <span>STATIC</span>
+                  </h1>
+                  <hr className={ cx('pager-hr') } />
+                  <span className={ cx('pager-footer') }>
+                    Fast, Secure, & Infinitely Scalable
+                  </span>
+                </View>
+              ),
+            ) }
           </Track>
           <nav className={ cx('pager-nav') }>
             { banners.map((src, index) =>
