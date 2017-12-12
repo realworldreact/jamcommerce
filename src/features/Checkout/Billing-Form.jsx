@@ -77,6 +77,12 @@ export class BillingForm extends PureComponent {
           Card Details
           <CardElement id='card' />
         </label>
+        <div className={ cx('dev-note') }>
+          Try it out using the test card number:<br />
+          4242 4242 4242 4242<br />
+          a random three-digit CVC number, any expiration date in the future,
+          and a random five-digit U.S. ZIP code.
+        </div>
         <button
           className={ cx('submit') }
           type='submit'

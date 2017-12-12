@@ -89,7 +89,7 @@ export default class Carousel extends PureComponent {
                   </h1>
                   <hr className={ cx('pager-hr') } />
                   <span className={ cx('pager-footer') }>
-                    Fast, Secure, & Infinitely Scalable
+                  Fast, Secure, & Infinitely Scalable
                   </span>
                 </View>
               ),
