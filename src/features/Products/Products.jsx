@@ -83,6 +83,11 @@ export default function Products({
                   <Price>${ prices[0].amount }</Price> { _sale }
                 </div>
               </div>
+              <div className={ cx('preview-button-container') }>
+                <button className={ cx('preview-button') }>
+                  Quick Shop
+                </button>
+              </div>
             </Link>
           );
         }) }
