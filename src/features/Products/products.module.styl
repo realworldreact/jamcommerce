@@ -54,8 +54,11 @@ $image-scale = 1.15
     &:hover
       transform scale3d($image-scale, $image-scale, $image-scale)
 
+  &:hover > .preview-button-container
+    display block
   .preview-button-container
     bottom 25%
+    display none
     left 0
     position absolute
     text-align center
