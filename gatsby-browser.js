@@ -27,16 +27,27 @@ exports.replaceRouterComponent = ({ history }) => {
   store.dispatch(routeUpdated(history.location));
   history.listen(location => store.dispatch(routeUpdated(location)));
 
+  console.log(window && window.Stripe);
+
   const ConnectedRouterWrapper = ({ children }) =>
-    (
-      <Provider store={ store }>
-        <StripeProvider apiKey={ process.env.STRIPE_API_KEY }>
-          <Router history={ history }>
-            { children }
-          </Router>
-        </StripeProvider>
-      </Provider>
-    );
+    <Provider store={store}>
+      {window.Stripe
+        ? <StripeProvider apiKey={process.env.STRIPE_API_KEY}>
+            <Router history={history}>
+              {children}
+            </Router>
+          </StripeProvider>
+        : <Router history={history}>
+            {children}
+          </Router>}
+    </Provider>;
+  // <Provider store={store}>
+  //   {/* <StripeProvider apiKey={process.env.STRIPE_API_KEY}> */}
+  //
+  //     {children}
+  //   </Router>
+  //   {/* </StripeProvider> */}
+  // </Provider>;
 
   ConnectedRouterWrapper.propTypes = { children: PropTypes.any };
 

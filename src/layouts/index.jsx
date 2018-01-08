@@ -29,17 +29,17 @@ export class TemplateWrapper extends PureComponent {
   render() {
     const { children } = this.props;
     return (
-      <div className={ cx('main') }>
+      <div className={cx('main')}>
         <Helmet
-          meta={ [
+          meta={[
             { name: 'description', content: 'Sample' },
             { name: 'keywords', content: 'sample, something' },
-          ] }
-          title='JamCommerce'
+          ]}
+          title="JamCommerce"
         />
         <Nav />
-        <div className={ cx('content') }>
-          { children() }
+        <div className={cx('content')}>
+          {children()}
         </div>
         <Footer />
       </div>

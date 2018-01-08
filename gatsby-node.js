@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const path = require('path');
 const yaml = require('js-yaml');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
 
 const createSlug = _.flow([
   s => s.toLowerCase(),
@@ -56,12 +57,12 @@ exports.createPages = ({ graphql, boundActionCreators: { createPage } }) => {
 function transformYaml(actions, loadNodeContent, node) {
   const { createNode } = actions;
   function objToNode(obj, i) {
-    const isCopy = (/copy$/).test(node.dir);
+    const isCopy = /copy$/.test(node.dir);
     const objStr = JSON.stringify(obj);
     const contentDigest = crypto.createHash('md5').update(objStr).digest('hex');
-    const type = isCopy ?
-      'JAMCopy' :
-      _.upperFirst(_.camelCase(`${node.name}Yaml`));
+    const type = isCopy
+      ? 'JAMCopy'
+      : _.upperFirst(_.camelCase(`${node.name}Yaml`));
     let id = obj.id;
     if (!id && isCopy) {
       if (isCopy) {
@@ -94,7 +95,7 @@ function transformYaml(actions, loadNodeContent, node) {
     .then(content => yaml.safeLoad(content))
     .then(contents => {
       if (!_.isArray(contents)) {
-        contents = [ contents ];
+        contents = [contents];
       }
       return contents.map(objToNode);
     })
@@ -155,13 +156,16 @@ exports.onCreateNode = ({
 
 exports.modifyWebpackConfig = ({ config }) => {
   // add env vars here
+
   config.merge({
-    plugins: [ new webpack.DefinePlugin({
-      'process.env': {
-        GOCOMMERCE_URI: JSON.stringify(process.env.GOCOMMERCE_URI),
-        STRIPE_API_KEY: JSON.stringify(process.env.STRIPE_API_KEY),
-      },
-    }) ],
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          GOCOMMERCE_URI: JSON.stringify(process.env.GOCOMMERCE_URI),
+          STRIPE_API_KEY: JSON.stringify(process.env.STRIPE_API_KEY),
+        },
+      }),
+    ],
   });
   return config;
 };

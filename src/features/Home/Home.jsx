@@ -43,36 +43,28 @@ const featured = [
 export default class Home extends Component {
   render() {
     return (
-      <div className={ cx('home') }>
+      <div className={cx('home')}>
         <Carousel />
         <Subheader />
-        <div className={ cx('content-container') }>
-          <Callout className={ cx('callout') }>
-            <header className={ cx('copy') }>
-              <h1 className={ cx('title') }>Free & Open Source</h1>
+        <div className={cx('content-container')}>
+          <Callout className={cx('callout')}>
+            <header className={cx('copy')}>
+              <h1 className={cx('title')}>Free & Open Source</h1>
               <p>
                 JAM Commerce is completely free to use and modify as you like.
                 Create your own version or fork it and contribute!
               </p>
               <LearnMore />
             </header>
-            <img
-              className={ cx('img') }
-              src={ callout }
-            />
+            <img className={cx('img')} src={callout} />
           </Callout>
-          <div className={ cx('featured-container') }>
-            { featured.map(featured =>
-              (
-                <Featured
-                  key={ featured.title }
-                  { ...featured }
-                />
-              ),
-            ) }
+          <div className={cx('featured-container')}>
+            {featured.map(featured =>
+              <Featured key={featured.title} {...featured} />,
+            )}
           </div>
         </div>
-        <div className={ cx('prefooter') }>
+        <div className={cx('prefooter')}>
           <h4>
             Learn More about the JAMstack from the links in the footer, or click
             around this example app to see how JAM Commerce works!
