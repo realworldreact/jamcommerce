@@ -128,85 +128,65 @@ export function Nav({
   let signBtn;
   if (isSignedIn) {
     signBtn = (
-      <Link to='/account'>
-        { name }
+      <Link to="/account" className={cx('account')}>
+        {name}
       </Link>
     );
   } else {
     signBtn = (
-      <Link
-        onClick={ clickOnSignIn }
-        to='/signin'
-        >
+      <Link onClick={clickOnSignIn} to="/signin">
         Sign In
       </Link>
     );
   }
   return (
-    <div className={ cx('navbar') }>
-      <nav className={ cx('top') }>
-        <div className={ cx('hamburger') }>
-          <img
-            alt='menu hamburger'
-            src={ hamburger }
-          />
+    <div className={cx('navbar')}>
+      <nav className={cx('top')}>
+        <div className={cx('hamburger')}>
+          <img alt="menu hamburger" src={hamburger} />
         </div>
-        <Link to='/'>
-          <div className={ cx('title') }>JAM Commerce</div>
+        <Link to="/">
+          <div className={cx('title')}>JAM Commerce</div>
         </Link>
-        <ul className={ cx('account') }>
+        <ul className={cx('account')}>
           <li>
-            { signBtn }
+            {signBtn}
           </li>
           <li>
             <Link
-              className={ cx('cart') }
-              to='/cart'
-              >
-              <img
-                alt='a padlock'
-                src={ cart }
-              />
-              <span className={ cx('num-in-cart') }>
-                { typeof numInCart === 'number' ? numInCart : 0 }
+              className={cx('cart')}
+              to="/cart"
+              style={{ backgroundImage: `url(${cart})` }}
+            >
+              <span className={cx('num-in-cart')}>
+                {typeof numInCart === 'number' ? numInCart : 0}
               </span>
             </Link>
           </li>
         </ul>
       </nav>
-      <nav className={ cx('bottom') }>
+      <nav className={cx('bottom')}>
         <ul>
-          { directories.map(({ title, href }) =>
-            (
-              <a
-                className={ cx('item-link') }
-                href={ href }
-                key={ title }
-                onClick={ clickOnSubNavActions[title] }
-                onMouseEnter={ hoverOnSubNavActions[title] }
-                >
-                <li className={ cx('item') }>
-                  { title }
-                </li>
-              </a>
-            ),
-          ) }
-          <a
-            className={ cx('item-link') }
-            href='/women'
+          {directories.map(({ title, href }) =>
+            <a
+              className={cx('item-link')}
+              href={href}
+              key={title}
+              onClick={clickOnSubNavActions[title]}
+              onMouseEnter={hoverOnSubNavActions[title]}
             >
-            <li className={ cx('item') }>Sale</li>
+              <li className={cx('item')}>
+                {title}
+              </li>
+            </a>,
+          )}
+          <a className={cx('item-link')} href="/women">
+            <li className={cx('item')}>Sale</li>
           </a>
         </ul>
       </nav>
-      <Menu
-        isOpen={ isMenuOpen }
-        onMouseLeave={ mouseLeaveMenu }
-        >
-        <Menu.Body
-          categories={ categories }
-          view={ currentDirectory.view }
-        />
+      <Menu isOpen={isMenuOpen} onMouseLeave={mouseLeaveMenu}>
+        <Menu.Body categories={categories} view={currentDirectory.view} />
       </Menu>
     </div>
   );

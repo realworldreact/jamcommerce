@@ -54,19 +54,17 @@ $navbar($height, $font-size = 20px)
 .account
   flex 1
   text-align right
+  padding-top 10px
   a
     font-size 16px
-
 .cart
-  position relative
+  background-repeat no-repeat
+  background-position center 2px
   img
     size($navbar-top-height - ($navbar-pad-horiz($navbar-top-height) *2))
   .num-in-cart
     color white
-    font-size small
-    left 18px
-    position absolute
-    top 22px
+    font-weight bold
 
 .bottom
   $navbar($navbar-bottom-height, 14px)
