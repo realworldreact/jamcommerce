@@ -27,81 +27,74 @@ export function Auth({ location, onSigninSubmit, onSignupSubmit }) {
   const isSignin = location.pathname === '/signin';
   const handleSubmit = isSignin ? onSigninSubmit : onSignupSubmit;
   return (
-    <div className={ cx('auth') }>
-      <div className={ cx('container') }>
-        <header className={ cx('header') }>
-          <Link to='/signup'>
-            <div className={ cx({ underline: !isSignin }) }>
+    <div className={cx('auth')}>
+      <div className={cx('container')}>
+        <header className={cx('header')}>
+          <Link to="/signup">
+            <div className={cx({ underline: !isSignin })}>
               <h4>Sign Up</h4>
             </div>
           </Link>
-          <Link to='/signin'>
-            <div className={ cx({ underline: isSignin }) }>
+          <Link to="/signin">
+            <div className={cx({ underline: isSignin })}>
               <h4>Sign In</h4>
             </div>
           </Link>
         </header>
-        <Form
-          className={ cx('form') }
-          model='forms.user'
-          onSubmit={ handleSubmit }
-          >
-          { !isSignin &&
+        <Form className={cx('form')} model="forms.user" onSubmit={handleSubmit}>
+          {!isSignin &&
             <div>
               <Input
-                label='First Name'
-                messages={ {
-                  length: 'Firstname must be at least 2 characters',
-                  required: 'Firstname is required',
-                } }
-                model='.firstname'
-                type='text'
-                validators={ {
+                label="First Name"
+                messages={{
+                  length: 'First name must be at least 2 characters',
+                  required: 'First name is required',
+                }}
+                model=".firstname"
+                type="text"
+                validators={{
                   length: (val = '') => val.length > 2,
                   required: (val = '') => val.length,
-                } }
+                }}
               />
               <Input
-                label='Last Name'
-                messages={ {
-                  length: 'Lastname must be at least 2 characters',
-                  required: 'Lastname is required',
-                } }
-                model='.lastname'
-                type='text'
-                validators={ {
+                label="Last Name"
+                messages={{
+                  length: 'Last name must be at least 2 characters',
+                  required: 'Last name is required',
+                }}
+                model=".lastname"
+                type="text"
+                validators={{
                   length: (val = '') => val.length > 2,
                   required: (val = '') => val.length,
-                } }
+                }}
               />
-            </div> }
+            </div>}
           <Input
-            label='Email Address'
-            messages={ {
+            label="Email Address"
+            messages={{
               isEmail: 'Email is not currectly formatted',
-            } }
-            model='.email'
-            type='email'
-            validators={ {
+            }}
+            model=".email"
+            type="email"
+            validators={{
               isEmail: (val = '') => isEmail(val),
-            } }
+            }}
           />
           <Input
-            label='Password'
-            messages={ {
+            label="Password"
+            messages={{
               length: 'Password must be at least 6 characters',
-            } }
-            model='.password'
-            type='password'
-            validators={ {
+            }}
+            model=".password"
+            type="password"
+            validators={{
               length: (val = '') => val.length > 6,
-            } }
+            }}
           />
-          <button
-            className={ cx('submit') }
-            type='submit'
-            >
-            Submit
+          <button className={cx('submit')} type="submit">
+            Let's GO!
           </button>
         </Form>
         <div />

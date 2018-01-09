@@ -21,10 +21,10 @@ export default function Input({ messages, model, label, type, ...rest }) {
     Comp = Control;
   }
   return (
-    <div className={ cx('group') }>
-      <label htmlFor={ model }>
+    <div className={cx('group')}>
+      <label htmlFor={model}>
         <Comp
-          mapProps={ {
+          mapProps={{
             className: ({
               fieldValue: { initialValue, value, touched, pristine, valid },
             }) =>
@@ -35,21 +35,25 @@ export default function Input({ messages, model, label, type, ...rest }) {
                 touched,
                 valid,
               }),
-          } }
-          { ...controlProps }
+          }}
+          {...controlProps}
         />
-        <span className={ cx('label') }>
-          { label }
+        <span className={cx('label')}>
+          {label}
         </span>
-        <span className={ cx('bar') } />
-        <span className={ cx('highlight') } />
+        <span className={cx('bar')} />
+        <span className={cx('highlight')} />
       </label>
-      { messages &&
+      {messages &&
         <Errors
-          messages={ messages }
-          model={ model }
-          show={ { touched: true, focus: false } }
-        /> }
+          component={({ children }) =>
+            <div className={cx('error')}>
+              {children}
+            </div>}
+          messages={messages}
+          model={model}
+          show={{ touched: true, focus: false }}
+        />}
     </div>
   );
 }
