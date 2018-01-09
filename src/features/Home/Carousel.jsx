@@ -8,11 +8,15 @@ import ProgressPage from './Progress-Page.jsx';
 import banner1 from './banner-1.png';
 import banner2 from './banner-2.png';
 import banner3 from './banner-3.png';
+import copy1 from './carousel-text-1.png';
+import copy2 from './carousel-text-2.png';
+import copy3 from './carousel-text-3.png';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
 const bannerTimeout = 4000;
-const banners = [banner1, banner2, banner3];
+const banners = [banner1, banner2, banner3],
+  copies = [copy1, copy2, copy3];
 
 export default class Carousel extends PureComponent {
   constructor(...args) {
@@ -24,7 +28,6 @@ export default class Carousel extends PureComponent {
       this['@@' + src] = function() {
         this.setState({ currentView: index });
       }.bind(this);
-      //this['@@' + src] = () => ;
     });
   }
   componentDidMount() {
@@ -59,6 +62,26 @@ export default class Carousel extends PureComponent {
     this.frame = frame;
   };
 
+  _carouselItem = (src, i) => {
+    return (
+      <View className={cx('pager-container')} key={src}>
+        <img alt="foo" className={cx('pager-img')} src={src} />
+        <img alt="foo" className={cx('pager-copy-img')} src={copies[i]} />
+
+        {/* <h2 className={cx('pager-copy-top')}>
+          <span>Dynamically</span>
+        </h2>
+        <h1 className={cx('pager-copy-bottom')}>
+          <span>STATIC</span>
+        </h1>
+        <hr className={cx('pager-hr')} />
+        <span className={cx('pager-footer')}>
+          Fast, Secure, & Infinitely Scalable
+        </span> */}
+      </View>
+    );
+  };
+
   render() {
     const { currentView } = this.state;
 
@@ -70,21 +93,7 @@ export default class Carousel extends PureComponent {
             onScroll={this.handleScroll}
             onViewChange={this.handleViewChange}
           >
-            {banners.map(src =>
-              <View className={cx('pager-container')} key={src}>
-                <img alt="foo" className={cx('pager-img')} src={src} />
-                <h2 className={cx('pager-copy-top')}>
-                  <span>Dynamically</span>
-                </h2>
-                <h1 className={cx('pager-copy-bottom')}>
-                  <span>STATIC</span>
-                </h1>
-                <hr className={cx('pager-hr')} />
-                <span className={cx('pager-footer')}>
-                  Fast, Secure, & Infinitely Scalable
-                </span>
-              </View>,
-            )}
+            {banners.map(this._carouselItem)}
           </Track>
           <nav className={cx('pager-nav')}>
             {banners.map((src, index) =>
