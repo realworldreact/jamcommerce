@@ -11,7 +11,7 @@ import banner3 from './banner-3.png';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
-const bannerTimeout = 3000;
+const bannerTimeout = 4000;
 const banners = [banner1, banner2, banner3];
 
 export default class Carousel extends PureComponent {
