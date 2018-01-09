@@ -232,121 +232,110 @@ export class Product extends PureComponent {
     } = this.props;
     const isSale = !!sale;
     const Price = isSale ? 'del' : 'span';
-    const _sale = isSale ?
-      (
-        <span className={ cx('sale') }>
-          ${ sale }
+    const _sale = isSale
+      ? <span className={cx('sale')}>
+          ${sale}
         </span>
-      ) :
-      null;
+      : null;
     return (
-      <div className={ cx('product') }>
+      <div className={cx('product')}>
         <script
-          className='gocommerce-product'
-          dangerouslySetInnerHTML={ { __html: JSON.stringify(gocommerceData) } }
-          type='application/json'
+          className="gocommerce-product"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(gocommerceData) }}
+          type="application/json"
         />
-        <div className={ cx('content') }>
-          <div className={ cx('images') }>
+        <div className={cx('content')}>
+          <div className={cx('images')}>
             <div>
               <img
-                alt='alt is set by content'
-                className={ cx('main') }
-                { ...images[currentImage] }
+                alt="alt is set by content"
+                className={cx('main')}
+                {...images[currentImage]}
               />
             </div>
-            <div className={ cx('thumbnails') }>
-              { _.map(thumbnails, ({ alt, ...rest }, side) =>
-                (
-                  <div
-                    key={ side }
-                    onClick={ thumbnailHandlers[side] }
-                    onKeyDown={ thumbnailHandlers[side] }
-                    role='button'
-                    tabIndex='0'
-                    >
-                    <img
-                      alt={ alt }
-                      { ...rest }
-                    />
-                  </div>
-                ),
-              ) }
+            <div className={cx('thumbnails')}>
+              {_.map(thumbnails, ({ alt, ...rest }, side) =>
+                <div
+                  key={side}
+                  onClick={thumbnailHandlers[side]}
+                  onKeyDown={thumbnailHandlers[side]}
+                  role="button"
+                  tabIndex="0"
+                >
+                  <img alt={alt} {...rest} />
+                </div>,
+              )}
             </div>
           </div>
-          <div className={ cx('details') }>
+          <div className={cx('details')}>
             <header>
               <h1>
-                { name }
+                {name}
               </h1>
             </header>
-            <div className={ cx('price') }>
-              <Price>${ prices[0].amount }</Price> { _sale }
+            <div className={cx('price')}>
+              <Price>${prices[0].amount}</Price> {_sale}
             </div>
-            <div className={ cx('description') }>
-              { description }
+            <div className={cx('description')}>
+              {description}
             </div>
-            <ul className={ cx('list') }>
-              { details.map(detail =>
-                (
-                  <li key={ detail }>
-                    <small>
-                      { detail }
-                    </small>
-                  </li>
-                ),
-              ) }
+            <ul className={cx('list')}>
+              {details.map(detail =>
+                <li key={detail}>
+                  <small>
+                    {detail}
+                  </small>
+                </li>,
+              )}
             </ul>
             <hr />
-            <div className={ cx('sizes') }>
-              <p>Size:</p>{ ' ' }
-              { sizes.map(value =>
-                (
-                  <button
-                    className={ cx(
-                      'button-size',
-                      currentSize === value ? 'selected' : '',
-                    ) }
-                    key={ value }
-                    onClick={ sizeHandlers[value] }
-                    >
-                    { value }
-                  </button>
-                ),
-              ) }
-            </div>
-            <div className={ cx('quantity') }>
-              <div className={ cx('copy') }>Quantity </div>
-              <Selector
-                className={ cx('quantity-selector', 'selector') }
-                maxQuantity={ maxQuantity }
-                onChange={ quantityChanged }
-                value={ currentQuantity }
-              />
-              <div className={ cx('submit-content') }>
-                { isSubmitDisabled ?
-                  <small className={ cx('submit-warning') }>
-                      Please select a size
-                  </small> :
-                  null }
+            <div className={cx('sizes')}>
+              <p>Size:</p>{' '}
+              {sizes.map(value =>
                 <button
-                  className={ cx('button', isSubmitDisabled ? 'disabled' : '') }
-                  disabled={ isSubmitDisabled }
-                  onClick={ clickOnAddToCart }
-                  type='submit'
-                  >
+                  className={cx(
+                    'button-size',
+                    currentSize === value ? 'selected' : '',
+                  )}
+                  key={value}
+                  onClick={sizeHandlers[value]}
+                >
+                  {value}
+                </button>,
+              )}
+            </div>
+            <div className={cx('quantity')}>
+              <div className={cx('copy')}>Quantity </div>
+              <Selector
+                className={cx('quantity-selector', 'selector')}
+                maxQuantity={maxQuantity}
+                onChange={quantityChanged}
+                value={currentQuantity}
+              />
+              <div className={cx('submit-content')}>
+                {isSubmitDisabled
+                  ? <small className={cx('submit-warning')}>
+                      Please select a size
+                    </small>
+                  : null}
+                <button
+                  className={cx('button', isSubmitDisabled ? 'disabled' : '')}
+                  disabled={isSubmitDisabled}
+                  onClick={clickOnAddToCart}
+                  type="submit"
+                >
                   Add To Cart
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <Link to='/women/shoes'>
-          <div className={ cx('back') }>
+        <Link to="/women/shoes">
+          <div className={cx('back')}>
             <img
-              alt='A smal left pointing arrow'
-              className={ cx('left-arrow') }
-              src={ leftArrow }
+              alt="A smal left pointing arrow"
+              className={cx('left-arrow')}
+              src={leftArrow}
             />
             Back to Shoes
           </div>

@@ -4,7 +4,6 @@ const crypto = require('crypto');
 const path = require('path');
 const yaml = require('js-yaml');
 const webpack = require('webpack');
-const dotenv = require('dotenv');
 
 const createSlug = _.flow([
   s => s.toLowerCase(),
