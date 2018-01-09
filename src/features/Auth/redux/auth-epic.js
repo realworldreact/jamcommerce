@@ -10,6 +10,7 @@ import {
   userParseError,
   userLoginSuccess,
   userLoginFailed,
+  userSignupSuccess,
 } from './';
 import { redirectToSelector } from '../../redux';
 
@@ -25,8 +26,10 @@ export function signupEpic(actions, { getState }, { localStorage }) {
   )::map(user => {
     localStorage.setItem(userNS, JSON.stringify(user));
     const redirectTo = redirectToSelector(getState());
-    navigateTo(redirectTo || '/account');
-  })::ignoreElements();
+
+    navigateTo('/signin');
+    return userSignupSuccess();
+  });
 }
 
 export function signinEpic(actions, { getState }, { localStorage }) {

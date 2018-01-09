@@ -15,15 +15,29 @@ const propTypes = {
   location: PropTypes.object,
   onSigninSubmit: PropTypes.func.isRequired,
   onSignupSubmit: PropTypes.func.isRequired,
+  loginMessage: PropTypes.string,
+  loginError: PropTypes.string,
 };
 
-const mapStateToProps = null;
+const mapStateToProps = state => (
+  console.log(state),
+  {
+    loginError: state.Auth.loginError,
+    loginMessage: state.Auth.loginMessage,
+  }
+);
 const mapDispatchToProps = {
   onSigninSubmit,
   onSignupSubmit,
 };
 
-export function Auth({ location, onSigninSubmit, onSignupSubmit }) {
+export function Auth({
+  loginError,
+  loginMessage,
+  location,
+  onSigninSubmit,
+  onSignupSubmit,
+}) {
   const isSignin = location.pathname === '/signin';
   const handleSubmit = isSignin ? onSigninSubmit : onSignupSubmit;
   return (
@@ -71,6 +85,12 @@ export function Auth({ location, onSigninSubmit, onSignupSubmit }) {
                 }}
               />
             </div>}
+
+          {loginMessage && isSignin
+            ? <p>
+                {loginMessage}
+              </p>
+            : null}
           <Input
             label="Email Address"
             messages={{
@@ -93,6 +113,11 @@ export function Auth({ location, onSigninSubmit, onSignupSubmit }) {
               length: (val = '') => val.length > 6,
             }}
           />
+          {loginError && isSignin
+            ? <p>
+                {loginError}
+              </p>
+            : null}
           <button className={cx('submit')} type="submit">
             Let's GO!
           </button>

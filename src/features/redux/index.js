@@ -8,10 +8,7 @@ import { createAction } from 'redux-actions';
 import cartEpic from './cart-epic.js';
 import errorEpic from './error-epic.js';
 
-export const epics = [
-  cartEpic,
-  errorEpic,
-];
+export const epics = [cartEpic, errorEpic];
 
 const ns = 'app';
 
@@ -19,11 +16,7 @@ export const addRedirectTo = () => ({ redirectTo: true });
 export const isRedirectAction = ({ meta: { redirectTo } = {} }) => !!redirectTo;
 
 export const types = createTypes(
-  [
-    'addToCart',
-    'appMounted',
-    'routeUpdated',
-  ],
+  ['addToCart', 'appMounted', 'routeUpdated'],
   ns,
 );
 
@@ -56,9 +49,9 @@ export default composeReducers(
       return {
         ...state,
         redirectTo:
-          currentLocation !== '/signin' && currentLocation !== '/signup' ?
-            currentLocation :
-            state.redirectTo,
+          currentLocation !== '/signin' && currentLocation !== '/signup'
+            ? currentLocation
+            : state.redirectTo,
       };
     }
     return state;
