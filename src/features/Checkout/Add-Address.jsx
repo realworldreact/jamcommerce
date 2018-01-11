@@ -13,19 +13,13 @@ const propTypes = {
 
 export default function AddAddress({ handleSubmit }) {
   return (
-    <div className={ cx('add-address') }>
+    <div className={cx('add-address')}>
       <header>
         <h4>Add New Address</h4>
       </header>
-      <Form
-        model='forms.newAddress'
-        onSubmit={ handleSubmit }
-        >
+      <Form model="forms.newAddress" onSubmit={handleSubmit}>
         <AddressForm />
-        <button
-          className={ cx('submit') }
-          type='submit'
-          >
+        <button className={cx('submit')} type="submit">
           Save Address
         </button>
       </Form>

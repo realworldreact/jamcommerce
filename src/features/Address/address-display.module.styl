@@ -1,7 +1,25 @@
 .address-display
   $padding-lg()
+  $grid()
+  display flex
+  min-width 273px
   p
     margin 0 0 5px
+    color $gray
   bold
     font-size larger
+    color $gray
+
+.selected
+  p
+    color $text-description
+  bold
     color black
+
+
+.checkmark
+  padding-left $padding-lg-horizontal
+  padding-right $padding-lg-horizontal
+  margin-left -($padding-lg-horizontal*2 + 37)
+    
+    

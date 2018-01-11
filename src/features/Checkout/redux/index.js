@@ -12,7 +12,7 @@ import { makeAddressAction } from '../../Address/redux';
 import { addRedirectTo } from '../../redux';
 import { createCartMeta, cartTypes } from '../../../utils/redux.js';
 
-export const epics = [ checkoutEpic ];
+export const epics = [checkoutEpic];
 export const ns = 'checkout';
 
 export const types = createTypes(

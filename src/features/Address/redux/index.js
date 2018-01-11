@@ -22,6 +22,8 @@ export const isAddressAction = ({
 
 export const addressSelector = state => state[ns];
 
+export const selectedAddressSelector = state => state.checkout.selectedAddress;
+
 export function addressReducer(state = {}, action) {
   if (isAddressAction(action)) {
     const address = { ...action.payload };
@@ -29,7 +31,6 @@ export function addressReducer(state = {}, action) {
     if (!address.id) {
       address.id = String(n);
     }
-    console.log(state, address);
     return {
       ...state,
       [address.id]: {

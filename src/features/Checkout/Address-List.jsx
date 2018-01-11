@@ -32,8 +32,10 @@ export default function AddressList({
             key={address.id}
             onClick={() => clickOnAddress(address.id)}
           >
-            {address.id === selectedAddress && 'x'}
-            <AddressDisplay {...address} />
+            <AddressDisplay
+              {...address}
+              selected={address.id === selectedAddress}
+            />
           </button>,
         )}
       </div>
