@@ -13,6 +13,8 @@ const propTypes = {
   city: PropTypes.string,
   state: PropTypes.string,
   zip: PropTypes.string,
+  simple: PropTypes.boolean,
+  selected: PropTypes.selected,
 };
 
 export default function AddressDisplay({
@@ -23,9 +25,10 @@ export default function AddressDisplay({
   state,
   zip,
   selected,
+  simple,
 }) {
   return (
-    <div className={cx({ 'address-display': true, selected })}>
+    <div className={cx({ 'address-display': true, selected, simple })}>
       {selected
         ? <img src={checkmark} className={cx('checkmark')} alt="selected" />
         : null}

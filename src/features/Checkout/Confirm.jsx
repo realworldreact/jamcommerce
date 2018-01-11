@@ -5,19 +5,32 @@ import classnames from 'classnames/bind';
 import { createSelector } from 'reselect';
 
 import styles from './checkout.module.styl';
-import { clickOnConfirm } from './redux';
+import { clickOnConfirm, cardSelector } from './redux';
 import { Table } from '../Cart';
 import { numInCartSelector } from '../Cart/redux';
+import { AddressDisplay } from '../Address';
+import { shippingAddressSelector } from '../Address/redux';
 
 const cx = classnames.bind(styles);
-const propTypes = { clickOnConfirm: PropTypes.func.isRequired };
-const mapStateToProps = createSelector(numInCartSelector, numInCart => ({
-  numInCart,
-}));
+const propTypes = {
+  clickOnConfirm: PropTypes.func.isRequired,
+  numInCart: PropTypes.integer,
+  shippingAddress: PropTypes.object,
+};
+const mapStateToProps = createSelector(
+  numInCartSelector,
+  shippingAddressSelector,
+  cardSelector,
+  (numInCart, shippingAddress, card) => ({
+    numInCart,
+    shippingAddress,
+    card,
+  }),
+);
 
 const mapDispatchToProps = { clickOnConfirm };
 
-export function Confirm({ numInCart, clickOnConfirm }) {
+export function Confirm({ numInCart, shippingAddress, card, clickOnConfirm }) {
   return (
     <div className={cx('confirm')}>
       <header>
@@ -27,6 +40,18 @@ export function Confirm({ numInCart, clickOnConfirm }) {
         <h5>Please review your cart below.</h5>
       </header>
       <Table />
+      <div className={cx('confirm-shipping-billing')}>
+        <div>
+          <h4>Shipping</h4>
+          <AddressDisplay {...shippingAddress} simple />
+        </div>
+        <div>
+          <h4>Billing</h4>
+          <p>
+            {card.brand} ending in {card.last4}
+          </p>
+        </div>
+      </div>
       <footer className={cx('footer-confirm')}>
         <p>
           Go Commerce is an example front-end for the Headless E-Commerce

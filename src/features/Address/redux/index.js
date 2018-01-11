@@ -4,6 +4,7 @@ import {
   createTypes,
   handleActions,
 } from 'berkeleys-redux-utils';
+import { createSelector } from 'reselect';
 import persistAddressEpic from './persist-address-epic.js';
 
 export const epics = [persistAddressEpic];
@@ -23,6 +24,11 @@ export const isAddressAction = ({
 export const addressSelector = state => state[ns];
 
 export const selectedAddressSelector = state => state.checkout.selectedAddress;
+export const shippingAddressSelector = createSelector(
+  addressSelector,
+  selectedAddressSelector,
+  (addresses, id) => addresses[id],
+);
 
 export function addressReducer(state = {}, action) {
   if (isAddressAction(action)) {

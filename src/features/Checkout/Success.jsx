@@ -49,36 +49,36 @@ export function Success({
   numOfItems,
 }) {
   return (
-    <div className={ cx('checkout') }>
-      <header className={ cx('header') }>
+    <div className={cx('checkout')}>
+      <header className={cx('header')}>
         <h4>Success</h4>
       </header>
-      <div className={ cx('container') }>
-        <header className={ cx('success-header') }>
+      <div className={cx('container')}>
+        <header className={cx('success-header')}>
           <h4>
-            Your order of { firstItem }{ ' ' }
-            { numOfItems > 1 ? `and ${numOfItems - 1} other item` : '' } has been
+            Your order of {firstItem}{' '}
+            {numOfItems > 1 ? `and ${numOfItems - 1} other item` : ''} has been
             placed.
           </h4>
         </header>
         <hr />
       </div>
       <div>
-        <div className={ cx('success-content') }>
+        <div className={cx('success-content')}>
           <p>
-            We’ll be shipping your goods to { address1 }, { address2 } in { city }.
-            You paid with your { brand } ending in { last4 }.
+            We’ll be shipping your goods to {address1}, {address2} in {city}.
+            You paid with your {brand} ending in {last4}.
           </p>
           <p>
             Please check your email account on file for your receipt and order
             confirmation.
           </p>
-          <div className={ cx('button-group') }>
-            <Link to='/'>
-              <button className={ cx('next-button') }>Continue Shopping</button>
+          <div className={cx('button-group')}>
+            <Link to="/">
+              <button className={cx('next-button')}>Continue Shopping</button>
             </Link>
-            <Link to='/account/orders'>
-              <button className={ cx('back-button') }>View Order History</button>
+            <Link to="/account/orders">
+              <button className={cx('back-button')}>View Order History</button>
             </Link>
           </div>
         </div>
