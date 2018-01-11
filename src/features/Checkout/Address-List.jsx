@@ -23,21 +23,19 @@ export default function AddressList({
   }
 
   return (
-    <div className={ cx('list') }>
+    <div className={cx('list')}>
       <ViewHeader>Your Address</ViewHeader>
-      <div className={ cx('address-container') }>
-        { addresses.map(address =>
-          (
-            <button
-              className={ cx('list-button') }
-              key={ address.id }
-              onClick={ () => clickOnAddress(address.id) }
-              >
-              { address.id === selectedAddress && 'x' }
-              <AddressDisplay { ...address } />
-            </button>
-          ),
-        ) }
+      <div className={cx('address-container')}>
+        {addresses.map(address =>
+          <button
+            className={cx('list-button')}
+            key={address.id}
+            onClick={() => clickOnAddress(address.id)}
+          >
+            {address.id === selectedAddress && 'x'}
+            <AddressDisplay {...address} />
+          </button>,
+        )}
       </div>
     </div>
   );

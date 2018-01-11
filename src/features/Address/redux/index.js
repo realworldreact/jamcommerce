@@ -6,10 +6,10 @@ import {
 } from 'berkeleys-redux-utils';
 import persistAddressEpic from './persist-address-epic.js';
 
-export const epics = [ persistAddressEpic ];
+export const epics = [persistAddressEpic];
 
 export const ns = 'address';
-export const types = createTypes([ 'persistedAddressParsed' ], ns);
+export const types = createTypes(['persistedAddressParsed'], ns);
 
 export const persistedAddressParsed = createAction(
   types.persistedAddressParsed,
@@ -29,7 +29,9 @@ export function addressReducer(state = {}, action) {
     if (!address.id) {
       address.id = String(n);
     }
+    console.log(state, address);
     return {
+      ...state,
       [address.id]: {
         ...state[address.id],
         ...address,

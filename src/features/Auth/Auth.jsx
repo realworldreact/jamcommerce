@@ -19,13 +19,10 @@ const propTypes = {
   loginError: PropTypes.string,
 };
 
-const mapStateToProps = state => (
-  console.log(state),
-  {
-    loginError: state.Auth.loginError,
-    loginMessage: state.Auth.loginMessage,
-  }
-);
+const mapStateToProps = state => ({
+  loginError: state.Auth.loginError,
+  loginMessage: state.Auth.loginMessage,
+});
 const mapDispatchToProps = {
   onSigninSubmit,
   onSignupSubmit,
