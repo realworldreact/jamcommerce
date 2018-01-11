@@ -37,6 +37,11 @@
   $center(271px)
   $padding-lg(,0,,0)
 
+.footer-confirm
+  $padding-lg(,0,,0)
+  div
+    $grid('row', 'between')
+
 .next-button
 .back-button
   background-color black
@@ -44,6 +49,7 @@
   color white
   line-height 2.5
   width 100%
+  max-width 271px
   &[disabled]
     background-color gray
     cursor not-allowed
@@ -117,3 +123,8 @@ header.view-header
   $padding-lg()
   button
     width 264px
+
+.confirm
+  header
+    $center(271px)
+

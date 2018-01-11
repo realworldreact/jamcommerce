@@ -42,41 +42,38 @@ const mapDispatchToProps = { clickOnRemove };
 
 export function Table({ clickOnRemove, items = [], total = {} }) {
   return (
-    <div className={ cx('table') }>
-      <div className={ cx('table-cell-first', 'table-first') }>Item</div>
-      <div className={ cx('table-cell') }>Price</div>
-      <div className={ cx('table-cell') }>Quantity</div>
-      <div className={ cx('table-cell') }>Total</div>
-      { items.reduce((a, { title, sku, image = {}, price, size, quantity }) => {
+    <div className={cx('table')}>
+      <div className={cx('table-cell-first', 'table-first')}>Item</div>
+      <div className={cx('table-cell')}>Price</div>
+      <div className={cx('table-cell')}>Quantity</div>
+      <div className={cx('table-cell')}>Total</div>
+      {items.reduce((a, { title, sku, image = {}, price, size, quantity }) => {
         a.push(
-          <div
-            className={ cx('table-cell-first', 'details') }
-            key={ sku + sku }
-            >
+          <div className={cx('table-cell-first', 'details')} key={sku + sku}>
             <div>
-              <Link to={ `/women/shoes/${sku}` }>
+              <Link to={`/women/shoes/${sku}`}>
                 <img
-                  alt={ image.alt }
-                  className={ cx('details-img') }
-                  src={ image.src }
-                  srcSet={ image.srcSet }
+                  alt={image.alt}
+                  className={cx('details-img')}
+                  src={image.src}
+                  srcSet={image.srcSet}
                 />
               </Link>
             </div>
-            <div className={ cx('details-info') }>
-              <Link to={ `/women/shoes/${sku}` }>
-                <div className={ cx('product-name') }>
-                  { title }
+            <div className={cx('details-info')}>
+              <Link to={`/women/shoes/${sku}`}>
+                <div className={cx('product-name')}>
+                  {title}
                 </div>
               </Link>
-              <div className={ cx('size-info') }>
-                Size: <span className={ cx('size-selected') }>{ size }</span>
+              <div className={cx('size-info')}>
+                Size: <span className={cx('size-selected')}>{size}</span>
               </div>
               <div>
                 <button
-                  className={ cx('remove') }
-                  onClick={ () => clickOnRemove(sku) }
-                  >
+                  className={cx('remove')}
+                  onClick={() => clickOnRemove(sku)}
+                >
                   Remove
                 </button>
               </div>
@@ -84,37 +81,28 @@ export function Table({ clickOnRemove, items = [], total = {} }) {
           </div>,
         );
         a.push(
-          <div
-            className={ cx('table-cell', 'price') }
-            key={ sku + 'price' }
-            >
-            ${ price.amount }
+          <div className={cx('table-cell', 'price')} key={sku + 'price'}>
+            ${price.amount}
           </div>,
         );
         a.push(
-          <div
-            className={ cx('table-cell', 'quantity') }
-            key={ sku + 'quantity' }
-            >
+          <div className={cx('table-cell', 'quantity')} key={sku + 'quantity'}>
             <Selector
-              className={ cx('quantity-selector', 'selector') }
-              value={ quantity }
+              className={cx('quantity-selector', 'selector')}
+              value={quantity}
             />
           </div>,
         );
         a.push(
-          <div
-            className={ cx('table-cell', 'total') }
-            key={ sku + 'total' }
-            >
-            ${ _.round(price.amount * quantity, 2) }
+          <div className={cx('table-cell', 'total')} key={sku + 'total'}>
+            ${_.round(price.amount * quantity, 2)}
           </div>,
         );
         return a;
-      }, []) }
-      <div className={ cx('table-cell', 'table-total') }>GRAND TOTAL</div>
-      <div className={ cx('table-cell', 'table-sum') }>
-        ${ total.amount }
+      }, [])}
+      <div className={cx('table-cell', 'table-total')}>TOTAL</div>
+      <div className={cx('table-cell', 'table-sum')}>
+        ${total.amount}
       </div>
     </div>
   );
