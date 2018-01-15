@@ -169,8 +169,6 @@
     "wrap-iife": [2, "any"],
     "wrap-regex": 2,
     "yoda": 0,
-
-    "jsx-quotes": [2, "prefer-single"],
     "react/display-name": 2,
     "react/jsx-boolean-value": [2, "always"],
     "react/jsx-closing-bracket-location": [
