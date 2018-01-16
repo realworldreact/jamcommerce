@@ -13,6 +13,7 @@ import Selector from '../Selector';
 const cx = classnames.bind(styles);
 const propTypes = {
   clickOnRemove: PropTypes.func.isRequired,
+  editable: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       alt: PropTypes.string,
@@ -40,7 +41,12 @@ const mapStateToProps = createSelector(
 
 const mapDispatchToProps = { clickOnRemove };
 
-export function Table({ clickOnRemove, items = [], total = {} }) {
+export function Table({
+  clickOnRemove,
+  items = [],
+  total = {},
+  editable = true,
+}) {
   return (
     <div className={cx('table')}>
       <div className={cx('table-cell-first', 'table-first')}>Item</div>
@@ -70,12 +76,14 @@ export function Table({ clickOnRemove, items = [], total = {} }) {
                 Size: <span className={cx('size-selected')}>{size}</span>
               </div>
               <div>
-                <button
-                  className={cx('remove')}
-                  onClick={() => clickOnRemove(sku)}
-                >
-                  Remove
-                </button>
+                {editable
+                  ? <button
+                      className={cx('remove')}
+                      onClick={() => clickOnRemove(sku)}
+                    >
+                      Remove
+                    </button>
+                  : null}
               </div>
             </div>
           </div>,
@@ -86,12 +94,22 @@ export function Table({ clickOnRemove, items = [], total = {} }) {
           </div>,
         );
         a.push(
-          <div className={cx('table-cell', 'quantity')} key={sku + 'quantity'}>
-            <Selector
-              className={cx('quantity-selector', 'selector')}
-              value={quantity}
-            />
-          </div>,
+          editable
+            ? <div
+                className={cx('table-cell', 'quantity')}
+                key={sku + 'quantity'}
+              >
+                <Selector
+                  className={cx('quantity-selector', 'selector')}
+                  value={quantity}
+                />
+              </div>
+            : <div
+                className={cx('table-cell', 'quantity-static')}
+                key={sku + 'quantityt'}
+              >
+                {quantity}
+              </div>,
         );
         a.push(
           <div className={cx('table-cell', 'total')} key={sku + 'total'}>
