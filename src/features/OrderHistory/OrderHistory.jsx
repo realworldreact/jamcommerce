@@ -27,7 +27,7 @@ export class OrderHistory extends Component {
     return (
       <div className={cx('orderHistory')}>
         <hr />
-        {orders.map(order => <Order {...order} />)}
+        {orders.map(order => <Order {...order} key={order.id} />)}
       </div>
     );
   }
