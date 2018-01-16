@@ -168,3 +168,17 @@ exports.modifyWebpackConfig = ({ config }) => {
   });
   return config;
 };
+
+exports.onCreatePage = async ({ page, boundActionCreators }) => {
+  const { createPage } = boundActionCreators;
+
+  return new Promise((resolve, _) => {
+    if (page.path.match(/^\/account/)) {
+      page.layout = 'account';
+
+      createPage(page);
+    }
+
+    resolve();
+  });
+};

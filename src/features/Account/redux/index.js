@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   combineActions,
   createAction,
@@ -9,9 +8,11 @@ import {
 
 import { addRedirectTo } from '../../redux';
 
-export const ns = 'account';
+export const ns = 'Account';
 
 export const types = createTypes(['didMountWithoutAuth', 'willUnmount'], ns);
+
+const getNS = state => state[ns];
 
 export const didMountWithoutAuth = createAction(
   types.didMountWithoutAuth,

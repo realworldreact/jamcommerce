@@ -13,6 +13,7 @@ import checkoutReducer, {
 import navReducer from './features/Nav/redux';
 import productReducer from './features/Product/redux';
 import productsReducer from './features/Products/redux';
+import accountReducer from './features/Account/redux';
 
 const formsReducer = combineForms(
   {
@@ -34,5 +35,6 @@ export default function createReducer() {
     navReducer,
     productReducer,
     productsReducer,
+    accountReducer,
   );
 }
