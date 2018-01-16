@@ -13,8 +13,8 @@ const propTypes = {
   city: PropTypes.string,
   state: PropTypes.string,
   zip: PropTypes.string,
-  simple: PropTypes.boolean,
-  selected: PropTypes.selected,
+  selected: PropTypes.bool,
+  simple: PropTypes.bool,
 };
 
 export default function AddressDisplay({

@@ -8,6 +8,7 @@ import Link from 'gatsby-link';
 import styles from './checkout.module.styl';
 import { cardSelector, selectedAddressSelector, orderSelector } from './redux';
 import { addressSelector } from '../Address/redux';
+import whiteCheckmark from './white-checkmark.svg';
 
 const cx = classnames.bind(styles);
 const propTypes = {
@@ -51,7 +52,8 @@ export function Success({
   return (
     <div className={cx('checkout')}>
       <header className={cx('header')}>
-        <h4>Success</h4>
+        <img alt="" className={cx('checkmark')} src={whiteCheckmark} />
+        <h4>Success!</h4>
       </header>
       <div className={cx('container')}>
         <header className={cx('success-header')}>
@@ -66,7 +68,7 @@ export function Success({
       <div>
         <div className={cx('success-content')}>
           <p>
-            We’ll be shipping your goods to {address1}, {address2} in {city}.
+            We’ll be shipping your goods to {address1}, {address2} in {city}.<br />
             You paid with your {brand} ending in {last4}.
           </p>
           <p>
@@ -75,10 +77,10 @@ export function Success({
           </p>
           <div className={cx('button-group')}>
             <Link to="/">
-              <button className={cx('next-button')}>Continue Shopping</button>
+              <button className={cx('back-button')}>Continue Shopping</button>
             </Link>
             <Link to="/account/orders">
-              <button className={cx('back-button')}>View Order History</button>
+              <button className={cx('next-button')}>View Order History</button>
             </Link>
           </div>
         </div>

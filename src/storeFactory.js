@@ -6,6 +6,7 @@ import { epics as addressEpics } from './features/Address/redux';
 import { epics as appEpics } from './features/redux';
 import { epics as authEpics } from './features/Auth/redux';
 import { epics as checkoutEpics } from './features/Checkout/redux';
+import { epics as orderHistoryEpics } from './features/OrderHistory/redux';
 
 export default function storeFactory(
   { epicDependencies = {}, enhancer = f => f } = {},
@@ -15,6 +16,7 @@ export default function storeFactory(
     ...appEpics,
     ...authEpics,
     ...checkoutEpics,
+    ...orderHistoryEpics,
   );
   const epicMiddleware = createEpicMiddleware(rootEpic, {
     dependencies: epicDependencies,

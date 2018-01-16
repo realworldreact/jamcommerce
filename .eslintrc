@@ -169,8 +169,6 @@
     "wrap-iife": [2, "any"],
     "wrap-regex": 2,
     "yoda": 0,
-
-    "jsx-quotes": [2, "prefer-single"],
     "react/display-name": 2,
     "react/jsx-boolean-value": [2, "always"],
     "react/jsx-closing-bracket-location": [
@@ -188,7 +186,6 @@
     "react/jsx-sort-props": [2, { "ignoreCase": true }],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
-    "react/jsx-wrap-multilines": 2,
     "react/no-did-mount-set-state": 2,
     "react/no-did-update-set-state": 2,
     "react/no-multi-comp": [2, { "ignoreStateless": true }],

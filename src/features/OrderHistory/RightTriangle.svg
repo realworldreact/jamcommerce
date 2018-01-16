@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Triangle</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Route:-/userProfile/orderHistory-overview" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1079.000000, -414.000000)">
+        <g id="History-Items" transform="translate(349.000000, 254.000000)" fill="#000000">
+            <g id="historyItem" transform="translate(0.000000, 116.000000)">
+                <g id="full-details" transform="translate(628.000000, 37.000000)">
+                    <polygon id="Triangle" transform="translate(108.035139, 13.000000) rotate(90.000000) translate(-108.035139, -13.000000) " points="108.035139 6.96486091 114.035139 19.0351391 102.035139 19.0351391"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
