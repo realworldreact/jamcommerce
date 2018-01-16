@@ -23,6 +23,7 @@
     "dependencies": {
         "berkeleys-redux-utils": "3.2.0",
         "classnames": "2.2.5",
+        "date-fns": "^1.29.0",
         "debug": "3.0.1",
         "dedent": "0.7.0",
         "gatsby": "^1.9.149",
