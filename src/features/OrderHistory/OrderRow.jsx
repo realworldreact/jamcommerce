@@ -34,7 +34,7 @@ class OrderRow extends Component {
                 : ''}
             </p>
           </div>
-          <h4 onClick={showOrderDetails}>
+          <h4 className={cx('clickable')} onClick={showOrderDetails}>
             Full details <img alt="" src={RightTriangle} />
           </h4>
         </div>

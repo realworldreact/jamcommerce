@@ -32,10 +32,10 @@ class Order extends Component {
         sku,
         title,
         price: {
-          amount: price / 100,
+          amount: String(price / 100),
         },
         total: {
-          amount: price / 100 * quantity,
+          amount: String(price / 100 * quantity),
         },
       }),
     );
@@ -48,10 +48,10 @@ class Order extends Component {
           </h4>
         </header>
         <Table
-          items={items}
-          editable={false}
-          total={total}
           clickOnRemove={_.noop}
+          editable={false}
+          items={items}
+          total={total}
         />
       </div>
     );

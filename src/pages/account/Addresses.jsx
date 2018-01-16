@@ -1,1 +1,1 @@
-export { default } from '../../features/Addresses';
+export { default } from '../../features/Address/Addresses';

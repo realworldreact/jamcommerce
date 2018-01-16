@@ -56,7 +56,7 @@ export class OrderHistory extends Component {
       return (
         <div className={cx('orderHistory')}>
           <Order {...currentOrder} />
-          <h4 onClick={backToHistory}>
+          <h4 className={cx('clickable')} onClick={backToHistory}>
             <img alt="" src={LeftTriangle} />Back to History
           </h4>
         </div>
