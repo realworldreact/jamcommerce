@@ -9,6 +9,7 @@ import styles from './address.module.styl';
 import AddressDisplay from './Display';
 import { addressSelector } from './redux';
 import ViewHeader from './Header.jsx';
+import AddAddress from './Add-Address';
 
 const cx = classnames.bind(styles);
 const propTypes = {
@@ -28,14 +29,15 @@ function AddressList({ addresses = [] }) {
 
   return (
     <div>
+      <AddAddress />
       <ViewHeader>Your Addresses</ViewHeader>
       <div className={cx('list')}>
         <div className={cx('address-container')}>
           {addresses.map(address =>
             <AddressDisplay
               {...address}
-              selected={false}
               key={address.id}
+              selected={false}
               simple={true}
             />,
           )}

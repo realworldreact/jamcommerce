@@ -7,14 +7,8 @@ import { createSelector } from 'reselect';
 
 import styles from './checkout.module.styl';
 import AddressList from './Address-List.jsx';
-import AddAddress from './Add-Address.jsx';
-import {
-  clickOnAddress,
-  clickOnAddAddress,
-  clickOnCancelAddAddress,
-  submitNewAddress,
-  showAddAddressSelector,
-} from './redux';
+import AddAddress from '../Address/Add-Address.jsx';
+import { clickOnAddress } from './redux';
 import { addressSelector, selectedAddressSelector } from '../Address/redux';
 
 const cx = classnames.bind(styles);
@@ -22,41 +16,23 @@ const propTypes = {
   addresses: PropTypes.array,
   selectedAddress: PropTypes.string,
   clickOnAddress: PropTypes.func.isRequired,
-  clickOnAddAddress: PropTypes.func.isRequired,
-  clickOnCancelAddAddress: PropTypes.func.isRequired,
   isAddressListEmpty: PropTypes.bool,
-  showAddAddress: PropTypes.bool,
-  submitNewAddress: PropTypes.func.isRequired,
 };
 const mapStateToProps = createSelector(
   addressSelector,
   selectedAddressSelector,
-  showAddAddressSelector,
-  (addressMap, selectedAddress, showAddAddress) => ({
+  (addressMap, selectedAddress) => ({
     addresses: _.map(addressMap, _.identity),
     selectedAddress,
     isAddressListEmpty: _.isEmpty(addressMap),
-    showAddAddress: _.isEmpty(addressMap) || showAddAddress,
   }),
 );
 
 const mapDispatchToProps = {
   clickOnAddress,
-  clickOnAddAddress,
-  clickOnCancelAddAddress,
-  submitNewAddress,
 };
 
-export function Shipping({
-  addresses,
-  selectedAddress,
-  clickOnAddress,
-  clickOnAddAddress,
-  clickOnCancelAddAddress,
-  isAddressListEmpty,
-  showAddAddress,
-  submitNewAddress,
-}) {
+export function Shipping({ addresses, selectedAddress, clickOnAddress }) {
   return (
     <div className={cx('shipping')}>
       <AddressList
@@ -65,12 +41,7 @@ export function Shipping({
         selectedAddress={selectedAddress}
       />
       <div className={cx('shipping-content')}>
-        {!showAddAddress &&
-          <button onClick={clickOnAddAddress}>Add Address</button>}
-        {showAddAddress && <AddAddress handleSubmit={submitNewAddress} />}
-        {showAddAddress &&
-          !isAddressListEmpty &&
-          <button onClick={clickOnCancelAddAddress}>Cancel</button>}
+        <AddAddress />
       </div>
     </div>
   );
