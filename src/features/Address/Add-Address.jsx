@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
@@ -12,6 +13,7 @@ import {
   clickOnCancelAddAddress,
   submitNewAddress,
   showAddAddressSelector,
+  addressSelector,
 } from './redux';
 
 const cx = classnames.bind(styles);
@@ -41,9 +43,11 @@ AddAddressDisplay.propTypes = {
 };
 
 const mapStateToProps = createSelector(
+  addressSelector,
   showAddAddressSelector,
-  showAddAddress => ({
+  (addressMap, showAddAddress) => ({
     showAddAddress,
+    isAddressListEmpty: _.isEmpty(addressMap),
   }),
 );
 
@@ -58,6 +62,7 @@ const AddAddress = ({
   submitNewAddress,
   clickOnAddAddress,
   clickOnCancelAddAddress,
+  isAddressListEmpty,
 }) =>
   <div className={cx('add-address')}>
     {!showAddAddress &&
@@ -65,6 +70,7 @@ const AddAddress = ({
         Add Address
       </button>}
     {showAddAddress &&
+      !isAddressListEmpty &&
       <AddAddressDisplay
         clickOnCancelAddAddress={clickOnCancelAddAddress}
         handleSubmit={submitNewAddress}
@@ -77,6 +83,7 @@ AddAddress.propTypes = {
   clickOnCancelAddAddress: PropTypes.func.isRequired,
   showAddAddress: PropTypes.bool,
   submitNewAddress: PropTypes.func.isRequired,
+  isAddressListEmpty: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddAddress);
