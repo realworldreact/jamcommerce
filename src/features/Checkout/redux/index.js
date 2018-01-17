@@ -83,7 +83,6 @@ export const formModels = {
 
 const defaultState = {
   selectedAddress: null,
-  showAddAddress: false,
   showBilling: false,
   showConfirm: false,
   showSuccess: false,
@@ -94,7 +93,6 @@ const defaultState = {
 
 const getNS = state => state[ns];
 export const selectedAddressSelector = state => getNS(state).selectedAddress;
-export const showAddAddressSelector = state => getNS(state).showAddAddress;
 export const showBillingSelector = state => getNS(state).showBilling;
 export const showConfirmSelector = state => getNS(state).showConfirm;
 export const showSuccessSelector = state => getNS(state).showSuccess;
@@ -104,17 +102,6 @@ export const transationSelector = state => getNS(state).transation;
 
 export default handleActions(
   () => ({
-    [types.clickOnAddAddress]: state => ({
-      ...state,
-      showAddAddress: true,
-    }),
-    [combineActions(
-      types.submitNewAddress,
-      types.clickOnCancelAddAddress,
-    )]: state => ({
-      ...state,
-      showAddAddress: false,
-    }),
     [types.clickOnAddress]: (state, { payload: selectedAddress }) => ({
       ...state,
       selectedAddress,
