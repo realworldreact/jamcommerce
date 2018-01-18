@@ -59,6 +59,8 @@ export const fullNameSelector = state =>
   isSignedInSelector(state)
     ? `${userSelector(state).firstname} ${userSelector(state).lastname}`
     : '';
+export const passwordSelector = state =>
+  isSignedInSelector(state) ? userSelector(state).password : '';
 
 export default handleActions(
   () => ({

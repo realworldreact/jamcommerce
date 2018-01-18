@@ -9,15 +9,17 @@ import styles from './account.module.styl';
 import {
   showEditProfile,
   showingEditProfileSelector,
-  cancelEditProfile,
+  cancelEdit,
   submitEditProfile,
   showChangePassword,
   showingChangePasswordSelector,
+  submitChangePassword,
   fullNameSelector,
   emailSelector,
 } from './redux';
 import EditProfile from './EditProfile';
 import ChangePassword from './ChangePassword';
+import { passwordSelector } from '../Auth/redux';
 
 const cx = classnames.bind(styles);
 const propTypes = {
@@ -35,18 +37,27 @@ const mapStateToProps = createSelector(
   emailSelector,
   showingEditProfileSelector,
   showingChangePasswordSelector,
-  (fullName, email, showingEditProfile, showingChangePassword) => ({
+  passwordSelector,
+  (
     fullName,
     email,
     showingEditProfile,
     showingChangePassword,
+    currentPassword,
+  ) => ({
+    fullName,
+    email,
+    showingEditProfile,
+    showingChangePassword,
+    currentPassword,
   }),
 );
 const mapDispatchToProps = {
   showEditProfile,
-  cancelEditProfile,
+  cancelEdit,
   submitEditProfile,
   showChangePassword,
+  submitChangePassword,
 };
 
 export class Profile extends Component {
@@ -65,8 +76,10 @@ export class Profile extends Component {
       email,
       showingEditProfile,
       submitEditProfile,
-      cancelEditProfile,
+      cancelEdit,
       showingChangePassword,
+      submitChangePassword,
+      currentPassword,
     } = this.props;
     return (
       <div className={cx('profile')}>
@@ -97,9 +110,14 @@ export class Profile extends Component {
           {showingEditProfile &&
             <EditProfile
               handleSubmit={submitEditProfile}
-              onCancelEdit={() => (console.log('HAI'), cancelEditProfile())}
+              onCancelEdit={cancelEdit}
             />}
-          {showingChangePassword && <ChangePassword />}
+          {showingChangePassword &&
+            <ChangePassword
+              handleSubmit={submitChangePassword}
+              onCancelEdit={cancelEdit}
+              currentPassword={currentPassword}
+            />}
         </div>
       </div>
     );

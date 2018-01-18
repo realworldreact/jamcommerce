@@ -22,10 +22,12 @@ export const types = createTypes(
     'didMountWithoutAuth',
     'willUnmount',
     'showEditProfile',
-    'cancelEditProfile',
+    'cancelEdit',
     'submitEditProfile',
     'editProfileSuccess',
     'showChangePassword',
+    'submitChangePassword',
+    'changePasswordSuccess',
   ],
   ns,
 );
@@ -51,10 +53,12 @@ export const didMountWithoutAuth = createAction(
 );
 export const willUnmount = createAction(types.willUnmount);
 export const showEditProfile = createAction(types.showEditProfile);
-export const cancelEditProfile = createAction(types.cancelEditProfile);
+export const cancelEdit = createAction(types.cancelEdit);
 export const submitEditProfile = createAction(types.submitEditProfile);
 export const showChangePassword = createAction(types.showChangePassword);
 export const editProfileSuccess = createAction(types.editProfileSuccess);
+export const changePasswordSuccess = createAction(types.changePasswordSuccess);
+export const submitChangePassword = createAction(types.submitChangePassword);
 
 const defaultState = {
   showingEditProfile: false,
@@ -66,6 +70,11 @@ export const formModels = {
     firstname: '',
     lastname: '',
     email: '',
+  },
+  changepassword: {
+    currentpass: '',
+    newpass: '',
+    confirmpass: '',
   },
 };
 
@@ -82,11 +91,13 @@ export default composeReducers(
         showingChangePassword: false,
       }),
       [combineActions(
-        types.cancelEditProfile,
+        types.cancelEdit,
         types.editProfileSuccess,
+        types.changePasswordSuccess,
       )]: state => ({
         ...state,
         showingEditProfile: false,
+        showingChangePassword: false,
       }),
       [types.showChangePassword]: state => ({
         ...state,
