@@ -6,7 +6,6 @@ import classnames from 'classnames/bind';
 import Link from 'gatsby-link';
 
 import styles from './account.module.styl';
-import { fullNameSelector, emailSelector } from '../Auth/redux';
 import {
   showEditProfile,
   showingEditProfileSelector,
@@ -14,6 +13,8 @@ import {
   submitEditProfile,
   showChangePassword,
   showingChangePasswordSelector,
+  fullNameSelector,
+  emailSelector,
 } from './redux';
 import EditProfile from './EditProfile';
 import ChangePassword from './ChangePassword';

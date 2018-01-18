@@ -8,8 +8,14 @@ import {
 } from 'berkeleys-redux-utils';
 
 import { addRedirectTo } from '../../redux';
+import {
+  fullNameSelector as topFullNameSelector,
+  emailSelector as topEmailSelector,
+} from '../../Auth/redux';
+import accountEpic from './account-epic';
 
 export const ns = 'Account';
+export const epics = [accountEpic];
 
 export const types = createTypes(
   [
@@ -18,6 +24,7 @@ export const types = createTypes(
     'showEditProfile',
     'cancelEditProfile',
     'submitEditProfile',
+    'editProfileSuccess',
     'showChangePassword',
   ],
   ns,
@@ -28,6 +35,14 @@ export const showingEditProfileSelector = state =>
   getNS(state).showingEditProfile;
 export const showingChangePasswordSelector = state =>
   getNS(state).showingChangePassword;
+export const fullNameSelector = state =>
+  showingEditProfileSelector(state)
+    ? `${state.forms.profile.firstname} ${state.forms.profile.lastname}`
+    : topFullNameSelector(state);
+export const emailSelector = state =>
+  showingEditProfileSelector(state)
+    ? state.forms.profile.email
+    : topEmailSelector(state);
 
 export const didMountWithoutAuth = createAction(
   types.didMountWithoutAuth,
@@ -39,6 +54,7 @@ export const showEditProfile = createAction(types.showEditProfile);
 export const cancelEditProfile = createAction(types.cancelEditProfile);
 export const submitEditProfile = createAction(types.submitEditProfile);
 export const showChangePassword = createAction(types.showChangePassword);
+export const editProfileSuccess = createAction(types.editProfileSuccess);
 
 const defaultState = {
   showingEditProfile: false,
@@ -65,7 +81,10 @@ export default composeReducers(
         showingEditProfile: true,
         showingChangePassword: false,
       }),
-      [types.cancelEditProfile]: state => ({
+      [combineActions(
+        types.cancelEditProfile,
+        types.editProfileSuccess,
+      )]: state => ({
         ...state,
         showingEditProfile: false,
       }),
