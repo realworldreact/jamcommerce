@@ -5,6 +5,7 @@ import {
 } from 'berkeleys-redux-utils';
 
 import authEpic from './auth-epic.js';
+import { types as accountTypes } from '../../Account/redux';
 
 export const ns = 'Auth';
 
@@ -18,18 +19,21 @@ export const formModels = {
   },
 };
 
-export const types = createTypes(
-  [
-    'onSignupSubmit',
-    'onSigninSubmit',
-    'userParseError',
-    'userParseSuccess',
-    'userSignupSuccess',
-    'userLoginFailed',
-    'userLoginSuccess',
-  ],
-  ns,
-);
+export const types = {
+  ...createTypes(
+    [
+      'onSignupSubmit',
+      'onSigninSubmit',
+      'userParseError',
+      'userParseSuccess',
+      'userSignupSuccess',
+      'userLoginFailed',
+      'userLoginSuccess',
+    ],
+    ns,
+  ),
+  submitEditProfile: accountTypes.submitEditProfile,
+};
 
 export const onSigninSubmit = createAction(types.onSigninSubmit);
 export const onSignupSubmit = createAction(types.onSignupSubmit);
@@ -51,6 +55,12 @@ export const nameSelector = state =>
   isSignedInSelector(state) ? userSelector(state).firstname : '';
 export const emailSelector = state =>
   isSignedInSelector(state) ? userSelector(state).email : '';
+export const fullNameSelector = state =>
+  isSignedInSelector(state)
+    ? `${userSelector(state).firstname} ${userSelector(state).lastname}`
+    : '';
+export const passwordSelector = state =>
+  isSignedInSelector(state) ? userSelector(state).password : '';
 
 export default handleActions(
   () => ({
@@ -66,6 +76,10 @@ export default handleActions(
       ...state,
       loginMessage: 'User created. Please sign in',
       loginError: '',
+    }),
+    [types.submitEditProfile]: (state, { payload: profile }) => ({
+      ...state,
+      user: { ...profile, password: state.user.password },
     }),
   }),
   defaultState,
