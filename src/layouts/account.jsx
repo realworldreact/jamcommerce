@@ -49,13 +49,28 @@ export class TemplateWrapper extends PureComponent {
               <nav className={cx('nav')}>
                 <ul className={cx('nav-list')}>
                   <li>
-                    <Link to="/account/orders">Order History</Link>
+                    <Link
+                      to="/account/orders"
+                      activeStyle={{ textDecoration: 'underline' }}
+                    >
+                      Order History
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/account/addresses">Addresses</Link>
+                    <Link
+                      to="/account/addresses"
+                      activeStyle={{ textDecoration: 'underline' }}
+                    >
+                      Addresses
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/account/account">Account</Link>
+                    <Link
+                      to="/account/account"
+                      activeStyle={{ textDecoration: 'underline' }}
+                    >
+                      Account
+                    </Link>
                   </li>
                 </ul>
               </nav>
