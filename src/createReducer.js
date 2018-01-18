@@ -13,13 +13,16 @@ import checkoutReducer, {
 import navReducer from './features/Nav/redux';
 import productReducer from './features/Product/redux';
 import productsReducer from './features/Products/redux';
-import accountReducer from './features/Account/redux';
+import accountReducer, {
+  formModels as accountModels,
+} from './features/Account/redux';
 import ordersReducer from './features/OrderHistory/redux';
 
 const formsReducer = combineForms(
   {
     ...authFormModels,
     ...checkoutModels,
+    ...accountModels,
   },
   'forms',
 );

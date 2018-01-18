@@ -10,6 +10,8 @@ import { fullNameSelector, emailSelector } from '../Auth/redux';
 import {
   showEditProfile,
   showingEditProfileSelector,
+  cancelEditProfile,
+  submitEditProfile,
   showChangePassword,
   showingChangePasswordSelector,
 } from './redux';
@@ -21,6 +23,7 @@ const propTypes = {
   fullName: PropTypes.string,
   email: PropTypes.string,
   showEditProfile: PropTypes.func,
+  cancelEditProfile: PropTypes.func,
   showingEditProfile: PropTypes.bool,
   showChangePassword: PropTypes.func,
   showingChangePassword: PropTypes.bool,
@@ -40,6 +43,8 @@ const mapStateToProps = createSelector(
 );
 const mapDispatchToProps = {
   showEditProfile,
+  cancelEditProfile,
+  submitEditProfile,
   showChangePassword,
 };
 
@@ -58,6 +63,8 @@ export class Profile extends Component {
       fullName,
       email,
       showingEditProfile,
+      submitEditProfile,
+      cancelEditProfile,
       showingChangePassword,
     } = this.props;
     return (
@@ -86,7 +93,11 @@ export class Profile extends Component {
           </div>
         </div>
         <div className={cx('right')}>
-          {showingEditProfile && <EditProfile />}
+          {showingEditProfile &&
+            <EditProfile
+              handleSubmit={submitEditProfile}
+              onCancelEdit={() => (console.log('HAI'), cancelEditProfile())}
+            />}
           {showingChangePassword && <ChangePassword />}
         </div>
       </div>
