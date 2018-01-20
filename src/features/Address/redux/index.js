@@ -17,6 +17,8 @@ export const types = createTypes(
     'clickOnAddAddress',
     'clickOnCancelAddAddress',
     'submitNewAddress',
+    'deleteAddress',
+    'editAddress',
   ],
   ns,
 );
@@ -29,6 +31,8 @@ export const makeAddressAction = () => ({ address: { isAddress: true } });
 export const isAddressAction = ({
   meta: { address: { isAddress } = {} } = {},
 }) => !!isAddress;
+export const isAddressChangeAction = (...args) =>
+  args[0].type === types.deleteAddress || isAddressAction(args);
 export const clickOnAddAddress = createAction(types.clickOnAddAddress);
 export const clickOnCancelAddAddress = createAction(
   types.clickOnCancelAddAddress,
@@ -38,6 +42,8 @@ export const submitNewAddress = createAction(
   address => ({ ...address, country: 'USA' }),
   makeAddressAction,
 );
+export const deleteAddress = createAction(types.deleteAddress);
+export const editAddress = createAction(types.editAddress);
 
 export const formModels = {
   newAddress: {
@@ -79,9 +85,20 @@ export function addressReducer(state = {}, action) {
   return state;
 }
 
+export function addressDeleteReducer(state = {}, action) {
+  if (action.type === types.deleteAddress) {
+    console.log(state, action);
+    // delete state[action.payload];
+    // console.log(state[action.payload], state);
+    return { ...state, [action.payload]: null };
+  }
+  return state;
+}
+
 export default composeReducers(
   ns,
   addressReducer,
+  addressDeleteReducer,
   handleActions(
     () => ({
       [types.persistedAddressParsed]: (state, { payload }) => ({
