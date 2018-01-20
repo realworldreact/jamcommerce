@@ -17,34 +17,40 @@ const propTypes = {
 };
 
 const mapStateToProps = createSelector(addressSelector, addressMap => ({
-  addresses: _.map(addressMap, _.identity),
+  addresses: Object.values(addressMap).filter(v =>
+    v.hasOwnProperty('address1'),
+  ),
 }));
 
 const mapDispatchToProps = null;
 
 function AddressList({ addresses = [] }) {
-  if (addresses.length === 0) {
-    return null;
-  }
-
-  return (
-    <div>
-      <AddAddress />
-      <ViewHeader>Your Addresses</ViewHeader>
-      <div className={cx('list')}>
-        <div className={cx('address-container')}>
-          {addresses.map(address =>
-            <AddressDisplay
-              {...address}
-              key={address.id}
-              selected={false}
-              simple={true}
-            />,
-          )}
+  if (addresses.length > 0) {
+    return (
+      <div>
+        <AddAddress />
+        <ViewHeader>Your Addresses</ViewHeader>
+        <div className={cx('list')}>
+          <div className={cx('address-container')}>
+            {addresses.map(address =>
+              <AddressDisplay
+                {...address}
+                key={address.id}
+                selected={false}
+                simple={true}
+              />,
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div>
+        <AddAddress />
+      </div>
+    );
+  }
 }
 AddressList.displayName = 'AddressList';
 AddressList.propTypes = propTypes;
