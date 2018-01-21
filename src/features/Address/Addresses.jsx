@@ -38,13 +38,8 @@ function AddressList({ addresses = [], editAddress, deleteAddress }) {
         <div className={cx('list')}>
           <div className={cx('address-container')}>
             {addresses.map(address =>
-              <div>
-                <AddressDisplay
-                  {...address}
-                  key={address.id}
-                  selected={false}
-                  simple={true}
-                />
+              <div key={address.id}>
+                <AddressDisplay {...address} selected={false} simple={true} />
                 <div className={cx('address-controls')}>
                   <button onClick={() => editAddress(address.id)}>Edit</button>
                   <button onClick={() => deleteAddress(address.id)}>

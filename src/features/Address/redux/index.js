@@ -32,7 +32,7 @@ export const isAddressAction = ({
   meta: { address: { isAddress } = {} } = {},
 }) => !!isAddress;
 export const isAddressChangeAction = (...args) =>
-  args[0].type === types.deleteAddress || isAddressAction(args);
+  args[0].type === types.deleteAddress || isAddressAction(...args);
 export const clickOnAddAddress = createAction(types.clickOnAddAddress);
 export const clickOnCancelAddAddress = createAction(
   types.clickOnCancelAddAddress,
