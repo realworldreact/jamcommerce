@@ -11,35 +11,29 @@ const propTypes = {};
 
 export default function Subheader() {
   return (
-    <div className={ cx('subheader') }>
-      <div className={ cx('subheader-container') }>
+    <div className={cx('subheader')}>
+      <div className={cx('subheader-container')}>
         <div>
-          <img
-            className={ cx('img') }
-            src={ subheader1 }
-          />
+          <img className={cx('img')} src={subheader1} />
         </div>
         <div>
-          <h2 className={ cx('title') }>Get up and running fast</h2>
+          <h2 className={cx('title')}>Get up and running fast</h2>
         </div>
-        <div className={ cx('copy') }>
+        <div className={cx('copy')}>
           JAM Commerce has a minimal learning curve. If you know how to fetch an
           API and are familiar with Git, you can make your front-end code a
           full-stack e-commerce solution in record time.
         </div>
         <LearnMore />
       </div>
-      <div className={ cx('subheader-container') }>
+      <div className={cx('subheader-container')}>
         <div>
-          <img
-            className={ cx('img') }
-            src={ subheader2 }
-          />
+          <img className={cx('img')} src={subheader2} />
         </div>
         <div>
-          <h2 className={ cx('title') }>Use tech that you love</h2>
+          <h2 className={cx('title')}>Use tech that you love</h2>
         </div>
-        <p className={ cx('copy') }>
+        <p className={cx('copy')}>
           JAM Commerce is headless, meaning you can use whatever front-end you'd
           like. You can also update and modify your stack by simply reconnecting
           the API endpoints. For this example app, we used the Gatsby

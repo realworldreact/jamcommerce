@@ -9,13 +9,10 @@ const propTypes = {};
 
 export default function LearnMore() {
   return (
-    <div className={ cx('learn-more') }>
+    <a className={cx('learn-more')} href="/women/shoes">
       Learn More
-      <img
-        className={ cx('triangle') }
-        src={ rightTriangle }
-      />
-    </div>
+      <img className={cx('triangle')} src={rightTriangle} />
+    </a>
   );
 }
 LearnMore.displayName = 'LearnMore';

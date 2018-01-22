@@ -12,14 +12,19 @@
 .header-right
   $padding-lg()
   margin-left 30px
-  text-align center
+  text-align left
   width 40%
   +$below(md)
     margin-left 0
     width 60%
 
-  h3
-    line-height 40px
+  h1
+    line-height 1.2em
+    margin-bottom 28px
+    width 280px
+
+  .copy
+    line-height 1.5em
 
 .content
   $center(70%)
@@ -28,6 +33,10 @@
   +$below(lg)
     $center(76%)
     $row(between)
+    .product-item
+      width 40%
+      img
+        max-width 100%
   +$below(md)
     $center(90%)
     $row(around)
@@ -52,6 +61,10 @@ $image-scale = 1.15
     transition all .2s ease-in-out
     transform scale3d(1,1,1)
     &:hover
+      transform scale3d($image-scale, $image-scale, $image-scale)
+
+  &:hover
+    img
       transform scale3d($image-scale, $image-scale, $image-scale)
 
   &:hover > .preview-button-container

@@ -8,7 +8,11 @@ import Modal from 'react-modal';
 
 import styles from './products.module.styl';
 
-import { clickOnClosePreview, clickOnProductPreview, showProductModalSelector } from './redux';
+import {
+  clickOnClosePreview,
+  clickOnProductPreview,
+  showProductModalSelector,
+} from './redux';
 import calloutImg from './callout-img.png';
 import Callout from '../Callout';
 
@@ -31,7 +35,7 @@ const mapStateToProps = createSelector(
   showProductModalSelector,
   currentProduct => ({
     currentProduct,
-  })
+  }),
 );
 const mapDispatchToProps = {
   clickOnProductPreview: (e, name) => {
@@ -62,99 +66,87 @@ export class Products extends PureComponent {
     } = this.props;
     const products = edges.map(({ node }) => node);
     return (
-      <div className={ cx('product') }>
-        <div className={ cx('header') }>
+      <div className={cx('product')}>
+        <div className={cx('header')}>
           <Callout>
             <img
-              alt={ `
+              alt={`
               a woman's legs dangle as she sits on a ledge wearing fashionable
               and hip heels
-              ` }
-              src={ calloutImg }
+              `}
+              src={calloutImg}
             />
           </Callout>
-          <div className={ cx('header-right') }>
-            <header className={ cx('title') }>
-              <h3>
-                { title }
-              </h3>
+          <div className={cx('header-right')}>
+            <header className={cx('title')}>
+              <h1>
+                {title}
+              </h1>
             </header>
-            <div className={ cx('copy') }>
-              { description }
+            <div className={cx('copy')}>
+              {description}
             </div>
           </div>
         </div>
-        <div className={ cx('content') }>
-          { products.map(({ name, sale, prices, slug, images: { front } }, i) => {
-            const isSale = !!sale;
-            const Price = isSale ? 'del' : 'span';
-            const _sale = isSale ?
-              (
-                <span className={ cx('sale') }>
-                  ${ sale }
-                </span>
-              ) :
-              null;
-            return (
-              <Link
-                className={ cx('product-item') }
-                key={ i }
-                to={ `/women/shoes/${slug}` }
+        <div className={cx('content')}>
+          {products.map(
+            ({ name, sale, prices, slug, images: { front } }, i) => {
+              const isSale = !!sale;
+              const Price = isSale ? 'del' : 'span';
+              const _sale = isSale
+                ? <span className={cx('sale')}>
+                    ${sale}
+                  </span>
+                : null;
+              return (
+                <Link
+                  className={cx('product-item')}
+                  key={i}
+                  to={`/women/shoes/${slug}`}
                 >
-                <div>
-                  <div className={ cx('img') }>
-                    <img
-                      alt='alt provided by content below'
-                      { ...front }
-                    />
-                  </div>
-                  <header className={ cx('title') }>
-                    <h4>
-                      { name }
-                    </h4>
-                  </header>
-                  <div className={ cx('price') }>
-                    <Price>${ prices[0].amount }</Price> { _sale }
-                  </div>
-                </div>
-                <div className={ cx('preview-button-container') }>
-                  <button
-                    className={ cx('preview-button') }
-                    onClick={ e => clickOnProductPreview(e, name) }
-                    >
-                    Quick Shop
-                  </button>
-                </div>
-                <Modal
-                  isOpen={ currentProduct === name }
-                  style={ modalStyles }
-                  >
-                  <div className={ cx('preview-container') }>
-                    <div className={ cx('preview-content') }>
-                      { name }
+                  <div>
+                    <div className={cx('img')}>
+                      <img alt="alt provided by content below" {...front} />
                     </div>
-                    <button className={ cx('preview-close-button') }>
-                      X
+                    <header className={cx('title')}>
+                      <h4>
+                        {name}
+                      </h4>
+                    </header>
+                    <div className={cx('price')}>
+                      <Price>${prices[0].amount}</Price> {_sale}
+                    </div>
+                  </div>
+                  <div className={cx('preview-button-container')}>
+                    <button
+                      className={cx('preview-button')}
+                      onClick={e => clickOnProductPreview(e, name)}
+                    >
+                      Quick Shop
                     </button>
                   </div>
-                </Modal>
-              </Link>
-            );
-          }) }
+                  <Modal isOpen={currentProduct === name} style={modalStyles}>
+                    <div className={cx('preview-container')}>
+                      <div className={cx('preview-content')}>
+                        {name}
+                      </div>
+                      <button className={cx('preview-close-button')}>X</button>
+                    </div>
+                  </Modal>
+                </Link>
+              );
+            },
+          )}
         </div>
       </div>
     );
   }
 }
 
-
 Products.displayName = 'Products';
 Products.propTypes = propTypes;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
 
 export const pageQuery = graphql`
   fragment Products_copy on JAMCopy {
