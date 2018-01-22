@@ -7,6 +7,7 @@ import Link from 'gatsby-link';
 import Modal from 'react-modal';
 
 import styles from './products.module.styl';
+import Product from '../Product';
 
 import {
   clickOnClosePreview,
