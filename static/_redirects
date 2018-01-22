@@ -1,1 +1,1 @@
-/api/* http://api.berkeleytrue.com/:splat 200
+/api/* http://159.89.37.225:9111 /:splat 200
