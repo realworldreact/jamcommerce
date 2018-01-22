@@ -11,12 +11,16 @@ const propTypes = {
   addresses: PropTypes.array,
   clickOnAddress: PropTypes.func,
   selectedAddress: PropTypes.string,
+  editAddress: PropTypes.func,
+  deleteAddress: PropTypes.func,
 };
 
 export default function AddressList({
   addresses = [],
   clickOnAddress,
   selectedAddress,
+  editAddress,
+  deleteAddress,
 }) {
   if (addresses.length === 0) {
     return null;
@@ -27,16 +31,21 @@ export default function AddressList({
       <ViewHeader>Your Address</ViewHeader>
       <div className={cx('address-container')}>
         {addresses.map(address =>
-          <button
-            className={cx('list-button')}
-            key={address.id}
-            onClick={() => clickOnAddress(address.id)}
-          >
-            <AddressDisplay
-              {...address}
-              selected={address.id === selectedAddress}
-            />
-          </button>,
+          <div key={address.id}>
+            <button
+              className={cx('list-button')}
+              onClick={() => clickOnAddress(address.id)}
+            >
+              <AddressDisplay
+                {...address}
+                selected={address.id === selectedAddress}
+              />
+            </button>
+            <div className={cx('address-controls')}>
+              <button onClick={() => editAddress(address.id)}>Edit</button>
+              <button onClick={() => deleteAddress(address.id)}>Delete</button>
+            </div>
+          </div>,
         )}
       </div>
     </div>

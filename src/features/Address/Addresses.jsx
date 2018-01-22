@@ -17,7 +17,7 @@ import {
 } from './redux';
 import ViewHeader from './Header.jsx';
 import AddAddress from './Add-Address';
-import EditAddress from './Edit-Address';
+import EditAddressModal from './EditAddressModal';
 
 const cx = classnames.bind(styles);
 const propTypes = {
@@ -94,20 +94,7 @@ class AddressList extends React.PureComponent {
                 </div>,
               )}
             </div>
-            <Modal isOpen={!!showEditAddressModal} style={modalStyles}>
-              <div className={cx('address-edit-container')}>
-                <div className={cx('address-edit-content')}>
-                  <ViewHeader>Edit Address</ViewHeader>
-                  <EditAddress />
-                </div>
-                <button
-                  className={cx('address-edit-close-button')}
-                  onClick={closeEditAddress}
-                >
-                  X
-                </button>
-              </div>
-            </Modal>
+            <EditAddressModal />
           </div>
         </div>
       );
