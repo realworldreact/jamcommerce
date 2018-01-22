@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import classnames from 'classnames/bind';
+import GithubForkRibbon from 'react-github-fork-ribbon';
 
 import './index.styl';
 import styles from './main.module.styl';
@@ -37,6 +38,14 @@ export class TemplateWrapper extends PureComponent {
           ]}
           title="JamCommerce"
         />
+        <GithubForkRibbon
+          color="green"
+          href="https://github.com/realworldreact/jamcommerce"
+          position="left"
+          target="_blank"
+        >
+          Fork me on GitHub
+        </GithubForkRibbon>
         <Nav />
         <div className={cx('content')}>
           {children()}
