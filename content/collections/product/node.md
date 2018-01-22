@@ -2,7 +2,7 @@
 name: Node.js
 description: "Products are added to the inventory from the admin panel. You can access this from the gocommerce.com/admin page. Check it out to learn more.\_"
 details:
-  - 100% Static
+  - 100% pre-built
   - Easily integrate a static content-management system such as Netlify-CMS
   - Track Inventory with a git-centric static database (under development)
 prices:

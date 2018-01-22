@@ -16,12 +16,7 @@ import { addRedirectTo } from '../../redux';
 const ns = 'nav';
 
 const types = createTypes(
-  [
-    'clickOnSubNav',
-    'clickOnSignIn',
-    'hoverOnSubNav',
-    'mouseLeaveMenu',
-  ],
+  ['clickOnSubNav', 'clickOnSignIn', 'hoverOnSubNav', 'mouseLeaveMenu'],
   ns,
 );
 
@@ -29,48 +24,31 @@ const womensLink = '/women/shoes';
 const defaultState = {
   isMenuOpen: false,
   currentDirectory: 'New Arrivals',
-  directories: [
-    'New Arrivals',
-    'Women',
-    'Men',
-    'Collections',
-  ],
+  directories: ['New Arrivals', 'Women', 'Men', 'Collections'],
   directoriesById: {
     'New Arrivals': {
       title: 'New Arrivals',
       href: womensLink,
       view: 'Image',
-      categories: [
-        'Women',
-        'Men',
-      ],
+      categories: ['Women', 'Men'],
     },
     Women: {
       title: 'Women',
       href: womensLink,
       view: 'Text',
-      categories: [
-        'Clothing',
-        'Accessories',
-      ],
+      categories: ['Clothing', 'Accessories'],
     },
     Men: {
       title: 'Men',
       href: womensLink,
       view: 'Text',
-      categories: [
-        'Clothing',
-        'Accessories',
-      ],
+      categories: ['Clothing', 'Accessories'],
     },
     Collections: {
       title: 'Collections',
       href: womensLink,
       view: 'Image',
-      categories: [
-        'Summer Colors',
-        'Essential Handbags',
-      ],
+      categories: ['Summer Accessories', 'Essential Shoes'],
     },
   },
   categoriesById: {
@@ -84,13 +62,13 @@ const defaultState = {
       img: menuMen,
       href: womensLink,
     },
-    'Summer Colors': {
-      title: 'Summer Colors',
+    'Summer Accessories': {
+      title: 'Summer Accessories',
       img: menuSummerAccessories,
       href: womensLink,
     },
-    'Essential Handbags': {
-      title: 'Essential Handbags',
+    'Essential Shoes': {
+      title: 'Essential Shoes',
       img: menuEssentialShoes,
       href: womensLink,
     },
