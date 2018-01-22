@@ -1,6 +1,8 @@
 .carousel
   $center(1078px)
   padding $padding-xl-horizontal 0
+  +$below(md)
+    padding 0
 
 .carousel-left
   width 20px
@@ -32,13 +34,20 @@
 .subheader-container
   width 450px
   +$below(md)
+    width 45%
     &:first-child
       padding-bottom 70px
+    h2
+      font-size 1.2em
   .img
     size(450px, 400px)
     padding-bottom $padding-lg-horizontal
+    +$below(md)
+      size(155px, 138px)
   .copy
     padding: $padding-base-horizontal 0
+    +$below(md)
+      font-size 0.8em
 
 .learn-more
   color $primary
@@ -168,6 +177,7 @@ $pager-copy-text()
       transform scale(1.15)
   +$below(1119px)
     padding-bottom 45px
+    width 40%
   .title
     font-weight bold
   .sale
@@ -175,6 +185,8 @@ $pager-copy-text()
   img
     max-width 250px
     transition all .2s ease-in-out
+    +$below(1119px)
+      max-width 100%
 
 
 .prefooter
@@ -182,4 +194,4 @@ $pager-copy-text()
   color $text-description
   font-weight 300
   line-height 34px
-  padding 150px 0
+  padding 150px 20px

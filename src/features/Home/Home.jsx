@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames/bind';
+import LazyLoad from 'react-lazyload';
 
 import styles from './home.module.styl';
 import FalcorImg from './falcor-front.png';
@@ -45,25 +46,29 @@ export default class Home extends Component {
     return (
       <div className={cx('home')}>
         <Carousel />
-        <Subheader />
-        <div className={cx('content-container')}>
-          <Callout className={cx('callout')}>
-            <header className={cx('copy')}>
-              <h1 className={cx('title')}>Free & Open Source</h1>
-              <p>
-                JAM Commerce is completely free to use and modify as you like.
-                Create your own version or fork it and contribute!
-              </p>
-              <LearnMore />
-            </header>
-            <img className={cx('img')} src={callout} />
-          </Callout>
-          <div className={cx('featured-container')}>
-            {featured.map(featured =>
-              <Featured key={featured.title} {...featured} />,
-            )}
+        <LazyLoad height={620}>
+          <Subheader />
+        </LazyLoad>
+        <LazyLoad height={650}>
+          <div className={cx('content-container')}>
+            <Callout className={cx('callout')}>
+              <header className={cx('copy')}>
+                <h1 className={cx('title')}>Free & Open Source</h1>
+                <p>
+                  JAM Commerce is completely free to use and modify as you like.
+                  Create your own version or fork it and contribute!
+                </p>
+                <LearnMore />
+              </header>
+              <img className={cx('img')} src={callout} />
+            </Callout>
+            <div className={cx('featured-container')}>
+              {featured.map(featured =>
+                <Featured key={featured.title} {...featured} />,
+              )}
+            </div>
           </div>
-        </div>
+        </LazyLoad>
         <div className={cx('prefooter')}>
           <h4>
             Learn More about the JAMstack from the links in the footer, or click
