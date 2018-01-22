@@ -7,6 +7,7 @@ import {
 } from 'berkeleys-redux-utils';
 import { createSelector } from 'reselect';
 import persistAddressEpic from './persist-address-epic.js';
+import { actions } from 'react-redux-form';
 
 export const epics = [persistAddressEpic];
 
@@ -19,6 +20,7 @@ export const types = createTypes(
     'submitNewAddress',
     'deleteAddress',
     'editAddress',
+    'closeEditAddress',
   ],
   ns,
 );
@@ -44,9 +46,20 @@ export const submitNewAddress = createAction(
 );
 export const deleteAddress = createAction(types.deleteAddress);
 export const editAddress = createAction(types.editAddress);
+export const closeEditAddress = createAction(types.closeEditAddress);
+export const updateEditAddress = address =>
+  actions.merge('forms.editAddress', address);
 
 export const formModels = {
   newAddress: {
+    name: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    zip: '',
+  },
+  editAddress: {
     name: '',
     address1: '',
     address2: '',
@@ -66,6 +79,8 @@ export const shippingAddressSelector = createSelector(
   selectedAddressSelector,
   (addresses, id) => addresses[id],
 );
+export const showEditAddressModalSelector = state =>
+  getNS(state).showEditAddressModal;
 
 export function addressReducer(state = {}, action) {
   if (isAddressAction(action)) {
@@ -87,7 +102,6 @@ export function addressReducer(state = {}, action) {
 
 export function addressDeleteReducer(state = {}, action) {
   if (action.type === types.deleteAddress) {
-    console.log(state, action);
     // delete state[action.payload];
     // console.log(state[action.payload], state);
     return { ...state, [action.payload]: null };
@@ -112,9 +126,15 @@ export default composeReducers(
       [combineActions(
         types.submitNewAddress,
         types.clickOnCancelAddAddress,
+        types.closeEditAddress,
       )]: state => ({
         ...state,
         showAddAddress: false,
+        showEditAddressModal: null,
+      }),
+      [types.editAddress]: (state, { payload }) => ({
+        ...state,
+        showEditAddressModal: payload,
       }),
     }),
     {},

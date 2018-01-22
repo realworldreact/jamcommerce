@@ -70,14 +70,6 @@ export const submitNewAddress = createAction(
 export const willUnmount = createAction(types.willUnmount);
 
 export const formModels = {
-  newAddress: {
-    name: '',
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    zip: '',
-  },
   billing: { name: '' },
 };
 

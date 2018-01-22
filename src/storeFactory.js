@@ -1,5 +1,6 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
+import thunkMiddleware from 'redux-thunk';
 
 import createReducer from './createReducer.js';
 import { epics as addressEpics } from './features/Address/redux';
@@ -25,6 +26,6 @@ export default function storeFactory(
   });
   return createStore(
     createReducer(),
-    compose(applyMiddleware(epicMiddleware), enhancer),
+    compose(applyMiddleware(epicMiddleware, thunkMiddleware), enhancer),
   );
 }
