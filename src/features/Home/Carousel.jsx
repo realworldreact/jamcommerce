@@ -11,6 +11,8 @@ import banner3 from './banner-3.png';
 import copy1 from './carousel-text-1.png';
 import copy2 from './carousel-text-2.png';
 import copy3 from './carousel-text-3.png';
+import carouselLeft from './carousel-left.png';
+import carouselRight from './carousel-right.png';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
@@ -42,6 +44,10 @@ export default class Carousel extends PureComponent {
     }, bannerTimeout);
   }
   componentWillUnmount() {
+    this.stopInterval();
+  }
+
+  stopInterval() {
     if (this._key) {
       clearInterval(this._key);
     }
@@ -67,19 +73,28 @@ export default class Carousel extends PureComponent {
       <View className={cx('pager-container')} key={src}>
         <img alt="foo" className={cx('pager-img')} src={src} />
         <img alt="foo" className={cx('pager-copy-img')} src={copies[i]} />
-
-        {/* <h2 className={cx('pager-copy-top')}>
-          <span>Dynamically</span>
-        </h2>
-        <h1 className={cx('pager-copy-bottom')}>
-          <span>STATIC</span>
-        </h1>
-        <hr className={cx('pager-hr')} />
-        <span className={cx('pager-footer')}>
-          Fast, Secure, & Infinitely Scalable
-        </span> */}
       </View>
     );
+  };
+
+  prev = () => {
+    const { currentView } = this.state;
+
+    this.stopInterval();
+
+    this.setState({
+      currentView: currentView > 0 ? currentView - 1 : banners.length - 1,
+    });
+  };
+
+  next = () => {
+    const { currentView } = this.state;
+
+    this.stopInterval();
+
+    this.setState({
+      currentView: (currentView + 1) % banners.length,
+    });
   };
 
   render() {
@@ -95,6 +110,16 @@ export default class Carousel extends PureComponent {
           >
             {banners.map(this._carouselItem)}
           </Track>
+          <img
+            className={cx('carousel-left')}
+            src={carouselLeft}
+            onClick={this.prev}
+          />
+          <img
+            className={cx('carousel-right')}
+            src={carouselRight}
+            onClick={this.next}
+          />
           <nav className={cx('pager-nav')}>
             {banners.map((src, index) =>
               <ProgressPage
