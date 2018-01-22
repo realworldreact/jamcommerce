@@ -1,7 +1,9 @@
 import { combineReducers } from 'berkeleys-redux-utils';
 import { combineForms } from 'react-redux-form';
 
-import addressReducer from './features/Address/redux';
+import addressReducer, {
+  formModels as addressModels,
+} from './features/Address/redux';
 import appReducer from './features/redux';
 import authReducer, {
   formModels as authFormModels,
@@ -23,6 +25,7 @@ const formsReducer = combineForms(
     ...authFormModels,
     ...checkoutModels,
     ...accountModels,
+    ...addressModels,
   },
   'forms',
 );

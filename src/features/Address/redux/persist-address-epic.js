@@ -7,7 +7,11 @@ import { filter } from 'rxjs/operator/filter';
 import { ignoreElements } from 'rxjs/operator/ignoreElements';
 import { map } from 'rxjs/operator/map';
 
-import { isAddressAction, addressSelector, persistedAddressParsed } from './';
+import {
+  isAddressChangeAction,
+  addressSelector,
+  persistedAddressParsed,
+} from './';
 import { types as app } from '../../redux';
 
 const key = 'address';
@@ -16,10 +20,9 @@ export function persistAddressEpic(actions, { getState }, { localStorage }) {
   return _if(
     () => !localStorage,
     defer(() => {
-      console.log('no localStorage found');
       return empty();
     }),
-    actions::filter(isAddressAction)::map(() =>
+    actions::filter(isAddressChangeAction)::map(() =>
       addressSelector(getState()),
     )::_do(address => {
       localStorage.setItem(key, JSON.stringify(address));

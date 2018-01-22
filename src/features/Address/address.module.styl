@@ -30,3 +30,56 @@ header.view-header
   
 .submit
   $button()
+
+.cancel
+  $button()
+  background-color white
+  border 1px solid black
+  color black
+  margin-top 2em
+
+.address-controls
+  $row('between')
+  $padding-sm()
+
+  button
+    background-color white
+    border 1px solid black 
+  
+
+  &:hover > .address-edit-button-container
+    display block
+  .address-edit-button-container
+    bottom 25%
+    display none
+    left 0
+    position absolute
+    text-align center
+    width 100%
+  .address-edit-button
+    border-radius 8px
+    width 50%
+
+.address-edit-container
+  position relative
+  height 100%
+  width 100%
+  .address-edit-content
+    border 20px solid lightgray
+    bottom 0
+    height 100%
+    left 0
+    position absolute
+    right 0
+    top 0
+    width 100%
+    padding 40px
+.address-edit-close-button
+  background-color lightgray
+  border none
+  border-radius 0
+  height 52px
+  position absolute
+  right 0
+  top 0
+  width 52px
