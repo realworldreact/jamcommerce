@@ -16,8 +16,9 @@ const createOptions = _.memoize(n =>
 export default function Selector({ maxQuantity, ...props }) {
   return (
     <Select
-      options={ createOptions(maxQuantity || 4) }
-      { ...props }
+      options={createOptions(maxQuantity || 4)}
+      {...props}
+      filterOptions={false}
     />
   );
 }

@@ -15,6 +15,7 @@ export const types = createTypes(
     createAsyncTypes('cartUpdate'),
     'commerceInitiated',
     'clickOnRemove',
+    'changeQuantity',
   ],
   ns,
 );
@@ -27,6 +28,11 @@ export const clickOnRemove = createAction(
   types.clickOnRemove,
   null,
   createCartMeta(cartTypes.removeFromCart),
+);
+export const changeQuantity = createAction(
+  types.changeQuantity,
+  null,
+  createCartMeta(cartTypes.changeQuantity),
 );
 
 const defaultState = {

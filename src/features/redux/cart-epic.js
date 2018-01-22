@@ -30,7 +30,7 @@ function catchCommercerError() {
   return source =>
     source.pipe(
       catchError(err => _throw(!(err instanceof Error) ? new Error(err) : err)),
-      catchError(err => [ cartUpdateFailed(err) ]),
+      catchError(err => [cartUpdateFailed(err)]),
     );
 }
 
@@ -91,6 +91,29 @@ export function removeFromCart(actions, store, { commerce }) {
   );
 }
 
+export function changeQuantity(actions, { getState }, { commerce }) {
+  return _if(
+    () => !commerce,
+    empty(),
+    actions.pipe(
+      filterCommerceActions(cartTypes.changeQuantity),
+      mergeMap(({ type, payload: { value, sku } }) =>
+        _if(
+          () => itemsMapSelector(getState())[sku],
+          defer(() => {
+            commerce.updateCart(sku, value);
+            return of(commerce.getCart());
+          }),
+        ).pipe(
+          map(cartUpdateCompleted),
+          navigateToCart(),
+          catchCommercerError(type),
+        ),
+      ),
+    ),
+  );
+}
+
 export function clearCart(actions, store, { commerce }) {
   return _if(
     () => !commerce,
@@ -103,4 +126,10 @@ export function clearCart(actions, store, { commerce }) {
     ),
   );
 }
-export default combineEpics(cartInit, addToCart, removeFromCart, clearCart);
+export default combineEpics(
+  cartInit,
+  addToCart,
+  removeFromCart,
+  clearCart,
+  changeQuantity,
+);

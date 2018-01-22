@@ -5,6 +5,7 @@ export const cartTypes = {
   addToCart: 'addToCart',
   removeFromCart: 'removeFromCart',
   clearCart: 'clearCart',
+  changeQuantity: 'changeQuantity',
 };
 
 export const createCartMeta = (type = cartTypes.addToCart) => payload => ({
@@ -17,4 +18,4 @@ export const createCartMeta = (type = cartTypes.addToCart) => payload => ({
 
 export const getCartMeta = ({
   meta: { cart: { type, isCart, payload } = {} } = {},
-}) => isCart ? { type, payload } : null;
+}) => (isCart ? { type, payload } : null);

@@ -7,12 +7,18 @@ import { createSelector } from 'reselect';
 import Link from 'gatsby-link';
 
 import styles from './cart.module.styl';
-import { totalSelector, itemsSelector, clickOnRemove } from './redux';
+import {
+  totalSelector,
+  itemsSelector,
+  clickOnRemove,
+  changeQuantity,
+} from './redux';
 import Selector from '../Selector';
 
 const cx = classnames.bind(styles);
 const propTypes = {
   clickOnRemove: PropTypes.func.isRequired,
+  changeQuantity: PropTypes.func,
   editable: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
@@ -39,10 +45,11 @@ const mapStateToProps = createSelector(
   }),
 );
 
-const mapDispatchToProps = { clickOnRemove };
+const mapDispatchToProps = { clickOnRemove, changeQuantity };
 
 export function Table({
   clickOnRemove,
+  changeQuantity,
   items = [],
   total = {},
   editable = true,
@@ -102,6 +109,7 @@ export function Table({
                 <Selector
                   className={cx('quantity-selector', 'selector')}
                   value={quantity}
+                  onChange={({ value }) => changeQuantity({ sku, value })}
                 />
               </div>
             : <div

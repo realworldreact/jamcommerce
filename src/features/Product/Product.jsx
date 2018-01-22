@@ -217,7 +217,7 @@ export class Product extends PureComponent {
           details,
           images,
           name,
-          maxQuantity = 1,
+          maxQuantity = 4,
           prices,
           sale,
           sizes,
