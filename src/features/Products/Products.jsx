@@ -8,6 +8,7 @@ import Modal from 'react-modal';
 
 import styles from './products.module.styl';
 import Product from '../Product';
+import CloseButton from '../CloseButton';
 
 import {
   clickOnClosePreview,
@@ -65,6 +66,7 @@ export class Products extends PureComponent {
         allJamProduct: { edges = [] } = {},
       } = {},
     } = this.props;
+    console.log('current', currentProduct);
     const products = edges.map(({ node }) => node);
     return (
       <div className={cx('product')}>
@@ -137,7 +139,7 @@ export class Products extends PureComponent {
                         showBackToShoes={false}
                       />
                     </div>
-                    <button className={cx('preview-close-button')}>X</button>
+                    <CloseButton onClick={clickOnClosePreview} />
                   </div>
                 </Modal>
               </Link>

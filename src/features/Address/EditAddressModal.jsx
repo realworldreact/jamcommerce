@@ -9,6 +9,7 @@ import EditAddress from './Edit-Address';
 import ViewHeader from './Header.jsx';
 import { showEditAddressModalSelector, closeEditAddress } from './redux';
 import styles from './address.module.styl';
+import CloseButton from '../CloseButton';
 
 const cx = classnames.bind(styles);
 
@@ -44,12 +45,7 @@ export const EditAddressModal = ({ showEditAddressModal, closeEditAddress }) =>
         <ViewHeader>Edit Address</ViewHeader>
         <EditAddress />
       </div>
-      <button
-        className={cx('address-edit-close-button')}
-        onClick={closeEditAddress}
-      >
-        X
-      </button>
+      <CloseButton onClick={closeEditAddress} />
     </div>
   </Modal>;
 

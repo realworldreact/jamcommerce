@@ -1,12 +1,22 @@
 import _ from 'lodash';
-import { createTypes, createAction, handleActions } from 'berkeleys-redux-utils';
+import {
+  createTypes,
+  createAction,
+  handleActions,
+} from 'berkeleys-redux-utils';
 
 const ns = 'Products';
 
-export const types = createTypes([ 'clickOnProductPreview', 'clickOnClosePreview' ], ns);
+export const types = createTypes(
+  ['clickOnProductPreview', 'clickOnClosePreview'],
+  ns,
+);
 
 export const clickOnProductPreview = createAction(types.clickOnProductPreview);
-export const clickOnClosePreview = createAction(types.clickOnClosePreview, _.noop);
+export const clickOnClosePreview = createAction(
+  types.clickOnClosePreview,
+  _.noop,
+);
 
 const defaultState = {
   showProductModal: null,
@@ -20,6 +30,10 @@ export default handleActions(
     [types.clickOnProductPreview]: (state, { payload: name }) => ({
       ...state,
       showProductModal: name,
+    }),
+    [types.clickOnClosePreview]: state => ({
+      ...state,
+      showProductModal: null,
     }),
   }),
   defaultState,

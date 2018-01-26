@@ -29,7 +29,7 @@ const createHandlerMemo = _.memoize((value, handler) => () => handler(value));
 const getCommerceMeta = ({ data: { jamProduct: { images } } }) => ({
   image: images.front,
 });
-const getGoCommerceData = (...args) => (
+const getGoCommerceData = (
   _,
   { data: { jamProduct: { sku, name, prices, path } } },
 ) => ({
@@ -116,6 +116,7 @@ export const productFragments = graphql`
     name
     sku
     path
+    slug
     prices {
       amount
       currency
