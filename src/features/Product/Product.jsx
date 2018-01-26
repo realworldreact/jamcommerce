@@ -29,7 +29,7 @@ const createHandlerMemo = _.memoize((value, handler) => () => handler(value));
 const getCommerceMeta = ({ data: { jamProduct: { images } } }) => ({
   image: images.front,
 });
-const getGoCommerceData = (
+const getGoCommerceData = (...args) => (
   _,
   { data: { jamProduct: { sku, name, prices, path } } },
 ) => ({
@@ -39,6 +39,7 @@ const getGoCommerceData = (
   title: name,
   type: 'shoe',
 });
+
 const mapStateToProps = createSelector(
   getGoCommerceData,
   currentQuantitySelector,
@@ -194,6 +195,7 @@ const propTypes = {
   quantityChanged: PropTypes.func.isRequired,
   productMounted: PropTypes.func.isRequired,
   productChanged: PropTypes.func.isRequired,
+  showBackToShoes: PropTypes.bool,
 };
 
 export class Product extends PureComponent {
@@ -229,6 +231,7 @@ export class Product extends PureComponent {
       sizeHandlers,
       thumbnailHandlers,
       quantityChanged,
+      showBackToShoes = true,
     } = this.props;
     const isSale = !!sale;
     const Price = isSale ? 'del' : 'span';
@@ -330,16 +333,18 @@ export class Product extends PureComponent {
             </div>
           </div>
         </div>
-        <Link to="/women/shoes">
-          <div className={cx('back')}>
-            <img
-              alt="A smal left pointing arrow"
-              className={cx('left-arrow')}
-              src={leftArrow}
-            />
-            Back to Shoes
-          </div>
-        </Link>
+        {showBackToShoes
+          ? <Link to="/women/shoes">
+              <div className={cx('back')}>
+                <img
+                  alt="A smal left pointing arrow"
+                  className={cx('left-arrow')}
+                  src={leftArrow}
+                />
+                Back to Shoes
+              </div>
+            </Link>
+          : null}
       </div>
     );
   }

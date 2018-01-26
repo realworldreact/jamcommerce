@@ -90,54 +90,59 @@ export class Products extends PureComponent {
           </div>
         </div>
         <div className={cx('content')}>
-          {products.map(
-            ({ name, sale, prices, slug, images: { front } }, i) => {
-              const isSale = !!sale;
-              const Price = isSale ? 'del' : 'span';
-              const _sale = isSale
-                ? <span className={cx('sale')}>
-                    ${sale}
-                  </span>
-                : null;
-              return (
-                <Link
-                  className={cx('product-item')}
-                  key={i}
-                  to={`/women/shoes/${slug}`}
-                >
-                  <div>
-                    <div className={cx('img')}>
-                      <img alt="alt provided by content below" {...front} />
-                    </div>
-                    <header className={cx('title')}>
-                      <h4>
-                        {name}
-                      </h4>
-                    </header>
-                    <div className={cx('price')}>
-                      <Price>${prices[0].amount}</Price> {_sale}
-                    </div>
+          {products.map((jamProduct, i) => {
+            const { name, sale, prices, slug, images: { front } } = jamProduct;
+
+            const isSale = !!sale;
+            const Price = isSale ? 'del' : 'span';
+            const _sale = isSale
+              ? <span className={cx('sale')}>
+                  ${sale}
+                </span>
+              : null;
+            return (
+              <Link
+                className={cx('product-item')}
+                key={i}
+                to={`/women/shoes/${slug}`}
+              >
+                <div>
+                  <div className={cx('img')}>
+                    <img alt="alt provided by content below" {...front} />
                   </div>
-                  <div className={cx('preview-button-container')}>
-                    <button
-                      className={cx('preview-button')}
-                      onClick={e => clickOnProductPreview(e, name)}
-                    >
-                      Quick Shop
-                    </button>
+                  <header className={cx('title')}>
+                    <h4>
+                      {name}
+                    </h4>
+                  </header>
+                  <div className={cx('price')}>
+                    <Price>${prices[0].amount}</Price> {_sale}
                   </div>
-                  <Modal isOpen={currentProduct === name} style={modalStyles}>
-                    <div className={cx('preview-container')}>
-                      <div className={cx('preview-content')}>
-                        {name}
-                      </div>
-                      <button className={cx('preview-close-button')}>X</button>
+                </div>
+                <div className={cx('preview-button-container')}>
+                  <button
+                    className={cx('preview-button')}
+                    onClick={e => clickOnProductPreview(e, name)}
+                  >
+                    Quick Shop
+                  </button>
+                </div>
+                <Modal isOpen={currentProduct === name} style={modalStyles}>
+                  <div className={cx('preview-container')}>
+                    <div className={cx('preview-content')}>
+                      <Product
+                        data={{
+                          jamProduct,
+                        }}
+                        showBackToShoes={false}
+                      />
                     </div>
-                  </Modal>
-                </Link>
-              );
-            },
-          )}
+                    <button className={cx('preview-close-button')}>X</button>
+                  </div>
+                </Modal>
+              </Link>
+            );
+          })}
         </div>
       </div>
     );
@@ -158,18 +163,6 @@ export const pageQuery = graphql`
   }
 
   fragment Products_products on JAMProduct {
-    name
-    prices {
-      amount
-    }
-    sale
-    slug
-    images {
-      front {
-        alt
-        src
-        srcSet
-      }
-    }
+    ...Product_page
   }
 `;
