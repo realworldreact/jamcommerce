@@ -66,7 +66,7 @@ export class Products extends PureComponent {
         allJamProduct: { edges = [] } = {},
       } = {},
     } = this.props;
-    console.log('current', currentProduct);
+
     const products = edges.map(({ node }) => node);
     return (
       <div className={cx('product')}>

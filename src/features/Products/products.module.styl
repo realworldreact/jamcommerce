@@ -33,13 +33,15 @@
   +$below(lg)
     $center(76%)
     $row(between)
+  +$below(md)
+    $center(90%)
+    $row(around)
     .product-item
       width 40%
       img
         max-width 100%
-  +$below(md)
-    $center(90%)
-    $row(around)
+    .preview-button-container
+      display none !important
   +$below(sm)
     $center(96%)
     $row(around)
