@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames/bind';
+import Link from 'gatsby-link';
 
 import styles from './home.module.styl';
 import FalcorImg from './falcor-front.png';
@@ -64,7 +65,9 @@ export default class Home extends Component {
           </Callout>
           <div className={cx('featured-container')}>
             {featured.map(featured =>
-              <Featured key={featured.title} {...featured} />,
+              <Link to="/women/shoes" key={featured.title}>
+                <Featured {...featured} />
+              </Link>,
             )}
           </div>
         </div>
