@@ -25,7 +25,7 @@ export default function Featured({ img, title, price, sale }) {
     <div className={cx('featured')}>
       <div className={cx('img-container')}>
         <FadeIn height={180}>
-          <img className={cx('img')} src={img} />
+          {onLoad => <img className={cx('img')} src={img} onLoad={onLoad} />}
         </FadeIn>
       </div>
       <header className={cx('title')}>

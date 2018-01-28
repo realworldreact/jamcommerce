@@ -16,18 +16,31 @@ const transitionStyles = {
   entered: { opacity: 1 },
 };
 
-const FadeIn = ({ height, children }) =>
-  <LazyLoad height={height} offset={150}>
-    <Transition in={true} timeout={duration}>
-      {state =>
-        <div style={{ ...defaultStyle, ...transitionStyles[state] }}>
-          {children}
-        </div>}
-    </Transition>
-  </LazyLoad>;
+class FadeIn extends React.Component {
+  state = {
+    loaded: false,
+  };
+  onLoad = () => this.setState({ loaded: true });
+
+  render() {
+    const { height, children } = this.props,
+      { loaded } = this.state;
+
+    return (
+      <LazyLoad height={height} offset={150}>
+        <Transition in={loaded} timeout={duration}>
+          {state =>
+            <div style={{ ...defaultStyle, ...transitionStyles[state] }}>
+              {children(this.onLoad)}
+            </div>}
+        </Transition>
+      </LazyLoad>
+    );
+  }
+}
 FadeIn.propTypes = {
   height: PropTypes.number,
-  children: PropTypes.element,
+  children: PropTypes.func,
 };
 
 export default FadeIn;

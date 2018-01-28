@@ -16,7 +16,8 @@ export default function Subheader() {
       <div className={cx('subheader-container')}>
         <div className={cx('img')}>
           <FadeIn height={400}>
-            <img className={cx('img')} src={subheader1} />
+            {onLoad =>
+              <img className={cx('img')} src={subheader1} onLoad={onLoad} />}
           </FadeIn>
         </div>
         <div>
@@ -32,7 +33,8 @@ export default function Subheader() {
       <div className={cx('subheader-container')}>
         <div>
           <FadeIn height={400}>
-            <img className={cx('img')} src={subheader2} />
+            {onLoad =>
+              <img className={cx('img')} src={subheader2} onLoad={onLoad} />}
           </FadeIn>
         </div>
         <div>

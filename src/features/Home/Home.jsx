@@ -58,7 +58,8 @@ export default class Home extends Component {
               <LearnMore />
             </header>
             <FadeIn height={344}>
-              <img src={callout} className={cx('img')} />
+              {onLoad =>
+                <img src={callout} className={cx('img')} onLoad={onLoad} />}
             </FadeIn>
           </Callout>
           <div className={cx('featured-container')}>
