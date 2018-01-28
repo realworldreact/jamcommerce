@@ -5,6 +5,7 @@ import styles from './home.module.styl';
 import subheader1 from './subheader-1.png';
 import subheader2 from './subheader-2.png';
 import LearnMore from './Learn-More.jsx';
+import FadeIn from './FadeIn';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
@@ -13,8 +14,10 @@ export default function Subheader() {
   return (
     <div className={cx('subheader')}>
       <div className={cx('subheader-container')}>
-        <div>
-          <img className={cx('img')} src={subheader1} />
+        <div className={cx('img')}>
+          <FadeIn height={400}>
+            <img className={cx('img')} src={subheader1} />
+          </FadeIn>
         </div>
         <div>
           <h2 className={cx('title')}>Get up and running fast</h2>
@@ -28,7 +31,9 @@ export default function Subheader() {
       </div>
       <div className={cx('subheader-container')}>
         <div>
-          <img className={cx('img')} src={subheader2} />
+          <FadeIn height={400}>
+            <img className={cx('img')} src={subheader2} />
+          </FadeIn>
         </div>
         <div>
           <h2 className={cx('title')}>Use tech that you love</h2>

@@ -49,6 +49,7 @@
         "react-router-scroll": "github:ytase/react-router-scroll#build",
         "react-select": "1.0.0-rc.5",
         "react-stripe-elements": "1.2.0",
+        "react-transition-group": "^2.2.1",
         "react-view-pager": "0.5.1",
         "redux": "3.7.2",
         "redux-actions": "2.2.1",
