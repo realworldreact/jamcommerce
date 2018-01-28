@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
+import Link from 'gatsby-link';
 
 import styles from './home.module.styl';
 import FadeIn from './FadeIn';
@@ -22,7 +23,7 @@ export default function Featured({ img, title, price, sale }) {
       </span>
     : null;
   return (
-    <div className={cx('featured')}>
+    <Link className={cx('featured')} to="/women/shoes">
       <div className={cx('img-container')}>
         <FadeIn height={180}>
           {onLoad => <img className={cx('img')} src={img} onLoad={onLoad} />}
@@ -36,7 +37,7 @@ export default function Featured({ img, title, price, sale }) {
       <div className={cx('price')}>
         <Price>${price}</Price> {_sale}
       </div>
-    </div>
+    </Link>
   );
 }
 Featured.displayName = 'Featured';
