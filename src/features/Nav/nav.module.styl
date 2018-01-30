@@ -56,6 +56,11 @@ $navbar($height, $font-size = 20px)
   padding-top 10px
   a
     font-size 16px
+
+.signin-link
+  +$below(md)
+    display none !important
+
 .cart
   background-repeat no-repeat
   background-position center 2px
@@ -64,11 +69,16 @@ $navbar($height, $font-size = 20px)
   .num-in-cart
     color white
     font-weight bold
+  +$below(md)
+    position relative
+    top -13px
 
 .bottom
   $navbar($navbar-bottom-height, 14px)
   $row(center)
   border-bottom 1px solid $gray
+  +$below(md)
+    display none
   ul
     display inline-block
     .item-link

@@ -128,13 +128,13 @@ export function Nav({
   let signBtn;
   if (isSignedIn) {
     signBtn = (
-      <Link to="/account" className={cx('account')}>
+      <Link to="/account" className={cx('signin-link')}>
         {name}
       </Link>
     );
   } else {
     signBtn = (
-      <Link onClick={clickOnSignIn} to="/signin">
+      <Link onClick={clickOnSignIn} to="/signin" className={cx('signin-link')}>
         Sign In
       </Link>
     );
