@@ -18,39 +18,33 @@ const propTypes = {
   ),
 };
 
-export default function Text({ categories }) {
+export default function Text({ categories, closeMobileMenu }) {
   return (
-    <div className={ cx('text') }>
-      { categories.map(({ title, sub }) =>
-        (
-          <div
-            className={ cx('category') }
-            key={ title }
-            >
-            <header>
-              <h4>
-                { title }
-              </h4>
-            </header>
-            <hr />
-            <div className={ cx('content') }>
-              { sub.map(({ title, href = '#' }) =>
-                (
-                  <Link
-                    className={ cx('item') }
-                    key={ title }
-                    to={ href }
-                    >
-                    <p>
-                      { title }
-                    </p>
-                  </Link>
-                ),
-              ) }
-            </div>
+    <div className={cx('text')}>
+      {categories.map(({ title, sub }) =>
+        <div className={cx('category')} key={title}>
+          <header>
+            <h4>
+              {title}
+            </h4>
+          </header>
+          <hr />
+          <div className={cx('content')}>
+            {sub.map(({ title, href = '#' }) =>
+              <Link
+                className={cx('item')}
+                key={title}
+                to={href}
+                onClick={closeMobileMenu}
+              >
+                <p>
+                  {title}
+                </p>
+              </Link>,
+            )}
           </div>
-        ),
-      ) }
+        </div>,
+      )}
     </div>
   );
 }

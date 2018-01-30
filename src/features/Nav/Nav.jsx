@@ -151,7 +151,11 @@ export function Nav({
   let signBtn;
   if (isSignedIn) {
     signBtn = (
-      <Link to="/account" className={cx('signin-link')}>
+      <Link
+        to="/account"
+        className={cx('signin-link')}
+        onClick={closeMobileMenu}
+      >
         {name}
       </Link>
     );
@@ -162,14 +166,13 @@ export function Nav({
       </Link>
     );
   }
-  console.log(isMobileMenuOpen);
   return (
     <div className={cx('navbar')}>
       <nav className={cx('top')}>
         <div className={cx('hamburger')} onClick={openMobileMenu}>
           <img alt="menu hamburger" src={hamburger} />
         </div>
-        <Link to="/">
+        <Link to="/" onClick={closeMobileMenu}>
           <div className={cx('title')}>JAM Commerce</div>
         </Link>
         <ul className={cx('account')}>
@@ -181,6 +184,7 @@ export function Nav({
               className={cx('cart')}
               to="/cart"
               style={{ backgroundImage: `url(${cart})` }}
+              onClick={closeMobileMenu}
             >
               <span className={cx('num-in-cart')}>
                 {typeof numInCart === 'number' ? numInCart : 0}
@@ -207,7 +211,10 @@ export function Nav({
               className={cx('item-link')}
               href={href}
               key={title}
-              onClick={clickOnSubNavActions[title]}
+              onClick={e => {
+                e.stopPropagation();
+                clickOnSubNavActions[title]();
+              }}
               onMouseEnter={hoverOnSubNavActions[title]}
             >
               <li className={cx('item')}>
@@ -215,17 +222,27 @@ export function Nav({
               </li>
             </a>,
           )}
-          <a className={cx('item-link')} href="/women">
+          <a
+            className={cx('item-link')}
+            href="/women/shoes"
+            onClick={closeMobileMenu}
+          >
             <li className={cx('item')}>Sale</li>
           </a>
         </ul>
         <div className={cx('mobile-menu-account')}>
           {signBtn}
-          <Link to="/cart">View cart</Link>
+          <Link to="/cart" onClick={closeMobileMenu}>
+            View cart
+          </Link>
         </div>
       </nav>
       <Menu isOpen={isMenuOpen} onMouseLeave={mouseLeaveMenu}>
-        <Menu.Body categories={categories} view={currentDirectory.view} />
+        <Menu.Body
+          categories={categories}
+          closeMobileMenu={() => null}
+          view={currentDirectory.view}
+        />
       </Menu>
     </div>
   );

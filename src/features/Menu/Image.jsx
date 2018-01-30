@@ -15,31 +15,23 @@ const propTypes = {
   ).isRequired,
 };
 
-export default function Image({ categories }) {
+export default function Image({ categories, closeMobileMenu }) {
   return (
-    <div className={ cx('image') }>
-      { categories.map(({ title, img, alt, href = '#' }) =>
-        (
-          <div
-            className={ cx('item') }
-            key={ title }
-            >
-            <Link to={ href }>
-              <header>
-                <h4>
-                  { title }
-                </h4>
-              </header>
-              <div>
-                <img
-                  alt={ alt }
-                  src={ img }
-                />
-              </div>
-            </Link>
-          </div>
-        ),
-      ) }
+    <div className={cx('image')}>
+      {categories.map(({ title, img, alt, href = '#' }) =>
+        <div className={cx('item')} key={title}>
+          <Link to={href} onClick={closeMobileMenu}>
+            <header>
+              <h4>
+                {title}
+              </h4>
+            </header>
+            <div>
+              <img alt={alt} src={img} />
+            </div>
+          </Link>
+        </div>,
+      )}
     </div>
   );
 }

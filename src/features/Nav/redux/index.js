@@ -32,7 +32,7 @@ const womensLink = '/women/shoes';
 const defaultState = {
   isMenuOpen: false,
   isMobileMenuOpen: false,
-  currentDirectory: 'New Arrivals',
+  currentDirectory: null,
   directories: ['New Arrivals', 'Women', 'Men', 'Collections'],
   directoriesById: {
     'New Arrivals': {
@@ -205,14 +205,17 @@ export default handleActions(
     [combineActions(types.mouseLeaveMenu, types.closeSubMenu)]: state => ({
       ...state,
       isMenuOpen: false,
+      currentDirectory: null,
     }),
     [types.openMobileMenu]: state => ({
       ...state,
       isMobileMenuOpen: true,
     }),
-    [types.closeMobileMenu]: state => ({
+    [combineActions(types.closeMobileMenu, types.clickOnSignIn)]: state => ({
       ...state,
       isMobileMenuOpen: false,
+      isMenuOpen: false,
+      currentDirectory: null,
     }),
   }),
   defaultState,
