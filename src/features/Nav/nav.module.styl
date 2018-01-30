@@ -35,6 +35,10 @@ $navbar($height, $font-size = 20px)
   border-bottom 1px solid $gray
   padding-left $navbar-padding-vertical
   padding-right $navbar-padding-vertical
+  background white
+  +$below(md)
+    position fixed
+    z-index 1000
 
 
 .hamburger
@@ -80,8 +84,9 @@ $navbar($height, $font-size = 20px)
   +$below(md)
     z-index 1000
     height 100vh
-    width 100%
-    position absolute
+    width 100vw
+    position fixed
+    top 50px
     background white
     $column(start, stretch, between)
   

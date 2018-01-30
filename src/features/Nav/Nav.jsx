@@ -16,11 +16,13 @@ import {
   hoverOnSubNav,
   isMenuOpenSelector,
   mouseLeaveMenu,
+  closeSubMenu,
 } from './redux';
 import styles from './nav.module.styl';
 import cart from './cart.svg';
 import hamburger from './hamburger.svg';
 import menuClose from './menu-close.svg';
+import backArrow from './back-arrow.svg';
 import Menu from '../Menu';
 import { isSignedInSelector, nameSelector } from '../Auth/redux';
 import { numInCartSelector } from '../Cart/redux';
@@ -61,7 +63,7 @@ const mapStateToProps = createSelector(
 
 function mapDispatchToProps(dispatch) {
   const dispatchers = bindActionCreators(
-    { clickOnSignIn, mouseLeaveMenu },
+    { clickOnSignIn, mouseLeaveMenu, closeSubMenu },
     dispatch,
   );
   dispatchers.dispatch = dispatch;
@@ -109,6 +111,7 @@ const propTypes = {
   isMenuOpen: PropTypes.bool,
   isSignedIn: PropTypes.bool,
   mouseLeaveMenu: PropTypes.func.isRequired,
+  closeSubMenu: PropTypes.func.isRequired,
   name: PropTypes.string,
   numInCart: PropTypes.number,
 };
@@ -123,6 +126,7 @@ export function Nav({
   isMenuOpen,
   isSignedIn,
   mouseLeaveMenu,
+  closeSubMenu,
   name,
   numInCart,
 }) {
@@ -169,7 +173,10 @@ export function Nav({
       <nav className={cx('bottom')}>
         <div className={cx('mobile-menu-meta')}>
           <div>
-            {currentDirectory.title}
+            {isMenuOpen &&
+              <button className={cx('back-button')} onClick={closeSubMenu}>
+                <img src={backArrow} /> Back
+              </button>}
           </div>
           <img alt="menu close" src={menuClose} />
         </div>

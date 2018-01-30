@@ -8,6 +8,14 @@
   visibility hidden
   width 100%
   z-index $z-dropdown
+  +$below(md)
+    height 100vh
+    width 100vw
+    position fixed
+    top 90px
+    background white
+    padding-top 0px
+    $column(start, stretch, between)
 .open
   visibility visible
 
@@ -28,9 +36,15 @@ $item-height = 26px
   $center(50%)
   $padding-base()
   text-align left
+  +$below(md)
+    $center(100%)
+
   .category
     $padding-base()
     width 45%
+    +$below(md)
+      width 100%
+
   .content
     $column(start)
     height $item-height * $items-per-col

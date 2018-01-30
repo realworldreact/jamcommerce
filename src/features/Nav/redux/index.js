@@ -16,7 +16,13 @@ import { addRedirectTo } from '../../redux';
 const ns = 'nav';
 
 const types = createTypes(
-  ['clickOnSubNav', 'clickOnSignIn', 'hoverOnSubNav', 'mouseLeaveMenu'],
+  [
+    'clickOnSubNav',
+    'clickOnSignIn',
+    'hoverOnSubNav',
+    'mouseLeaveMenu',
+    'closeSubMenu',
+  ],
   ns,
 );
 
@@ -142,6 +148,7 @@ export const clickOnSignIn = createAction(
 );
 export const hoverOnSubNav = createAction(types.hoverOnSubNav);
 export const mouseLeaveMenu = createAction(types.mouseLeaveMenu, _.noop);
+export const closeSubMenu = createAction(types.closeSubMenu, _.noop);
 
 export const getNS = state => state[ns];
 
@@ -189,7 +196,7 @@ export default handleActions(
       isMenuOpen: true,
       currentDirectory: item,
     }),
-    [types.mouseLeaveMenu]: state => ({
+    [combineActions(types.mouseLeaveMenu, types.closeSubMenu)]: state => ({
       ...state,
       isMenuOpen: false,
     }),
