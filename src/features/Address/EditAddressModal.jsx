@@ -39,7 +39,11 @@ const modalStyles = {
 };
 
 export const EditAddressModal = ({ showEditAddressModal, closeEditAddress }) =>
-  <Modal isOpen={!!showEditAddressModal} style={modalStyles}>
+  <Modal
+    isOpen={!!showEditAddressModal}
+    style={modalStyles}
+    overlayClassName={cx('address-modal-overlay')}
+  >
     <div className={cx('address-edit-container')}>
       <div className={cx('address-edit-content')}>
         <ViewHeader>Edit Address</ViewHeader>
