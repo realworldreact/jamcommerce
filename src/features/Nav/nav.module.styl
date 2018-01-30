@@ -78,12 +78,27 @@ $navbar($height, $font-size = 20px)
   $row(center)
   border-bottom 1px solid $gray
   +$below(md)
-    display none
+    z-index 1000
+    height 100vh
+    width 100%
+    position absolute
+    background white
+    $column(start, stretch, between)
+  
   ul
     display inline-block
+    text-align center
+    +$below(md)
+      display flex
+      flex-direction column
+      align-items center
     .item-link
       height 100%
       display inline-block
+      +$below(md)
+        border-bottom 1px solid gray 
+        padding 17px 0px
+        width 241px
     .item
       $column(center, center)
       color $menu-unselected
@@ -100,3 +115,29 @@ $navbar($height, $font-size = 20px)
         padding-top 5px
       &:hover
         color $menu-selected
+
+.mobile-menu-meta
+  $row(between)
+  padding 0px 24px
+  margin 20px 0px 74px 0px
+  
+  +$above(md)
+    display none
+
+.mobile-menu-account
+  $column()
+  align-items center
+  margin-top 56px
+  .signin-link
+    display inline-block !important
+  a
+    text-transform uppercase
+    color $menu-unselected
+    font-weight 500
+    letter-spacing 2.75px
+    margin-left 18px
+    margin-right 18px
+    padding-left 0
+    padding-right 0
+    text-transform uppercase
+    padding 17px 0px

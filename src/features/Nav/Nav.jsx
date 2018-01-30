@@ -20,6 +20,7 @@ import {
 import styles from './nav.module.styl';
 import cart from './cart.svg';
 import hamburger from './hamburger.svg';
+import menuClose from './menu-close.svg';
 import Menu from '../Menu';
 import { isSignedInSelector, nameSelector } from '../Auth/redux';
 import { numInCartSelector } from '../Cart/redux';
@@ -166,6 +167,12 @@ export function Nav({
         </ul>
       </nav>
       <nav className={cx('bottom')}>
+        <div className={cx('mobile-menu-meta')}>
+          <div>
+            {currentDirectory.title}
+          </div>
+          <img alt="menu close" src={menuClose} />
+        </div>
         <ul>
           {directories.map(({ title, href }) =>
             <a
@@ -184,6 +191,10 @@ export function Nav({
             <li className={cx('item')}>Sale</li>
           </a>
         </ul>
+        <div className={cx('mobile-menu-account')}>
+          {signBtn}
+          <Link to="/cart">View cart</Link>
+        </div>
       </nav>
       <Menu isOpen={isMenuOpen} onMouseLeave={mouseLeaveMenu}>
         <Menu.Body categories={categories} view={currentDirectory.view} />
