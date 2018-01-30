@@ -38,14 +38,16 @@ export class TemplateWrapper extends PureComponent {
           ]}
           title="JamCommerce"
         />
-        <GithubForkRibbon
-          color="green"
-          href="https://github.com/realworldreact/jamcommerce"
-          position="left"
-          target="_blank"
-        >
-          Fork me on GitHub
-        </GithubForkRibbon>
+        <div className={cx('github-outer-wrapper')}>
+          <GithubForkRibbon
+            color="green"
+            href="https://github.com/realworldreact/jamcommerce"
+            position="left"
+            target="_blank"
+          >
+            Fork me on GitHub
+          </GithubForkRibbon>
+        </div>
         <Nav />
         <div className={cx('content')}>
           {children()}

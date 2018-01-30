@@ -197,7 +197,20 @@ $pager-copy-text()
 
 .prefooter
   $center(650px)
+  text-align center
   color $text-description
   font-weight 300
   line-height 34px
   padding 150px 20px
+  +$below(md)
+    padding 70px 20px 30px 20px
+
+.github-mobile-fork-button
+  background #028704
+  color white
+  padding $padding-sm-vertical $padding-xl-horizontal
+  border-radius 5px
+  margin 20px auto 0px auto
+  display none
+  +$below(md)
+    display inline-block

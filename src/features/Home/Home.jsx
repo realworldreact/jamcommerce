@@ -73,6 +73,12 @@ export default class Home extends Component {
             Learn More about the JAMstack from the links in the footer, or click
             around this example app to see how JAM Commerce works!
           </h4>
+          <a
+            className={cx('github-mobile-fork-button')}
+            href="https://github.com/realworldreact/jamcommerce"
+          >
+            Fork me on GitHub
+          </a>
         </div>
       </div>
     );
