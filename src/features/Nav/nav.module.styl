@@ -87,8 +87,12 @@ $navbar($height, $font-size = 20px)
     width 100vw
     position fixed
     top 50px
+    left -100vw
     background white
     $column(start, stretch, between)
+    transition left 500ms ease-in-out
+    &.open
+      left 0px
   
   ul
     display inline-block

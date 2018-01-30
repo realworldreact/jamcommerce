@@ -22,6 +22,8 @@ const types = createTypes(
     'hoverOnSubNav',
     'mouseLeaveMenu',
     'closeSubMenu',
+    'openMobileMenu',
+    'closeMobileMenu',
   ],
   ns,
 );
@@ -29,6 +31,7 @@ const types = createTypes(
 const womensLink = '/women/shoes';
 const defaultState = {
   isMenuOpen: false,
+  isMobileMenuOpen: false,
   currentDirectory: 'New Arrivals',
   directories: ['New Arrivals', 'Women', 'Men', 'Collections'],
   directoriesById: {
@@ -149,10 +152,13 @@ export const clickOnSignIn = createAction(
 export const hoverOnSubNav = createAction(types.hoverOnSubNav);
 export const mouseLeaveMenu = createAction(types.mouseLeaveMenu, _.noop);
 export const closeSubMenu = createAction(types.closeSubMenu, _.noop);
+export const openMobileMenu = createAction(types.openMobileMenu);
+export const closeMobileMenu = createAction(types.closeMobileMenu);
 
 export const getNS = state => state[ns];
 
 export const isMenuOpenSelector = state => getNS(state).isMenuOpen;
+export const isMobileMenuOpenSelector = state => getNS(state).isMobileMenuOpen;
 
 export const subByIdSelector = state => getNS(state).subById;
 export const currentDirectorySelector = state => getNS(state).currentDirectory;
@@ -199,6 +205,14 @@ export default handleActions(
     [combineActions(types.mouseLeaveMenu, types.closeSubMenu)]: state => ({
       ...state,
       isMenuOpen: false,
+    }),
+    [types.openMobileMenu]: state => ({
+      ...state,
+      isMobileMenuOpen: true,
+    }),
+    [types.closeMobileMenu]: state => ({
+      ...state,
+      isMobileMenuOpen: false,
     }),
   }),
   defaultState,

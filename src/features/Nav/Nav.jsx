@@ -17,6 +17,9 @@ import {
   isMenuOpenSelector,
   mouseLeaveMenu,
   closeSubMenu,
+  openMobileMenu,
+  closeMobileMenu,
+  isMobileMenuOpenSelector,
 } from './redux';
 import styles from './nav.module.styl';
 import cart from './cart.svg';
@@ -42,6 +45,7 @@ const mapStateToProps = createSelector(
   numInCartSelector,
   isSignedInSelector,
   nameSelector,
+  isMobileMenuOpenSelector,
   (
     isMenuOpen,
     directories = [],
@@ -50,6 +54,7 @@ const mapStateToProps = createSelector(
     numInCart,
     isSignedIn,
     name,
+    isMobileMenuOpen,
   ) => ({
     categories,
     currentDirectory,
@@ -58,12 +63,19 @@ const mapStateToProps = createSelector(
     isSignedIn,
     name,
     numInCart,
+    isMobileMenuOpen,
   }),
 );
 
 function mapDispatchToProps(dispatch) {
   const dispatchers = bindActionCreators(
-    { clickOnSignIn, mouseLeaveMenu, closeSubMenu },
+    {
+      clickOnSignIn,
+      mouseLeaveMenu,
+      closeSubMenu,
+      openMobileMenu,
+      closeMobileMenu,
+    },
     dispatch,
   );
   dispatchers.dispatch = dispatch;
@@ -114,6 +126,9 @@ const propTypes = {
   closeSubMenu: PropTypes.func.isRequired,
   name: PropTypes.string,
   numInCart: PropTypes.number,
+  openMobileMenu: PropTypes.func.isRequired,
+  closeMobileMenu: PropTypes.func.isRequired,
+  isMobileMenuOpen: PropTypes.bool,
 };
 
 export function Nav({
@@ -129,6 +144,9 @@ export function Nav({
   closeSubMenu,
   name,
   numInCart,
+  openMobileMenu,
+  closeMobileMenu,
+  isMobileMenuOpen,
 }) {
   let signBtn;
   if (isSignedIn) {
@@ -144,10 +162,11 @@ export function Nav({
       </Link>
     );
   }
+  console.log(isMobileMenuOpen);
   return (
     <div className={cx('navbar')}>
       <nav className={cx('top')}>
-        <div className={cx('hamburger')}>
+        <div className={cx('hamburger')} onClick={openMobileMenu}>
           <img alt="menu hamburger" src={hamburger} />
         </div>
         <Link to="/">
@@ -170,7 +189,7 @@ export function Nav({
           </li>
         </ul>
       </nav>
-      <nav className={cx('bottom')}>
+      <nav className={cx('bottom', { open: isMobileMenuOpen })}>
         <div className={cx('mobile-menu-meta')}>
           <div>
             {isMenuOpen &&
@@ -178,7 +197,9 @@ export function Nav({
                 <img src={backArrow} /> Back
               </button>}
           </div>
-          <img alt="menu close" src={menuClose} />
+          <button onClick={closeMobileMenu}>
+            <img alt="menu close" src={menuClose} />
+          </button>
         </div>
         <ul>
           {directories.map(({ title, href }) =>
