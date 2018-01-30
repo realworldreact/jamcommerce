@@ -211,11 +211,9 @@ export function Nav({
               className={cx('item-link')}
               href={href}
               key={title}
-              onClick={e => {
-                e.stopPropagation();
-                clickOnSubNavActions[title]();
-              }}
-              onMouseEnter={hoverOnSubNavActions[title]}
+              onClick={clickOnSubNavActions[title]}
+              onMouseEnter={() =>
+                !isMobileMenuOpen && hoverOnSubNavActions[title]()}
             >
               <li className={cx('item')}>
                 {title}
@@ -237,7 +235,10 @@ export function Nav({
           </Link>
         </div>
       </nav>
-      <Menu isOpen={isMenuOpen} onMouseLeave={mouseLeaveMenu}>
+      <Menu
+        isOpen={isMenuOpen}
+        onMouseLeave={() => !isMobileMenuOpen && mouseLeaveMenu()}
+      >
         <Menu.Body
           categories={categories}
           closeMobileMenu={() => null}
