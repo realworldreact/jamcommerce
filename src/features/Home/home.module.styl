@@ -28,13 +28,14 @@
   padding $padding-xl-horizontal 0
   +$below(md)
     $row(around)
+    max-width 100%
     padding $padding-xl-horizontal $padding-xl-vertical
 
 
 .subheader-container
   width 450px
   +$below(md)
-    width 45%
+    width 45% !important
     &:first-child
       padding-bottom 70px
     h2

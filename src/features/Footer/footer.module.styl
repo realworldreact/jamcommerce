@@ -6,8 +6,9 @@
 
 .top-row
   width 32%
-  +$below('md')
+  +$below(md)
     width 100%
+    padding-top 0px !important
 
 .first
   padding-bottom $padding-xl-horizontal
@@ -47,7 +48,7 @@
   .content
     $row(between)
     $center(419px)
-    +$below('md')
+    +$below(md)
       text-align center
   a
     display inline-block
