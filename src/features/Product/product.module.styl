@@ -13,14 +13,23 @@
 
 .images
   .main
-    size(486px, 312px)
+    +$above(md)
+      size(486px, 312px)
+    +$below(md)
+      max-width 100%
 
   .thumbnails
     $row(around)
     padding-right 5px
+    div
+      +$below(md)
+        width 30%
     img
       padding-left 5px
-      size(165px, 109px)
+      +$above(md)
+        size(165px, 109px)
+      +$below(md)
+        width 100%
       &:hover
         cursor pointer
 
@@ -33,12 +42,16 @@
   font-weight 300
   line-height $line-height-copy
   width 48%
+  +$below(md)
+    width 90%
 
   .sale
     color $color-sale
   .list
     list-style-type disc
     // margin 20px 0 20px 20px
+    +$below(md)
+      margin-left 20px
 
   .sizes
     color red
@@ -99,6 +112,8 @@
     color $color-red
     position absolute
     top -30px
+    +$below(md)
+      top 30px
 
 
 .back
