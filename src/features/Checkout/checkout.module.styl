@@ -42,6 +42,9 @@
   $padding-lg(,0,,0)
   div
     $grid('row', 'between')
+  +$below(md)
+    .next-button
+      margin 20px auto
 
 .next-button
 .back-button
@@ -124,6 +127,11 @@ header.view-header
   button
     width 264px
 
+.success-buttons
+  a
+    +$below(md)
+      margin 0 auto
+
 .confirm
   header
     $center(371px)
@@ -132,8 +140,9 @@ header.view-header
 .confirm-shipping-billing
   $grid('row', 'around')
   background lighten($gray, 40)
-  padding-bottom $padding-lg-vertical
-
+  padding-bottom $padding-lg-vertica
+  +$below(md)
+    $column(around)
   h4
     text-decoration underline
     font-weight bold

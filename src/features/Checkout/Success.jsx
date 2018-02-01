@@ -75,7 +75,7 @@ export function Success({
             Please check your email account on file for your receipt and order
             confirmation.
           </p>
-          <div className={cx('button-group')}>
+          <div className={cx('button-group', 'success-buttons')}>
             <Link to="/">
               <button className={cx('back-button')}>Continue Shopping</button>
             </Link>
