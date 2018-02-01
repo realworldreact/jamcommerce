@@ -45,8 +45,8 @@ $navbar($height, $font-size = 20px)
 
 
 .hamburger
-  flex 1
   align-self center
+  flex 1
   +$above(sm)
     visibility hidden
 
@@ -56,6 +56,9 @@ $navbar($height, $font-size = 20px)
   font-size 27px
   font-weight 800
   text-align center
+  +$below(sm)
+    padding-left 0px
+    padding-right 0px
 
 .account
   flex 1
