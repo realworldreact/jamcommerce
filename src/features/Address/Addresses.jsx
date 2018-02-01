@@ -81,7 +81,7 @@ class AddressList extends React.PureComponent {
           <div className={cx('list')}>
             <div className={cx('address-container')}>
               {addresses.map(address =>
-                <div key={address.id}>
+                <div key={address.id} className={cx('address-subcontainer')}>
                   <AddressDisplay {...address} selected={false} simple={true} />
                   <div className={cx('address-controls')}>
                     <button onClick={() => editAddress(address.id)}>

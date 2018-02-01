@@ -31,7 +31,7 @@ export default function AddressList({
       <ViewHeader>Your Address</ViewHeader>
       <div className={cx('address-container')}>
         {addresses.map(address =>
-          <div key={address.id}>
+          <div key={address.id} className={cx('address-subcontainer')}>
             <button
               className={cx('list-button')}
               onClick={() => clickOnAddress(address.id)}
