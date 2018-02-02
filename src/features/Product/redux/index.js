@@ -7,6 +7,7 @@ import {
 } from 'berkeleys-redux-utils';
 
 import { createCartMeta } from '../../../utils/redux';
+import { types as cartTypes } from '../../Cart/redux';
 
 export const ns = 'product';
 export const types = createTypes(
@@ -63,6 +64,15 @@ export default handleActions(
     [types.thumbnailClicked]: (state, { payload }) => ({
       ...state,
       currentImage: payload || 'front',
+    }),
+    [combineActions(
+      types.productChanged,
+      cartTypes.cartUpdate.complete,
+    )]: state => ({
+      ...state,
+      currentQuantity: 1,
+      currentSize: null,
+      currentImage: 'front',
     }),
   }),
   defaultState,
