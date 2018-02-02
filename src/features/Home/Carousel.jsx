@@ -8,9 +8,9 @@ import ProgressPage from './Progress-Page.jsx';
 import banner1 from './banner-1.png';
 import banner2 from './banner-2.png';
 import banner3 from './banner-3.png';
-import copy1 from './carousel-text-1.png';
-import copy2 from './carousel-text-2.png';
-import copy3 from './carousel-text-3.png';
+import copy1 from './carousel-text-1.svg';
+import copy2 from './carousel-text-2.svg';
+import copy3 from './carousel-text-3.svg';
 import carouselLeft from './carousel-left.png';
 import carouselRight from './carousel-right.png';
 

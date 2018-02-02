@@ -66,7 +66,7 @@ $pager-copy-text()
   background rgb(0, 0, 0) // fallback color
   background transparent
   $padding-sm()
-
+  
 .pager-nav
   align-items center
   display flex
@@ -75,12 +75,14 @@ $pager-copy-text()
 .pager-container
   position relative
   width 100%
+  background rgba(1, 31, 43, 1)
   .pager-img
     width 100%
+    opacity 0.5
   .pager-copy-img
     $pager-copy-abs()
     margin 48px
-    width 35%
+    width 70%
   .pager-copy-top
     $pager-copy-abs()
     color #FE5068
