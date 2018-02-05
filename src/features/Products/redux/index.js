@@ -36,10 +36,13 @@ export default handleActions(
     [combineActions(
       types.clickOnClosePreview,
       cartTypes.cartUpdate.complete,
-    )]: state => ({
-      ...state,
-      showProductModal: null,
-    }),
+    )]: state => {
+      console.log('HAI?');
+      return {
+        ...state,
+        showProductModal: null,
+      };
+    },
   }),
   defaultState,
   ns,

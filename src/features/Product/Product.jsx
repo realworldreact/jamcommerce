@@ -8,6 +8,7 @@ import classnames from 'classnames/bind';
 import Link from 'gatsby-link';
 
 import leftArrow from './left-arrow.svg';
+import rightArrow from './right-arrow.svg';
 import styles from './product.module.styl';
 import './product.styl';
 import {
@@ -21,6 +22,10 @@ import {
   productMounted,
   productChanged,
 } from './redux';
+import {
+  showProductModalSelector,
+  clickOnClosePreview,
+} from '../Products/redux';
 import Selector from '../Selector';
 import { itemsMapSelector } from '../Cart/redux';
 
@@ -46,13 +51,22 @@ const mapStateToProps = createSelector(
   currentImageSelector,
   currentSizeSelector,
   itemsMapSelector,
-  (gocommerceData, currentQuantity, currentImage, currentSize, itemsMap) => ({
+  showProductModalSelector,
+  (
+    gocommerceData,
+    currentQuantity,
+    currentImage,
+    currentSize,
+    itemsMap,
+    showingProductModal,
+  ) => ({
     currentImage,
     currentCartQuantity: (itemsMap[gocommerceData.sku] || {}).quantity,
     currentQuantity,
     gocommerceData,
     currentSize,
     isSubmitDisabled: !currentSize,
+    showingProductModal: !!showingProductModal,
   }),
 );
 
@@ -83,6 +97,7 @@ const mapDispatchToProps = (dispatch, props) => {
     dispatch,
     sizeHandlers,
     thumbnailHandlers,
+    clickOnClosePreview,
     quantityChanged: x =>
       dispatch(quantityChanged((x && x.value) || undefined)),
     productMounted: n => dispatch(productMounted(n)),
@@ -171,6 +186,7 @@ const propTypes = {
   currentSize: PropTypes.number,
   data: PropTypes.shape({
     jamProduct: PropTypes.shape({
+      slug: PropTypes.string,
       description: PropTypes.string,
       details: PropTypes.arrayOf(PropTypes.string),
       images: PropTypes.shape({
@@ -197,6 +213,8 @@ const propTypes = {
   productMounted: PropTypes.func.isRequired,
   productChanged: PropTypes.func.isRequired,
   showBackToShoes: PropTypes.bool,
+  showingProductModal: PropTypes.bool,
+  clickOnClosePreview: PropTypes.func,
 };
 
 export class Product extends PureComponent {
@@ -225,6 +243,7 @@ export class Product extends PureComponent {
           sale,
           sizes,
           thumbnails = {},
+          slug,
         },
       },
       gocommerceData,
@@ -233,6 +252,8 @@ export class Product extends PureComponent {
       thumbnailHandlers,
       quantityChanged,
       showBackToShoes = true,
+      showingProductModal,
+      clickOnClosePreview,
     } = this.props;
     const isSale = !!sale;
     const Price = isSale ? 'del' : 'span';
@@ -283,15 +304,24 @@ export class Product extends PureComponent {
             <div className={cx('description')}>
               {description}
             </div>
-            <ul className={cx('list')}>
-              {details.map(detail =>
-                <li key={detail}>
-                  <small>
-                    {detail}
-                  </small>
-                </li>,
-              )}
-            </ul>
+            {!showingProductModal
+              ? <ul className={cx('list')}>
+                  {details.map(detail =>
+                    <li key={detail}>
+                      <small>
+                        {detail}
+                      </small>
+                    </li>,
+                  )}
+                </ul>
+              : <Link to={`/women/shoes/${slug}`} onClick={clickOnClosePreview}>
+                  View Full Product Details{' '}
+                  <img
+                    alt="A small right pointing arrow"
+                    className={cx('right-arrow')}
+                    src={rightArrow}
+                  />
+                </Link>}
             <hr />
             <div className={cx('sizes')}>
               <p>Size:</p>{' '}
