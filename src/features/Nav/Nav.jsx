@@ -241,7 +241,7 @@ export function Nav({
       >
         <Menu.Body
           categories={categories}
-          closeMobileMenu={() => null}
+          closeMobileMenu={closeMobileMenu}
           view={currentDirectory.view}
         />
       </Menu>
