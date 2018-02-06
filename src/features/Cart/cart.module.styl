@@ -46,6 +46,8 @@ $cell-size = (100 - $cell-size-first) * .33
 
 .details-img
   size(115px, 76px)
+  +$below(md)
+    size(86px, 57px)
 
 .details-info
   $padding-sm()
@@ -68,6 +70,8 @@ $cell-size = (100 - $cell-size-first) * .33
 
 .table-cell-first
   width $cell-size-first
+  +$below(md)
+    width $cell-size-first*.75
 
 .price
   color $gray-dark
@@ -85,6 +89,8 @@ $cell-size = (100 - $cell-size-first) * .33
   flex-basis 75%
   padding-left 50%
   text-align left
+  +$below(md)
+    padding-left 45%
 
 .quantity
   font-size 14px
@@ -99,7 +105,9 @@ $cell-size = (100 - $cell-size-first) * .33
   border-bottom none
   max-width $cell-size
   +$below(md)
-    padding-right 10px
+    max-width $cell-size * 1.5
+    position relative
+    left -10px
 
 .checkout .button
   $padding-sm()
