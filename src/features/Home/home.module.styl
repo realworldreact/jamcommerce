@@ -141,14 +141,20 @@ $pager-copy-text()
   +$below(1119px)
     $row(around)
     padding $padding-xl-horizontal $padding-xl-vertical
+  +$below(md)
+    max-width 100vw
 
 .callout
   $column(between)
-  size(556px, 635px)
+  // size(556px, 635px)
   text-align left
   border 20px solid $callout-gray-border
   +$below(1119px)
     max-width 96vw
+  +$below(md)
+    width 100%
+  +$above(1119px)
+    size(556px, 635px)
 
 .copy
   $column(between)
@@ -176,6 +182,7 @@ $pager-copy-text()
   padding 2px 2px
   +$below(542px)
     $row(around)
+    width 100%
 
 .featured
   padding 2px 2px 20px 2px
