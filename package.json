@@ -38,7 +38,7 @@
         "js-yaml": "3.9.1",
         "kouto-swiss": "1.1.0",
         "lodash": "4.17.4",
-        "netlify-cms": "0.4.6",
+        "netlify-cms": "1.1.0",
         "prop-types": "15.5.10",
         "react-github-fork-ribbon": "^0.5.1",
         "react-lazyload": "^2.3.0",
