@@ -6,6 +6,7 @@ import {
   combineActions,
 } from 'berkeleys-redux-utils';
 import { types as cartTypes } from '../../Cart/redux';
+import { types as productTypes } from '../../Product/redux';
 
 const ns = 'Products';
 
@@ -15,10 +16,7 @@ export const types = createTypes(
 );
 
 export const clickOnProductPreview = createAction(types.clickOnProductPreview);
-export const clickOnClosePreview = createAction(
-  types.clickOnClosePreview,
-  _.noop,
-);
+export const clickOnClosePreview = createAction(types.clickOnClosePreview);
 
 const defaultState = {
   showProductModal: null,
@@ -36,6 +34,7 @@ export default handleActions(
     [combineActions(
       types.clickOnClosePreview,
       cartTypes.cartUpdate.complete,
+      productTypes.clickOnProductDetails,
     )]: state => {
       console.log('HAI?');
       return {

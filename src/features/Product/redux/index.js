@@ -19,6 +19,7 @@ export const types = createTypes(
     'thumbnailClicked',
     'productMounted',
     'productChanged',
+    'clickOnProductDetails',
   ],
   ns,
 );
@@ -33,6 +34,7 @@ export const currentSizeChanged = createAction(types.currentSizeChanged);
 export const thumbnailClicked = createAction(types.thumbnailClicked);
 export const productMounted = createAction(types.productMounted);
 export const productChanged = createAction(types.productChanged);
+export const clickOnProductDetails = createAction(types.clickOnProductDetails);
 
 export const defaultState = {
   currentImage: 'front',

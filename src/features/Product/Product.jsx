@@ -21,11 +21,9 @@ import {
   thumbnailClicked,
   productMounted,
   productChanged,
+  clickOnProductDetails,
 } from './redux';
-import {
-  showProductModalSelector,
-  clickOnClosePreview,
-} from '../Products/redux';
+import { showProductModalSelector } from '../Products/redux';
 import Selector from '../Selector';
 import { itemsMapSelector } from '../Cart/redux';
 
@@ -97,7 +95,7 @@ const mapDispatchToProps = (dispatch, props) => {
     dispatch,
     sizeHandlers,
     thumbnailHandlers,
-    clickOnClosePreview,
+    clickOnProductDetails: () => dispatch(clickOnProductDetails()),
     quantityChanged: x =>
       dispatch(quantityChanged((x && x.value) || undefined)),
     productMounted: n => dispatch(productMounted(n)),
@@ -214,7 +212,7 @@ const propTypes = {
   productChanged: PropTypes.func.isRequired,
   showBackToShoes: PropTypes.bool,
   showingProductModal: PropTypes.bool,
-  clickOnClosePreview: PropTypes.func,
+  clickOnProductDetails: PropTypes.func,
 };
 
 export class Product extends PureComponent {
@@ -253,7 +251,7 @@ export class Product extends PureComponent {
       quantityChanged,
       showBackToShoes = true,
       showingProductModal,
-      clickOnClosePreview,
+      clickOnProductDetails,
     } = this.props;
     const isSale = !!sale;
     const Price = isSale ? 'del' : 'span';
@@ -314,7 +312,10 @@ export class Product extends PureComponent {
                     </li>,
                   )}
                 </ul>
-              : <Link to={`/women/shoes/${slug}`} onClick={clickOnClosePreview}>
+              : <Link
+                  to={`/women/shoes/${slug}`}
+                  onClick={clickOnProductDetails}
+                >
                   View Full Product Details{' '}
                   <img
                     alt="A small right pointing arrow"
