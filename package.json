@@ -78,7 +78,7 @@
         "eslint-plugin-import": "2.7.0",
         "eslint-plugin-jsx-a11y": "6.0.2",
         "eslint-plugin-react": "git+https://github.com/berkeleytrue/eslint-plugin-react.git#feat/rwr",
-        "fs-extra": "4.0.1",
+        "fs-extra": "^5.0.0",
         "husky": "0.14.3",
         "prettier": "1.5.2",
         "validate-commit-msg": "2.14.0"
