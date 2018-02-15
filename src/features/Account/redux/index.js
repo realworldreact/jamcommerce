@@ -6,6 +6,7 @@ import {
   handleActions,
   composeReducers,
 } from 'berkeleys-redux-utils';
+import { actions } from 'react-redux-form';
 
 import { addRedirectTo } from '../../redux';
 import {
@@ -22,6 +23,7 @@ export const types = createTypes(
     'didMountWithoutAuth',
     'willUnmount',
     'showEditProfile',
+    'updateProfileForm',
     'cancelEdit',
     'submitEditProfile',
     'editProfileSuccess',
@@ -59,6 +61,8 @@ export const showChangePassword = createAction(types.showChangePassword);
 export const editProfileSuccess = createAction(types.editProfileSuccess);
 export const changePasswordSuccess = createAction(types.changePasswordSuccess);
 export const submitChangePassword = createAction(types.submitChangePassword);
+export const updateProfileForm = profile =>
+  actions.merge('forms.profile', profile);
 
 const defaultState = {
   showingEditProfile: false,
