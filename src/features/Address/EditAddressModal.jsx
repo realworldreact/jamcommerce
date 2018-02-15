@@ -27,14 +27,15 @@ const mapDispatchToProps = {
 const modalStyles = {
   content: {
     padding: 'none',
+    boxShadow: '0px 0px 15px lightgray',
   },
   overlay: {
-    position: 'absolute',
-    top: '80px',
-    left: '120px',
-    right: '120px',
-    bottom: '80px',
-    backgroundColor: 'rgba(0, 0, 0, 0)',
+    // position: 'absolute',
+    // top: '80px',
+    // left: '120px',
+    // right: '120px',
+    // bottom: '80px',
+    // backgroundColor: 'rgba(0, 0, 0, 0)',
   },
 };
 
