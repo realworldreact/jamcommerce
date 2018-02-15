@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import styles from './products.module.styl';
 import Product from '../Product';
 import CloseButton from '../CloseButton';
+import FadeIn from '../Home/FadeIn';
 
 import {
   clickOnClosePreview,
@@ -108,19 +109,26 @@ export class Products extends PureComponent {
                 key={i}
                 to={`/women/shoes/${slug}`}
               >
-                <div>
-                  <div className={cx('img')}>
-                    <img alt="alt provided by content below" {...front} />
-                  </div>
-                  <header className={cx('title')}>
-                    <h4>
-                      {name}
-                    </h4>
-                  </header>
-                  <div className={cx('price')}>
-                    <Price>${prices[0].amount}</Price> {_sale}
-                  </div>
-                </div>
+                <FadeIn height={226}>
+                  {onload =>
+                    <React.Fragment>
+                      <div className={cx('img')}>
+                        <img
+                          alt="alt provided by content below"
+                          {...front}
+                          onLoad={onload}
+                        />
+                      </div>
+                      <header className={cx('title')}>
+                        <h4>
+                          {name}
+                        </h4>
+                      </header>
+                      <div className={cx('price')}>
+                        <Price>${prices[0].amount}</Price> {_sale}
+                      </div>
+                    </React.Fragment>}
+                </FadeIn>
                 <div className={cx('preview-button-container')}>
                   <button
                     className={cx('preview-button')}
