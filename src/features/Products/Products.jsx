@@ -10,6 +10,7 @@ import FadeIn from 'react-lazyload-fadein';
 import styles from './products.module.styl';
 import Product from '../Product';
 import CloseButton from '../CloseButton';
+import FAQ from '../FAQ';
 
 import {
   clickOnClosePreview,
@@ -154,6 +155,7 @@ export class Products extends PureComponent {
             );
           })}
         </div>
+        <FAQ type="products" />
       </div>
     );
   }

@@ -23,6 +23,7 @@ import {
   willUnmount,
 } from './redux';
 import { isSignedInSelector } from '../Auth/redux';
+import FAQ from '../FAQ';
 
 const cx = classnames.bind(styles);
 const propTypes = {
@@ -120,32 +121,35 @@ export class Checkout extends Component {
       );
     }
     return (
-      <div className={cx('checkout')}>
-        <header className={cx('header')}>
-          <h4>Check Out</h4>
-        </header>
-        <div className={cx('container')}>
-          <nav className={cx('nav')}>
-            <ul className={cx('nav-list')}>
-              <li className={cx({ underline: !showBilling && !showConfirm })}>
-                Address
-              </li>
-              <li className={cx({ underline: showBilling && !showConfirm })}>
-                Billing
-              </li>
-              <li className={cx({ underline: !showBilling && showConfirm })}>
-                Confirm
-              </li>
-            </ul>
-          </nav>
-          <div className={cx('content')}>
-            <View />
-            <div className={cx('footer')}>
-              {btn}
+      <React.Fragment>
+        <div className={cx('checkout')}>
+          <header className={cx('header')}>
+            <h4>Check Out</h4>
+          </header>
+          <div className={cx('container')}>
+            <nav className={cx('nav')}>
+              <ul className={cx('nav-list')}>
+                <li className={cx({ underline: !showBilling && !showConfirm })}>
+                  Address
+                </li>
+                <li className={cx({ underline: showBilling && !showConfirm })}>
+                  Billing
+                </li>
+                <li className={cx({ underline: !showBilling && showConfirm })}>
+                  Confirm
+                </li>
+              </ul>
+            </nav>
+            <div className={cx('content')}>
+              <View />
+              <div className={cx('footer')}>
+                {btn}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        <FAQ type="checkout" />
+      </React.Fragment>
     );
   }
 }

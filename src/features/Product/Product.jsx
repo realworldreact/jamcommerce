@@ -26,6 +26,7 @@ import {
 import { showProductModalSelector } from '../Products/redux';
 import Selector from '../Selector';
 import { itemsMapSelector } from '../Cart/redux';
+import FAQ from '../FAQ';
 
 const cx = classnames.bind(styles);
 const createHandlerMemo = _.memoize((value, handler) => () => handler(value));
@@ -261,123 +262,126 @@ export class Product extends PureComponent {
         </span>
       : null;
     return (
-      <div className={cx('product')}>
-        <script
-          className="gocommerce-product"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(gocommerceData) }}
-          type="application/json"
-        />
-        <div className={cx('content')}>
-          <div className={cx('images')}>
-            <div>
-              <img
-                alt="alt is set by content"
-                className={cx('main')}
-                {...images[currentImage]}
-              />
-            </div>
-            <div className={cx('thumbnails')}>
-              {_.map(thumbnails, ({ alt, ...rest }, side) =>
-                <div
-                  key={side}
-                  onClick={thumbnailHandlers[side]}
-                  onKeyDown={thumbnailHandlers[side]}
-                  role="button"
-                  tabIndex="0"
-                >
-                  <img alt={alt} {...rest} />
-                </div>,
-              )}
-            </div>
-          </div>
-          <div className={cx('details')}>
-            <header>
-              <h1>
-                {name}
-              </h1>
-            </header>
-            <div className={cx('price')}>
-              <Price>${prices[0].amount}</Price> {_sale}
-            </div>
-            <div className={cx('description')}>
-              {description}
-            </div>
-            {!showingProductModal
-              ? <ul className={cx('list')}>
-                  {details.map(detail =>
-                    <li key={detail}>
-                      <small>
-                        {detail}
-                      </small>
-                    </li>,
-                  )}
-                </ul>
-              : <Link
-                  to={`/women/shoes/${slug}`}
-                  onClick={clickOnProductDetails}
-                >
-                  View Full Product Details{' '}
-                  <img
-                    alt="A small right pointing arrow"
-                    className={cx('right-arrow')}
-                    src={rightArrow}
-                  />
-                </Link>}
-            <hr />
-            <div className={cx('sizes')}>
-              <p>Size:</p>{' '}
-              {sizes.map(value =>
-                <button
-                  className={cx(
-                    'button-size',
-                    currentSize === value ? 'selected' : '',
-                  )}
-                  key={value}
-                  onClick={sizeHandlers[value]}
-                >
-                  {value}
-                </button>,
-              )}
-            </div>
-            <div className={cx('quantity')}>
-              <div className={cx('copy')}>Quantity </div>
-              <Selector
-                className={cx('quantity-selector', 'selector')}
-                maxQuantity={maxQuantity}
-                onChange={quantityChanged}
-                value={currentQuantity}
-              />
-              <div className={cx('submit-content')}>
-                {isSubmitDisabled
-                  ? <small className={cx('submit-warning')}>
-                      Please select a size
-                    </small>
-                  : null}
-                <button
-                  className={cx('button', isSubmitDisabled ? 'disabled' : '')}
-                  disabled={isSubmitDisabled}
-                  onClick={clickOnAddToCart}
-                  type="submit"
-                >
-                  Add To Cart
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        {showBackToShoes
-          ? <Link to="/women/shoes">
-              <div className={cx('back')}>
+      <React.Fragment>
+        <div className={cx('product')}>
+          <script
+            className="gocommerce-product"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(gocommerceData) }}
+            type="application/json"
+          />
+          <div className={cx('content')}>
+            <div className={cx('images')}>
+              <div>
                 <img
-                  alt="A smal left pointing arrow"
-                  className={cx('left-arrow')}
-                  src={leftArrow}
+                  alt="alt is set by content"
+                  className={cx('main')}
+                  {...images[currentImage]}
                 />
-                Back to Shoes
               </div>
-            </Link>
-          : null}
-      </div>
+              <div className={cx('thumbnails')}>
+                {_.map(thumbnails, ({ alt, ...rest }, side) =>
+                  <div
+                    key={side}
+                    onClick={thumbnailHandlers[side]}
+                    onKeyDown={thumbnailHandlers[side]}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <img alt={alt} {...rest} />
+                  </div>,
+                )}
+              </div>
+            </div>
+            <div className={cx('details')}>
+              <header>
+                <h1>
+                  {name}
+                </h1>
+              </header>
+              <div className={cx('price')}>
+                <Price>${prices[0].amount}</Price> {_sale}
+              </div>
+              <div className={cx('description')}>
+                {description}
+              </div>
+              {!showingProductModal
+                ? <ul className={cx('list')}>
+                    {details.map(detail =>
+                      <li key={detail}>
+                        <small>
+                          {detail}
+                        </small>
+                      </li>,
+                    )}
+                  </ul>
+                : <Link
+                    to={`/women/shoes/${slug}`}
+                    onClick={clickOnProductDetails}
+                  >
+                    View Full Product Details{' '}
+                    <img
+                      alt="A small right pointing arrow"
+                      className={cx('right-arrow')}
+                      src={rightArrow}
+                    />
+                  </Link>}
+              <hr />
+              <div className={cx('sizes')}>
+                <p>Size:</p>{' '}
+                {sizes.map(value =>
+                  <button
+                    className={cx(
+                      'button-size',
+                      currentSize === value ? 'selected' : '',
+                    )}
+                    key={value}
+                    onClick={sizeHandlers[value]}
+                  >
+                    {value}
+                  </button>,
+                )}
+              </div>
+              <div className={cx('quantity')}>
+                <div className={cx('copy')}>Quantity </div>
+                <Selector
+                  className={cx('quantity-selector', 'selector')}
+                  maxQuantity={maxQuantity}
+                  onChange={quantityChanged}
+                  value={currentQuantity}
+                />
+                <div className={cx('submit-content')}>
+                  {isSubmitDisabled
+                    ? <small className={cx('submit-warning')}>
+                        Please select a size
+                      </small>
+                    : null}
+                  <button
+                    className={cx('button', isSubmitDisabled ? 'disabled' : '')}
+                    disabled={isSubmitDisabled}
+                    onClick={clickOnAddToCart}
+                    type="submit"
+                  >
+                    Add To Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {showBackToShoes
+            ? <Link to="/women/shoes">
+                <div className={cx('back')}>
+                  <img
+                    alt="A smal left pointing arrow"
+                    className={cx('left-arrow')}
+                    src={leftArrow}
+                  />
+                  Back to Shoes
+                </div>
+              </Link>
+            : null}
+        </div>
+        {showBackToShoes && <FAQ type="products" />}
+      </React.Fragment>
     );
   }
 }

@@ -10,6 +10,7 @@ import MainWrapper from './index';
 
 import { didMountWithoutAuth, willUnmount } from '../features/Account/redux';
 import { isSignedInSelector } from '../features/Auth/redux';
+import FAQ from '../features/FAQ';
 
 const propTypes = {
   showOrderHistory: PropTypes.bool,
@@ -44,41 +45,44 @@ export class TemplateWrapper extends PureComponent {
     return (
       <MainWrapper>
         {() =>
-          <div className={cx('account')}>
-            <div className={cx('container')}>
-              <nav className={cx('nav')}>
-                <ul className={cx('nav-list')}>
-                  <li>
-                    <Link
-                      to="/account/orders"
-                      activeStyle={{ textDecoration: 'underline' }}
-                    >
-                      Order History
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/account/addresses"
-                      activeStyle={{ textDecoration: 'underline' }}
-                    >
-                      Addresses
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/account/account"
-                      activeStyle={{ textDecoration: 'underline' }}
-                    >
-                      Account
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-              <div className={cx('content')}>
-                {children && children()}
+          <React.Fragment>
+            <div className={cx('account')}>
+              <div className={cx('container')}>
+                <nav className={cx('nav')}>
+                  <ul className={cx('nav-list')}>
+                    <li>
+                      <Link
+                        to="/account/orders"
+                        activeStyle={{ textDecoration: 'underline' }}
+                      >
+                        Order History
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/account/addresses"
+                        activeStyle={{ textDecoration: 'underline' }}
+                      >
+                        Addresses
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/account/account"
+                        activeStyle={{ textDecoration: 'underline' }}
+                      >
+                        Account
+                      </Link>
+                    </li>
+                  </ul>
+                </nav>
+                <div className={cx('content')}>
+                  {children && children()}
+                </div>
               </div>
             </div>
-          </div>}
+            <FAQ type="account" />
+          </React.Fragment>}
       </MainWrapper>
     );
   }
