@@ -5,11 +5,11 @@ import classnames from 'classnames/bind';
 import { createSelector } from 'reselect';
 import Link from 'gatsby-link';
 import Modal from 'react-modal';
+import FadeIn from 'react-lazyload-fadein';
 
 import styles from './products.module.styl';
 import Product from '../Product';
 import CloseButton from '../CloseButton';
-import FadeIn from '../Home/FadeIn';
 
 import {
   clickOnClosePreview,

@@ -1,11 +1,11 @@
 import React from 'react';
 import classnames from 'classnames/bind';
+import FadeIn from 'react-lazyload-fadein';
 
 import styles from './home.module.styl';
 import subheader1 from './subheader-1.png';
 import subheader2 from './subheader-2.png';
 import LearnMore from './Learn-More.jsx';
-import FadeIn from './FadeIn';
 
 const cx = classnames.bind(styles);
 const propTypes = {};

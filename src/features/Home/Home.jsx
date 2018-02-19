@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames/bind';
+import FadeIn from 'react-lazyload-fadein';
 
 import styles from './home.module.styl';
 import FalcorImg from './falcor-front.png';
@@ -12,7 +13,6 @@ import Callout from '../Callout';
 import Featured from './Featured.jsx';
 import LearnMore from './Learn-More.jsx';
 import callout from './callout.png';
-import FadeIn from './FadeIn';
 
 const cx = classnames.bind(styles);
 const propTypes = {};
