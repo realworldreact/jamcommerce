@@ -8,6 +8,7 @@ import {
 
 import { types as checkoutTypes } from '../../Checkout/redux';
 import persistOrdersEpic from './persist-orders-epic.js';
+import { types as authTypes } from '../../Auth/redux';
 
 export const ns = 'orders';
 export const epics = [persistOrdersEpic];
@@ -25,7 +26,8 @@ export const showOrderDetails = createAction(types.showOrderDetails);
 export const backToHistory = createAction(types.backToHistory);
 
 export const isOrdersAction = ({ type }) =>
-  type === checkoutTypes.postOrder.complete;
+  type === checkoutTypes.postOrder.complete ||
+  type === authTypes.userSignupSuccess;
 
 const getNS = state => state[ns];
 export const ordersSelector = state => getNS(state).history;
@@ -57,6 +59,10 @@ export default handleActions(
       ...state,
       currentOrder: null,
       showOrderDetails: false,
+    }),
+    [authTypes.userSignupSuccess]: state => ({
+      ...state,
+      history: [],
     }),
   }),
   defaultState,

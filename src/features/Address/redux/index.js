@@ -6,8 +6,10 @@ import {
   combineActions,
 } from 'berkeleys-redux-utils';
 import { createSelector } from 'reselect';
-import persistAddressEpic from './persist-address-epic.js';
 import { actions } from 'react-redux-form';
+
+import persistAddressEpic from './persist-address-epic.js';
+import { types as authTypes } from '../../Auth/redux';
 
 export const epics = [persistAddressEpic];
 
@@ -34,7 +36,9 @@ export const isAddressAction = ({
   meta: { address: { isAddress } = {} } = {},
 }) => !!isAddress;
 export const isAddressChangeAction = (...args) =>
-  args[0].type === types.deleteAddress || isAddressAction(...args);
+  args[0].type === types.deleteAddress ||
+  args[0].type === authTypes.userSignupSuccess ||
+  isAddressAction(...args);
 export const clickOnAddAddress = createAction(types.clickOnAddAddress);
 export const clickOnCancelAddAddress = createAction(
   types.clickOnCancelAddAddress,
@@ -109,6 +113,8 @@ export function addressDeleteReducer(state = {}, action) {
   return state;
 }
 
+console.log(authTypes);
+
 export default composeReducers(
   ns,
   addressReducer,
@@ -136,6 +142,7 @@ export default composeReducers(
         ...state,
         showEditAddressModal: payload,
       }),
+      [authTypes.userSignupSuccess]: state => ({}),
     }),
     {},
   ),
